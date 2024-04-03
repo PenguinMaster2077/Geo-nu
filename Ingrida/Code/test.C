@@ -1,11 +1,17 @@
 //CPP
 #include <iostream>
+#include <fstream>
 #include <vector>
+//ROOT
+#include <TFile.h>
+#include <TTree.h>
 //RAT
 #include <RAT/DU/DSReader.hh>
 // #include <RAT/DS/Run.hh>
 // #include <RAT/DS/Entry.hh>
 // #include <RAT/DS/EV.hh>
+// #include <RAT/DS/DataQCFlags.hh>
+// #include <RAT/DS/BitMask.hh>
 // #include <RAT/DS/FitResult.hh>
 // #include <RAT/DS/FitVertex.hh>
 // #include <RAT/DB.hh>
@@ -13,58 +19,46 @@
 // #include <RAT/DU/ReconCalibrator.hh>
 // #include <RAT/DU/DetectorStateCorrection.hh>
 
-class myresult;
-void RecordRunInfo(myresult &res, RAT::DU::DSReader &dsreader);
-bool GetReconInfo(std::vector<double> &Energy, RAT::DS::EV &ev);
-
 int test()
 {
-    std::string InFile = "/home/shuaioy/scratch/Geo/Gold/300000-306498/ratds/300050/Analysis20R_r0000300000_s000_p000.root";
-    myresult res;
+    // std::string InFile = "/home/shuaioy/scratch/Fisher/Reactor/20240331/ROOT/Reactor_Fisher_Classifier.306499.root";
     
+    std::string InFile = "/home/shuaioy/scratch/Geo/Gold/300000-306498/ratds/300050/Data/Analysis20R_r0000300026_s008_p000.root";
+
+    TFile *outfile = new TFile("./test.root", "recreate");
+    TTree *outtree = new TTree("output", "");
+
+    ULong64_t daApplied, daFlags;
+    outtree->Branch("daApplied", &daApplied, "daApplied/L");
+    outtree->Branch("daFlags", &daFlags, "daFlags/L");
+
     RAT::DU::DSReader dsreader(InFile);
-    RAT::DU::ReconCalibrator recon_cali = RAT::DU::Utility::Get()->GetReconCalibrator();
-    RAT::DU::Utility::Get()->BeginOfRun();
-    RAT::DU::DetectorStateCorrection detector_state_correct = RAT::DU::Utility::Get()->GetDetectorStateCorrection();
-    
-    RecordRunInfo(res, dsreader);
 
-    RAT::DS::Entry entry;
-    RAT::DS::EV ev;
-    std::vector<double> test(2, -99.0);
-    std::cout << test.at(0) << std::endl;
+    for(unsigned int iEntry = 0; iEntry < 10; iEntry++)
+    {
+        RAT::DS::Entry entry = dsreader.GetEntry(iEntry);
+        for(unsigned int iEv = 0; iEv < entry.GetEVCount(); iEv++)
+        {
+            RAT::DS::EV ev = entry.GetEV(iEv);
+            RAT::DS::DataQCFlags data = ev.GetDataCleaningFlags();
+            Int_t fpass = data.GetLatestPass();
+            RAT::DS::BitMask bit_applied = data.GetApplied(fpass);
+            RAT::DS::BitMask bit_flags = data.GetFlags(fpass);
+            ULong64_t applied = bit_applied.GetULong64_t(0);
+            ULong64_t flags = bit_flags.GetULong64_t(0);
+            if((flags & 0x2100000042C2) == 0x2100000042C2)
+            {
+            std::cout << "Entry:" << iEntry << ",EV:" << iEv  << ",GTID:" << ev.GetGTID() << ",LastPass:" << fpass
+            << ",Applied:" << applied << ",Flags:" << flags << ",After:" << (flags & 0x2100000042C2 )
+            << "," << ((flags & 0x2100000042C2) == 0x2100000042C2) << std::endl;
+            };
+            daApplied = applied;
+            daFlags = flags;
+            outtree->Fill();
+        };
+    };
+    outfile->Write();
+    outfile->Close();
+
     return 0;
-};
-
-class myresult
-{
-public:
-    void ClearRunInfo()
-    {
-        C_RunID = 0;
-        C_SubRunID = 0;
-        C_Date = 0;
-        C_Time = 0;
-        C_RunType = 0;
-    };
-    void ShowRunInfo()
-    {
-        std::cout << "RunID:" << C_RunID << std::endl;
-        std::cout << "SubRunID:" << C_SubRunID << std::endl;
-        std::cout << "Date:" << C_Date << std::endl;
-        std::cout << "Time:" << C_Time << std::endl;
-        std::cout << "RunType:" << C_RunType << std::endl;
-    };
-//Run Information
-    UInt_t C_RunID, C_SubRunID, C_Date, C_Time, C_RunType;
-};
-void RecordRunInfo(myresult &res, RAT::DU::DSReader &dsreader)
-{
-    RAT::DS::Run run = dsreader.GetRun();
-    res.ClearRunInfo();
-    res.C_RunID = run.GetRunID();
-    res.C_SubRunID = run.GetSubRunID();
-    res.C_Date = run.GetDate();
-    res.C_Time = run.GetTime();
-    res.C_RunType = run.GetRunType();
 };

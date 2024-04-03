@@ -170,7 +170,7 @@ int main(int argc, char** argv)
     std::string InFile = argv[1];
     std::string OutFile = argv[2];
 
-
+    std::vector<std::string> RunFile = Run(InFile);//一定要修改RAT::DU::DSReader
 
 //Create New Root File
     TFile *outfile = new TFile(OutFile.c_str(), "recreate");
@@ -213,7 +213,7 @@ int main(int argc, char** argv)
     outtree->Branch("DelayedPosY", &res.C_Delayed.C_Pos_Y, "DelayedPosY/D");
     outtree->Branch("DelayedPosZ", &res.C_Delayed.C_Pos_Z, "DelayedPosZ/D");
 //Read File
-    RAT::DU::DSReader dsreader(InFile);
+    RAT::DU::DSReader dsreader(RunFile);
     RAT::DU::ReconCalibrator recon_cali = RAT::DU::Utility::Get()->GetReconCalibrator();
     RAT::DU::Utility::Get()->BeginOfRun();
     RAT::DU::DetectorStateCorrection detector_state_correct = RAT::DU::Utility::Get()->GetDetectorStateCorrection();

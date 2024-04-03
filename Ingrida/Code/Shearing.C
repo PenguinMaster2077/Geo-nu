@@ -8,18 +8,23 @@
 #include <TTree.h>
 //RAT
 #include <RAT/DU/DSReader.hh>
-// #include <RAT/DU/Utility.hh>
-// #include <RAT/DU/PMTInfo.hh>
-// #include <RAT/DU/PMTCalStatus.hh>
-// #include <RAT/DU/EffectiveVelocity.hh>
-// #include <RAT/DS/Entry.hh>
-// #include <RAT/DS/EV.hh>
-// #include <RAT/DS/PMT.hh>
-// #include <RAT/DS/Run.hh>
-// #include <RAT/DS/PMTSet.hh>
-// #include <RAT/DS/FitVertex.hh>
-// #include <RAT/DS/MC.hh>
-// #include <RAT/DS/UniversalTime.hh>
+#include <RAT/DU/Utility.hh>
+#include <RAT/DU/PMTInfo.hh>
+#include <RAT/DU/PMTCalStatus.hh>
+#include <RAT/DU/EffectiveVelocity.hh>
+#include <RAT/DS/DataQCFlags.hh>
+#include <RAT/DS/BitMask.hh>
+#include <RAT/DS/Entry.hh>
+#include <RAT/DS/EV.hh>
+#include <RAT/DS/PMT.hh>
+#include <RAT/DS/Run.hh>
+#include <RAT/DS/PMTSet.hh>
+#include <RAT/DS/FitVertex.hh>
+#include <RAT/DS/MC.hh>
+#include <RAT/DS/UniversalTime.hh>
+#include <RAT/DB.hh>
+#include <RAT/DBLink.hh>
+#include <RAT/DBTable.hh>
 
 const int Max = 10000;
 struct Result
@@ -29,6 +34,7 @@ struct Result
         C_RunID = 0;
         C_SubRunID = 0;
         C_MCFlag = 0;
+        C_ZOffSet = 0;
     };
     void ClearMC()
     {
@@ -73,6 +79,7 @@ struct Result
 
 //Run等信息
     UInt_t C_RunID, C_SubRunID, C_MCFlag;
+    Double_t C_ZOffSet;
 //MC等信息
     Int_t C_MCID;
 //EV的信息
@@ -88,8 +95,8 @@ struct Result
     Double_t C_HitTime[Max], C_HitPosX[Max], C_HitPosY[Max], C_HitPosZ[Max];
 //tResidual信息
     Double_t C_tResidual[Max];
-
-    ULong64_t C_50MHz;
+//Classifier
+    
 };
 
 std::string scintFitter = "scintFitter";
