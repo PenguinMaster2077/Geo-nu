@@ -179,7 +179,6 @@ int FindIBD()
         std::cout << "Delayed Info:" << std::endl;
         std::cout << "Run:" << RunID << ",SubRun:" << SubRunID << ",GTID" << DelayedGTID << ",Entry:" << DelayedEntry << ",EV:" << DelayedEv << ",NHits:" << DelayedNHits << ",50MHz:" << Delayed50MHz <<  std::endl << std::endl;
 
-        
     };
     coincidence_pair.close();
     coincidence_pair_dataflags.close();
