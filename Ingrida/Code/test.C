@@ -23,43 +23,35 @@ int test()
 {
     // std::string InFile = "/home/shuaioy/scratch/Fisher/Reactor/20240331/ROOT/Reactor_Fisher_Classifier.306499.root";
     
-    std::string InFile = "/home/shuaioy/scratch/Geo/Gold/300000-306498/ratds/300050/Data/Analysis20R_r0000300026_s008_p000.root";
+    std::string InFile = "/home/shuaioy/scratch/Geo/Muon/ROOT/6.root";
 
-    TFile *outfile = new TFile("./test.root", "recreate");
-    TTree *outtree = new TTree("output", "");
+    // TFile *outfile = new TFile("./test.root", "recreate");
+    // TTree *outtree = new TTree("output", "");
 
     ULong64_t daApplied, daFlags;
-    outtree->Branch("daApplied", &daApplied, "daApplied/L");
-    outtree->Branch("daFlags", &daFlags, "daFlags/L");
+    // outtree->Branch("daApplied", &daApplied, "daApplied/L");
+    // outtree->Branch("daFlags", &daFlags, "daFlags/L");
 
     RAT::DU::DSReader dsreader(InFile);
 
-    for(unsigned int iEntry = 0; iEntry < 10; iEntry++)
+    for(unsigned int iEntry = 0; iEntry < dsreader.GetEntryCount(); iEntry++)
     {
         RAT::DS::Entry entry = dsreader.GetEntry(iEntry);
         for(unsigned int iEv = 0; iEv < entry.GetEVCount(); iEv++)
         {
             RAT::DS::EV ev = entry.GetEV(iEv);
-            RAT::DS::DataQCFlags data = ev.GetDataCleaningFlags();
-            Int_t fpass = data.GetLatestPass();
-            RAT::DS::BitMask bit_applied = data.GetApplied(fpass);
-            RAT::DS::BitMask bit_flags = data.GetFlags(fpass);
-            ULong64_t applied = bit_applied.GetULong64_t(0);
-            ULong64_t flags = bit_flags.GetULong64_t(0);
-            if((flags & 0x2100000042C2) == 0x2100000042C2)
-            {
-            std::cout << "Entry:" << iEntry << ",EV:" << iEv  << ",GTID:" << ev.GetGTID() << ",LastPass:" << fpass
-            << ",Applied:" << applied << ",Flags:" << flags << ",After:" << (flags & 0x2100000042C2 )
-            << "," << ((flags & 0x2100000042C2) == 0x2100000042C2) << std::endl;
-            };
-            daApplied = applied;
-            daFlags = flags;
-            outtree->Fill();
+            std::cout << "Entry:" << iEntry << ",EV:" << iEv << ",NHits:" << ev.GetNhits() << ",OWLCount:" << ev.GetUncalPMTs().GetOWLCount() << std::endl;
+            std::string FitName = ev.GetDefaultFitName();
+            if( FitName == "") {continue;};
+            RAT::DS::FitResult fit_res = ev.GetFitResult(FitName);
+            RAT::DS::FitVertex fit_ver = fit_res.GetVertex(0);
+            std::cout << "FitValid:" << fit_ver.GetValid() << ",Pos Valid:" << fit_ver.ValidPosition() << ",Energy Valid:" << fit_ver.ValidEnergy() << ",Time Valid:" << fit_ver.ValidTime() << std::endl;
+            // outtree->Fill();
         };
     };
     
-    outfile->Write();
-    outfile->Close();
+    // outfile->Write();
+    // outfile->Close();
 
     return 0;
 };

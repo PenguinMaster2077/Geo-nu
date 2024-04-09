@@ -93,7 +93,7 @@ public:
     Int_t C_GTID;
     UInt_t C_Nhits, C_Nhits_Cleaned, C_Nhits_Corrected;
     ULong64_t C_50MHZ, C_Data_Applied, C_Data_Flags;
-//4D Position and Time
+//Energy and Position
     Double_t C_Energy, C_Pos_X, C_Pos_Y, C_Pos_Z;
 };
 
@@ -206,7 +206,7 @@ int main(int argc, char** argv)
     outtree->Branch("DelayedNHitsCleaned", &res.C_Delayed.C_Nhits_Cleaned, "DelayedNHitsCleaned/I");
     outtree->Branch("DelayedNHitsCorrected", &res.C_Delayed.C_Nhits_Corrected, "DelayedNHitsCorrected/I");
     outtree->Branch("Delayed50MHz", &res.C_Delayed.C_50MHZ, "Delayed50MHz/L");
-    outtree->Branch("DalayedDataApplied", &res.C_Delayed.C_Data_Applied, "DalayedDataApplied/L");
+    outtree->Branch("DelayedDataApplied", &res.C_Delayed.C_Data_Applied, "DelayedDataApplied/L");
     outtree->Branch("DelayedDataFlags", &res.C_Delayed.C_Data_Flags, "DelayedDataFlags/L");
     outtree->Branch("DelayedEnergy", &res.C_Delayed.C_Energy, "DelayedEnergy/D");
     outtree->Branch("DelayedPosX", &res.C_Delayed.C_Pos_X, "DelayedPosX/D");
@@ -413,6 +413,13 @@ RAT::DU::DetectorStateCorrection &detector_state_correct)
             //std::cout << "Entry:" << iDEntry << ", EV:" << iDEv << ", GTID:" << delayed_ev.GetGTID() << ", Energy:" << DelayedEnergy << std::endl;
             if(FindDelayed == true) 
             {  
+                RAT::DS::DataQCFlags tempdata = delayed_ev.GetDataCleaningFlags();
+                Int_t last_pass = tempdata.GetLatestPass();
+                if(last_pass >= 0)
+                {
+                    DelayedDataApplied = tempdata.GetApplied(last_pass).GetULong64_t(0);
+                    DelayedDataFlags = tempdata.GetFlags(last_pass).GetULong64_t(0);
+                };
                 DelayedEntry = iDEntry;
                 DelayedEV = iDEv;
                 break;

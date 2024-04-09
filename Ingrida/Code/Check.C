@@ -8,7 +8,7 @@
 
 int Check()
 {
-    std::string InFile = "/rat/MyCode/Work/Geo-nu-Data/CoincidencePair/Reactor_20240329/Reactor_CoincidencePair.root";
+    std::string InFile = "/rat/MyCode/Work/Geo-nu-Data/CoincidencePair/Reactor_20240403/Reactor_CoincidencePair.root";
 
     TFile *infile = new TFile(InFile.c_str());
     TTree *intree = (TTree*) infile->Get("output");
