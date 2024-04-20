@@ -17,6 +17,7 @@
 #include <RAT/DS/FitResult.hh>
 #include <RAT/DS/FitVertex.hh>
 #include <RAT/DS/UniversalTime.hh>
+#include <RAT/DS/PMTSet.hh>
 #include <RAT/DB.hh>
 #include <RAT/DBLink.hh>
 #include <RAT/DBTable.hh>
@@ -53,6 +54,8 @@ public:
         C_Entry = 0;
         C_EV = 0;
         C_GTID = 0;
+
+        C_OWLHits = 0;
         C_Nhits = 0;
         C_Nhits_Cleaned = 0;
         C_Nhits_Corrected = 0;
@@ -66,6 +69,9 @@ public:
         C_Pos_X = 0;
         C_Pos_Y = 0;
         C_Pos_Z = 0;
+
+        C_Original_Energy = 0;
+        C_Tony_Energy = 0;
     };
     void ShowDetals()
     {
@@ -77,6 +83,7 @@ public:
         std::cout << "Entry:" << C_Entry << std::endl;
         std::cout << "EV:" << C_EV << std::endl;
         std::cout << "GTID:" << C_GTID << std::endl;
+        std::cout << "OWLHits:" << C_OWLHits << std::endl;
         std::cout << "Nhits:" << C_Nhits << std::endl;
         std::cout << "NhitsCleaned:" << C_Nhits_Cleaned << std::endl;
         std::cout << "NhitsCorre:" << C_Nhits_Corrected << std::endl;
@@ -86,15 +93,18 @@ public:
     };
     void ShowPosTime()
     {
-        std::cout << "E:" << C_Energy << ",X:" << C_Pos_X << ",Y:" << C_Pos_Y << ",Z:" << C_Pos_Z << std::endl;
+        std::cout << "Energy:" << C_Energy << ",X:" << C_Pos_X << ",Y:" << C_Pos_Y << ",Z:" << C_Pos_Z << std::endl;
+        std::cout << "Original Energy:" << C_Original_Energy <<",Tony Energy:" << C_Tony_Energy << std::endl;
     };
 //EV Info
     unsigned int C_Entry, C_EV;
     Int_t C_GTID;
+    Int_t C_OWLHits;
     UInt_t C_Nhits, C_Nhits_Cleaned, C_Nhits_Corrected;
     ULong64_t C_50MHZ, C_Data_Applied, C_Data_Flags;
 //Energy and Position
     Double_t C_Energy, C_Pos_X, C_Pos_Y, C_Pos_Z;
+    Double_t C_Original_Energy, C_Tony_Energy;//Tony Energy: Original + Tony Correction
 };
 
 class myresult
@@ -142,34 +152,37 @@ std::vector<std::string> Run(std::string InFile);
 
 void RecordRunInfo(myresult &res, RAT::DU::DSReader &dsreader);
 
-bool GetReconInfo(TVector3 ZShift, Double_t &Energy, TVector3 &Position, RAT::DS::EV &ev,
-Int_t &GTID, UInt_t &NHits, UInt_t &NHits_Cleaned, UInt_t &NHits_Corrected, ULong64_t &Count50MHz,
-RAT::DU::ReconCalibrator &recon_cali, RAT::DU::DetectorStateCorrection &detector_state_correct);
+bool GetReconInfo(TVector3 ZShift, Double_t &Energy, Double_t &Origin_Energy, Double_t &Tony_Energy,
+TVector3 &Position, RAT::DS::EV &ev, Int_t &GTID, UInt_t &NHits, UInt_t &NHits_Cleaned, 
+UInt_t &NHits_Corrected, ULong64_t &Count50MHz, RAT::DU::ReconCalibrator &recon_cali, 
+RAT::DU::DetectorStateCorrection &detector_state_correct);
 
 bool PromptCut(const Double_t Energy, const TVector3 Positon);
 
 bool DelayedCut(const Double_t Energy, const TVector3 Positon);
 
-bool SearchDelayed(RAT::DU::DSReader &dsreader, TVector3 ZShift,unsigned int &iEntry,
-unsigned int &iEV, Double_t &Delta_T, TVector3 &Delta_R,Double_t &PromptEnergy,
-TVector3 &PromptPos, Double_t &DelayedEnergy, TVector3 &DelayedPos, unsigned int &DelayedEntry,
-unsigned int &DelayedEV, Int_t &DelayedGTID, UInt_t &DelayedNhits, UInt_t &DelayedNhitsCleaned,
-UInt_t &DelayedNhitsCorrected, ULong64_t &Delayed50MHz, ULong64_t &DelayedDataApplied,
-ULong64_t &DelayedDataFlags,RAT::DU::ReconCalibrator &recon_cali,
+bool SearchDelayed(RAT::DU::DSReader &dsreader, TVector3 ZShift, unsigned int &iEntry,
+unsigned int &iEV, Double_t &Delta_T, TVector3 &Delta_R,
+TVector3 &PromptPos, Double_t &DelayedEnergy, Double_t &Delayed_Original_Energy, 
+Double_t &Delayed_Tony_Energy, TVector3 &DelayedPos, unsigned int &DelayedEntry,
+unsigned int &DelayedEV, Int_t &DelayedGTID, Int_t &Delayed_OWL, UInt_t &DelayedNhits,
+UInt_t &DelayedNhitsCleaned,UInt_t &DelayedNhitsCorrected, ULong64_t &Delayed50MHz,
+ULong64_t &DelayedDataApplied, ULong64_t &DelayedDataFlags,RAT::DU::ReconCalibrator &recon_cali,
 RAT::DU::DetectorStateCorrection &detector_state_correct);
 
-void RecordCoincidencePair(myresult &res, const Double_t Energy[], const unsigned int Entry[],
-const unsigned int EV[], const Int_t GTID[], const UInt_t NHits[], const UInt_t NHitsCleaned[],
+void RecordCoincidencePair(myresult &res, const Double_t Energy[], const Double_t Original_Energy[],
+const Double_t Tony_Energy[], const unsigned int Entry[], const unsigned int EV[],
+const Int_t GTID[], const Int_t OWL[], const UInt_t NHits[], const UInt_t NHitsCleaned[],
 const UInt_t NHitsCorrected[], const ULong64_t Count50MHz[], const ULong64_t DataApplied[],
-const ULong64_t DataFlags[],
-const TVector3 PromptPos, const TVector3 DelayedPos);
+const ULong64_t DataFlags[], const TVector3 PromptPos, const TVector3 DelayedPos);
 
 // int TaggingCoincidencePair()
 int main(int argc, char** argv)
 {   
     std::string InFile = argv[1];
     std::string OutFile = argv[2];
-
+    
+    
 
 
 //Create New Root File
@@ -188,6 +201,7 @@ int main(int argc, char** argv)
     outtree->Branch("PromptEntry", &res.C_Prompt.C_Entry, "PromptEntry/I");
     outtree->Branch("PromptEv", &res.C_Prompt.C_EV, "PromptEv/I");
     outtree->Branch("PromptGTID", &res.C_Prompt.C_GTID, "PromptGTID/I");
+    outtree->Branch("PromptOWLHits", &res.C_Prompt.C_OWLHits, "PromptOWLHits/I");
     outtree->Branch("PromptNHits", &res.C_Prompt.C_Nhits, "PromptNHits/I");
     outtree->Branch("PromptNHitsCleaned", &res.C_Prompt.C_Nhits_Cleaned, "PromptNHitsCleaned/I");
     outtree->Branch("PromptNHitsCorrected", &res.C_Prompt.C_Nhits_Corrected, "PromptNHitsCorrected/I");
@@ -195,6 +209,8 @@ int main(int argc, char** argv)
     outtree->Branch("PromptDataApplied", &res.C_Prompt.C_Data_Applied, "PromptDataApplied/L");
     outtree->Branch("PromptDataFlags", &res.C_Prompt.C_Data_Flags, "PromptDataFlags/L");
     outtree->Branch("PromptEnergy", &res.C_Prompt.C_Energy, "PromptEnergy/D");
+    outtree->Branch("PromptOriginalEnergy", &res.C_Prompt.C_Original_Energy, "PromptOriginalEnergy/D");
+    outtree->Branch("PromptTonyEnergy", &res.C_Prompt.C_Tony_Energy, "PromptTonyEnergy/D");
     outtree->Branch("PromptPosX", &res.C_Prompt.C_Pos_X, "PromptPosX/D");
     outtree->Branch("PromptPosY", &res.C_Prompt.C_Pos_Y, "PromptPosY/D");
     outtree->Branch("PromptPosZ", &res.C_Prompt.C_Pos_Z, "PromptPosZ/D");
@@ -202,6 +218,7 @@ int main(int argc, char** argv)
     outtree->Branch("DelayedEntry", &res.C_Delayed.C_Entry, "DelayedEntry/I");
     outtree->Branch("DelayedEv", &res.C_Delayed.C_EV, "DelayedEv/I");
     outtree->Branch("DelayedGTID", &res.C_Delayed.C_GTID, "DelayedGTID/I");
+    outtree->Branch("DelayedOWLHits", &res.C_Delayed.C_OWLHits, "DelayedOWLHits/I");
     outtree->Branch("DelayedNHits", &res.C_Delayed.C_Nhits, "DelayedNHits/I");
     outtree->Branch("DelayedNHitsCleaned", &res.C_Delayed.C_Nhits_Cleaned, "DelayedNHitsCleaned/I");
     outtree->Branch("DelayedNHitsCorrected", &res.C_Delayed.C_Nhits_Corrected, "DelayedNHitsCorrected/I");
@@ -209,6 +226,8 @@ int main(int argc, char** argv)
     outtree->Branch("DelayedDataApplied", &res.C_Delayed.C_Data_Applied, "DelayedDataApplied/L");
     outtree->Branch("DelayedDataFlags", &res.C_Delayed.C_Data_Flags, "DelayedDataFlags/L");
     outtree->Branch("DelayedEnergy", &res.C_Delayed.C_Energy, "DelayedEnergy/D");
+    outtree->Branch("DelayedOriginalEnergy", &res.C_Delayed.C_Original_Energy, "DelayedOriginalEnergy/D");
+    outtree->Branch("DelayedTonyEnergy", &res.C_Delayed.C_Tony_Energy, "DelayedTonyEnergy/D");
     outtree->Branch("DelayedPosX", &res.C_Delayed.C_Pos_X, "DelayedPosX/D");
     outtree->Branch("DelayedPosY", &res.C_Delayed.C_Pos_Y, "DelayedPosY/D");
     outtree->Branch("DelayedPosZ", &res.C_Delayed.C_Pos_Z, "DelayedPosZ/D");
@@ -228,9 +247,10 @@ int main(int argc, char** argv)
     //Coincidence Pair:{Prompt, Delayed}
     int Prompt = 0; //If there isn't Coincidence pair, let root record a zero result.
     Double_t Energy[2] = {-99.0, -99.0};
+    Double_t Original_Energy[2] = {-99.0, -99.0}, Tony_Energy[2] = {-99.0, -99.0};
     TVector3 Position[2] = {TVector3(-99.0, -99.0, -99.0), TVector3(-99.0, -99.0, -99.0)};
     unsigned int Entry[2] = {99999, 99999}, EV[2] = {99999, 99999};
-    Int_t GTID[2] = {-99, -99};
+    Int_t GTID[2] = {-99, -99}, OWL[2] = {-99, -99};
     UInt_t NHits[2] = {99999, 99999}, NHits_Cleaned[2] = {99999, 99999}, NHits_Corrected[2] = {99999, 99999};
     ULong64_t Count_50MHz[2] = {99999, 99999}, Data_Applied[2] = {99999, 99999}, Data_Flags[2] = {99999, 99999};
     Double_t Delta_T = -999.0;
@@ -244,11 +264,14 @@ int main(int argc, char** argv)
         {
             ev = entry.GetEV(iEv);
         //Initialization
-            Energy[0] = Energy[1]= -99.0;
+            Energy[0] = Energy[1]= 0;
+            Original_Energy[0] = Original_Energy[1] = 0;
+            Tony_Energy[0] = Tony_Energy[1] = 0;
             Position[0] = Position[1]  = TVector3(-99.0, -99.0, -99.0);
             Entry[0] = Entry[1] = 0;
             EV[0] = EV[1] = 0;
             GTID[0] = GTID[1] = 0;
+            OWL[0] = OWL[1] = 0;
             NHits[0] = NHits[1] = 0;
             NHits_Cleaned[0] = NHits_Cleaned[1] = 0;
             NHits_Corrected[0] = NHits_Corrected[1] = 0;
@@ -257,7 +280,7 @@ int main(int argc, char** argv)
             Data_Flags[0] = Data_Flags[1] = 0;
         //Find Prompt Event
             if(ev.GetNhits() < 30){continue;};//Boost Finding
-            if(GetReconInfo(ZShift, Energy[0], Position[0], ev, GTID[0], NHits[0], NHits_Cleaned[0], NHits_Corrected[0], Count_50MHz[0], recon_cali, detector_state_correct) == false){continue;};//skip the events that doesn't have reconcted info
+            if(GetReconInfo(ZShift, Energy[0], Original_Energy[0], Tony_Energy[0], Position[0], ev, GTID[0], NHits[0], NHits_Cleaned[0], NHits_Corrected[0], Count_50MHz[0], recon_cali, detector_state_correct) == false){continue;};//skip the events that doesn't have reconcted info
             if(PromptCut(Energy[0], Position[0]) == false){continue;};
             Entry[0] = iEntry;
             EV[0] = iEv;
@@ -269,14 +292,16 @@ int main(int argc, char** argv)
                 Data_Applied[0] = data.GetApplied(last_pass).GetULong64_t(0);
                 Data_Flags[0] = data.GetFlags(last_pass).GetULong64_t(0);
             };
+            //OWL
+            OWL[0] = ev.GetCalPMTs().GetOWLCount();
             //std::cout << "Find Prompt Event!!!" << std::endl;
             //std::cout << "Entry:" << iEntry << ", EV:" << iEv << ", GTID:" << ev.GetGTID() << ", Energy:" << Energy[0] << std::endl;
             //ShowVector(Position[0]);
         //Find Delayed Event
-            if(SearchDelayed(dsreader, ZShift, iEntry, iEv, Delta_T, Delta_R, Energy[0], Position[0], Energy[1], Position[1], Entry[1], EV[1], GTID[1], NHits[1], NHits_Cleaned[1], NHits_Corrected[1], Count_50MHz[1], Data_Applied[1], Data_Flags[1], recon_cali, detector_state_correct) == false){continue;};
+            if(SearchDelayed(dsreader, ZShift, iEntry, iEv, Delta_T, Delta_R, Position[0], Energy[1], Original_Energy[1], Tony_Energy[1], Position[1], Entry[1], EV[1], GTID[1], OWL[1], NHits[1], NHits_Cleaned[1], NHits_Corrected[1], Count_50MHz[1], Data_Applied[1], Data_Flags[1], recon_cali, detector_state_correct) == false){continue;};
         //Record Coincidence pair
             std::cout << "Find Coincidence Pair!!!Recording!!!" << std::endl;
-            RecordCoincidencePair(res, Energy, Entry, EV, GTID, NHits, NHits_Cleaned, NHits_Corrected, Count_50MHz, Data_Applied, Data_Flags, Position[0], Position[1]);
+            RecordCoincidencePair(res, Energy, Original_Energy, Tony_Energy, Entry, EV, GTID, OWL, NHits, NHits_Cleaned, NHits_Corrected, Count_50MHz, Data_Applied, Data_Flags, Position[0], Position[1]);
             Prompt = 1;
             res.ShowPrompt();
             res.ShowDelayed();
@@ -340,9 +365,10 @@ void RecordRunInfo(myresult &res, RAT::DU::DSReader &dsreader)
     res.C_ZOffSet = AVPos[2];
 };
 
-bool GetReconInfo(TVector3 ZShift, Double_t &Energy, TVector3 &Position, RAT::DS::EV &ev,
-Int_t &GTID, UInt_t &NHits, UInt_t &NHits_Cleaned, UInt_t &NHits_Corrected, ULong64_t &Count50MHz,
-RAT::DU::ReconCalibrator &recon_cali, RAT::DU::DetectorStateCorrection &detector_state_correct)
+bool GetReconInfo(TVector3 ZShift, Double_t &Energy, Double_t &Origin_Energy, Double_t &Tony_Energy,
+TVector3 &Position, RAT::DS::EV &ev, Int_t &GTID, UInt_t &NHits, UInt_t &NHits_Cleaned, 
+UInt_t &NHits_Corrected, ULong64_t &Count50MHz, RAT::DU::ReconCalibrator &recon_cali, 
+RAT::DU::DetectorStateCorrection &detector_state_correct)
 {
 try{
 //Valid
@@ -355,6 +381,9 @@ try{
 //Get Info
     Energy = fit_vertex.GetEnergy();
     Position = fit_vertex.GetPosition() - ZShift;
+
+    Origin_Energy = Energy;
+    Tony_Energy = recon_cali.CalibrateEnergyRTF(true, Energy, Position.Perp(), Position.Z());
 //Logan's Energy Correction----DocDB: 7730
 //Detector Status Correction will be integrated in reconstruction later, thus it should be firstly applied
     RAT::DU::Point3D tempPoint3D(0, Position);
@@ -382,12 +411,14 @@ bool PromptCut(const Double_t Energy, const TVector3 Position)
     if(Position.Mag() > RADIUS_MAX){return false;};
     return true;
 };
+
 bool SearchDelayed(RAT::DU::DSReader &dsreader, TVector3 ZShift, unsigned int &iEntry,
-unsigned int &iEV, Double_t &Delta_T, TVector3 &Delta_R,Double_t &PromptEnergy,
-TVector3 &PromptPos, Double_t &DelayedEnergy, TVector3 &DelayedPos, unsigned int &DelayedEntry,
-unsigned int &DelayedEV, Int_t &DelayedGTID, UInt_t &DelayedNhits, UInt_t &DelayedNhitsCleaned,
-UInt_t &DelayedNhitsCorrected, ULong64_t &Delayed50MHz, ULong64_t &DelayedDataApplied,
-ULong64_t &DelayedDataFlags,RAT::DU::ReconCalibrator &recon_cali,
+unsigned int &iEV, Double_t &Delta_T, TVector3 &Delta_R,
+TVector3 &PromptPos, Double_t &DelayedEnergy, Double_t &Delayed_Original_Energy, 
+Double_t &Delayed_Tony_Energy, TVector3 &DelayedPos, unsigned int &DelayedEntry,
+unsigned int &DelayedEV, Int_t &DelayedGTID, Int_t &Delayed_OWL, UInt_t &DelayedNhits,
+UInt_t &DelayedNhitsCleaned,UInt_t &DelayedNhitsCorrected, ULong64_t &Delayed50MHz,
+ULong64_t &DelayedDataApplied, ULong64_t &DelayedDataFlags,RAT::DU::ReconCalibrator &recon_cali,
 RAT::DU::DetectorStateCorrection &detector_state_correct)
 {
     bool TimeOut = false, FindDelayed = false;
@@ -401,7 +432,7 @@ RAT::DU::DetectorStateCorrection &detector_state_correct)
         for(unsigned int iDEv = iEV; iDEv < delayed_entry.GetEVCount(); iDEv++)
         {
             RAT::DS::EV delayed_ev = delayed_entry.GetEV(iDEv);
-            if(!(GetReconInfo(ZShift, DelayedEnergy, DelayedPos, delayed_ev, DelayedGTID, DelayedNhits, DelayedNhitsCleaned, DelayedNhitsCorrected, Delayed50MHz, recon_cali, detector_state_correct))){continue;};
+            if(!(GetReconInfo(ZShift, DelayedEnergy, Delayed_Original_Energy, Delayed_Tony_Energy, DelayedPos, delayed_ev, DelayedGTID, DelayedNhits, DelayedNhitsCleaned, DelayedNhitsCorrected, Delayed50MHz, recon_cali, detector_state_correct))){continue;};
             Delta_T = ((delayed_ev.GetClockCount50()- prompt_50MHz_time) & 0x7FFFFFFFFFF) * 20.0;//ns
             if(Delta_T < DELTA_T_MIN){continue;};
             if(Delta_T > DELTA_T_MAX){TimeOut = true; break;};
@@ -422,6 +453,7 @@ RAT::DU::DetectorStateCorrection &detector_state_correct)
                 };
                 DelayedEntry = iDEntry;
                 DelayedEV = iDEv;
+                Delayed_OWL = delayed_ev.GetCalPMTs().GetOWLCount();
                 break;
             };
         };
@@ -446,11 +478,11 @@ bool DelayedCut(const Double_t Energy, const TVector3 Positon)
     return true;
 };
 
-void RecordCoincidencePair(myresult &res, const Double_t Energy[], const unsigned int Entry[],
-const unsigned int EV[], const Int_t GTID[], const UInt_t NHits[], const UInt_t NHitsCleaned[],
+void RecordCoincidencePair(myresult &res, const Double_t Energy[], const Double_t Original_Energy[],
+const Double_t Tony_Energy[], const unsigned int Entry[], const unsigned int EV[],
+const Int_t GTID[], const Int_t OWL[], const UInt_t NHits[], const UInt_t NHitsCleaned[],
 const UInt_t NHitsCorrected[], const ULong64_t Count50MHz[], const ULong64_t DataApplied[],
-const ULong64_t DataFlags[],
-const TVector3 PromptPos, const TVector3 DelayedPos)
+const ULong64_t DataFlags[], const TVector3 PromptPos, const TVector3 DelayedPos)
 {
 //Prompt
     res.ClearPrompt();
@@ -458,11 +490,14 @@ const TVector3 PromptPos, const TVector3 DelayedPos)
     res.C_Prompt.C_Entry = Entry[index];
     res.C_Prompt.C_EV = EV[index];
     res.C_Prompt.C_GTID = GTID[index];
+    res.C_Prompt.C_OWLHits = OWL[index];
     res.C_Prompt.C_Nhits = NHits[index];
     res.C_Prompt.C_Nhits_Cleaned = NHitsCleaned[index];
     res.C_Prompt.C_Nhits_Corrected = NHitsCorrected[index];
     res.C_Prompt.C_50MHZ = Count50MHz[index];
     res.C_Prompt.C_Energy = Energy[index];
+    res.C_Prompt.C_Original_Energy = Original_Energy[index];
+    res.C_Prompt.C_Tony_Energy = Tony_Energy[index];
     res.C_Prompt.C_Data_Applied = DataApplied[index];
     res.C_Prompt.C_Data_Flags = DataFlags[index];
     res.C_Prompt.C_Pos_X = PromptPos.X();
@@ -474,6 +509,7 @@ const TVector3 PromptPos, const TVector3 DelayedPos)
     res.C_Delayed.C_Entry = Entry[index];
     res.C_Delayed.C_EV = EV[index];
     res.C_Delayed.C_GTID = GTID[index];
+    res.C_Delayed.C_OWLHits = OWL[index];
     res.C_Delayed.C_Nhits = NHits[index];
     res.C_Delayed.C_Nhits_Cleaned = NHitsCleaned[index];
     res.C_Delayed.C_Nhits_Corrected = NHitsCorrected[index];
@@ -481,6 +517,8 @@ const TVector3 PromptPos, const TVector3 DelayedPos)
     res.C_Delayed.C_Data_Applied = DataApplied[index];
     res.C_Delayed.C_Data_Flags = DataFlags[index];
     res.C_Delayed.C_Energy = Energy[index];
+    res.C_Delayed.C_Original_Energy = Original_Energy[index];
+    res.C_Delayed.C_Tony_Energy = Tony_Energy[index];
     res.C_Delayed.C_Pos_X = DelayedPos.X();
     res.C_Delayed.C_Pos_Y = DelayedPos.Y();
     res.C_Delayed.C_Pos_Z = DelayedPos.Z();

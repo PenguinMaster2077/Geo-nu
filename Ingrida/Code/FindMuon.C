@@ -4,6 +4,8 @@
 //ROOT
 #include <TFile.h>
 #include <TTree.h>
+const Long64_t MAX_NUMBER = 8796093022207;//2^43 - 1; DocDB-481
+const Long64_t MIN_CARE_NUMBER = 8596093022207;
 
 class Event
 {
@@ -76,12 +78,28 @@ public:
 //Event
     Event C_Muon;
 };
-
+Double_t ComputeDelta_T(Long64_t Last_50MHz, Long64_t Present_50MHz)
+{
+    
+    if(Last_50MHz > Present_50MHz && Last_50MHz > MIN_CARE_NUMBER && Present_50MHz < MIN_CARE_NUMBER)
+    {
+        Long64_t Part1 = MAX_NUMBER - Last_50MHz;
+        Long64_t ClockGap = (Part1 + Present_50MHz);
+        std::cout << "注意Clock反转！！！！！！！, Max Clock:" << MAX_NUMBER << ",Last Clock:" << Last_50MHz << ", Present Clock:" << Present_50MHz << ", Delta T(s):" << 20.0 * ClockGap / 1e9 << std::endl;
+        return 20.0 * ClockGap;
+    }
+    else
+    {
+        Long64_t ClockGap = (Present_50MHz - Last_50MHz);
+        return 20.0 *ClockGap;
+    };
+};
 int FindMuon()
 {
-    std::string InFile = "/rat/MyCode/Work/Geo-nu-Data/Muon/Gold_20R_Muon_0000300000-0000300050.root";
-    std::string OutFile = "/rat/MyCode/Work/Geo-nu-Data/Muon/Gold_20R_Muon_Abstract_0000300000-0000300050.root";
-    std::string MuonFile = "./Muon.txt";
+    std::string InFile = "/rat/MyCode/Work/Geo-nu-Data/Muon/Gold_20R_Muon_0000300000-0000307612.root";
+    std::string OutFile = "/rat/MyCode/Work/Geo-nu-Data/Muon/Gold_20R_Muon_Abstract_0000300000-0000307612.root";
+    std::string Muon_LargeNHits = "./Muon_LargeNHits.txt";
+    std::string Muon_LargeNHits_DeltaT = "./Muon_LargeNHits_DeltaT.txt";
 //Read File
     TFile *infile = new TFile(InFile.c_str());
     TTree *intree = (TTree*) infile->Get("output");
@@ -127,22 +145,29 @@ int FindMuon()
     outtree->Branch("MuonDataApplied", &res.C_Muon.C_Data_Applied, "MuonDataApplied/L");
     outtree->Branch("MuonDataFlags", &res.C_Muon.C_Data_Flags, "MuonDataFlags/L");
 //Begin to Find
-    std::ofstream Muon(MuonFile.c_str());
+    std::ofstream Muon_NHits(Muon_LargeNHits.c_str());
+    std::ofstream Muon_NHits_T(Muon_LargeNHits_DeltaT.c_str());
 
     Int_t Last_GTID = 0, Last_Run = 0, Last_SubRun = 0;
-    Long64_t Last_50MHz = 0;
+    Long64_t Last_50MHz = 0, Temp_50MHz = 0;
     int MuonNumber = 0;
     for( int ii1 = 0; ii1 < intree->GetEntries(); ii1++)
     {
         intree->GetEntry(ii1);
         if(GTID == 0){continue;};//排除0结果
+        //初始化
         if(ii1 == 0){ Last_GTID = GTID; Last_50MHz = Clock50MHz; Last_Run = RunID; Last_SubRun = SubRunID;};//初始化
-        if(Nhits < 2500){continue;};
-        if( Last_GTID == GTID) {continue;}//后期可以删除，只是排除此时的一个bug
-        Last_GTID = GTID;      
-        Double_t Delta_T = 20.0 *(Clock50MHz - Last_50MHz);
+        //Tag Muon Event
+        if(Nhits < 2500 ){continue;};
+        Muon_NHits << RunID << " " << SubRunID << " " << Entry << " " << EV << " " << GTID << " " << OWLHits << " " << Nhits << " " << Clock50MHz << std::endl;
+
+        Last_GTID = GTID;
+        Temp_50MHz = Clock50MHz;
+        Double_t Delta_T = ComputeDelta_T(Last_50MHz, Temp_50MHz);
+        //if( Last_50MHz > Temp_50MHz){std::cout << "发生反转：" << Last_50MHz << "," << Temp_50MHz << "," << Delta_T << std::endl;}
+        if(Delta_T <= 0){std::cout << ii1 << ",Present Clock:" << Temp_50MHz << ",Last Clock:" << Last_50MHz << ",Delta T(s):" << Delta_T/1e9 << std::endl;};
         if( Delta_T <= 20e9 && Delta_T >= 0){continue;};//找到第一个Muon Event，忽略此后20秒的所有事件；
-        Last_50MHz = Clock50MHz;        
+        Last_50MHz = Clock50MHz;      
         //std::cout << RunID << "," << SubRunID << "," << Delta_T/1e9 << std::endl;
         MuonNumber++;
         std::cout << ii1 << ",Run:" << RunID << ",SubRun:" << SubRunID << ",Entry:" << Entry << ",EV:"
@@ -165,7 +190,7 @@ int FindMuon()
         res.C_Muon.C_Data_Applied = Data_Applied;
         res.C_Muon.C_Data_Flags = Data_Flags;
         outtree->Fill();
-        Muon << RunID << " " << SubRunID << " " << Entry << " " << EV << " " << GTID << " " << OWLHits << " " << Nhits << " " << Clock50MHz << std::endl;
+        Muon_NHits_T << RunID << " " << SubRunID << " " << Entry << " " << EV << " " << GTID << " " << OWLHits << " " << Nhits << " " << Clock50MHz << std::endl;
         //std::cout << ii1 << ",Run:" << RunID << ",SubRun:" << SubRunID << ",Entry:" << Entry << ",EV:"
         //<< EV << ",GTID:" << GTID << ",OWLHits:" << OWLHits << ",Nhits:" << Nhits << ",Nhits Cleaned:"
         //<< Nhits_Cleaned << ",Delta T(s):" << Delta_T/1e9 << std::endl;

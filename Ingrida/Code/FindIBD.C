@@ -1,25 +1,47 @@
 //CPP
 #include <iostream>
 #include <fstream>
+#include <iomanip>
 //ROOT
 #include <TFile.h>
 #include <TTree.h>
 #include <TVector3.h>
 //Self-defined
+const Long64_t MAX_NUMBER = 8796093022207;//2^43 - 1; DocDB-481
+const Long64_t MIN_CARE_NUMBER = 8596093022207;
 
 const double ZOffset = 186;//mm
+
 class Event;
 class myresult;
 
-bool PassMuonCut(int &Change_Run_SubRun, const int Muon_Len, int &Index_Muon_Array, Long64_t Muon_50MHz[], Int_t Muon_Run[], Int_t Muon_SubRun[], Long64_t Prompt_50MHz);
+Double_t ComputeDelta_T(Long64_t Last_50MHz, Long64_t Present_50MHz)
+{
+    
+    if(Last_50MHz > Present_50MHz && Last_50MHz > MIN_CARE_NUMBER && Present_50MHz < MIN_CARE_NUMBER)
+    {
+        Long64_t Part1 = MAX_NUMBER - Last_50MHz;
+        Long64_t ClockGap = (Part1 + Present_50MHz);
+        std::cout << "注意Clock反转！！！！！！！, Max Clock:" << MAX_NUMBER << ",Last Clock:" << Last_50MHz << ", Present Clock:" << Present_50MHz << ", Delta T(s):" << 20.0 * ClockGap / 1e9 << std::endl;
+        return 20.0 * ClockGap;
+    }
+    else
+    {
+        Long64_t ClockGap = (Present_50MHz - Last_50MHz);
+        return 20.0 *ClockGap;
+    };
+};
+
+bool PassMuonCut(int &Index_Muon, const int Muon_Len, ULong64_t Muon_50MHz[], Int_t Muon_Run[], Int_t Muon_SubRun[], ULong64_t Prompt_50MHz, Int_t Prompt_Run, Int_t Prompt_SubRun);
 
 int FindIBD()
 {
-    std::string InFile = "/rat/MyCode/Work/Geo-nu-Data/CoincidencePair/Data/Gold_20R_CoincidencePair_0000300000-0000301000.root";
-    std::string InMuonFile = "/rat/MyCode/Work/Geo-nu-Data/Muon/Gold_20R_Muon_Abstract_0000300000-0000300050.root";
+    std::string InFile = "/rat/MyCode/Work/Geo-nu-Data/CoincidencePair/Data/Gold_20R_CoincidencePair_0000300000-0000307612.root";
+    std::string InMuonFile = "/rat/MyCode/Work/Geo-nu-Data/Muon/Gold_20R_Muon_Abstract_0000300000-0000307612.root";
     std::string OutFile = "./CoincidencePair.txt";
     std::string OutFile2 = "./CoincidencePair_DataFlags.txt";
     std::string OutFile3 = "./CoincidencePair_DataFlags_Muon.txt";
+    std::string OutFile4 = "./CoincidencePair_Find_Multi_Event.txt";
 //Read Coincidence Pair Files
     TFile *infile = new TFile(InFile.c_str());
     TTree *intree = (TTree*) infile->Get("output");
@@ -37,8 +59,9 @@ int FindIBD()
     int PromptEntry, PromptEv;
     intree->SetBranchAddress("PromptEntry", &PromptEntry);
     intree->SetBranchAddress("PromptEv", &PromptEv);
-    Int_t PromptGTID;
+    Int_t PromptGTID, PromptOWLHits;
     intree->SetBranchAddress("PromptGTID", &PromptGTID);
+    intree->SetBranchAddress("PromptOWLHits", &PromptOWLHits);
     Int_t PromptNHits, PromptNHitsCleaned, PromptNHitsCorrected;
     intree->SetBranchAddress("PromptNHits", &PromptNHits);
     intree->SetBranchAddress("PromptNHitsCleaned", &PromptNHitsCleaned);
@@ -53,12 +76,16 @@ int FindIBD()
     intree->SetBranchAddress("PromptPosY", &PromptPosY);
     intree->SetBranchAddress("PromptPosZ", &PromptPosZ);
     intree->SetBranchAddress("PromptEnergy", &PromptEnergy);
+    Double_t Prompt_Original_Energy, Prompt_Tony_Energy;
+    intree->SetBranchAddress("PromptOriginalEnergy", &Prompt_Original_Energy);
+    intree->SetBranchAddress("PromptTonyEnergy", &Prompt_Tony_Energy);
 //Delayed
     int DelayedEntry, DelayedEv;
     intree->SetBranchAddress("DelayedEntry", &DelayedEntry);
     intree->SetBranchAddress("DelayedEv", &DelayedEv);
-    Int_t DelayedGTID;
+    Int_t DelayedGTID, DelayedOWLHits;
     intree->SetBranchAddress("DelayedGTID", &DelayedGTID);
+    intree->SetBranchAddress("DelayedOWLHits", &DelayedOWLHits);
     Int_t DelayedNHits, DelayedNHitsCleaned, DelayedNHitsCorrected;
     intree->SetBranchAddress("DelayedNHits", &DelayedNHits);
     intree->SetBranchAddress("DelayedNHitsCleaned", &DelayedNHitsCleaned);
@@ -73,6 +100,9 @@ int FindIBD()
     intree->SetBranchAddress("DelayedPosY", &DelayedPosY);
     intree->SetBranchAddress("DelayedPosZ", &DelayedPosZ);
     intree->SetBranchAddress("DelayedEnergy", &DelayedEnergy);
+    Double_t Delayed_Original_Energy, Delayed_Tony_Energy;
+    intree->SetBranchAddress("DelayedOriginalEnergy", &Delayed_Original_Energy);
+    intree->SetBranchAddress("DelayedTonyEnergy", &Delayed_Tony_Energy);
 //Read and Load Muon File
     TFile *muonfile = new TFile(InMuonFile.c_str());
     TTree *muontree = (TTree*) muonfile->Get("output");
@@ -100,7 +130,7 @@ int FindIBD()
     const int Muon_Len = tempInt;
     Int_t Muon_Run_Array[Muon_Len], Muon_SubRun_Array[Muon_Len];
     Int_t Muon_GTID_Array[Muon_Len];
-    Long64_t Muon_50MHz_Array[Muon_Len];
+    ULong64_t Muon_50MHz_Array[Muon_Len];
     for(int ii1 = 0; ii1 < Muon_Len; ii1++)
     {
         muontree->GetEntry(ii1);
@@ -113,9 +143,11 @@ int FindIBD()
     std::ofstream coincidence_pair(OutFile.c_str());
     std::ofstream coincidence_pair_dataflags(OutFile2.c_str());
     std::ofstream coincidence_pair_dataflags_muon(OutFile3.c_str());
+    std::ofstream coincidence_pair_multi(OutFile4.c_str());
 
     int Coin_Pair_Numer = 0, After_Flags_Numer = 0, After_Flags_Muon_Numer = 0;
     int Index_Muon_Array = 0, Change_Run_SubRun = 0;
+    ULong64_t PromptFlags = 0, DelayedFlags = 0;
     for(int ii1 = 0; ii1 < intree->GetEntries(); ii1++)
     {
         intree->GetEntry(ii1);
@@ -124,17 +156,18 @@ int FindIBD()
         TVector3 PromptPos = TVector3(PromptPosX, PromptPosY, PromptPosZ);
         TVector3 DelayedPos = TVector3(DelayedPosX, DelayedPosY, DelayedPosZ);
         TVector3 Delta_R = DelayedPos - PromptPos;
-        Double_t Delta_T = (Delayed50MHz - Prompt50MHz) * 20;//ns;
+        ULong64_t prompt_50MHz = Prompt50MHz, delayed_50MHz = Delayed50MHz;
+        Double_t Delta_T = ComputeDelta_T(prompt_50MHz, delayed_50MHz);//ns;
         Coin_Pair_Numer++;
     //Recording
         coincidence_pair << RunID << " " << SubRunID << " " << PromptGTID << " " << PromptEnergy << " "
         << PromptPos.Mag() << " " << DelayedGTID << " " << DelayedEnergy << " " << DelayedPos.Mag() 
         << " " << Delta_T << " " << Delta_R.Mag() << std::endl;
     //Data Clean Cut
-        ULong64_t temp = PromptDataFlags;
-        if( (temp &0x2100000042C2) != 0x2100000042C2){ continue;};
-        temp = DelayedDataFlags;
-        if( (temp &0x2100000042C2) != 0x2100000042C2){ continue;};
+        PromptFlags = PromptDataFlags;
+        DelayedFlags = DelayedDataFlags;
+        if( (PromptFlags &0x2100000042C2) != 0x2100000042C2){ continue;};
+        if( (DelayedFlags &0x2100000042C2) != 0x2100000042C2){ continue;};
     //Recording
         After_Flags_Numer++;
         //if( (DelayedDataFlags &0x2100000042C2) != 0x2100000042C2){ continue;};
@@ -142,42 +175,42 @@ int FindIBD()
         << PromptPos.Mag() << " " << DelayedGTID << " " << DelayedEnergy << " " << DelayedPos.Mag() 
         << " " << Delta_T << " " << Delta_R.Mag() << std::endl;
     //Muon Cut
-        //Same Run and SubRun
-        if(Muon_Run_Array[Index_Muon_Array] < RunID)//Same Run
+        //Find the Closest Muon Event
+        if( Muon_Run_Array[Index_Muon_Array] < RunID)
         {
             for(int ii2 = Index_Muon_Array; ii2 < Muon_Len; ii2++)
             {
-                if(Muon_Run_Array[ii2] == RunID) 
+                if(Muon_Run_Array[ii2] == RunID)
                 {
                     Index_Muon_Array = ii2;
                     break;
                 };
             };
-        };
-        if(Muon_SubRun_Array[Index_Muon_Array] < SubRunID)//Same SubRun
-        {
             for(int ii2 = Index_Muon_Array; ii2 < Muon_Len; ii2++)
             {
-                if(Muon_SubRun_Array[ii2] == SubRunID)
+                if(Muon_SubRun_Array[ii2] >= SubRunID && Muon_Run_Array[ii2] == RunID)
                 {
-                    Index_Muon_Array = ii2;
+                    Index_Muon_Array = ii2 - 1;
                     break;
                 };
-            }  
+            };
+            std::cout << "更新Muon:" << Muon_Run_Array[Index_Muon_Array] << ",SubRun:" << Muon_SubRun_Array[Index_Muon_Array] << ",Prompt Run:" << RunID << ", Prompt SubRun:" << SubRunID << std::endl;
         };
-        if(Muon_Run_Array[Index_Muon_Array - 1] != Muon_Run_Array[Index_Muon_Array] || Muon_SubRun_Array[Index_Muon_Array - 1] != Muon_SubRun_Array[Index_Muon_Array]){Change_Run_SubRun = 1;};
-        if(PassMuonCut(Change_Run_SubRun, Muon_Len, Index_Muon_Array, Muon_50MHz_Array, Muon_Run_Array, Muon_SubRun_Array, Prompt50MHz) == false){continue;};
+        if( PassMuonCut(Index_Muon_Array, Muon_Len, Muon_50MHz_Array, Muon_Run_Array, Muon_SubRun_Array, Prompt50MHz, RunID, SubRunID) == false){continue;};
         After_Flags_Muon_Numer++;
         //Recording
         coincidence_pair_dataflags_muon << RunID << " " << SubRunID << " " << PromptGTID << " " << PromptEnergy << " "
         << PromptPos.Mag() << " " << DelayedGTID << " " << DelayedEnergy << " " << DelayedPos.Mag() 
         << " " << Delta_T << " " << Delta_R.Mag() << std::endl;
 
+        //Recording for Multi Cut
+        coincidence_pair_multi << RunID << " "  << std::setw(3) << std::setfill('0') << SubRunID << " " << PromptEntry << " " << DelayedEntry << std::endl;
+
         std::cout << "通过Muon Cut，输出Coincidence Pair的信息：" << std::endl;
         std::cout << "Prompt Info:" << std::endl;
-        std::cout << "Run:" << RunID << ",SubRun:" << SubRunID << ",GTID:" << PromptGTID  << ",Entry:" << PromptEntry << ",EV:" << PromptEv  << ",NHits:" << PromptNHits << ",50MHz:" << Prompt50MHz << std::endl;
+        std::cout << "Run:" << RunID << ",SubRun:" << SubRunID << ",GTID:" << PromptGTID  << ",Entry:" << PromptEntry << ",EV:" << PromptEv  << ",Energy:" << PromptEnergy << ",Original Energ:" << Prompt_Original_Energy << ", Tony Energy:" << Prompt_Tony_Energy << ",NHits:" << PromptNHits <<  ",OWL:" << PromptOWLHits << ",50MHz:" << Prompt50MHz << ",Applied:" << PromptDataApplied << ",Flags:" << PromptFlags << ", Flags&Mask:" << ( (PromptFlags & 0x2100000042C2) == 0x2100000042C2) << std::endl;
         std::cout << "Delayed Info:" << std::endl;
-        std::cout << "Run:" << RunID << ",SubRun:" << SubRunID << ",GTID" << DelayedGTID << ",Entry:" << DelayedEntry << ",EV:" << DelayedEv << ",NHits:" << DelayedNHits << ",50MHz:" << Delayed50MHz <<  std::endl << std::endl;
+        std::cout << "Run:" << RunID << ",SubRun:" << SubRunID << ",GTID:" << DelayedGTID << ",Entry:" << DelayedEntry << ",EV:" << DelayedEv << ",Energy:" << DelayedEnergy << ",Original Energy:" << Delayed_Original_Energy << ", Tony Energy:" << Delayed_Tony_Energy << ",NHits:" << DelayedNHits << ",OWL:" << DelayedOWLHits << ",50MHz:" << Delayed50MHz << ",Applied:" << DelayedDataApplied << ",Flags:" << DelayedFlags << ", Flags&Mask:" << ((DelayedFlags & 0x2100000042C2) == 0x2100000042C2)  <<  std::endl << std::endl;
 
     };
     coincidence_pair.close();
@@ -281,60 +314,31 @@ public:
     Event C_Prompt, C_Delayed;
 };
 
-bool PassMuonCut(int &Change_Run_SubRun, const int Muon_Len, int &Index_Muon_Array, Long64_t Muon_50MHz[], Int_t Muon_Run[], Int_t Muon_SubRun[], Long64_t Prompt_50MHz)
+bool PassMuonCut(int &Index_Muon, const int Muon_Len, ULong64_t Muon_50MHz[], Int_t Muon_Run[], Int_t Muon_SubRun[], ULong64_t Prompt_50MHz, Int_t Prompt_Run, Int_t Prompt_SubRun)
 {
-    Double_t Delta_T = 20.0 *(Prompt_50MHz - Muon_50MHz[Index_Muon_Array]);
-    bool PassMuonCut = false;
-    bool In_Next_Muon = false;
-    std::cout << "开始检测，此时Muon信息为：" << Muon_Run[Index_Muon_Array] << ",SubRun:" << Muon_SubRun[Index_Muon_Array] << ", 50MHz:" << Muon_50MHz[Index_Muon_Array] << std::endl;
-    if(Delta_T < 0 && Change_Run_SubRun == 1)
-    { 
-        std::cout << "通过Muon Cut，此时Muon信息为:" << Muon_Run[Index_Muon_Array] << ",SubRun:" << Muon_SubRun[Index_Muon_Array] << ", 50MHz:" << Muon_50MHz[Index_Muon_Array] << std::endl;
-        std::cout << "此时Delta T(s):" << 20.0 * (Prompt_50MHz - Muon_50MHz[Index_Muon_Array]) / 1e9 << std::endl;
-        Change_Run_SubRun = 0;
-        return true;
-    };//因为Run或者SubRun改变了，所以时间会比20s长。
-    if( Delta_T >= 0.0 && Delta_T <= 20.0e9){ Change_Run_SubRun == 0; return false;}
-    else
+    Double_t Delta_T = ComputeDelta_T(Muon_50MHz[Index_Muon - 1], Prompt_50MHz);
+    std::cout << "前一个Muon检测信息。Run:" << Muon_Run[Index_Muon - 1] << ",SubRun:" << Muon_SubRun[Index_Muon - 1] << ",50MHz:" << Muon_50MHz[Index_Muon - 1] << ",Prompt Run:" << Prompt_Run << ",Prompt SubRun:" << Prompt_SubRun << ",Delta T(s):" << Delta_T/1e9 << std::endl;
+    int FindMuon = 0;
+    if(Delta_T >= 0 && Delta_T <= 20e9){return false;};
+    if(Delta_T > 20e9 || Delta_T < 0)
     {
-        std::cout << "计算的Delta T:" << Delta_T << ",开始寻找下一个Muon" << std::endl;
-        Change_Run_SubRun = 0;
-        for(int ii1 = Index_Muon_Array + 1; ii1 < Muon_Len; ii1++)
-        {   
-            if((Muon_Run[ii1] != Muon_Run[Index_Muon_Array]) || (Muon_SubRun[ii1] != Muon_SubRun[Index_Muon_Array]))
+        for(int ii2 = Index_Muon; ii2 < Muon_Len; ii2++)
+        {
+            if(Muon_Run[ii2] > Prompt_Run){ break;};
+            Delta_T = ComputeDelta_T(Muon_50MHz[ii2], Prompt_50MHz);
+            std::cout << "Run:" << Muon_Run[ii2] << ",SubRun:" << Muon_SubRun[ii2] << ",50MHz:" << Muon_50MHz[ii2] << ",Prompt Run:" << Prompt_Run  << ",Prompt SubRun:" << Prompt_SubRun << ",Delta T(s):" << Delta_T/1e9 << std::endl;
+            if(Delta_T >=0 && Delta_T<=20e9)
             {
-                std::cout << "Run or SubRun 发生改变，通过Muon Cut, 此时Muon的信息为：" << Muon_Run[ii1] << ",SubRun:" << Muon_SubRun[ii1] << ", 50MHz:" << Muon_50MHz[ii1] << std::endl;
-                Double_t tempDelta_T = 20.0 * (Prompt_50MHz - Muon_50MHz[ii1]) / 1e9;
-                std::cout << "此时的Delta T(s)：" << tempDelta_T << std::endl;
-                Index_Muon_Array = ii1; 
-                In_Next_Muon = false;
-                PassMuonCut = true;
+                std::cout << "找到对应的Muon。Run:" << Muon_Run[ii2] << ",SubRun:" << Muon_SubRun[ii2] << ",Prompt Run:" << Prompt_Run << ",Prompt SubRun:" << Prompt_SubRun << ",Delta T(s):" << Delta_T/1e9  << std::endl << std::endl;
+                FindMuon = 1; 
                 break;
             };
-            Double_t Delta_T_Next = 20.0 * (Prompt_50MHz - Muon_50MHz[ii1]);
-            if(Delta_T_Next >=0 && Delta_T_Next <= 20e9)
-            { 
-                std::cout << "找到对应的Muon:" << Muon_Run[ii1] << ",SubRun:" << Muon_SubRun[ii1] << ",Muon 50MHz:" << Muon_50MHz[ii1] << std::endl; 
-                std::cout << "此时的Delta T(s):" << 20.0 * (Prompt_50MHz - Muon_50MHz[ii1]) / 1e9 << std::endl << std::endl;
-                Index_Muon_Array = ii1; 
-                In_Next_Muon = true;
-                PassMuonCut = false;
-                break;
-            };
-            if(Delta_T_Next < 0)
-            { 
-                std::cout << "没有找到对应的Muon，通过Muon Cut" << std::endl;
-                Index_Muon_Array = ii1; 
-                In_Next_Muon = false; 
-                PassMuonCut = true; 
-                break;
-            };
-            if(Delta_T_Next > 20e9){continue;};
         };
-    }; 
-    if(PassMuonCut == true && In_Next_Muon == false) { return true;}
+    };
+    if(FindMuon == 1){return false;}
     else
     {
-        return false;
+        std::cout << "并没有找到对应的Muon，通过Muon Cut" << std::endl;
+        return true;
     };
 }; 

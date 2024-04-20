@@ -149,7 +149,7 @@ int main(int argc, char** argv)
             //Begin to find
             ev = entry.GetEV(iEv);
             if( ev.GetNhits() >= 2000){ LargeNhits = 1; };
-            if( ev.GetUncalPMTs().GetOWLCount() >= 3) { LargeOWPMT = 1;};
+            if( ev.GetCalPMTs().GetOWLCount() >= 3) { LargeOWPMT = 1;};
             if( LargeNhits == 0 && LargeOWPMT == 0) {continue;};
             //Record and Show Info for LargeNhits- or LargeOWPMT-event
             std::cout << "Find Muon Event!!!!!!" << std::endl;
@@ -208,7 +208,7 @@ void RecordEV(Myresult &res, RAT::DU::DSReader &dsreader, const unsigned int iEn
     res.C_Muon.C_Entry = iEntry;
     res.C_Muon.C_EV = iEv;
     res.C_Muon.C_GTID = ev.GetGTID();
-    res.C_Muon.C_OWLHits = ev.GetUncalPMTs().GetOWLCount();
+    res.C_Muon.C_OWLHits = ev.GetCalPMTs().GetOWLCount();
     res.C_Muon.C_Nhits = ev.GetNhits();
     res.C_Muon.C_Nhits_Cleaned = ev.GetNhitsCleaned();
     res.C_Muon.C_50MHz = ev.GetClockCount50();

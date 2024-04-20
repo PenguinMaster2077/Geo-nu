@@ -1,0 +1,1595 @@
+
+  *******************************************
+  *   T H I S   I S   R A T ' s   R O O T   *
+  *                                         *
+  *     RAT Version: 7.0.14-3-ge18ad06      *
+  *                                         *
+  *******************************************
+
+RAT: Libraries loaded.
+DB::Constructor:: Setting PgSQL server to default...
+
+Processing FindIBD.C...
+更新Muon:300026,SubRun:7,Prompt Run:300026, Prompt SubRun:8
+前一个Muon检测信息。Run:300026,SubRun:6,50MHz:2677823742699,Prompt Run:300026,Prompt SubRun:8,Delta T(s):481.321
+Run:300026,SubRun:7,50MHz:2695419772124,Prompt Run:300026,Prompt SubRun:8,Delta T(s):129.401
+Run:300026,SubRun:9,50MHz:2711481404416,Prompt Run:300026,Prompt SubRun:8,Delta T(s):-191.832
+Run:300026,SubRun:9,50MHz:2720862881748,Prompt Run:300026,Prompt SubRun:8,Delta T(s):-379.462
+Run:300026,SubRun:10,50MHz:2728513519649,Prompt Run:300026,Prompt SubRun:8,Delta T(s):-532.474
+Run:300026,SubRun:11,50MHz:2737478766136,Prompt Run:300026,Prompt SubRun:8,Delta T(s):-711.779
+Run:300026,SubRun:12,50MHz:2757669592437,Prompt Run:300026,Prompt SubRun:8,Delta T(s):-1115.6
+Run:300026,SubRun:13,50MHz:2759800980335,Prompt Run:300026,Prompt SubRun:8,Delta T(s):-1158.22
+Run:300026,SubRun:14,50MHz:2777668815318,Prompt Run:300026,Prompt SubRun:8,Delta T(s):-1515.58
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:300026,SubRun:8,GTID:16017660,Entry:172600,EV:0,Energy:0.998142,Original Energ:0.976658, Tony Energy:0.985943,NHits:302,OWL:0,50MHz:2701889798011,Applied:951627314364415,Flags:951627314298871, Flags&Mask:1
+Delayed Info:
+Run:300026,SubRun:8,GTID:16017662,Entry:172602,EV:0,Energy:2.19753,Original Energy:2.15737, Tony Energy:2.17077,NHits:641,OWL:1,50MHz:2701889798551,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+
+更新Muon:300027,SubRun:13,Prompt Run:300027, Prompt SubRun:14
+前一个Muon检测信息。Run:300027,SubRun:12,50MHz:2930599552549,Prompt Run:300027,Prompt SubRun:14,Delta T(s):463.165
+Run:300027,SubRun:13,50MHz:2945501516252,Prompt Run:300027,Prompt SubRun:14,Delta T(s):165.126
+Run:300027,SubRun:14,50MHz:2958121733794,Prompt Run:300027,Prompt SubRun:14,Delta T(s):-87.2786
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:300027,SubRun:14,GTID:12204228,Entry:45021,EV:0,Energy:2.52205,Original Energ:2.53895, Tony Energy:2.57119,NHits:756,OWL:0,50MHz:2953757803517,Applied:951627314364415,Flags:951627314298871, Flags&Mask:1
+Delayed Info:
+Run:300027,SubRun:14,GTID:12204230,Entry:45023,EV:0,Energy:1.97106,Original Energy:1.98696, Tony Energy:2.00955,NHits:604,OWL:0,50MHz:2953757817921,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+
+更新Muon:300038,SubRun:4,Prompt Run:300038, Prompt SubRun:5
+前一个Muon检测信息。Run:300038,SubRun:4,50MHz:4567939375694,Prompt Run:300038,Prompt SubRun:5,Delta T(s):109.565
+Run:300038,SubRun:4,50MHz:4570661191297,Prompt Run:300038,Prompt SubRun:5,Delta T(s):55.1288
+Run:300038,SubRun:5,50MHz:4577883991352,Prompt Run:300038,Prompt SubRun:5,Delta T(s):-89.3272
+Run:300038,SubRun:7,50MHz:4605143666440,Prompt Run:300038,Prompt SubRun:5,Delta T(s):-634.521
+Run:300038,SubRun:8,50MHz:4611623132605,Prompt Run:300038,Prompt SubRun:5,Delta T(s):-764.11
+Run:300038,SubRun:9,50MHz:4627458130220,Prompt Run:300038,Prompt SubRun:5,Delta T(s):-1080.81
+Run:300038,SubRun:10,50MHz:4644782580437,Prompt Run:300038,Prompt SubRun:5,Delta T(s):-1427.3
+Run:300038,SubRun:11,50MHz:4652201619104,Prompt Run:300038,Prompt SubRun:5,Delta T(s):-1575.68
+Run:300038,SubRun:12,50MHz:4663984817102,Prompt Run:300038,Prompt SubRun:5,Delta T(s):-1811.34
+Run:300038,SubRun:13,50MHz:4675615705503,Prompt Run:300038,Prompt SubRun:5,Delta T(s):-2043.96
+Run:300038,SubRun:14,50MHz:4685262797507,Prompt Run:300038,Prompt SubRun:5,Delta T(s):-2236.9
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:300038,SubRun:5,GTID:4920489,Entry:10106,EV:0,Energy:1.31352,Original Energ:1.32772, Tony Energy:1.33794,NHits:415,OWL:0,50MHz:4573417632115,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+Delayed Info:
+Run:300038,SubRun:5,GTID:4920491,Entry:10108,EV:0,Energy:2.05577,Original Energy:2.06447, Tony Energy:2.07882,NHits:638,OWL:0,50MHz:4573417636069,Applied:951627314364415,Flags:951627314298871, Flags&Mask:1
+
+更新Muon:300043,SubRun:9,Prompt Run:300043, Prompt SubRun:11
+前一个Muon检测信息。Run:300043,SubRun:9,50MHz:5527686407647,Prompt Run:300043,Prompt SubRun:11,Delta T(s):506.383
+Run:300043,SubRun:9,50MHz:5529122740697,Prompt Run:300043,Prompt SubRun:11,Delta T(s):477.656
+Run:300043,SubRun:11,50MHz:5548374892227,Prompt Run:300043,Prompt SubRun:11,Delta T(s):92.613
+Run:300043,SubRun:11,50MHz:5553005540191,Prompt Run:300043,Prompt SubRun:11,Delta T(s):4.14e-06
+找到对应的Muon。Run:300043,SubRun:11,Prompt Run:300043,Prompt SubRun:11,Delta T(s):4.14e-06
+
+更新Muon:300056,SubRun:14,Prompt Run:300057, Prompt SubRun:0
+前一个Muon检测信息。Run:300056,SubRun:14,50MHz:7926157537124,Prompt Run:300057,Prompt SubRun:0,Delta T(s):150.696
+Run:300056,SubRun:14,50MHz:7929063468942,Prompt Run:300057,Prompt SubRun:0,Delta T(s):92.5774
+Run:300057,SubRun:0,50MHz:7933692340716,Prompt Run:300057,Prompt SubRun:0,Delta T(s):1.36e-06
+找到对应的Muon。Run:300057,SubRun:0,Prompt Run:300057,Prompt SubRun:0,Delta T(s):1.36e-06
+
+更新Muon:300059,SubRun:5,Prompt Run:300059, Prompt SubRun:6
+前一个Muon检测信息。Run:300059,SubRun:4,50MHz:8342398271726,Prompt Run:300059,Prompt SubRun:6,Delta T(s):679.249
+Run:300059,SubRun:5,50MHz:8360793240672,Prompt Run:300059,Prompt SubRun:6,Delta T(s):311.35
+Run:300059,SubRun:7,50MHz:8384455592636,Prompt Run:300059,Prompt SubRun:6,Delta T(s):-161.897
+Run:300059,SubRun:8,50MHz:8396193643180,Prompt Run:300059,Prompt SubRun:6,Delta T(s):-396.658
+Run:300059,SubRun:11,50MHz:8431007297871,Prompt Run:300059,Prompt SubRun:6,Delta T(s):-1092.93
+Run:300059,SubRun:12,50MHz:8444255720999,Prompt Run:300059,Prompt SubRun:6,Delta T(s):-1357.9
+Run:300059,SubRun:12,50MHz:8451634037375,Prompt Run:300059,Prompt SubRun:6,Delta T(s):-1505.47
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:300059,SubRun:6,GTID:16077508,Entry:498726,EV:0,Energy:2.56919,Original Energ:2.53126, Tony Energy:2.5415,NHits:724,OWL:0,50MHz:8376360731731,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+Delayed Info:
+Run:300059,SubRun:6,GTID:16077512,Entry:498730,EV:0,Energy:2.17237,Original Energy:2.14031, Tony Energy:2.14896,NHits:617,OWL:0,50MHz:8376360735202,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+
+更新Muon:300067,SubRun:7,Prompt Run:300067, Prompt SubRun:10
+前一个Muon检测信息。Run:300067,SubRun:6,50MHz:849902473002,Prompt Run:300067,Prompt SubRun:10,Delta T(s):896.642
+Run:300067,SubRun:7,50MHz:864690200816,Prompt Run:300067,Prompt SubRun:10,Delta T(s):600.888
+Run:300067,SubRun:10,50MHz:897116597854,Prompt Run:300067,Prompt SubRun:10,Delta T(s):-47.6403
+Run:300067,SubRun:10,50MHz:898373417218,Prompt Run:300067,Prompt SubRun:10,Delta T(s):-72.7767
+Run:300067,SubRun:11,50MHz:905425259557,Prompt Run:300067,Prompt SubRun:10,Delta T(s):-213.814
+Run:300067,SubRun:11,50MHz:907172664751,Prompt Run:300067,Prompt SubRun:10,Delta T(s):-248.762
+Run:300067,SubRun:11,50MHz:911672817003,Prompt Run:300067,Prompt SubRun:10,Delta T(s):-338.765
+Run:300067,SubRun:12,50MHz:925627623023,Prompt Run:300067,Prompt SubRun:10,Delta T(s):-617.861
+Run:300067,SubRun:12,50MHz:927779136612,Prompt Run:300067,Prompt SubRun:10,Delta T(s):-660.891
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:300067,SubRun:10,GTID:8186027,Entry:156628,EV:0,Energy:1.44742,Original Energ:1.44847, Tony Energy:1.44712,NHits:449,OWL:0,50MHz:894734582525,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+Delayed Info:
+Run:300067,SubRun:10,GTID:8186032,Entry:156633,EV:0,Energy:1.80124,Original Energy:1.80732, Tony Energy:1.7987,NHits:561,OWL:0,50MHz:894734587991,Applied:951627314364415,Flags:951627314297846, Flags&Mask:1
+
+更新Muon:300072,SubRun:3,Prompt Run:300072, Prompt SubRun:4
+前一个Muon检测信息。Run:300072,SubRun:3,50MHz:1715165552340,Prompt Run:300072,Prompt SubRun:4,Delta T(s):133.558
+Run:300072,SubRun:3,50MHz:1717307858462,Prompt Run:300072,Prompt SubRun:4,Delta T(s):90.7114
+Run:300072,SubRun:4,50MHz:1721843429647,Prompt Run:300072,Prompt SubRun:4,Delta T(s):5.46e-06
+找到对应的Muon。Run:300072,SubRun:4,Prompt Run:300072,Prompt SubRun:4,Delta T(s):5.46e-06
+
+前一个Muon检测信息。Run:300072,SubRun:3,50MHz:1715165552340,Prompt Run:300072,Prompt SubRun:4,Delta T(s):133.558
+Run:300072,SubRun:3,50MHz:1717307858462,Prompt Run:300072,Prompt SubRun:4,Delta T(s):90.7115
+Run:300072,SubRun:4,50MHz:1721843429647,Prompt Run:300072,Prompt SubRun:4,Delta T(s):2.934e-05
+找到对应的Muon。Run:300072,SubRun:4,Prompt Run:300072,Prompt SubRun:4,Delta T(s):2.934e-05
+
+前一个Muon检测信息。Run:300072,SubRun:3,50MHz:1715165552340,Prompt Run:300072,Prompt SubRun:4,Delta T(s):133.558
+Run:300072,SubRun:3,50MHz:1717307858462,Prompt Run:300072,Prompt SubRun:4,Delta T(s):90.7116
+Run:300072,SubRun:4,50MHz:1721843429647,Prompt Run:300072,Prompt SubRun:4,Delta T(s):0.00018374
+找到对应的Muon。Run:300072,SubRun:4,Prompt Run:300072,Prompt SubRun:4,Delta T(s):0.00018374
+
+更新Muon:300087,SubRun:3,Prompt Run:300087, Prompt SubRun:4
+前一个Muon检测信息。Run:300087,SubRun:3,50MHz:4409092987011,Prompt Run:300087,Prompt SubRun:4,Delta T(s):339.261
+Run:300087,SubRun:3,50MHz:4419368180251,Prompt Run:300087,Prompt SubRun:4,Delta T(s):133.757
+Run:300087,SubRun:4,50MHz:4422365144480,Prompt Run:300087,Prompt SubRun:4,Delta T(s):73.8181
+Run:300087,SubRun:5,50MHz:4432341760356,Prompt Run:300087,Prompt SubRun:4,Delta T(s):-125.714
+Run:300087,SubRun:5,50MHz:4441116986285,Prompt Run:300087,Prompt SubRun:4,Delta T(s):-301.219
+Run:300087,SubRun:5,50MHz:4443412427418,Prompt Run:300087,Prompt SubRun:4,Delta T(s):-347.128
+Run:300087,SubRun:7,50MHz:4457617256578,Prompt Run:300087,Prompt SubRun:4,Delta T(s):-631.224
+Run:300087,SubRun:7,50MHz:4463289248526,Prompt Run:300087,Prompt SubRun:4,Delta T(s):-744.664
+Run:300087,SubRun:7,50MHz:4465632207503,Prompt Run:300087,Prompt SubRun:4,Delta T(s):-791.523
+Run:300087,SubRun:8,50MHz:4469579136608,Prompt Run:300087,Prompt SubRun:4,Delta T(s):-870.462
+Run:300087,SubRun:8,50MHz:4475302935760,Prompt Run:300087,Prompt SubRun:4,Delta T(s):-984.938
+Run:300087,SubRun:11,50MHz:4511470856824,Prompt Run:300087,Prompt SubRun:4,Delta T(s):-1708.3
+Run:300087,SubRun:11,50MHz:4514283352263,Prompt Run:300087,Prompt SubRun:4,Delta T(s):-1764.55
+Run:300087,SubRun:12,50MHz:4517540760571,Prompt Run:300087,Prompt SubRun:4,Delta T(s):-1829.69
+Run:300087,SubRun:13,50MHz:4530570775389,Prompt Run:300087,Prompt SubRun:4,Delta T(s):-2090.29
+Run:300087,SubRun:14,50MHz:4547139032071,Prompt Run:300087,Prompt SubRun:4,Delta T(s):-2421.66
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:300087,SubRun:4,GTID:5384322,Entry:341947,EV:0,Energy:1.53272,Original Energ:1.51941, Tony Energy:1.52117,NHits:410,OWL:0,50MHz:4426056051680,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+Delayed Info:
+Run:300087,SubRun:4,GTID:5384324,Entry:341949,EV:0,Energy:1.83222,Original Energy:1.81755, Tony Energy:1.81922,NHits:502,OWL:0,50MHz:4426056054094,Applied:951627314364415,Flags:951627314298871, Flags&Mask:1
+
+更新Muon:300105,SubRun:14,Prompt Run:300106, Prompt SubRun:1
+前一个Muon检测信息。Run:300105,SubRun:13,50MHz:7771695911091,Prompt Run:300106,Prompt SubRun:1,Delta T(s):708.445
+Run:300105,SubRun:14,50MHz:7790658189751,Prompt Run:300106,Prompt SubRun:1,Delta T(s):329.199
+Run:300106,SubRun:1,50MHz:7804282760656,Prompt Run:300106,Prompt SubRun:1,Delta T(s):56.7079
+Run:300106,SubRun:2,50MHz:7823148308488,Prompt Run:300106,Prompt SubRun:1,Delta T(s):-320.603
+Run:300106,SubRun:2,50MHz:7826822426727,Prompt Run:300106,Prompt SubRun:1,Delta T(s):-394.085
+Run:300106,SubRun:3,50MHz:7835747856635,Prompt Run:300106,Prompt SubRun:1,Delta T(s):-572.594
+Run:300106,SubRun:4,50MHz:7850165253940,Prompt Run:300106,Prompt SubRun:1,Delta T(s):-860.942
+Run:300106,SubRun:5,50MHz:7854269875121,Prompt Run:300106,Prompt SubRun:1,Delta T(s):-943.034
+Run:300106,SubRun:5,50MHz:7863323515991,Prompt Run:300106,Prompt SubRun:1,Delta T(s):-1124.11
+Run:300106,SubRun:6,50MHz:7873828008787,Prompt Run:300106,Prompt SubRun:1,Delta T(s):-1334.2
+Run:300106,SubRun:7,50MHz:7879045175885,Prompt Run:300106,Prompt SubRun:1,Delta T(s):-1438.54
+Run:300106,SubRun:7,50MHz:7881776920172,Prompt Run:300106,Prompt SubRun:1,Delta T(s):-1493.18
+Run:300106,SubRun:9,50MHz:7903556976518,Prompt Run:300106,Prompt SubRun:1,Delta T(s):-1928.78
+Run:300106,SubRun:10,50MHz:7915029206601,Prompt Run:300106,Prompt SubRun:1,Delta T(s):-2158.22
+Run:300106,SubRun:10,50MHz:7917481513675,Prompt Run:300106,Prompt SubRun:1,Delta T(s):-2207.27
+Run:300106,SubRun:12,50MHz:7943068446193,Prompt Run:300106,Prompt SubRun:1,Delta T(s):-2719.01
+Run:300106,SubRun:12,50MHz:7948811965051,Prompt Run:300106,Prompt SubRun:1,Delta T(s):-2833.88
+Run:300106,SubRun:13,50MHz:7957576288716,Prompt Run:300106,Prompt SubRun:1,Delta T(s):-3009.16
+Run:300106,SubRun:14,50MHz:7968628092832,Prompt Run:300106,Prompt SubRun:1,Delta T(s):-3230.2
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:300106,SubRun:1,GTID:11643758,Entry:175241,EV:0,Energy:1.6316,Original Energ:1.6271, Tony Energy:1.62442,NHits:461,OWL:0,50MHz:7807118155367,Applied:951627314364415,Flags:951627314298854, Flags&Mask:1
+Delayed Info:
+Run:300106,SubRun:1,GTID:11643760,Entry:175243,EV:0,Energy:1.80433,Original Energy:1.78923, Tony Energy:1.79091,NHits:502,OWL:0,50MHz:7807118160706,Applied:951627314364415,Flags:951627314298871, Flags&Mask:1
+
+更新Muon:300108,SubRun:5,Prompt Run:300108, Prompt SubRun:6
+前一个Muon检测信息。Run:300108,SubRun:3,50MHz:8194613820166,Prompt Run:300108,Prompt SubRun:6,Delta T(s):835.257
+Run:300108,SubRun:5,50MHz:8217326990609,Prompt Run:300108,Prompt SubRun:6,Delta T(s):380.993
+Run:300108,SubRun:6,50MHz:8233614010364,Prompt Run:300108,Prompt SubRun:6,Delta T(s):55.2529
+Run:300108,SubRun:7,50MHz:8239565612363,Prompt Run:300108,Prompt SubRun:6,Delta T(s):-63.7792
+Run:300108,SubRun:8,50MHz:8258213865140,Prompt Run:300108,Prompt SubRun:6,Delta T(s):-436.744
+Run:300108,SubRun:9,50MHz:8263669756083,Prompt Run:300108,Prompt SubRun:6,Delta T(s):-545.862
+Run:300108,SubRun:10,50MHz:8274642314981,Prompt Run:300108,Prompt SubRun:6,Delta T(s):-765.313
+Run:300108,SubRun:10,50MHz:8276148100676,Prompt Run:300108,Prompt SubRun:6,Delta T(s):-795.429
+Run:300108,SubRun:10,50MHz:8283749673259,Prompt Run:300108,Prompt SubRun:6,Delta T(s):-947.46
+Run:300108,SubRun:11,50MHz:8289841858433,Prompt Run:300108,Prompt SubRun:6,Delta T(s):-1069.3
+Run:300108,SubRun:11,50MHz:8292580443961,Prompt Run:300108,Prompt SubRun:6,Delta T(s):-1124.08
+Run:300108,SubRun:12,50MHz:8299911487023,Prompt Run:300108,Prompt SubRun:6,Delta T(s):-1270.7
+Run:300108,SubRun:12,50MHz:8303496771034,Prompt Run:300108,Prompt SubRun:6,Delta T(s):-1342.4
+Run:300108,SubRun:12,50MHz:8304863212451,Prompt Run:300108,Prompt SubRun:6,Delta T(s):-1369.73
+Run:300108,SubRun:13,50MHz:8316703450338,Prompt Run:300108,Prompt SubRun:6,Delta T(s):-1606.54
+Run:300108,SubRun:14,50MHz:8329463742448,Prompt Run:300108,Prompt SubRun:6,Delta T(s):-1861.74
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:300108,SubRun:6,GTID:238473,Entry:619863,EV:0,Energy:2.44103,Original Energ:2.39528, Tony Energy:2.36685,NHits:716,OWL:0,50MHz:8236376653002,Applied:951627314364415,Flags:951627314298854, Flags&Mask:1
+Delayed Info:
+Run:300108,SubRun:6,GTID:238475,Entry:619865,EV:0,Energy:1.83335,Original Energy:1.78892, Tony Energy:1.77849,NHits:554,OWL:0,50MHz:8236376656619,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+
+更新Muon:300407,SubRun:6,Prompt Run:300407, Prompt SubRun:7
+前一个Muon检测信息。Run:300407,SubRun:4,50MHz:2156736658733,Prompt Run:300407,Prompt SubRun:7,Delta T(s):780.797
+Run:300407,SubRun:6,50MHz:2177623608375,Prompt Run:300407,Prompt SubRun:7,Delta T(s):363.058
+Run:300407,SubRun:7,50MHz:2188690016157,Prompt Run:300407,Prompt SubRun:7,Delta T(s):141.73
+Run:300407,SubRun:7,50MHz:2195470973888,Prompt Run:300407,Prompt SubRun:7,Delta T(s):6.11088
+找到对应的Muon。Run:300407,SubRun:7,Prompt Run:300407,Prompt SubRun:7,Delta T(s):6.11088
+
+更新Muon:300436,SubRun:4,Prompt Run:300436, Prompt SubRun:5
+前一个Muon检测信息。Run:300436,SubRun:3,50MHz:6641364956152,Prompt Run:300436,Prompt SubRun:5,Delta T(s):649.033
+Run:300436,SubRun:4,50MHz:6651416004594,Prompt Run:300436,Prompt SubRun:5,Delta T(s):448.012
+Run:300436,SubRun:5,50MHz:6670130515841,Prompt Run:300436,Prompt SubRun:5,Delta T(s):73.7216
+Run:300436,SubRun:6,50MHz:6681015444057,Prompt Run:300436,Prompt SubRun:5,Delta T(s):-143.977
+Run:300436,SubRun:6,50MHz:6683622654124,Prompt Run:300436,Prompt SubRun:5,Delta T(s):-196.121
+Run:300436,SubRun:7,50MHz:6688056611212,Prompt Run:300436,Prompt SubRun:5,Delta T(s):-284.8
+Run:300436,SubRun:7,50MHz:6691010252656,Prompt Run:300436,Prompt SubRun:5,Delta T(s):-343.873
+Run:300436,SubRun:8,50MHz:6700375062352,Prompt Run:300436,Prompt SubRun:5,Delta T(s):-531.169
+Run:300436,SubRun:8,50MHz:6707854361390,Prompt Run:300436,Prompt SubRun:5,Delta T(s):-680.755
+Run:300436,SubRun:9,50MHz:6712116212681,Prompt Run:300436,Prompt SubRun:5,Delta T(s):-765.992
+Run:300436,SubRun:9,50MHz:6714405395983,Prompt Run:300436,Prompt SubRun:5,Delta T(s):-811.776
+Run:300436,SubRun:10,50MHz:6725350055147,Prompt Run:300436,Prompt SubRun:5,Delta T(s):-1030.67
+Run:300436,SubRun:10,50MHz:6730949982188,Prompt Run:300436,Prompt SubRun:5,Delta T(s):-1142.67
+Run:300436,SubRun:11,50MHz:6745312533431,Prompt Run:300436,Prompt SubRun:5,Delta T(s):-1429.92
+Run:300436,SubRun:13,50MHz:6764318397031,Prompt Run:300436,Prompt SubRun:5,Delta T(s):-1810.04
+Run:300436,SubRun:13,50MHz:6765720969251,Prompt Run:300436,Prompt SubRun:5,Delta T(s):-1838.09
+Run:300436,SubRun:13,50MHz:6770988919234,Prompt Run:300436,Prompt SubRun:5,Delta T(s):-1943.45
+Run:300436,SubRun:14,50MHz:6777124304033,Prompt Run:300436,Prompt SubRun:5,Delta T(s):-2066.15
+Run:300436,SubRun:14,50MHz:6779916154080,Prompt Run:300436,Prompt SubRun:5,Delta T(s):-2121.99
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:300436,SubRun:5,GTID:7323906,Entry:618091,EV:0,Energy:2.7299,Original Energ:2.75962, Tony Energy:2.73714,NHits:733,OWL:0,50MHz:6673816594207,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+Delayed Info:
+Run:300436,SubRun:5,GTID:7323909,Entry:618094,EV:0,Energy:2.0209,Original Energy:2.04285, Tony Energy:2.02484,NHits:539,OWL:0,50MHz:6673816623620,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+
+更新Muon:300442,SubRun:7,Prompt Run:300442, Prompt SubRun:8
+前一个Muon检测信息。Run:300442,SubRun:6,50MHz:7756735199432,Prompt Run:300442,Prompt SubRun:8,Delta T(s):479.028
+Run:300442,SubRun:7,50MHz:7771252031784,Prompt Run:300442,Prompt SubRun:8,Delta T(s):188.692
+Run:300442,SubRun:8,50MHz:7780686599494,Prompt Run:300442,Prompt SubRun:8,Delta T(s):0.00018674
+找到对应的Muon。Run:300442,SubRun:8,Prompt Run:300442,Prompt SubRun:8,Delta T(s):0.00018674
+
+更新Muon:300475,SubRun:11,Prompt Run:300475, Prompt SubRun:12
+前一个Muon检测信息。Run:300475,SubRun:10,50MHz:4270755893932,Prompt Run:300475,Prompt SubRun:12,Delta T(s):523.596
+Run:300475,SubRun:11,50MHz:4276861307674,Prompt Run:300475,Prompt SubRun:12,Delta T(s):401.488
+Run:300475,SubRun:12,50MHz:4290983356012,Prompt Run:300475,Prompt SubRun:12,Delta T(s):119.047
+Run:300475,SubRun:12,50MHz:4295043551478,Prompt Run:300475,Prompt SubRun:12,Delta T(s):37.8428
+Run:300475,SubRun:12,50MHz:4296935693123,Prompt Run:300475,Prompt SubRun:12,Delta T(s):1.36e-06
+找到对应的Muon。Run:300475,SubRun:12,Prompt Run:300475,Prompt SubRun:12,Delta T(s):1.36e-06
+
+前一个Muon检测信息。Run:300475,SubRun:10,50MHz:4270755893932,Prompt Run:300475,Prompt SubRun:12,Delta T(s):523.596
+Run:300475,SubRun:11,50MHz:4276861307674,Prompt Run:300475,Prompt SubRun:12,Delta T(s):401.488
+Run:300475,SubRun:12,50MHz:4290983356012,Prompt Run:300475,Prompt SubRun:12,Delta T(s):119.047
+Run:300475,SubRun:12,50MHz:4295043551478,Prompt Run:300475,Prompt SubRun:12,Delta T(s):37.8428
+Run:300475,SubRun:12,50MHz:4296935693123,Prompt Run:300475,Prompt SubRun:12,Delta T(s):4.12e-06
+找到对应的Muon。Run:300475,SubRun:12,Prompt Run:300475,Prompt SubRun:12,Delta T(s):4.12e-06
+
+前一个Muon检测信息。Run:300475,SubRun:10,50MHz:4270755893932,Prompt Run:300475,Prompt SubRun:12,Delta T(s):523.596
+Run:300475,SubRun:11,50MHz:4276861307674,Prompt Run:300475,Prompt SubRun:12,Delta T(s):401.488
+Run:300475,SubRun:12,50MHz:4290983356012,Prompt Run:300475,Prompt SubRun:12,Delta T(s):119.047
+Run:300475,SubRun:12,50MHz:4295043551478,Prompt Run:300475,Prompt SubRun:12,Delta T(s):37.8428
+Run:300475,SubRun:12,50MHz:4296935693123,Prompt Run:300475,Prompt SubRun:12,Delta T(s):4.58e-06
+找到对应的Muon。Run:300475,SubRun:12,Prompt Run:300475,Prompt SubRun:12,Delta T(s):4.58e-06
+
+前一个Muon检测信息。Run:300475,SubRun:10,50MHz:4270755893932,Prompt Run:300475,Prompt SubRun:12,Delta T(s):523.596
+Run:300475,SubRun:11,50MHz:4276861307674,Prompt Run:300475,Prompt SubRun:12,Delta T(s):401.488
+Run:300475,SubRun:12,50MHz:4290983356012,Prompt Run:300475,Prompt SubRun:12,Delta T(s):119.047
+Run:300475,SubRun:12,50MHz:4295043551478,Prompt Run:300475,Prompt SubRun:12,Delta T(s):37.8428
+Run:300475,SubRun:12,50MHz:4296935693123,Prompt Run:300475,Prompt SubRun:12,Delta T(s):5.5e-06
+找到对应的Muon。Run:300475,SubRun:12,Prompt Run:300475,Prompt SubRun:12,Delta T(s):5.5e-06
+
+更新Muon:300483,SubRun:12,Prompt Run:300483, Prompt SubRun:13
+前一个Muon检测信息。Run:300483,SubRun:11,50MHz:5721273400979,Prompt Run:300483,Prompt SubRun:13,Delta T(s):523.022
+Run:300483,SubRun:12,50MHz:5732872249097,Prompt Run:300483,Prompt SubRun:13,Delta T(s):291.045
+Run:300483,SubRun:13,50MHz:5746158888049,Prompt Run:300483,Prompt SubRun:13,Delta T(s):25.3123
+Run:300483,SubRun:14,50MHz:5755408250758,Prompt Run:300483,Prompt SubRun:13,Delta T(s):-159.675
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:300483,SubRun:13,GTID:332399,Entry:543079,EV:0,Energy:0.957051,Original Energ:0.951103, Tony Energy:0.959905,NHits:280,OWL:1,50MHz:5747424502644,Applied:951627314364415,Flags:951627314298871, Flags&Mask:1
+Delayed Info:
+Run:300483,SubRun:13,GTID:332401,Entry:543081,EV:0,Energy:2.24165,Original Energy:2.22946, Tony Energy:2.23644,NHits:619,OWL:0,50MHz:5747424507754,Applied:951627314364415,Flags:951627314297846, Flags&Mask:1
+
+更新Muon:300825,SubRun:6,Prompt Run:300825, Prompt SubRun:7
+前一个Muon检测信息。Run:300825,SubRun:4,50MHz:7122423297122,Prompt Run:300825,Prompt SubRun:7,Delta T(s):606.999
+Run:300825,SubRun:6,50MHz:7138279484770,Prompt Run:300825,Prompt SubRun:7,Delta T(s):289.875
+Run:300825,SubRun:7,50MHz:7152773246282,Prompt Run:300825,Prompt SubRun:7,Delta T(s):2.3e-06
+找到对应的Muon。Run:300825,SubRun:7,Prompt Run:300825,Prompt SubRun:7,Delta T(s):2.3e-06
+
+前一个Muon检测信息。Run:300825,SubRun:4,50MHz:7122423297122,Prompt Run:300825,Prompt SubRun:7,Delta T(s):606.999
+Run:300825,SubRun:6,50MHz:7138279484770,Prompt Run:300825,Prompt SubRun:7,Delta T(s):289.875
+Run:300825,SubRun:7,50MHz:7152773246282,Prompt Run:300825,Prompt SubRun:7,Delta T(s):4.6e-06
+找到对应的Muon。Run:300825,SubRun:7,Prompt Run:300825,Prompt SubRun:7,Delta T(s):4.6e-06
+
+更新Muon:300840,SubRun:7,Prompt Run:300840, Prompt SubRun:8
+前一个Muon检测信息。Run:300840,SubRun:7,50MHz:1054144805272,Prompt Run:300840,Prompt SubRun:8,Delta T(s):319.321
+Run:300840,SubRun:7,50MHz:1057141118525,Prompt Run:300840,Prompt SubRun:8,Delta T(s):259.394
+Run:300840,SubRun:9,50MHz:1085779541642,Prompt Run:300840,Prompt SubRun:8,Delta T(s):-313.374
+Run:300840,SubRun:9,50MHz:1089643364746,Prompt Run:300840,Prompt SubRun:8,Delta T(s):-390.651
+Run:300840,SubRun:10,50MHz:1099440166339,Prompt Run:300840,Prompt SubRun:8,Delta T(s):-586.587
+Run:300840,SubRun:12,50MHz:1121821590814,Prompt Run:300840,Prompt SubRun:8,Delta T(s):-1034.22
+Run:300840,SubRun:12,50MHz:1125961576266,Prompt Run:300840,Prompt SubRun:8,Delta T(s):-1117.01
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:300840,SubRun:8,GTID:16172306,Entry:192203,EV:0,Energy:1.79399,Original Energ:1.80572, Tony Energy:1.80909,NHits:552,OWL:0,50MHz:1070110834723,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+Delayed Info:
+Run:300840,SubRun:8,GTID:16172309,Entry:192206,EV:0,Energy:1.91147,Original Energy:1.92681, Tony Energy:1.93473,NHits:588,OWL:0,50MHz:1070110838419,Applied:951627314364415,Flags:951627314298871, Flags&Mask:1
+
+更新Muon:300901,SubRun:9,Prompt Run:300901, Prompt SubRun:10
+前一个Muon检测信息。Run:300901,SubRun:9,50MHz:3272757454586,Prompt Run:300901,Prompt SubRun:10,Delta T(s):157.631
+Run:300901,SubRun:9,50MHz:3274522566580,Prompt Run:300901,Prompt SubRun:10,Delta T(s):122.329
+Run:300901,SubRun:10,50MHz:3276790661482,Prompt Run:300901,Prompt SubRun:10,Delta T(s):76.967
+Run:300901,SubRun:10,50MHz:3287454055357,Prompt Run:300901,Prompt SubRun:10,Delta T(s):-136.301
+Run:300901,SubRun:12,50MHz:3302821273993,Prompt Run:300901,Prompt SubRun:10,Delta T(s):-443.645
+Run:300901,SubRun:12,50MHz:3304200860568,Prompt Run:300901,Prompt SubRun:10,Delta T(s):-471.237
+Run:300901,SubRun:14,50MHz:3327227896028,Prompt Run:300901,Prompt SubRun:10,Delta T(s):-931.778
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:300901,SubRun:10,GTID:8076817,Entry:227012,EV:0,Energy:3.17219,Original Energ:3.21374, Tony Energy:3.22152,NHits:962,OWL:0,50MHz:3280639013768,Applied:951627314364415,Flags:951627314298879, Flags&Mask:1
+Delayed Info:
+Run:300901,SubRun:10,GTID:8076819,Entry:227014,EV:0,Energy:2.04639,Original Energy:2.07748, Tony Energy:2.08961,NHits:634,OWL:0,50MHz:3280639016735,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+
+更新Muon:300954,SubRun:7,Prompt Run:300954, Prompt SubRun:8
+前一个Muon检测信息。Run:300954,SubRun:6,50MHz:3206188877579,Prompt Run:300954,Prompt SubRun:8,Delta T(s):479.857
+Run:300954,SubRun:7,50MHz:3227318155884,Prompt Run:300954,Prompt SubRun:8,Delta T(s):57.2711
+Run:300954,SubRun:8,50MHz:3230181709279,Prompt Run:300954,Prompt SubRun:8,Delta T(s):9.8e-07
+找到对应的Muon。Run:300954,SubRun:8,Prompt Run:300954,Prompt SubRun:8,Delta T(s):9.8e-07
+
+前一个Muon检测信息。Run:300954,SubRun:6,50MHz:3206188877579,Prompt Run:300954,Prompt SubRun:8,Delta T(s):479.857
+Run:300954,SubRun:7,50MHz:3227318155884,Prompt Run:300954,Prompt SubRun:8,Delta T(s):57.2711
+Run:300954,SubRun:8,50MHz:3230181709279,Prompt Run:300954,Prompt SubRun:8,Delta T(s):1.44e-06
+找到对应的Muon。Run:300954,SubRun:8,Prompt Run:300954,Prompt SubRun:8,Delta T(s):1.44e-06
+
+更新Muon:300991,SubRun:0,Prompt Run:300991, Prompt SubRun:14
+前一个Muon检测信息。Run:300990,SubRun:13,50MHz:290761925705,Prompt Run:300991,Prompt SubRun:14,Delta T(s):3934.9
+Run:300991,SubRun:0,50MHz:319851715445,Prompt Run:300991,Prompt SubRun:14,Delta T(s):3353.11
+Run:300991,SubRun:2,50MHz:344475225053,Prompt Run:300991,Prompt SubRun:14,Delta T(s):2860.64
+Run:300991,SubRun:4,50MHz:366287442828,Prompt Run:300991,Prompt SubRun:14,Delta T(s):2424.39
+Run:300991,SubRun:4,50MHz:368904000347,Prompt Run:300991,Prompt SubRun:14,Delta T(s):2372.06
+Run:300991,SubRun:6,50MHz:394110277928,Prompt Run:300991,Prompt SubRun:14,Delta T(s):1867.93
+Run:300991,SubRun:7,50MHz:401389131873,Prompt Run:300991,Prompt SubRun:14,Delta T(s):1722.36
+Run:300991,SubRun:8,50MHz:409612333062,Prompt Run:300991,Prompt SubRun:14,Delta T(s):1557.89
+Run:300991,SubRun:9,50MHz:429044642656,Prompt Run:300991,Prompt SubRun:14,Delta T(s):1169.25
+Run:300991,SubRun:10,50MHz:433358237093,Prompt Run:300991,Prompt SubRun:14,Delta T(s):1082.98
+Run:300991,SubRun:12,50MHz:462939848488,Prompt Run:300991,Prompt SubRun:14,Delta T(s):491.343
+Run:300991,SubRun:13,50MHz:481387566170,Prompt Run:300991,Prompt SubRun:14,Delta T(s):122.389
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:300991,SubRun:14,GTID:13283754,Entry:271472,EV:0,Energy:1.17083,Original Energ:1.15252, Tony Energy:1.16152,NHits:346,OWL:0,50MHz:487507014341,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+Delayed Info:
+Run:300991,SubRun:14,GTID:13283758,Entry:271476,EV:0,Energy:2.14812,Original Energy:2.13602, Tony Energy:2.12762,NHits:645,OWL:0,50MHz:487507030880,Applied:951627314364415,Flags:951627314298854, Flags&Mask:1
+
+更新Muon:300996,SubRun:12,Prompt Run:300996, Prompt SubRun:14
+前一个Muon检测信息。Run:300996,SubRun:11,50MHz:1348844262740,Prompt Run:300996,Prompt SubRun:14,Delta T(s):781.16
+Run:300996,SubRun:12,50MHz:1368427165498,Prompt Run:300996,Prompt SubRun:14,Delta T(s):389.502
+Run:300996,SubRun:14,50MHz:1385838553038,Prompt Run:300996,Prompt SubRun:14,Delta T(s):41.2746
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:300996,SubRun:14,GTID:8933258,Entry:258659,EV:0,Energy:1.62349,Original Energ:1.6874, Tony Energy:1.6533,NHits:474,OWL:0,50MHz:1387902285395,Applied:951627314364415,Flags:951627314297847, Flags&Mask:1
+Delayed Info:
+Run:300996,SubRun:14,GTID:8933261,Entry:258662,EV:0,Energy:2.26457,Original Energy:2.31842, Tony Energy:2.29306,NHits:712,OWL:0,50MHz:1387902300103,Applied:951627314364415,Flags:951627314297854, Flags&Mask:1
+
+更新Muon:301016,SubRun:10,Prompt Run:301016, Prompt SubRun:11
+前一个Muon检测信息。Run:301016,SubRun:9,50MHz:4924827701757,Prompt Run:301016,Prompt SubRun:11,Delta T(s):534.096
+Run:301016,SubRun:10,50MHz:4942136695332,Prompt Run:301016,Prompt SubRun:11,Delta T(s):187.917
+Run:301016,SubRun:11,50MHz:4949461618007,Prompt Run:301016,Prompt SubRun:11,Delta T(s):41.4182
+Run:301016,SubRun:12,50MHz:4969098750774,Prompt Run:301016,Prompt SubRun:11,Delta T(s):-351.324
+Run:301016,SubRun:13,50MHz:4980135694854,Prompt Run:301016,Prompt SubRun:11,Delta T(s):-572.063
+Run:301016,SubRun:13,50MHz:4981958603010,Prompt Run:301016,Prompt SubRun:11,Delta T(s):-608.522
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:301016,SubRun:11,GTID:6319826,Entry:244203,EV:0,Energy:2.55293,Original Energ:2.57317, Tony Energy:2.57416,NHits:687,OWL:0,50MHz:4951532525847,Applied:951627314364415,Flags:951627314298854, Flags&Mask:1
+Delayed Info:
+Run:301016,SubRun:11,GTID:6319828,Entry:244205,EV:0,Energy:2.14867,Original Energy:2.1659, Tony Energy:2.16878,NHits:593,OWL:1,50MHz:4951532532452,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+
+更新Muon:301018,SubRun:10,Prompt Run:301018, Prompt SubRun:14
+前一个Muon检测信息。Run:301018,SubRun:10,50MHz:5296423518574,Prompt Run:301018,Prompt SubRun:14,Delta T(s):959.638
+Run:301018,SubRun:10,50MHz:5304692542490,Prompt Run:301018,Prompt SubRun:14,Delta T(s):794.258
+Run:301018,SubRun:14,50MHz:5347413131665,Prompt Run:301018,Prompt SubRun:14,Delta T(s):-60.1541
+Run:301018,SubRun:14,50MHz:5348649320159,Prompt Run:301018,Prompt SubRun:14,Delta T(s):-84.8779
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:301018,SubRun:14,GTID:9587233,Entry:29483,EV:0,Energy:1.89822,Original Energ:1.89447, Tony Energy:1.88818,NHits:589,OWL:0,50MHz:5344405427405,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+Delayed Info:
+Run:301018,SubRun:14,GTID:9587237,Entry:29487,EV:0,Energy:2.11096,Original Energy:2.10709, Tony Energy:2.10398,NHits:652,OWL:0,50MHz:5344405428591,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+
+更新Muon:301020,SubRun:8,Prompt Run:301020, Prompt SubRun:9
+前一个Muon检测信息。Run:301020,SubRun:8,50MHz:5633651056921,Prompt Run:301020,Prompt SubRun:9,Delta T(s):358.901
+Run:301020,SubRun:8,50MHz:5635970389599,Prompt Run:301020,Prompt SubRun:9,Delta T(s):312.515
+Run:301020,SubRun:9,50MHz:5645686105859,Prompt Run:301020,Prompt SubRun:9,Delta T(s):118.2
+Run:301020,SubRun:12,50MHz:5682123065338,Prompt Run:301020,Prompt SubRun:9,Delta T(s):-610.539
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:301020,SubRun:9,GTID:8512433,Entry:477821,EV:0,Energy:1.50193,Original Energ:1.53155, Tony Energy:1.50283,NHits:479,OWL:0,50MHz:5651596130569,Applied:951627314364415,Flags:951627314298878, Flags&Mask:1
+Delayed Info:
+Run:301020,SubRun:9,GTID:8512435,Entry:477823,EV:0,Energy:1.96416,Original Energy:2.00191, Tony Energy:1.978,NHits:614,OWL:0,50MHz:5651596137260,Applied:951627314364415,Flags:951627314298854, Flags&Mask:1
+
+更新Muon:301071,SubRun:6,Prompt Run:301071, Prompt SubRun:7
+前一个Muon检测信息。Run:301071,SubRun:5,50MHz:5623483420201,Prompt Run:301071,Prompt SubRun:7,Delta T(s):554.997
+Run:301071,SubRun:6,50MHz:5630389609539,Prompt Run:301071,Prompt SubRun:7,Delta T(s):416.873
+Run:301071,SubRun:8,50MHz:5660591066403,Prompt Run:301071,Prompt SubRun:7,Delta T(s):-187.156
+Run:301071,SubRun:8,50MHz:5664762904536,Prompt Run:301071,Prompt SubRun:7,Delta T(s):-270.593
+Run:301071,SubRun:9,50MHz:5667747069629,Prompt Run:301071,Prompt SubRun:7,Delta T(s):-330.276
+Run:301071,SubRun:9,50MHz:5669496331661,Prompt Run:301071,Prompt SubRun:7,Delta T(s):-365.262
+Run:301071,SubRun:10,50MHz:5680651842286,Prompt Run:301071,Prompt SubRun:7,Delta T(s):-588.372
+Run:301071,SubRun:10,50MHz:5685515528005,Prompt Run:301071,Prompt SubRun:7,Delta T(s):-685.646
+Run:301071,SubRun:10,50MHz:5689060285584,Prompt Run:301071,Prompt SubRun:7,Delta T(s):-756.541
+Run:301071,SubRun:11,50MHz:5693260951080,Prompt Run:301071,Prompt SubRun:7,Delta T(s):-840.554
+Run:301071,SubRun:13,50MHz:5716704201710,Prompt Run:301071,Prompt SubRun:7,Delta T(s):-1309.42
+Run:301071,SubRun:13,50MHz:5726168639992,Prompt Run:301071,Prompt SubRun:7,Delta T(s):-1498.71
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:301071,SubRun:7,GTID:510346,Entry:496523,EV:0,Energy:6.40223,Original Energ:6.65871, Tony Energy:6.38792,NHits:1409,OWL:0,50MHz:5651233245737,Applied:951627314364415,Flags:951627314297846, Flags&Mask:1
+Delayed Info:
+Run:301071,SubRun:7,GTID:510349,Entry:496526,EV:0,Energy:2.0857,Original Energy:2.16793, Tony Energy:2.0599,NHits:562,OWL:0,50MHz:5651233257508,Applied:951627314364415,Flags:951627314298854, Flags&Mask:1
+
+更新Muon:301075,SubRun:13,Prompt Run:301075, Prompt SubRun:14
+前一个Muon检测信息。Run:301075,SubRun:12,50MHz:6435090002304,Prompt Run:301075,Prompt SubRun:14,Delta T(s):295.491
+Run:301075,SubRun:13,50MHz:6446290779217,Prompt Run:301075,Prompt SubRun:14,Delta T(s):71.4755
+Run:301075,SubRun:14,50MHz:6451711911160,Prompt Run:301075,Prompt SubRun:14,Delta T(s):-36.9472
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:301075,SubRun:14,GTID:7643898,Entry:32491,EV:0,Energy:3.32304,Original Energ:3.27868, Tony Energy:3.29034,NHits:925,OWL:0,50MHz:6449864552299,Applied:951627314364415,Flags:951627314298854, Flags&Mask:1
+Delayed Info:
+Run:301075,SubRun:14,GTID:7643903,Entry:32496,EV:0,Energy:1.86208,Original Energy:1.86673, Tony Energy:1.84849,NHits:556,OWL:0,50MHz:6449864573552,Applied:951627314364415,Flags:951627314298871, Flags&Mask:1
+
+更新Muon:301079,SubRun:14,Prompt Run:301080, Prompt SubRun:0
+前一个Muon检测信息。Run:301079,SubRun:14,50MHz:7171923725926,Prompt Run:301080,Prompt SubRun:0,Delta T(s):236.23
+Run:301079,SubRun:14,50MHz:7175271570139,Prompt Run:301080,Prompt SubRun:0,Delta T(s):169.274
+Run:301080,SubRun:0,50MHz:7178290522071,Prompt Run:301080,Prompt SubRun:0,Delta T(s):108.895
+Run:301080,SubRun:0,50MHz:7183735247386,Prompt Run:301080,Prompt SubRun:0,Delta T(s):5.94e-06
+找到对应的Muon。Run:301080,SubRun:0,Prompt Run:301080,Prompt SubRun:0,Delta T(s):5.94e-06
+
+更新Muon:301079,SubRun:14,Prompt Run:301080, Prompt SubRun:0
+前一个Muon检测信息。Run:301079,SubRun:14,50MHz:7171923725926,Prompt Run:301080,Prompt SubRun:0,Delta T(s):236.23
+Run:301079,SubRun:14,50MHz:7175271570139,Prompt Run:301080,Prompt SubRun:0,Delta T(s):169.274
+Run:301080,SubRun:0,50MHz:7178290522071,Prompt Run:301080,Prompt SubRun:0,Delta T(s):108.895
+Run:301080,SubRun:0,50MHz:7183735247386,Prompt Run:301080,Prompt SubRun:0,Delta T(s):5.928e-05
+找到对应的Muon。Run:301080,SubRun:0,Prompt Run:301080,Prompt SubRun:0,Delta T(s):5.928e-05
+
+更新Muon:301079,SubRun:14,Prompt Run:301080, Prompt SubRun:0
+前一个Muon检测信息。Run:301079,SubRun:14,50MHz:7171923725926,Prompt Run:301080,Prompt SubRun:0,Delta T(s):236.231
+Run:301079,SubRun:14,50MHz:7175271570139,Prompt Run:301080,Prompt SubRun:0,Delta T(s):169.274
+Run:301080,SubRun:0,50MHz:7178290522071,Prompt Run:301080,Prompt SubRun:0,Delta T(s):108.895
+Run:301080,SubRun:0,50MHz:7183735247386,Prompt Run:301080,Prompt SubRun:0,Delta T(s):8.358e-05
+找到对应的Muon。Run:301080,SubRun:0,Prompt Run:301080,Prompt SubRun:0,Delta T(s):8.358e-05
+
+更新Muon:301079,SubRun:14,Prompt Run:301080, Prompt SubRun:0
+前一个Muon检测信息。Run:301079,SubRun:14,50MHz:7171923725926,Prompt Run:301080,Prompt SubRun:0,Delta T(s):236.231
+Run:301079,SubRun:14,50MHz:7175271570139,Prompt Run:301080,Prompt SubRun:0,Delta T(s):169.274
+Run:301080,SubRun:0,50MHz:7178290522071,Prompt Run:301080,Prompt SubRun:0,Delta T(s):108.895
+Run:301080,SubRun:0,50MHz:7183735247386,Prompt Run:301080,Prompt SubRun:0,Delta T(s):0.00016248
+找到对应的Muon。Run:301080,SubRun:0,Prompt Run:301080,Prompt SubRun:0,Delta T(s):0.00016248
+
+更新Muon:301096,SubRun:10,Prompt Run:301096, Prompt SubRun:13
+前一个Muon检测信息。Run:301096,SubRun:10,50MHz:1393574732927,Prompt Run:301096,Prompt SubRun:13,Delta T(s):556.829
+Run:301096,SubRun:10,50MHz:1395476757531,Prompt Run:301096,Prompt SubRun:13,Delta T(s):518.788
+Run:301096,SubRun:13,50MHz:1425385397750,Prompt Run:301096,Prompt SubRun:13,Delta T(s):-79.3847
+Run:301096,SubRun:13,50MHz:1433354528210,Prompt Run:301096,Prompt SubRun:13,Delta T(s):-238.767
+Run:301096,SubRun:14,50MHz:1440311919707,Prompt Run:301096,Prompt SubRun:13,Delta T(s):-377.915
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:301096,SubRun:13,GTID:15373145,Entry:14179,EV:0,Energy:1.02793,Original Energ:1.01656, Tony Energy:1.01894,NHits:304,OWL:0,50MHz:1421416162161,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+Delayed Info:
+Run:301096,SubRun:13,GTID:15373147,Entry:14181,EV:0,Energy:2.29969,Original Energy:2.27098, Tony Energy:2.27827,NHits:665,OWL:0,50MHz:1421416166333,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+
+更新Muon:301213,SubRun:11,Prompt Run:301213, Prompt SubRun:12
+前一个Muon检测信息。Run:301213,SubRun:10,50MHz:7699110203076,Prompt Run:301213,Prompt SubRun:12,Delta T(s):646.805
+Run:301213,SubRun:11,50MHz:7720728185401,Prompt Run:301213,Prompt SubRun:12,Delta T(s):214.445
+Run:301213,SubRun:12,50MHz:7724823465002,Prompt Run:301213,Prompt SubRun:12,Delta T(s):132.54
+Run:301213,SubRun:13,50MHz:7744093155472,Prompt Run:301213,Prompt SubRun:12,Delta T(s):-252.854
+Run:301213,SubRun:14,50MHz:7750300349677,Prompt Run:301213,Prompt SubRun:12,Delta T(s):-376.998
+Run:301213,SubRun:14,50MHz:7751492944491,Prompt Run:301213,Prompt SubRun:12,Delta T(s):-400.85
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:301213,SubRun:12,GTID:6603410,Entry:397525,EV:0,Energy:1.76624,Original Energ:1.76726, Tony Energy:1.76962,NHits:495,OWL:0,50MHz:7731450459586,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+Delayed Info:
+Run:301213,SubRun:12,GTID:6603413,Entry:397528,EV:0,Energy:2.02696,Original Energy:2.02267, Tony Energy:2.03191,NHits:570,OWL:0,50MHz:7731450474614,Applied:951627314364415,Flags:951627314294774, Flags&Mask:1
+
+更新Muon:301272,SubRun:0,Prompt Run:301272, Prompt SubRun:14
+前一个Muon检测信息。Run:301271,SubRun:14,50MHz:284433617767,Prompt Run:301272,Prompt SubRun:14,Delta T(s):3534.11
+Run:301272,SubRun:0,50MHz:288855905464,Prompt Run:301272,Prompt SubRun:14,Delta T(s):3445.67
+Run:301272,SubRun:2,50MHz:316460252494,Prompt Run:301272,Prompt SubRun:14,Delta T(s):2893.58
+Run:301272,SubRun:2,50MHz:321918206752,Prompt Run:301272,Prompt SubRun:14,Delta T(s):2784.42
+Run:301272,SubRun:3,50MHz:324249733742,Prompt Run:301272,Prompt SubRun:14,Delta T(s):2737.79
+Run:301272,SubRun:3,50MHz:332044260305,Prompt Run:301272,Prompt SubRun:14,Delta T(s):2581.9
+Run:301272,SubRun:4,50MHz:340017542584,Prompt Run:301272,Prompt SubRun:14,Delta T(s):2422.43
+Run:301272,SubRun:6,50MHz:371180107116,Prompt Run:301272,Prompt SubRun:14,Delta T(s):1799.18
+Run:301272,SubRun:7,50MHz:373673471274,Prompt Run:301272,Prompt SubRun:14,Delta T(s):1749.32
+Run:301272,SubRun:8,50MHz:386857382649,Prompt Run:301272,Prompt SubRun:14,Delta T(s):1485.64
+Run:301272,SubRun:8,50MHz:394638858106,Prompt Run:301272,Prompt SubRun:14,Delta T(s):1330.01
+Run:301272,SubRun:9,50MHz:407199431760,Prompt Run:301272,Prompt SubRun:14,Delta T(s):1078.8
+Run:301272,SubRun:9,50MHz:408955207323,Prompt Run:301272,Prompt SubRun:14,Delta T(s):1043.68
+Run:301272,SubRun:10,50MHz:418816296935,Prompt Run:301272,Prompt SubRun:14,Delta T(s):846.46
+Run:301272,SubRun:11,50MHz:425816767506,Prompt Run:301272,Prompt SubRun:14,Delta T(s):706.45
+Run:301272,SubRun:11,50MHz:429292078201,Prompt Run:301272,Prompt SubRun:14,Delta T(s):636.944
+Run:301272,SubRun:13,50MHz:450623346355,Prompt Run:301272,Prompt SubRun:14,Delta T(s):210.319
+Run:301272,SubRun:13,50MHz:454386709381,Prompt Run:301272,Prompt SubRun:14,Delta T(s):135.052
+Run:301272,SubRun:13,50MHz:455959235363,Prompt Run:301272,Prompt SubRun:14,Delta T(s):103.601
+Run:301272,SubRun:13,50MHz:460492064236,Prompt Run:301272,Prompt SubRun:14,Delta T(s):12.9445
+找到对应的Muon。Run:301272,SubRun:13,Prompt Run:301272,Prompt SubRun:14,Delta T(s):12.9445
+
+更新Muon:301304,SubRun:4,Prompt Run:301304, Prompt SubRun:5
+前一个Muon检测信息。Run:301304,SubRun:3,50MHz:4561154790476,Prompt Run:301304,Prompt SubRun:5,Delta T(s):447.905
+Run:301304,SubRun:4,50MHz:4564527982940,Prompt Run:301304,Prompt SubRun:5,Delta T(s):380.442
+Run:301304,SubRun:5,50MHz:4582089568179,Prompt Run:301304,Prompt SubRun:5,Delta T(s):29.2098
+Run:301304,SubRun:5,50MHz:4583550055941,Prompt Run:301304,Prompt SubRun:5,Delta T(s):9.09e-05
+找到对应的Muon。Run:301304,SubRun:5,Prompt Run:301304,Prompt SubRun:5,Delta T(s):9.09e-05
+
+更新Muon:301324,SubRun:13,Prompt Run:301327, Prompt SubRun:0
+前一个Muon检测信息。Run:301324,SubRun:13,50MHz:8284389535328,Prompt Run:301327,Prompt SubRun:0,Delta T(s):4194.62
+Run:301324,SubRun:13,50MHz:8287413897655,Prompt Run:301327,Prompt SubRun:0,Delta T(s):4134.14
+Run:301327,SubRun:0,50MHz:8486435331795,Prompt Run:301327,Prompt SubRun:0,Delta T(s):153.708
+Run:301327,SubRun:0,50MHz:8494120754106,Prompt Run:301327,Prompt SubRun:0,Delta T(s):9e-07
+找到对应的Muon。Run:301327,SubRun:0,Prompt Run:301327,Prompt SubRun:0,Delta T(s):9e-07
+
+更新Muon:301324,SubRun:13,Prompt Run:301327, Prompt SubRun:0
+前一个Muon检测信息。Run:301324,SubRun:13,50MHz:8284389535328,Prompt Run:301327,Prompt SubRun:0,Delta T(s):4194.62
+Run:301324,SubRun:13,50MHz:8287413897655,Prompt Run:301327,Prompt SubRun:0,Delta T(s):4134.14
+Run:301327,SubRun:0,50MHz:8486435331795,Prompt Run:301327,Prompt SubRun:0,Delta T(s):153.708
+Run:301327,SubRun:0,50MHz:8494120754106,Prompt Run:301327,Prompt SubRun:0,Delta T(s):1.82e-06
+找到对应的Muon。Run:301327,SubRun:0,Prompt Run:301327,Prompt SubRun:0,Delta T(s):1.82e-06
+
+更新Muon:301324,SubRun:13,Prompt Run:301327, Prompt SubRun:0
+前一个Muon检测信息。Run:301324,SubRun:13,50MHz:8284389535328,Prompt Run:301327,Prompt SubRun:0,Delta T(s):4194.62
+Run:301324,SubRun:13,50MHz:8287413897655,Prompt Run:301327,Prompt SubRun:0,Delta T(s):4134.14
+Run:301327,SubRun:0,50MHz:8486435331795,Prompt Run:301327,Prompt SubRun:0,Delta T(s):153.708
+Run:301327,SubRun:0,50MHz:8494120754106,Prompt Run:301327,Prompt SubRun:0,Delta T(s):4.12e-06
+找到对应的Muon。Run:301327,SubRun:0,Prompt Run:301327,Prompt SubRun:0,Delta T(s):4.12e-06
+
+更新Muon:301324,SubRun:13,Prompt Run:301327, Prompt SubRun:0
+前一个Muon检测信息。Run:301324,SubRun:13,50MHz:8284389535328,Prompt Run:301327,Prompt SubRun:0,Delta T(s):4194.62
+Run:301324,SubRun:13,50MHz:8287413897655,Prompt Run:301327,Prompt SubRun:0,Delta T(s):4134.14
+Run:301327,SubRun:0,50MHz:8486435331795,Prompt Run:301327,Prompt SubRun:0,Delta T(s):153.708
+Run:301327,SubRun:0,50MHz:8494120754106,Prompt Run:301327,Prompt SubRun:0,Delta T(s):5.04e-06
+找到对应的Muon。Run:301327,SubRun:0,Prompt Run:301327,Prompt SubRun:0,Delta T(s):5.04e-06
+
+更新Muon:301356,SubRun:0,Prompt Run:301356, Prompt SubRun:1
+前一个Muon检测信息。Run:301355,SubRun:13,50MHz:4603690894053,Prompt Run:301356,Prompt SubRun:1,Delta T(s):583.282
+Run:301356,SubRun:0,50MHz:4619987069583,Prompt Run:301356,Prompt SubRun:1,Delta T(s):257.358
+Run:301356,SubRun:1,50MHz:4631035275799,Prompt Run:301356,Prompt SubRun:1,Delta T(s):36.3939
+Run:301356,SubRun:2,50MHz:4647987282957,Prompt Run:301356,Prompt SubRun:1,Delta T(s):-302.646
+Run:301356,SubRun:3,50MHz:4664327695365,Prompt Run:301356,Prompt SubRun:1,Delta T(s):-629.454
+Run:301356,SubRun:3,50MHz:4665591593306,Prompt Run:301356,Prompt SubRun:1,Delta T(s):-654.732
+Run:301356,SubRun:4,50MHz:4673549435686,Prompt Run:301356,Prompt SubRun:1,Delta T(s):-813.889
+Run:301356,SubRun:5,50MHz:4679684457945,Prompt Run:301356,Prompt SubRun:1,Delta T(s):-936.59
+Run:301356,SubRun:5,50MHz:4690042150075,Prompt Run:301356,Prompt SubRun:1,Delta T(s):-1143.74
+Run:301356,SubRun:6,50MHz:4696650726249,Prompt Run:301356,Prompt SubRun:1,Delta T(s):-1275.92
+Run:301356,SubRun:7,50MHz:4713476430457,Prompt Run:301356,Prompt SubRun:1,Delta T(s):-1612.43
+Run:301356,SubRun:7,50MHz:4715558246045,Prompt Run:301356,Prompt SubRun:1,Delta T(s):-1654.07
+Run:301356,SubRun:8,50MHz:4728080344527,Prompt Run:301356,Prompt SubRun:1,Delta T(s):-1904.51
+Run:301356,SubRun:9,50MHz:4732413985695,Prompt Run:301356,Prompt SubRun:1,Delta T(s):-1991.18
+Run:301356,SubRun:10,50MHz:4751815129982,Prompt Run:301356,Prompt SubRun:1,Delta T(s):-2379.2
+Run:301356,SubRun:11,50MHz:4759271006766,Prompt Run:301356,Prompt SubRun:1,Delta T(s):-2528.32
+Run:301356,SubRun:12,50MHz:4768014573597,Prompt Run:301356,Prompt SubRun:1,Delta T(s):-2703.19
+Run:301356,SubRun:12,50MHz:4770161150308,Prompt Run:301356,Prompt SubRun:1,Delta T(s):-2746.12
+Run:301356,SubRun:13,50MHz:4785844974766,Prompt Run:301356,Prompt SubRun:1,Delta T(s):-3059.8
+Run:301356,SubRun:13,50MHz:4787349644127,Prompt Run:301356,Prompt SubRun:1,Delta T(s):-3089.89
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:301356,SubRun:1,GTID:15094346,Entry:232022,EV:0,Energy:2.37127,Original Energ:2.28745, Tony Energy:2.29437,NHits:685,OWL:0,50MHz:4632854970418,Applied:951627314364415,Flags:951627314298878, Flags&Mask:1
+Delayed Info:
+Run:301356,SubRun:1,GTID:15094348,Entry:232024,EV:0,Energy:2.18025,Original Energy:2.10191, Tony Energy:2.10947,NHits:632,OWL:0,50MHz:4632854971212,Applied:951627314364415,Flags:951627314298855, Flags&Mask:1
+
+更新Muon:301357,SubRun:9,Prompt Run:301357, Prompt SubRun:10
+前一个Muon检测信息。Run:301357,SubRun:9,50MHz:4912135011904,Prompt Run:301357,Prompt SubRun:10,Delta T(s):275.996
+Run:301357,SubRun:9,50MHz:4915204474664,Prompt Run:301357,Prompt SubRun:10,Delta T(s):214.607
+Run:301357,SubRun:10,50MHz:4931729541113,Prompt Run:301357,Prompt SubRun:10,Delta T(s):-115.895
+Run:301357,SubRun:12,50MHz:4952465713077,Prompt Run:301357,Prompt SubRun:10,Delta T(s):-530.618
+Run:301357,SubRun:13,50MHz:4962012937678,Prompt Run:301357,Prompt SubRun:10,Delta T(s):-721.563
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:301357,SubRun:10,GTID:13236217,Entry:274913,EV:0,Energy:1.03191,Original Energ:1.03303, Tony Energy:1.03255,NHits:273,OWL:0,50MHz:4925934807779,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+Delayed Info:
+Run:301357,SubRun:10,GTID:13236220,Entry:274916,EV:0,Energy:2.211,Original Energy:2.22097, Tony Energy:2.21292,NHits:566,OWL:0,50MHz:4925934809730,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+
+更新Muon:301395,SubRun:4,Prompt Run:301395, Prompt SubRun:5
+前一个Muon检测信息。Run:301395,SubRun:2,50MHz:1690414266623,Prompt Run:301395,Prompt SubRun:5,Delta T(s):748.567
+Run:301395,SubRun:4,50MHz:1713211098613,Prompt Run:301395,Prompt SubRun:5,Delta T(s):292.63
+Run:301395,SubRun:5,50MHz:1726513523569,Prompt Run:301395,Prompt SubRun:5,Delta T(s):26.5816
+Run:301395,SubRun:5,50MHz:1727842586146,Prompt Run:301395,Prompt SubRun:5,Delta T(s):0.00034752
+找到对应的Muon。Run:301395,SubRun:5,Prompt Run:301395,Prompt SubRun:5,Delta T(s):0.00034752
+
+更新Muon:301429,SubRun:14,Prompt Run:301430, Prompt SubRun:0
+前一个Muon检测信息。Run:301429,SubRun:13,50MHz:7653238803710,Prompt Run:301430,Prompt SubRun:0,Delta T(s):295.421
+Run:301429,SubRun:14,50MHz:7657052747348,Prompt Run:301430,Prompt SubRun:0,Delta T(s):219.142
+Run:301430,SubRun:0,50MHz:7660243053306,Prompt Run:301430,Prompt SubRun:0,Delta T(s):155.336
+Run:301430,SubRun:0,50MHz:7662001715048,Prompt Run:301430,Prompt SubRun:0,Delta T(s):120.163
+Run:301430,SubRun:0,50MHz:7668009855905,Prompt Run:301430,Prompt SubRun:0,Delta T(s):1.82e-06
+找到对应的Muon。Run:301430,SubRun:0,Prompt Run:301430,Prompt SubRun:0,Delta T(s):1.82e-06
+
+更新Muon:301429,SubRun:14,Prompt Run:301430, Prompt SubRun:0
+前一个Muon检测信息。Run:301429,SubRun:13,50MHz:7653238803710,Prompt Run:301430,Prompt SubRun:0,Delta T(s):295.421
+Run:301429,SubRun:14,50MHz:7657052747348,Prompt Run:301430,Prompt SubRun:0,Delta T(s):219.142
+Run:301430,SubRun:0,50MHz:7660243053306,Prompt Run:301430,Prompt SubRun:0,Delta T(s):155.336
+Run:301430,SubRun:0,50MHz:7662001715048,Prompt Run:301430,Prompt SubRun:0,Delta T(s):120.163
+Run:301430,SubRun:0,50MHz:7668009855905,Prompt Run:301430,Prompt SubRun:0,Delta T(s):2.28e-06
+找到对应的Muon。Run:301430,SubRun:0,Prompt Run:301430,Prompt SubRun:0,Delta T(s):2.28e-06
+
+更新Muon:301442,SubRun:2,Prompt Run:301442, Prompt SubRun:3
+前一个Muon检测信息。Run:301442,SubRun:2,50MHz:1058631940246,Prompt Run:301442,Prompt SubRun:3,Delta T(s):219.781
+Run:301442,SubRun:2,50MHz:1060367944519,Prompt Run:301442,Prompt SubRun:3,Delta T(s):185.06
+Run:301442,SubRun:3,50MHz:1068796335033,Prompt Run:301442,Prompt SubRun:3,Delta T(s):16.4926
+找到对应的Muon。Run:301442,SubRun:3,Prompt Run:301442,Prompt SubRun:3,Delta T(s):16.4926
+
+更新Muon:301476,SubRun:13,Prompt Run:301476, Prompt SubRun:14
+前一个Muon检测信息。Run:301476,SubRun:12,50MHz:6933276580108,Prompt Run:301476,Prompt SubRun:14,Delta T(s):445.644
+Run:301476,SubRun:13,50MHz:6943829086811,Prompt Run:301476,Prompt SubRun:14,Delta T(s):234.594
+Run:301476,SubRun:14,50MHz:6956045634279,Prompt Run:301476,Prompt SubRun:14,Delta T(s):-9.73686
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:301476,SubRun:14,GTID:3223113,Entry:47793,EV:0,Energy:2.60707,Original Energ:2.68034, Tony Energy:2.68237,NHits:769,OWL:0,50MHz:6955558791220,Applied:951627314364415,Flags:951627314298854, Flags&Mask:1
+Delayed Info:
+Run:301476,SubRun:14,GTID:3223115,Entry:47795,EV:0,Energy:2.12338,Original Energy:2.1863, Tony Energy:2.19036,NHits:634,OWL:0,50MHz:6955558794944,Applied:951627314364415,Flags:951627314298854, Flags&Mask:1
+
+更新Muon:301652,SubRun:14,Prompt Run:301653, Prompt SubRun:0
+前一个Muon检测信息。Run:301652,SubRun:12,50MHz:7772188080531,Prompt Run:301653,Prompt SubRun:0,Delta T(s):460.897
+Run:301652,SubRun:14,50MHz:7792248638007,Prompt Run:301653,Prompt SubRun:0,Delta T(s):59.6858
+Run:301653,SubRun:0,50MHz:7797764930130,Prompt Run:301653,Prompt SubRun:0,Delta T(s):-50.6401
+Run:301653,SubRun:0,50MHz:7798839192968,Prompt Run:301653,Prompt SubRun:0,Delta T(s):-72.1253
+Run:301653,SubRun:0,50MHz:7802246998439,Prompt Run:301653,Prompt SubRun:0,Delta T(s):-140.281
+Run:301653,SubRun:0,50MHz:7803301168966,Prompt Run:301653,Prompt SubRun:0,Delta T(s):-161.365
+Run:301653,SubRun:0,50MHz:7804681527904,Prompt Run:301653,Prompt SubRun:0,Delta T(s):-188.972
+Run:301653,SubRun:0,50MHz:7806911031003,Prompt Run:301653,Prompt SubRun:0,Delta T(s):-233.562
+Run:301653,SubRun:1,50MHz:7815066370085,Prompt Run:301653,Prompt SubRun:0,Delta T(s):-396.669
+Run:301653,SubRun:2,50MHz:7826340619063,Prompt Run:301653,Prompt SubRun:0,Delta T(s):-622.154
+Run:301653,SubRun:2,50MHz:7829031753098,Prompt Run:301653,Prompt SubRun:0,Delta T(s):-675.977
+Run:301653,SubRun:2,50MHz:7832019257797,Prompt Run:301653,Prompt SubRun:0,Delta T(s):-735.727
+Run:301653,SubRun:4,50MHz:7848627542419,Prompt Run:301653,Prompt SubRun:0,Delta T(s):-1067.89
+Run:301653,SubRun:5,50MHz:7857845574393,Prompt Run:301653,Prompt SubRun:0,Delta T(s):-1252.25
+Run:301653,SubRun:5,50MHz:7869566124473,Prompt Run:301653,Prompt SubRun:0,Delta T(s):-1486.66
+Run:301653,SubRun:6,50MHz:7874426943901,Prompt Run:301653,Prompt SubRun:0,Delta T(s):-1583.88
+Run:301653,SubRun:7,50MHz:7883870097613,Prompt Run:301653,Prompt SubRun:0,Delta T(s):-1772.74
+Run:301653,SubRun:8,50MHz:7902846729092,Prompt Run:301653,Prompt SubRun:0,Delta T(s):-2152.28
+Run:301653,SubRun:10,50MHz:7927276926051,Prompt Run:301653,Prompt SubRun:0,Delta T(s):-2640.88
+Run:301653,SubRun:11,50MHz:7941548235332,Prompt Run:301653,Prompt SubRun:0,Delta T(s):-2926.31
+Run:301653,SubRun:12,50MHz:7947809273336,Prompt Run:301653,Prompt SubRun:0,Delta T(s):-3051.53
+Run:301653,SubRun:14,50MHz:7974001016444,Prompt Run:301653,Prompt SubRun:0,Delta T(s):-3575.36
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:301653,SubRun:0,GTID:1814583,Entry:16680,EV:0,Energy:6.87691,Original Energ:6.85734, Tony Energy:6.89209,NHits:1836,OWL:0,50MHz:7795232927555,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+Delayed Info:
+Run:301653,SubRun:0,GTID:1814586,Entry:16683,EV:0,Energy:2.07778,Original Energy:2.07403, Tony Energy:2.08716,NHits:602,OWL:0,50MHz:7795232936914,Applied:951627314364415,Flags:951627314298854, Flags&Mask:1
+
+更新Muon:301655,SubRun:0,Prompt Run:301655, Prompt SubRun:1
+前一个Muon检测信息。Run:301655,SubRun:0,50MHz:8159726457062,Prompt Run:301655,Prompt SubRun:1,Delta T(s):337.459
+Run:301655,SubRun:0,50MHz:8167019636259,Prompt Run:301655,Prompt SubRun:1,Delta T(s):191.596
+Run:301655,SubRun:1,50MHz:8175654948517,Prompt Run:301655,Prompt SubRun:1,Delta T(s):18.8893
+找到对应的Muon。Run:301655,SubRun:1,Prompt Run:301655,Prompt SubRun:1,Delta T(s):18.8893
+
+前一个Muon检测信息。Run:301655,SubRun:0,50MHz:8159726457062,Prompt Run:301655,Prompt SubRun:1,Delta T(s):337.459
+Run:301655,SubRun:0,50MHz:8167019636259,Prompt Run:301655,Prompt SubRun:1,Delta T(s):191.596
+Run:301655,SubRun:1,50MHz:8175654948517,Prompt Run:301655,Prompt SubRun:1,Delta T(s):18.8893
+找到对应的Muon。Run:301655,SubRun:1,Prompt Run:301655,Prompt SubRun:1,Delta T(s):18.8893
+
+更新Muon:301664,SubRun:0,Prompt Run:301664, Prompt SubRun:3
+前一个Muon检测信息。Run:301663,SubRun:13,50MHz:964895972989,Prompt Run:301664,Prompt SubRun:3,Delta T(s):1136.45
+Run:301664,SubRun:0,50MHz:988429840989,Prompt Run:301664,Prompt SubRun:3,Delta T(s):665.773
+Run:301664,SubRun:3,50MHz:1022773904756,Prompt Run:301664,Prompt SubRun:3,Delta T(s):-21.1083
+Run:301664,SubRun:3,50MHz:1027766444089,Prompt Run:301664,Prompt SubRun:3,Delta T(s):-120.959
+Run:301664,SubRun:4,50MHz:1029220943152,Prompt Run:301664,Prompt SubRun:3,Delta T(s):-150.049
+Run:301664,SubRun:5,50MHz:1042753269311,Prompt Run:301664,Prompt SubRun:3,Delta T(s):-420.696
+Run:301664,SubRun:5,50MHz:1043952877837,Prompt Run:301664,Prompt SubRun:3,Delta T(s):-444.688
+Run:301664,SubRun:7,50MHz:1068359590655,Prompt Run:301664,Prompt SubRun:3,Delta T(s):-932.822
+Run:301664,SubRun:7,50MHz:1070671714716,Prompt Run:301664,Prompt SubRun:3,Delta T(s):-979.065
+Run:301664,SubRun:7,50MHz:1075003784362,Prompt Run:301664,Prompt SubRun:3,Delta T(s):-1065.71
+Run:301664,SubRun:8,50MHz:1090287236759,Prompt Run:301664,Prompt SubRun:3,Delta T(s):-1371.37
+Run:301664,SubRun:8,50MHz:1091598356573,Prompt Run:301664,Prompt SubRun:3,Delta T(s):-1397.6
+Run:301664,SubRun:9,50MHz:1095169636718,Prompt Run:301664,Prompt SubRun:3,Delta T(s):-1469.02
+Run:301664,SubRun:10,50MHz:1106935967200,Prompt Run:301664,Prompt SubRun:3,Delta T(s):-1704.35
+Run:301664,SubRun:11,50MHz:1125267204971,Prompt Run:301664,Prompt SubRun:3,Delta T(s):-2070.97
+Run:301664,SubRun:11,50MHz:1127658400720,Prompt Run:301664,Prompt SubRun:3,Delta T(s):-2118.8
+Run:301664,SubRun:12,50MHz:1131081085571,Prompt Run:301664,Prompt SubRun:3,Delta T(s):-2187.25
+Run:301664,SubRun:13,50MHz:1146974733327,Prompt Run:301664,Prompt SubRun:3,Delta T(s):-2505.12
+Run:301664,SubRun:13,50MHz:1153310409442,Prompt Run:301664,Prompt SubRun:3,Delta T(s):-2631.84
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:301664,SubRun:3,GTID:3695230,Entry:271621,EV:0,Energy:1.18971,Original Energ:1.14418, Tony Energy:1.14184,NHits:358,OWL:0,50MHz:1021718487461,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+Delayed Info:
+Run:301664,SubRun:3,GTID:3695232,Entry:271623,EV:0,Energy:2.30919,Original Energy:2.22716, Tony Energy:2.22125,NHits:672,OWL:0,50MHz:1021718489726,Applied:951627314364415,Flags:951627314298854, Flags&Mask:1
+
+更新Muon:301708,SubRun:1,Prompt Run:301708, Prompt SubRun:2
+前一个Muon检测信息。Run:301708,SubRun:0,50MHz:7379182272808,Prompt Run:301708,Prompt SubRun:2,Delta T(s):431.149
+Run:301708,SubRun:1,50MHz:7384932092605,Prompt Run:301708,Prompt SubRun:2,Delta T(s):316.152
+Run:301708,SubRun:3,50MHz:7407360262950,Prompt Run:301708,Prompt SubRun:2,Delta T(s):-132.411
+Run:301708,SubRun:3,50MHz:7412970022797,Prompt Run:301708,Prompt SubRun:2,Delta T(s):-244.606
+Run:301708,SubRun:4,50MHz:7421771288298,Prompt Run:301708,Prompt SubRun:2,Delta T(s):-420.632
+Run:301708,SubRun:4,50MHz:7425522041220,Prompt Run:301708,Prompt SubRun:2,Delta T(s):-495.647
+Run:301708,SubRun:4,50MHz:7431650414713,Prompt Run:301708,Prompt SubRun:2,Delta T(s):-618.214
+Run:301708,SubRun:6,50MHz:7448039333753,Prompt Run:301708,Prompt SubRun:2,Delta T(s):-945.993
+Run:301708,SubRun:6,50MHz:7454091910198,Prompt Run:301708,Prompt SubRun:2,Delta T(s):-1067.04
+Run:301708,SubRun:6,50MHz:7456264050804,Prompt Run:301708,Prompt SubRun:2,Delta T(s):-1110.49
+Run:301708,SubRun:8,50MHz:7474983964964,Prompt Run:301708,Prompt SubRun:2,Delta T(s):-1484.89
+Run:301708,SubRun:8,50MHz:7476747183814,Prompt Run:301708,Prompt SubRun:2,Delta T(s):-1520.15
+Run:301708,SubRun:8,50MHz:7480634752419,Prompt Run:301708,Prompt SubRun:2,Delta T(s):-1597.9
+Run:301708,SubRun:10,50MHz:7497105173990,Prompt Run:301708,Prompt SubRun:2,Delta T(s):-1927.31
+Run:301708,SubRun:10,50MHz:7500298782012,Prompt Run:301708,Prompt SubRun:2,Delta T(s):-1991.18
+Run:301708,SubRun:10,50MHz:7501505165418,Prompt Run:301708,Prompt SubRun:2,Delta T(s):-2015.31
+Run:301708,SubRun:11,50MHz:7517064324748,Prompt Run:301708,Prompt SubRun:2,Delta T(s):-2326.49
+Run:301708,SubRun:11,50MHz:7519065071382,Prompt Run:301708,Prompt SubRun:2,Delta T(s):-2366.51
+Run:301708,SubRun:12,50MHz:7524571711181,Prompt Run:301708,Prompt SubRun:2,Delta T(s):-2476.64
+Run:301708,SubRun:12,50MHz:7527279652118,Prompt Run:301708,Prompt SubRun:2,Delta T(s):-2530.8
+Run:301708,SubRun:13,50MHz:7540896390790,Prompt Run:301708,Prompt SubRun:2,Delta T(s):-2803.13
+Run:301708,SubRun:14,50MHz:7546555450985,Prompt Run:301708,Prompt SubRun:2,Delta T(s):-2916.31
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:301708,SubRun:2,GTID:7245924,Entry:302377,EV:0,Energy:1.85064,Original Energ:1.93574, Tony Energy:1.92539,NHits:569,OWL:0,50MHz:7400739706489,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+Delayed Info:
+Run:301708,SubRun:2,GTID:7245926,Entry:302379,EV:0,Energy:1.96332,Original Energy:2.05613, Tony Energy:2.04465,NHits:593,OWL:0,50MHz:7400739730456,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+
+更新Muon:301732,SubRun:1,Prompt Run:301732, Prompt SubRun:3
+前一个Muon检测信息。Run:301732,SubRun:1,50MHz:2909930487017,Prompt Run:301732,Prompt SubRun:3,Delta T(s):654.511
+Run:301732,SubRun:1,50MHz:2911348580380,Prompt Run:301732,Prompt SubRun:3,Delta T(s):626.149
+Run:301732,SubRun:3,50MHz:2939345925029,Prompt Run:301732,Prompt SubRun:3,Delta T(s):66.2018
+Run:301732,SubRun:3,50MHz:2940956075128,Prompt Run:301732,Prompt SubRun:3,Delta T(s):33.9988
+Run:301732,SubRun:3,50MHz:2942656015162,Prompt Run:301732,Prompt SubRun:3,Delta T(s):4.024e-05
+找到对应的Muon。Run:301732,SubRun:3,Prompt Run:301732,Prompt SubRun:3,Delta T(s):4.024e-05
+
+前一个Muon检测信息。Run:301732,SubRun:1,50MHz:2909930487017,Prompt Run:301732,Prompt SubRun:3,Delta T(s):654.511
+Run:301732,SubRun:1,50MHz:2911348580380,Prompt Run:301732,Prompt SubRun:3,Delta T(s):626.149
+Run:301732,SubRun:3,50MHz:2939345925029,Prompt Run:301732,Prompt SubRun:3,Delta T(s):66.2019
+Run:301732,SubRun:3,50MHz:2940956075128,Prompt Run:301732,Prompt SubRun:3,Delta T(s):33.9989
+Run:301732,SubRun:3,50MHz:2942656015162,Prompt Run:301732,Prompt SubRun:3,Delta T(s):7.84e-05
+找到对应的Muon。Run:301732,SubRun:3,Prompt Run:301732,Prompt SubRun:3,Delta T(s):7.84e-05
+
+前一个Muon检测信息。Run:301732,SubRun:1,50MHz:2909930487017,Prompt Run:301732,Prompt SubRun:3,Delta T(s):654.511
+Run:301732,SubRun:1,50MHz:2911348580380,Prompt Run:301732,Prompt SubRun:3,Delta T(s):626.149
+Run:301732,SubRun:3,50MHz:2939345925029,Prompt Run:301732,Prompt SubRun:3,Delta T(s):66.2019
+Run:301732,SubRun:3,50MHz:2940956075128,Prompt Run:301732,Prompt SubRun:3,Delta T(s):33.9989
+Run:301732,SubRun:3,50MHz:2942656015162,Prompt Run:301732,Prompt SubRun:3,Delta T(s):0.00011006
+找到对应的Muon。Run:301732,SubRun:3,Prompt Run:301732,Prompt SubRun:3,Delta T(s):0.00011006
+
+更新Muon:301772,SubRun:10,Prompt Run:301772, Prompt SubRun:11
+前一个Muon检测信息。Run:301772,SubRun:10,50MHz:966385814016,Prompt Run:301772,Prompt SubRun:11,Delta T(s):294.466
+Run:301772,SubRun:10,50MHz:972885563321,Prompt Run:301772,Prompt SubRun:11,Delta T(s):164.471
+Run:301772,SubRun:11,50MHz:981109105356,Prompt Run:301772,Prompt SubRun:11,Delta T(s):9e-07
+找到对应的Muon。Run:301772,SubRun:11,Prompt Run:301772,Prompt SubRun:11,Delta T(s):9e-07
+
+前一个Muon检测信息。Run:301772,SubRun:10,50MHz:966385814016,Prompt Run:301772,Prompt SubRun:11,Delta T(s):294.466
+Run:301772,SubRun:10,50MHz:972885563321,Prompt Run:301772,Prompt SubRun:11,Delta T(s):164.471
+Run:301772,SubRun:11,50MHz:981109105356,Prompt Run:301772,Prompt SubRun:11,Delta T(s):1.36e-06
+找到对应的Muon。Run:301772,SubRun:11,Prompt Run:301772,Prompt SubRun:11,Delta T(s):1.36e-06
+
+前一个Muon检测信息。Run:301772,SubRun:10,50MHz:966385814016,Prompt Run:301772,Prompt SubRun:11,Delta T(s):294.466
+Run:301772,SubRun:10,50MHz:972885563321,Prompt Run:301772,Prompt SubRun:11,Delta T(s):164.471
+Run:301772,SubRun:11,50MHz:981109105356,Prompt Run:301772,Prompt SubRun:11,Delta T(s):5.48e-06
+找到对应的Muon。Run:301772,SubRun:11,Prompt Run:301772,Prompt SubRun:11,Delta T(s):5.48e-06
+
+前一个Muon检测信息。Run:301772,SubRun:10,50MHz:966385814016,Prompt Run:301772,Prompt SubRun:11,Delta T(s):294.466
+Run:301772,SubRun:10,50MHz:972885563321,Prompt Run:301772,Prompt SubRun:11,Delta T(s):164.471
+Run:301772,SubRun:11,50MHz:981109105356,Prompt Run:301772,Prompt SubRun:11,Delta T(s):0.00010066
+找到对应的Muon。Run:301772,SubRun:11,Prompt Run:301772,Prompt SubRun:11,Delta T(s):0.00010066
+
+前一个Muon检测信息。Run:301772,SubRun:10,50MHz:966385814016,Prompt Run:301772,Prompt SubRun:11,Delta T(s):294.466
+Run:301772,SubRun:10,50MHz:972885563321,Prompt Run:301772,Prompt SubRun:11,Delta T(s):164.471
+Run:301772,SubRun:11,50MHz:981109105356,Prompt Run:301772,Prompt SubRun:11,Delta T(s):0.00019074
+找到对应的Muon。Run:301772,SubRun:11,Prompt Run:301772,Prompt SubRun:11,Delta T(s):0.00019074
+
+更新Muon:301820,SubRun:2,Prompt Run:301820, Prompt SubRun:4
+前一个Muon检测信息。Run:301820,SubRun:2,50MHz:8655261466729,Prompt Run:301820,Prompt SubRun:4,Delta T(s):552.862
+Run:301820,SubRun:2,50MHz:8656326945199,Prompt Run:301820,Prompt SubRun:4,Delta T(s):531.552
+Run:301820,SubRun:4,50MHz:8672017277820,Prompt Run:301820,Prompt SubRun:4,Delta T(s):217.745
+Run:301820,SubRun:4,50MHz:8682904544563,Prompt Run:301820,Prompt SubRun:4,Delta T(s):2.444e-05
+找到对应的Muon。Run:301820,SubRun:4,Prompt Run:301820,Prompt SubRun:4,Delta T(s):2.444e-05
+
+前一个Muon检测信息。Run:301820,SubRun:2,50MHz:8655261466729,Prompt Run:301820,Prompt SubRun:4,Delta T(s):552.862
+Run:301820,SubRun:2,50MHz:8656326945199,Prompt Run:301820,Prompt SubRun:4,Delta T(s):531.552
+Run:301820,SubRun:4,50MHz:8672017277820,Prompt Run:301820,Prompt SubRun:4,Delta T(s):217.745
+Run:301820,SubRun:4,50MHz:8682904544563,Prompt Run:301820,Prompt SubRun:4,Delta T(s):6.06e-05
+找到对应的Muon。Run:301820,SubRun:4,Prompt Run:301820,Prompt SubRun:4,Delta T(s):6.06e-05
+
+更新Muon:301892,SubRun:10,Prompt Run:301892, Prompt SubRun:11
+前一个Muon检测信息。Run:301892,SubRun:9,50MHz:2412524562653,Prompt Run:301892,Prompt SubRun:11,Delta T(s):576.449
+Run:301892,SubRun:10,50MHz:2417224885368,Prompt Run:301892,Prompt SubRun:11,Delta T(s):482.443
+Run:301892,SubRun:11,50MHz:2430129137248,Prompt Run:301892,Prompt SubRun:11,Delta T(s):224.357
+Run:301892,SubRun:11,50MHz:2437491173138,Prompt Run:301892,Prompt SubRun:11,Delta T(s):77.1168
+Run:301892,SubRun:12,50MHz:2443892083608,Prompt Run:301892,Prompt SubRun:11,Delta T(s):-50.9014
+Run:301892,SubRun:12,50MHz:2450392347767,Prompt Run:301892,Prompt SubRun:11,Delta T(s):-180.907
+Run:301892,SubRun:13,50MHz:2459452686517,Prompt Run:301892,Prompt SubRun:11,Delta T(s):-362.113
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:301892,SubRun:11,GTID:7616837,Entry:627767,EV:0,Energy:0.949145,Original Energ:0.960239, Tony Energy:0.960442,NHits:273,OWL:0,50MHz:2441347012201,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+Delayed Info:
+Run:301892,SubRun:11,GTID:7616839,Entry:627769,EV:0,Energy:2.21006,Original Energy:2.23789, Tony Energy:2.2386,NHits:599,OWL:0,50MHz:2441347029581,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+
+更新Muon:301947,SubRun:6,Prompt Run:301947, Prompt SubRun:7
+前一个Muon检测信息。Run:301947,SubRun:5,50MHz:2008998600782,Prompt Run:301947,Prompt SubRun:7,Delta T(s):495.902
+Run:301947,SubRun:6,50MHz:2019727906424,Prompt Run:301947,Prompt SubRun:7,Delta T(s):281.316
+Run:301947,SubRun:7,50MHz:2031676181434,Prompt Run:301947,Prompt SubRun:7,Delta T(s):42.3502
+Run:301947,SubRun:9,50MHz:2065981839451,Prompt Run:301947,Prompt SubRun:7,Delta T(s):-643.763
+Run:301947,SubRun:9,50MHz:2068389127267,Prompt Run:301947,Prompt SubRun:7,Delta T(s):-691.909
+Run:301947,SubRun:10,50MHz:2071359553903,Prompt Run:301947,Prompt SubRun:7,Delta T(s):-751.317
+Run:301947,SubRun:11,50MHz:2082602068370,Prompt Run:301947,Prompt SubRun:7,Delta T(s):-976.168
+Run:301947,SubRun:11,50MHz:2083853601191,Prompt Run:301947,Prompt SubRun:7,Delta T(s):-1001.2
+Run:301947,SubRun:11,50MHz:2087483639325,Prompt Run:301947,Prompt SubRun:7,Delta T(s):-1073.8
+Run:301947,SubRun:12,50MHz:2099949906983,Prompt Run:301947,Prompt SubRun:7,Delta T(s):-1323.12
+Run:301947,SubRun:13,50MHz:2111270423049,Prompt Run:301947,Prompt SubRun:7,Delta T(s):-1549.53
+Run:301947,SubRun:13,50MHz:2117797628132,Prompt Run:301947,Prompt SubRun:7,Delta T(s):-1680.08
+Run:301947,SubRun:14,50MHz:2120924013739,Prompt Run:301947,Prompt SubRun:7,Delta T(s):-1742.61
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:301947,SubRun:7,GTID:7872258,Entry:117179,EV:0,Energy:1.92128,Original Energ:1.96794, Tony Energy:1.88329,NHits:551,OWL:0,50MHz:2033793691250,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+Delayed Info:
+Run:301947,SubRun:7,GTID:7872260,Entry:117181,EV:0,Energy:2.11632,Original Energy:2.09576, Tony Energy:2.07432,NHits:619,OWL:0,50MHz:2033793691931,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+
+更新Muon:301971,SubRun:10,Prompt Run:301971, Prompt SubRun:11
+前一个Muon检测信息。Run:301971,SubRun:10,50MHz:6295176050924,Prompt Run:301971,Prompt SubRun:11,Delta T(s):275.554
+Run:301971,SubRun:10,50MHz:6296276420240,Prompt Run:301971,Prompt SubRun:11,Delta T(s):253.547
+Run:301971,SubRun:11,50MHz:6300958374931,Prompt Run:301971,Prompt SubRun:11,Delta T(s):159.907
+Run:301971,SubRun:11,50MHz:6306600665153,Prompt Run:301971,Prompt SubRun:11,Delta T(s):47.0616
+Run:301971,SubRun:11,50MHz:6308953729611,Prompt Run:301971,Prompt SubRun:11,Delta T(s):0.000345
+找到对应的Muon。Run:301971,SubRun:11,Prompt Run:301971,Prompt SubRun:11,Delta T(s):0.000345
+
+更新Muon:301985,SubRun:5,Prompt Run:301985, Prompt SubRun:6
+前一个Muon检测信息。Run:301985,SubRun:5,50MHz:8750402429219,Prompt Run:301985,Prompt SubRun:6,Delta T(s):339.79
+Run:301985,SubRun:5,50MHz:8756605069240,Prompt Run:301985,Prompt SubRun:6,Delta T(s):215.737
+Run:301985,SubRun:6,50MHz:8759984636758,Prompt Run:301985,Prompt SubRun:6,Delta T(s):148.146
+Run:301985,SubRun:6,50MHz:8763422768354,Prompt Run:301985,Prompt SubRun:6,Delta T(s):79.3833
+Run:301985,SubRun:6,50MHz:8764573815488,Prompt Run:301985,Prompt SubRun:6,Delta T(s):56.3624
+Run:301985,SubRun:6,50MHz:8767391933263,Prompt Run:301985,Prompt SubRun:6,Delta T(s):5.5e-06
+找到对应的Muon。Run:301985,SubRun:6,Prompt Run:301985,Prompt SubRun:6,Delta T(s):5.5e-06
+
+更新Muon:301988,SubRun:6,Prompt Run:301988, Prompt SubRun:7
+前一个Muon检测信息。Run:301988,SubRun:6,50MHz:507822915394,Prompt Run:301988,Prompt SubRun:7,Delta T(s):258.999
+Run:301988,SubRun:6,50MHz:509481053310,Prompt Run:301988,Prompt SubRun:7,Delta T(s):225.837
+Run:301988,SubRun:7,50MHz:518244160930,Prompt Run:301988,Prompt SubRun:7,Delta T(s):50.5745
+Run:301988,SubRun:7,50MHz:520772883559,Prompt Run:301988,Prompt SubRun:7,Delta T(s):4.58e-06
+找到对应的Muon。Run:301988,SubRun:7,Prompt Run:301988,Prompt SubRun:7,Delta T(s):4.58e-06
+
+前一个Muon检测信息。Run:301988,SubRun:6,50MHz:507822915394,Prompt Run:301988,Prompt SubRun:11,Delta T(s):1286.36
+Run:301988,SubRun:6,50MHz:509481053310,Prompt Run:301988,Prompt SubRun:11,Delta T(s):1253.2
+Run:301988,SubRun:7,50MHz:518244160930,Prompt Run:301988,Prompt SubRun:11,Delta T(s):1077.93
+Run:301988,SubRun:7,50MHz:520772883559,Prompt Run:301988,Prompt SubRun:11,Delta T(s):1027.36
+Run:301988,SubRun:8,50MHz:531003308395,Prompt Run:301988,Prompt SubRun:11,Delta T(s):822.751
+Run:301988,SubRun:9,50MHz:543236210637,Prompt Run:301988,Prompt SubRun:11,Delta T(s):578.093
+Run:301988,SubRun:9,50MHz:548227171651,Prompt Run:301988,Prompt SubRun:11,Delta T(s):478.273
+Run:301988,SubRun:10,50MHz:556504438623,Prompt Run:301988,Prompt SubRun:11,Delta T(s):312.728
+Run:301988,SubRun:10,50MHz:558028001244,Prompt Run:301988,Prompt SubRun:11,Delta T(s):282.257
+Run:301988,SubRun:10,50MHz:560536108366,Prompt Run:301988,Prompt SubRun:11,Delta T(s):232.095
+Run:301988,SubRun:10,50MHz:563793830655,Prompt Run:301988,Prompt SubRun:11,Delta T(s):166.94
+Run:301988,SubRun:11,50MHz:565770920223,Prompt Run:301988,Prompt SubRun:11,Delta T(s):127.398
+Run:301988,SubRun:11,50MHz:568021569734,Prompt Run:301988,Prompt SubRun:11,Delta T(s):82.3854
+Run:301988,SubRun:11,50MHz:577701251398,Prompt Run:301988,Prompt SubRun:11,Delta T(s):-111.208
+Run:301988,SubRun:12,50MHz:579605146988,Prompt Run:301988,Prompt SubRun:11,Delta T(s):-149.286
+Run:301988,SubRun:13,50MHz:593848169051,Prompt Run:301988,Prompt SubRun:11,Delta T(s):-434.147
+Run:301988,SubRun:13,50MHz:600482007149,Prompt Run:301988,Prompt SubRun:11,Delta T(s):-566.823
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:301988,SubRun:11,GTID:9445857,Entry:354746,EV:0,Energy:2.40264,Original Energ:2.35017, Tony Energy:2.35143,NHits:668,OWL:1,50MHz:572140841147,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+Delayed Info:
+Run:301988,SubRun:11,GTID:9445860,Entry:354749,EV:0,Energy:2.11478,Original Energy:2.05032, Tony Energy:2.0595,NHits:607,OWL:0,50MHz:572140841633,Applied:951627314364415,Flags:951627314298878, Flags&Mask:1
+
+更新Muon:301994,SubRun:6,Prompt Run:301994, Prompt SubRun:7
+前一个Muon检测信息。Run:301994,SubRun:6,50MHz:1587049681564,Prompt Run:301994,Prompt SubRun:7,Delta T(s):165.428
+Run:301994,SubRun:6,50MHz:1593675097514,Prompt Run:301994,Prompt SubRun:7,Delta T(s):32.92
+Run:301994,SubRun:7,50MHz:1598030478117,Prompt Run:301994,Prompt SubRun:7,Delta T(s):-54.1876
+Run:301994,SubRun:7,50MHz:1603317487646,Prompt Run:301994,Prompt SubRun:7,Delta T(s):-159.928
+Run:301994,SubRun:8,50MHz:1608056368489,Prompt Run:301994,Prompt SubRun:7,Delta T(s):-254.705
+Run:301994,SubRun:8,50MHz:1611240610394,Prompt Run:301994,Prompt SubRun:7,Delta T(s):-318.39
+Run:301994,SubRun:9,50MHz:1621048975307,Prompt Run:301994,Prompt SubRun:7,Delta T(s):-514.558
+Run:301994,SubRun:10,50MHz:1635262277900,Prompt Run:301994,Prompt SubRun:7,Delta T(s):-798.824
+Run:301994,SubRun:10,50MHz:1636376273701,Prompt Run:301994,Prompt SubRun:7,Delta T(s):-821.104
+Run:301994,SubRun:10,50MHz:1639679076077,Prompt Run:301994,Prompt SubRun:7,Delta T(s):-887.16
+Run:301994,SubRun:10,50MHz:1640908167428,Prompt Run:301994,Prompt SubRun:7,Delta T(s):-911.741
+Run:301994,SubRun:11,50MHz:1646950313540,Prompt Run:301994,Prompt SubRun:7,Delta T(s):-1032.58
+Run:301994,SubRun:11,50MHz:1657240402165,Prompt Run:301994,Prompt SubRun:7,Delta T(s):-1238.39
+Run:301994,SubRun:12,50MHz:1661629308816,Prompt Run:301994,Prompt SubRun:7,Delta T(s):-1326.16
+Run:301994,SubRun:12,50MHz:1663508652503,Prompt Run:301994,Prompt SubRun:7,Delta T(s):-1363.75
+Run:301994,SubRun:12,50MHz:1665355122295,Prompt Run:301994,Prompt SubRun:7,Delta T(s):-1400.68
+Run:301994,SubRun:12,50MHz:1670728715826,Prompt Run:301994,Prompt SubRun:7,Delta T(s):-1508.15
+Run:301994,SubRun:13,50MHz:1679770780043,Prompt Run:301994,Prompt SubRun:7,Delta T(s):-1688.99
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:301994,SubRun:7,GTID:10756052,Entry:24898,EV:0,Energy:2.37229,Original Energ:2.32156, Tony Energy:2.27733,NHits:613,OWL:0,50MHz:1595321097271,Applied:951627314364415,Flags:951627314293750, Flags&Mask:1
+Delayed Info:
+Run:301994,SubRun:7,GTID:10756054,Entry:24900,EV:0,Energy:2.18707,Original Energy:2.14737, Tony Energy:2.12946,NHits:647,OWL:0,50MHz:1595321101586,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+
+更新Muon:302005,SubRun:2,Prompt Run:302005, Prompt SubRun:3
+前一个Muon检测信息。Run:302005,SubRun:1,50MHz:3463397650895,Prompt Run:302005,Prompt SubRun:3,Delta T(s):365.916
+Run:302005,SubRun:2,50MHz:3468388847385,Prompt Run:302005,Prompt SubRun:3,Delta T(s):266.092
+Run:302005,SubRun:3,50MHz:3477000929508,Prompt Run:302005,Prompt SubRun:3,Delta T(s):93.8502
+Run:302005,SubRun:3,50MHz:3486303124336,Prompt Run:302005,Prompt SubRun:3,Delta T(s):-92.1937
+Run:302005,SubRun:3,50MHz:3488968007866,Prompt Run:302005,Prompt SubRun:3,Delta T(s):-145.491
+Run:302005,SubRun:4,50MHz:3498036967958,Prompt Run:302005,Prompt SubRun:3,Delta T(s):-326.871
+Run:302005,SubRun:4,50MHz:3499475287977,Prompt Run:302005,Prompt SubRun:3,Delta T(s):-355.637
+Run:302005,SubRun:4,50MHz:3501578364093,Prompt Run:302005,Prompt SubRun:3,Delta T(s):-397.698
+Run:302005,SubRun:5,50MHz:3503127276705,Prompt Run:302005,Prompt SubRun:3,Delta T(s):-428.677
+Run:302005,SubRun:5,50MHz:3505582552240,Prompt Run:302005,Prompt SubRun:3,Delta T(s):-477.782
+Run:302005,SubRun:5,50MHz:3507254200656,Prompt Run:302005,Prompt SubRun:3,Delta T(s):-511.215
+Run:302005,SubRun:6,50MHz:3519862201800,Prompt Run:302005,Prompt SubRun:3,Delta T(s):-763.375
+Run:302005,SubRun:6,50MHz:3525363080355,Prompt Run:302005,Prompt SubRun:3,Delta T(s):-873.393
+Run:302005,SubRun:7,50MHz:3527455857805,Prompt Run:302005,Prompt SubRun:3,Delta T(s):-915.248
+Run:302005,SubRun:7,50MHz:3530305540867,Prompt Run:302005,Prompt SubRun:3,Delta T(s):-972.242
+Run:302005,SubRun:7,50MHz:3532712451256,Prompt Run:302005,Prompt SubRun:3,Delta T(s):-1020.38
+Run:302005,SubRun:7,50MHz:3536431959789,Prompt Run:302005,Prompt SubRun:3,Delta T(s):-1094.77
+Run:302005,SubRun:8,50MHz:3550343537288,Prompt Run:302005,Prompt SubRun:3,Delta T(s):-1373
+Run:302005,SubRun:9,50MHz:3560607212491,Prompt Run:302005,Prompt SubRun:3,Delta T(s):-1578.28
+Run:302005,SubRun:10,50MHz:3566909090041,Prompt Run:302005,Prompt SubRun:3,Delta T(s):-1704.31
+Run:302005,SubRun:10,50MHz:3568466570073,Prompt Run:302005,Prompt SubRun:3,Delta T(s):-1735.46
+Run:302005,SubRun:10,50MHz:3576329036547,Prompt Run:302005,Prompt SubRun:3,Delta T(s):-1892.71
+Run:302005,SubRun:11,50MHz:3581581488117,Prompt Run:302005,Prompt SubRun:3,Delta T(s):-1997.76
+Run:302005,SubRun:11,50MHz:3582918945662,Prompt Run:302005,Prompt SubRun:3,Delta T(s):-2024.51
+Run:302005,SubRun:13,50MHz:3602509967161,Prompt Run:302005,Prompt SubRun:3,Delta T(s):-2416.33
+Run:302005,SubRun:13,50MHz:3607332096070,Prompt Run:302005,Prompt SubRun:3,Delta T(s):-2512.77
+Run:302005,SubRun:14,50MHz:3617642575415,Prompt Run:302005,Prompt SubRun:3,Delta T(s):-2718.98
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:302005,SubRun:3,GTID:6336779,Entry:256960,EV:0,Energy:5.53496,Original Energ:5.59261, Tony Energy:5.5882,NHits:1442,OWL:0,50MHz:3481693441272,Applied:951627314364415,Flags:951627314297846, Flags&Mask:1
+Delayed Info:
+Run:302005,SubRun:3,GTID:6336782,Entry:256963,EV:0,Energy:2.24241,Original Energy:2.2666, Tony Energy:2.26727,NHits:620,OWL:0,50MHz:3481693442196,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+
+更新Muon:302047,SubRun:7,Prompt Run:302047, Prompt SubRun:8
+前一个Muon检测信息。Run:302047,SubRun:5,50MHz:2270494738631,Prompt Run:302047,Prompt SubRun:8,Delta T(s):794.225
+Run:302047,SubRun:7,50MHz:2299532078442,Prompt Run:302047,Prompt SubRun:8,Delta T(s):213.478
+Run:302047,SubRun:8,50MHz:2310205990594,Prompt Run:302047,Prompt SubRun:8,Delta T(s):5.04e-06
+找到对应的Muon。Run:302047,SubRun:8,Prompt Run:302047,Prompt SubRun:8,Delta T(s):5.04e-06
+
+更新Muon:302895,SubRun:6,Prompt Run:302895, Prompt SubRun:7
+前一个Muon检测信息。Run:302895,SubRun:6,50MHz:2684051090063,Prompt Run:302895,Prompt SubRun:7,Delta T(s):298.331
+Run:302895,SubRun:6,50MHz:2687918230162,Prompt Run:302895,Prompt SubRun:7,Delta T(s):220.989
+Run:302895,SubRun:7,50MHz:2701696394187,Prompt Run:302895,Prompt SubRun:7,Delta T(s):-54.5747
+Run:302895,SubRun:7,50MHz:2703820728825,Prompt Run:302895,Prompt SubRun:7,Delta T(s):-97.0614
+Run:302895,SubRun:8,50MHz:2710825908353,Prompt Run:302895,Prompt SubRun:7,Delta T(s):-237.165
+Run:302895,SubRun:8,50MHz:2713053472405,Prompt Run:302895,Prompt SubRun:7,Delta T(s):-281.716
+Run:302895,SubRun:8,50MHz:2714440424979,Prompt Run:302895,Prompt SubRun:7,Delta T(s):-309.455
+Run:302895,SubRun:10,50MHz:2735867419752,Prompt Run:302895,Prompt SubRun:7,Delta T(s):-737.995
+Run:302895,SubRun:10,50MHz:2739316210359,Prompt Run:302895,Prompt SubRun:7,Delta T(s):-806.971
+Run:302895,SubRun:10,50MHz:2743105876814,Prompt Run:302895,Prompt SubRun:7,Delta T(s):-882.764
+Run:302895,SubRun:11,50MHz:2748985495438,Prompt Run:302895,Prompt SubRun:7,Delta T(s):-1000.36
+Run:302895,SubRun:11,50MHz:2751071955957,Prompt Run:302895,Prompt SubRun:7,Delta T(s):-1042.09
+Run:302895,SubRun:12,50MHz:2763985370171,Prompt Run:302895,Prompt SubRun:7,Delta T(s):-1300.35
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:302895,SubRun:7,GTID:4803480,Entry:336427,EV:0,Energy:2.97453,Original Energ:3.16401, Tony Energy:3.13268,NHits:883,OWL:0,50MHz:2698967659595,Applied:951627314364415,Flags:951627314298854, Flags&Mask:1
+Delayed Info:
+Run:302895,SubRun:7,GTID:4803484,Entry:336431,EV:0,Energy:2.21696,Original Energy:2.27656, Tony Energy:2.27518,NHits:679,OWL:0,50MHz:2698967688591,Applied:951627314364415,Flags:951627314298878, Flags&Mask:1
+
+更新Muon:303081,SubRun:3,Prompt Run:303081, Prompt SubRun:4
+前一个Muon检测信息。Run:303081,SubRun:3,50MHz:5099482765342,Prompt Run:303081,Prompt SubRun:4,Delta T(s):254.913
+Run:303081,SubRun:3,50MHz:5103000522797,Prompt Run:303081,Prompt SubRun:4,Delta T(s):184.558
+Run:303081,SubRun:4,50MHz:5111913023548,Prompt Run:303081,Prompt SubRun:4,Delta T(s):6.30829
+找到对应的Muon。Run:303081,SubRun:4,Prompt Run:303081,Prompt SubRun:4,Delta T(s):6.30829
+
+前一个Muon检测信息。Run:303081,SubRun:3,50MHz:5099482765342,Prompt Run:303081,Prompt SubRun:4,Delta T(s):254.913
+Run:303081,SubRun:3,50MHz:5103000522797,Prompt Run:303081,Prompt SubRun:4,Delta T(s):184.558
+Run:303081,SubRun:4,50MHz:5111913023548,Prompt Run:303081,Prompt SubRun:4,Delta T(s):6.30829
+找到对应的Muon。Run:303081,SubRun:4,Prompt Run:303081,Prompt SubRun:4,Delta T(s):6.30829
+
+更新Muon:303139,SubRun:5,Prompt Run:303139, Prompt SubRun:6
+前一个Muon检测信息。Run:303139,SubRun:5,50MHz:6751031355522,Prompt Run:303139,Prompt SubRun:6,Delta T(s):206.539
+Run:303139,SubRun:5,50MHz:6752642380527,Prompt Run:303139,Prompt SubRun:6,Delta T(s):174.318
+Run:303139,SubRun:6,50MHz:6761358294456,Prompt Run:303139,Prompt SubRun:6,Delta T(s):1.82e-06
+找到对应的Muon。Run:303139,SubRun:6,Prompt Run:303139,Prompt SubRun:6,Delta T(s):1.82e-06
+
+前一个Muon检测信息。Run:303139,SubRun:5,50MHz:6751031355522,Prompt Run:303139,Prompt SubRun:6,Delta T(s):206.539
+Run:303139,SubRun:5,50MHz:6752642380527,Prompt Run:303139,Prompt SubRun:6,Delta T(s):174.318
+Run:303139,SubRun:6,50MHz:6761358294456,Prompt Run:303139,Prompt SubRun:6,Delta T(s):4.58e-06
+找到对应的Muon。Run:303139,SubRun:6,Prompt Run:303139,Prompt SubRun:6,Delta T(s):4.58e-06
+
+更新Muon:303233,SubRun:4,Prompt Run:303233, Prompt SubRun:5
+前一个Muon检测信息。Run:303233,SubRun:4,50MHz:5378207699297,Prompt Run:303233,Prompt SubRun:5,Delta T(s):394.826
+Run:303233,SubRun:4,50MHz:5382940076514,Prompt Run:303233,Prompt SubRun:5,Delta T(s):300.178
+Run:303233,SubRun:5,50MHz:5396411106909,Prompt Run:303233,Prompt SubRun:5,Delta T(s):30.7577
+Run:303233,SubRun:5,50MHz:5397948990841,Prompt Run:303233,Prompt SubRun:5,Delta T(s):5.04e-06
+找到对应的Muon。Run:303233,SubRun:5,Prompt Run:303233,Prompt SubRun:5,Delta T(s):5.04e-06
+
+更新Muon:303471,SubRun:6,Prompt Run:303471, Prompt SubRun:7
+前一个Muon检测信息。Run:303471,SubRun:6,50MHz:5624822726150,Prompt Run:303471,Prompt SubRun:7,Delta T(s):158.247
+Run:303471,SubRun:6,50MHz:5626648897228,Prompt Run:303471,Prompt SubRun:7,Delta T(s):121.724
+Run:303471,SubRun:7,50MHz:5629969554158,Prompt Run:303471,Prompt SubRun:7,Delta T(s):55.3104
+Run:303471,SubRun:7,50MHz:5634580619124,Prompt Run:303471,Prompt SubRun:7,Delta T(s):-36.9109
+Run:303471,SubRun:7,50MHz:5636803709079,Prompt Run:303471,Prompt SubRun:7,Delta T(s):-81.3727
+Run:303471,SubRun:8,50MHz:5643073230665,Prompt Run:303471,Prompt SubRun:7,Delta T(s):-206.763
+Run:303471,SubRun:8,50MHz:5645177918136,Prompt Run:303471,Prompt SubRun:7,Delta T(s):-248.857
+Run:303471,SubRun:8,50MHz:5648528733426,Prompt Run:303471,Prompt SubRun:7,Delta T(s):-315.873
+Run:303471,SubRun:9,50MHz:5658869704430,Prompt Run:303471,Prompt SubRun:7,Delta T(s):-522.693
+Run:303471,SubRun:10,50MHz:5671910759935,Prompt Run:303471,Prompt SubRun:7,Delta T(s):-783.514
+Run:303471,SubRun:10,50MHz:5678578086254,Prompt Run:303471,Prompt SubRun:7,Delta T(s):-916.86
+Run:303471,SubRun:10,50MHz:5681277475157,Prompt Run:303471,Prompt SubRun:7,Delta T(s):-970.848
+Run:303471,SubRun:11,50MHz:5685134187942,Prompt Run:303471,Prompt SubRun:7,Delta T(s):-1047.98
+Run:303471,SubRun:12,50MHz:5695229840080,Prompt Run:303471,Prompt SubRun:7,Delta T(s):-1249.9
+Run:303471,SubRun:12,50MHz:5705497516827,Prompt Run:303471,Prompt SubRun:7,Delta T(s):-1455.25
+Run:303471,SubRun:13,50MHz:5708627950245,Prompt Run:303471,Prompt SubRun:7,Delta T(s):-1517.86
+Run:303471,SubRun:13,50MHz:5714880917182,Prompt Run:303471,Prompt SubRun:7,Delta T(s):-1642.92
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:303471,SubRun:7,GTID:1333077,Entry:161034,EV:0,Energy:2.21925,Original Energ:2.2008, Tony Energy:2.21708,NHits:627,OWL:0,50MHz:5632735076464,Applied:951627314364415,Flags:951627314266103, Flags&Mask:1
+Delayed Info:
+Run:303471,SubRun:7,GTID:1333081,Entry:161038,EV:0,Energy:1.95036,Original Energy:1.93856, Tony Energy:1.95195,NHits:547,OWL:0,50MHz:5632735097924,Applied:951627314364415,Flags:951627314266102, Flags&Mask:1
+
+更新Muon:303738,SubRun:11,Prompt Run:303738, Prompt SubRun:12
+前一个Muon检测信息。Run:303738,SubRun:11,50MHz:2740279398029,Prompt Run:303738,Prompt SubRun:12,Delta T(s):406.477
+Run:303738,SubRun:11,50MHz:2742073881922,Prompt Run:303738,Prompt SubRun:12,Delta T(s):370.587
+Run:303738,SubRun:12,50MHz:2750463057071,Prompt Run:303738,Prompt SubRun:12,Delta T(s):202.804
+Run:303738,SubRun:13,50MHz:2766848206887,Prompt Run:303738,Prompt SubRun:12,Delta T(s):-124.899
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:303738,SubRun:12,GTID:13173840,Entry:603064,EV:0,Energy:4.62946,Original Energ:4.5426, Tony Energy:4.59009,NHits:1258,OWL:0,50MHz:2760603253465,Applied:951627314364415,Flags:951627314297846, Flags&Mask:1
+Delayed Info:
+Run:303738,SubRun:12,GTID:13173842,Entry:603066,EV:0,Energy:2.15015,Original Energy:2.10336, Tony Energy:2.13006,NHits:612,OWL:0,50MHz:2760603262520,Applied:951627314364415,Flags:951627314297846, Flags&Mask:1
+
+更新Muon:303767,SubRun:7,Prompt Run:303767, Prompt SubRun:8
+前一个Muon检测信息。Run:303767,SubRun:7,50MHz:7477707717376,Prompt Run:303767,Prompt SubRun:8,Delta T(s):236.82
+Run:303767,SubRun:7,50MHz:7479524992645,Prompt Run:303767,Prompt SubRun:8,Delta T(s):200.475
+Run:303767,SubRun:8,50MHz:7486804239650,Prompt Run:303767,Prompt SubRun:8,Delta T(s):54.8898
+Run:303767,SubRun:8,50MHz:7488014435971,Prompt Run:303767,Prompt SubRun:8,Delta T(s):30.6859
+Run:303767,SubRun:9,50MHz:7494797939567,Prompt Run:303767,Prompt SubRun:8,Delta T(s):-104.984
+Run:303767,SubRun:9,50MHz:7498729826700,Prompt Run:303767,Prompt SubRun:8,Delta T(s):-183.622
+Run:303767,SubRun:9,50MHz:7505967400290,Prompt Run:303767,Prompt SubRun:8,Delta T(s):-328.373
+Run:303767,SubRun:11,50MHz:7525596973859,Prompt Run:303767,Prompt SubRun:8,Delta T(s):-720.965
+Run:303767,SubRun:12,50MHz:7536006827645,Prompt Run:303767,Prompt SubRun:8,Delta T(s):-929.162
+Run:303767,SubRun:12,50MHz:7543976059432,Prompt Run:303767,Prompt SubRun:8,Delta T(s):-1088.55
+Run:303767,SubRun:13,50MHz:7553226346563,Prompt Run:303767,Prompt SubRun:8,Delta T(s):-1273.55
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:303767,SubRun:8,GTID:14585202,Entry:463721,EV:0,Energy:1.06351,Original Energ:1.06026, Tony Energy:1.06387,NHits:291,OWL:0,50MHz:7489548728841,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+Delayed Info:
+Run:303767,SubRun:8,GTID:14585205,Entry:463724,EV:0,Energy:2.26816,Original Energy:2.27122, Tony Energy:2.27538,NHits:604,OWL:0,50MHz:7489548733369,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+
+更新Muon:303878,SubRun:3,Prompt Run:303878, Prompt SubRun:4
+前一个Muon检测信息。Run:303878,SubRun:1,50MHz:526509455296,Prompt Run:303878,Prompt SubRun:4,Delta T(s):783.559
+Run:303878,SubRun:3,50MHz:552477862223,Prompt Run:303878,Prompt SubRun:4,Delta T(s):264.191
+Run:303878,SubRun:4,50MHz:565687386360,Prompt Run:303878,Prompt SubRun:4,Delta T(s):5.182e-05
+找到对应的Muon。Run:303878,SubRun:4,Prompt Run:303878,Prompt SubRun:4,Delta T(s):5.182e-05
+
+前一个Muon检测信息。Run:303878,SubRun:1,50MHz:526509455296,Prompt Run:303878,Prompt SubRun:4,Delta T(s):783.559
+Run:303878,SubRun:3,50MHz:552477862223,Prompt Run:303878,Prompt SubRun:4,Delta T(s):264.191
+Run:303878,SubRun:4,50MHz:565687386360,Prompt Run:303878,Prompt SubRun:4,Delta T(s):0.00014932
+找到对应的Muon。Run:303878,SubRun:4,Prompt Run:303878,Prompt SubRun:4,Delta T(s):0.00014932
+
+更新Muon:304017,SubRun:6,Prompt Run:304017, Prompt SubRun:7
+前一个Muon检测信息。Run:304017,SubRun:6,50MHz:6118812257764,Prompt Run:304017,Prompt SubRun:7,Delta T(s):329.542
+Run:304017,SubRun:6,50MHz:6120982030126,Prompt Run:304017,Prompt SubRun:7,Delta T(s):286.146
+Run:304017,SubRun:7,50MHz:6128807933942,Prompt Run:304017,Prompt SubRun:7,Delta T(s):129.628
+Run:304017,SubRun:7,50MHz:6135289338196,Prompt Run:304017,Prompt SubRun:7,Delta T(s):1.36e-06
+找到对应的Muon。Run:304017,SubRun:7,Prompt Run:304017,Prompt SubRun:7,Delta T(s):1.36e-06
+
+更新Muon:304028,SubRun:1,Prompt Run:304028, Prompt SubRun:3
+前一个Muon检测信息。Run:304028,SubRun:1,50MHz:8028053189594,Prompt Run:304028,Prompt SubRun:3,Delta T(s):674.562
+Run:304028,SubRun:1,50MHz:8033980464474,Prompt Run:304028,Prompt SubRun:3,Delta T(s):556.016
+Run:304028,SubRun:3,50MHz:8054683932722,Prompt Run:304028,Prompt SubRun:3,Delta T(s):141.947
+Run:304028,SubRun:3,50MHz:8061589589441,Prompt Run:304028,Prompt SubRun:3,Delta T(s):3.83366
+找到对应的Muon。Run:304028,SubRun:3,Prompt Run:304028,Prompt SubRun:3,Delta T(s):3.83366
+
+更新Muon:304039,SubRun:10,Prompt Run:304039, Prompt SubRun:11
+前一个Muon检测信息。Run:304039,SubRun:9,50MHz:1324431800104,Prompt Run:304039,Prompt SubRun:11,Delta T(s):529.896
+Run:304039,SubRun:10,50MHz:1330636905181,Prompt Run:304039,Prompt SubRun:11,Delta T(s):405.793
+Run:304039,SubRun:11,50MHz:1347250072436,Prompt Run:304039,Prompt SubRun:11,Delta T(s):73.5301
+Run:304039,SubRun:12,50MHz:1355773914657,Prompt Run:304039,Prompt SubRun:11,Delta T(s):-96.9468
+Run:304039,SubRun:12,50MHz:1362706122717,Prompt Run:304039,Prompt SubRun:11,Delta T(s):-235.591
+Run:304039,SubRun:12,50MHz:1365490161568,Prompt Run:304039,Prompt SubRun:11,Delta T(s):-291.272
+Run:304039,SubRun:13,50MHz:1369978878929,Prompt Run:304039,Prompt SubRun:11,Delta T(s):-381.046
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:304039,SubRun:11,GTID:12707480,Entry:475100,EV:0,Energy:2.93318,Original Energ:2.94289, Tony Energy:2.94648,NHits:787,OWL:0,50MHz:1350926576423,Applied:951627314364415,Flags:951627314298854, Flags&Mask:1
+Delayed Info:
+Run:304039,SubRun:11,GTID:12707483,Entry:475103,EV:0,Energy:1.99997,Original Energy:2.00706, Tony Energy:2.01044,NHits:544,OWL:0,50MHz:1350926583588,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+
+更新Muon:304103,SubRun:12,Prompt Run:304104, Prompt SubRun:1
+前一个Muon检测信息。Run:304103,SubRun:12,50MHz:3121811747734,Prompt Run:304104,Prompt SubRun:1,Delta T(s):764.116
+Run:304103,SubRun:12,50MHz:3130699689573,Prompt Run:304104,Prompt SubRun:1,Delta T(s):586.357
+Run:304104,SubRun:1,50MHz:3160017524211,Prompt Run:304104,Prompt SubRun:1,Delta T(s):2.018e-05
+找到对应的Muon。Run:304104,SubRun:1,Prompt Run:304104,Prompt SubRun:1,Delta T(s):2.018e-05
+
+更新Muon:304103,SubRun:12,Prompt Run:304104, Prompt SubRun:1
+前一个Muon检测信息。Run:304103,SubRun:12,50MHz:3121811747734,Prompt Run:304104,Prompt SubRun:1,Delta T(s):764.116
+Run:304103,SubRun:12,50MHz:3130699689573,Prompt Run:304104,Prompt SubRun:1,Delta T(s):586.357
+Run:304104,SubRun:1,50MHz:3160017524211,Prompt Run:304104,Prompt SubRun:1,Delta T(s):2.342e-05
+找到对应的Muon。Run:304104,SubRun:1,Prompt Run:304104,Prompt SubRun:1,Delta T(s):2.342e-05
+
+更新Muon:304103,SubRun:12,Prompt Run:304104, Prompt SubRun:1
+前一个Muon检测信息。Run:304103,SubRun:12,50MHz:3121811747734,Prompt Run:304104,Prompt SubRun:1,Delta T(s):764.116
+Run:304103,SubRun:12,50MHz:3130699689573,Prompt Run:304104,Prompt SubRun:1,Delta T(s):586.357
+Run:304104,SubRun:1,50MHz:3160017524211,Prompt Run:304104,Prompt SubRun:1,Delta T(s):4.928e-05
+找到对应的Muon。Run:304104,SubRun:1,Prompt Run:304104,Prompt SubRun:1,Delta T(s):4.928e-05
+
+更新Muon:304103,SubRun:12,Prompt Run:304104, Prompt SubRun:1
+前一个Muon检测信息。Run:304103,SubRun:12,50MHz:3121811747734,Prompt Run:304104,Prompt SubRun:1,Delta T(s):764.116
+Run:304103,SubRun:12,50MHz:3130699689573,Prompt Run:304104,Prompt SubRun:1,Delta T(s):586.357
+Run:304104,SubRun:1,50MHz:3160017524211,Prompt Run:304104,Prompt SubRun:1,Delta T(s):0.00013384
+找到对应的Muon。Run:304104,SubRun:1,Prompt Run:304104,Prompt SubRun:1,Delta T(s):0.00013384
+
+更新Muon:304103,SubRun:12,Prompt Run:304104, Prompt SubRun:1
+前一个Muon检测信息。Run:304103,SubRun:12,50MHz:3121811747734,Prompt Run:304104,Prompt SubRun:1,Delta T(s):764.116
+Run:304103,SubRun:12,50MHz:3130699689573,Prompt Run:304104,Prompt SubRun:1,Delta T(s):586.357
+Run:304104,SubRun:1,50MHz:3160017524211,Prompt Run:304104,Prompt SubRun:1,Delta T(s):0.00017946
+找到对应的Muon。Run:304104,SubRun:1,Prompt Run:304104,Prompt SubRun:1,Delta T(s):0.00017946
+
+更新Muon:304103,SubRun:12,Prompt Run:304104, Prompt SubRun:1
+前一个Muon检测信息。Run:304103,SubRun:12,50MHz:3121811747734,Prompt Run:304104,Prompt SubRun:1,Delta T(s):764.116
+Run:304103,SubRun:12,50MHz:3130699689573,Prompt Run:304104,Prompt SubRun:1,Delta T(s):586.357
+Run:304104,SubRun:1,50MHz:3160017524211,Prompt Run:304104,Prompt SubRun:1,Delta T(s):0.00030564
+找到对应的Muon。Run:304104,SubRun:1,Prompt Run:304104,Prompt SubRun:1,Delta T(s):0.00030564
+
+更新Muon:304120,SubRun:0,Prompt Run:304120, Prompt SubRun:13
+前一个Muon检测信息。Run:304119,SubRun:13,50MHz:5772320772885,Prompt Run:304120,Prompt SubRun:13,Delta T(s):3510.88
+Run:304120,SubRun:0,50MHz:5781440086249,Prompt Run:304120,Prompt SubRun:13,Delta T(s):3328.49
+Run:304120,SubRun:2,50MHz:5801543624998,Prompt Run:304120,Prompt SubRun:13,Delta T(s):2926.42
+Run:304120,SubRun:3,50MHz:5819169929154,Prompt Run:304120,Prompt SubRun:13,Delta T(s):2573.9
+Run:304120,SubRun:3,50MHz:5820876622722,Prompt Run:304120,Prompt SubRun:13,Delta T(s):2539.76
+Run:304120,SubRun:6,50MHz:5855263863838,Prompt Run:304120,Prompt SubRun:13,Delta T(s):1852.02
+Run:304120,SubRun:6,50MHz:5858963195948,Prompt Run:304120,Prompt SubRun:13,Delta T(s):1778.03
+Run:304120,SubRun:6,50MHz:5865274600936,Prompt Run:304120,Prompt SubRun:13,Delta T(s):1651.8
+Run:304120,SubRun:7,50MHz:5873880435055,Prompt Run:304120,Prompt SubRun:13,Delta T(s):1479.69
+Run:304120,SubRun:8,50MHz:5885103932047,Prompt Run:304120,Prompt SubRun:13,Delta T(s):1255.22
+Run:304120,SubRun:9,50MHz:5896488540215,Prompt Run:304120,Prompt SubRun:13,Delta T(s):1027.52
+Run:304120,SubRun:9,50MHz:5898998712405,Prompt Run:304120,Prompt SubRun:13,Delta T(s):977.32
+Run:304120,SubRun:10,50MHz:5917648079042,Prompt Run:304120,Prompt SubRun:13,Delta T(s):604.332
+Run:304120,SubRun:12,50MHz:5935447605228,Prompt Run:304120,Prompt SubRun:13,Delta T(s):248.342
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:304120,SubRun:13,GTID:14539193,Entry:128453,EV:0,Energy:5.87827,Original Energ:6.07065, Tony Energy:6.11375,NHits:1580,OWL:0,50MHz:5947864694408,Applied:951627314364415,Flags:951627314297846, Flags&Mask:1
+Delayed Info:
+Run:304120,SubRun:13,GTID:14539200,Entry:128460,EV:0,Energy:1.99468,Original Energy:2.05391, Tony Energy:2.07177,NHits:619,OWL:0,50MHz:5947864707758,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+
+更新Muon:304157,SubRun:0,Prompt Run:304157, Prompt SubRun:1
+前一个Muon检测信息。Run:304157,SubRun:0,50MHz:1008683381370,Prompt Run:304157,Prompt SubRun:1,Delta T(s):296.221
+Run:304157,SubRun:0,50MHz:1014777414122,Prompt Run:304157,Prompt SubRun:1,Delta T(s):174.341
+Run:304157,SubRun:1,50MHz:1023494442182,Prompt Run:304157,Prompt SubRun:1,Delta T(s):2.3e-06
+找到对应的Muon。Run:304157,SubRun:1,Prompt Run:304157,Prompt SubRun:1,Delta T(s):2.3e-06
+
+更新Muon:304845,SubRun:11,Prompt Run:304846, Prompt SubRun:0
+前一个Muon检测信息。Run:304845,SubRun:9,50MHz:487171836213,Prompt Run:304846,Prompt SubRun:0,Delta T(s):983.398
+Run:304845,SubRun:11,50MHz:514883569683,Prompt Run:304846,Prompt SubRun:0,Delta T(s):429.163
+Run:304846,SubRun:0,50MHz:536341723725,Prompt Run:304846,Prompt SubRun:0,Delta T(s):4.56e-06
+找到对应的Muon。Run:304846,SubRun:0,Prompt Run:304846,Prompt SubRun:0,Delta T(s):4.56e-06
+
+更新Muon:304845,SubRun:11,Prompt Run:304846, Prompt SubRun:0
+前一个Muon检测信息。Run:304845,SubRun:9,50MHz:487171836213,Prompt Run:304846,Prompt SubRun:0,Delta T(s):983.398
+Run:304845,SubRun:11,50MHz:514883569683,Prompt Run:304846,Prompt SubRun:0,Delta T(s):429.163
+Run:304846,SubRun:0,50MHz:536341723725,Prompt Run:304846,Prompt SubRun:0,Delta T(s):5.294e-05
+找到对应的Muon。Run:304846,SubRun:0,Prompt Run:304846,Prompt SubRun:0,Delta T(s):5.294e-05
+
+更新Muon:304878,SubRun:3,Prompt Run:304878, Prompt SubRun:4
+前一个Muon检测信息。Run:304878,SubRun:2,50MHz:5837725290774,Prompt Run:304878,Prompt SubRun:4,Delta T(s):537.387
+Run:304878,SubRun:3,50MHz:5861579324936,Prompt Run:304878,Prompt SubRun:4,Delta T(s):60.3066
+Run:304878,SubRun:4,50MHz:5864594656909,Prompt Run:304878,Prompt SubRun:4,Delta T(s):4.6e-07
+找到对应的Muon。Run:304878,SubRun:4,Prompt Run:304878,Prompt SubRun:4,Delta T(s):4.6e-07
+
+前一个Muon检测信息。Run:304878,SubRun:2,50MHz:5837725290774,Prompt Run:304878,Prompt SubRun:4,Delta T(s):537.387
+Run:304878,SubRun:3,50MHz:5861579324936,Prompt Run:304878,Prompt SubRun:4,Delta T(s):60.3066
+Run:304878,SubRun:4,50MHz:5864594656909,Prompt Run:304878,Prompt SubRun:4,Delta T(s):5.48e-06
+找到对应的Muon。Run:304878,SubRun:4,Prompt Run:304878,Prompt SubRun:4,Delta T(s):5.48e-06
+
+更新Muon:304928,SubRun:1,Prompt Run:304928, Prompt SubRun:2
+前一个Muon检测信息。Run:304927,SubRun:12,50MHz:4934257854458,Prompt Run:304928,Prompt SubRun:2,Delta T(s):1007.33
+Run:304928,SubRun:1,50MHz:4967997794808,Prompt Run:304928,Prompt SubRun:2,Delta T(s):332.534
+Run:304928,SubRun:2,50MHz:4978978709905,Prompt Run:304928,Prompt SubRun:2,Delta T(s):112.916
+Run:304928,SubRun:4,50MHz:5004248058225,Prompt Run:304928,Prompt SubRun:2,Delta T(s):-392.471
+Run:304928,SubRun:5,50MHz:5023355977267,Prompt Run:304928,Prompt SubRun:2,Delta T(s):-774.63
+Run:304928,SubRun:5,50MHz:5028335737368,Prompt Run:304928,Prompt SubRun:2,Delta T(s):-874.225
+Run:304928,SubRun:6,50MHz:5030863075795,Prompt Run:304928,Prompt SubRun:2,Delta T(s):-924.772
+Run:304928,SubRun:6,50MHz:5037177765127,Prompt Run:304928,Prompt SubRun:2,Delta T(s):-1051.07
+Run:304928,SubRun:6,50MHz:5040274400160,Prompt Run:304928,Prompt SubRun:2,Delta T(s):-1113
+Run:304928,SubRun:10,50MHz:5085331844750,Prompt Run:304928,Prompt SubRun:2,Delta T(s):-2014.15
+Run:304928,SubRun:12,50MHz:5116227726943,Prompt Run:304928,Prompt SubRun:2,Delta T(s):-2632.06
+Run:304928,SubRun:13,50MHz:5127184135449,Prompt Run:304928,Prompt SubRun:2,Delta T(s):-2851.19
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:304928,SubRun:2,GTID:11611175,Entry:391674,EV:0,Energy:4.45923,Original Energ:4.42435, Tony Energy:4.44612,NHits:1139,OWL:0,50MHz:4984624493574,Applied:951627314364415,Flags:951627314293758, Flags&Mask:1
+Delayed Info:
+Run:304928,SubRun:2,GTID:11611179,Entry:391678,EV:0,Energy:2.09205,Original Energy:2.07641, Tony Energy:2.08412,NHits:563,OWL:0,50MHz:4984624520103,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+
+更新Muon:304929,SubRun:11,Prompt Run:304929, Prompt SubRun:12
+前一个Muon检测信息。Run:304929,SubRun:10,50MHz:5267913410678,Prompt Run:304929,Prompt SubRun:12,Delta T(s):639.328
+Run:304929,SubRun:11,50MHz:5287034696899,Prompt Run:304929,Prompt SubRun:12,Delta T(s):256.903
+Run:304929,SubRun:12,50MHz:5299879828719,Prompt Run:304929,Prompt SubRun:12,Delta T(s):9e-07
+找到对应的Muon。Run:304929,SubRun:12,Prompt Run:304929,Prompt SubRun:12,Delta T(s):9e-07
+
+前一个Muon检测信息。Run:304929,SubRun:10,50MHz:5267913410678,Prompt Run:304929,Prompt SubRun:12,Delta T(s):639.328
+Run:304929,SubRun:11,50MHz:5287034696899,Prompt Run:304929,Prompt SubRun:12,Delta T(s):256.903
+Run:304929,SubRun:12,50MHz:5299879828719,Prompt Run:304929,Prompt SubRun:12,Delta T(s):1.36e-06
+找到对应的Muon。Run:304929,SubRun:12,Prompt Run:304929,Prompt SubRun:12,Delta T(s):1.36e-06
+
+前一个Muon检测信息。Run:304929,SubRun:10,50MHz:5267913410678,Prompt Run:304929,Prompt SubRun:12,Delta T(s):639.328
+Run:304929,SubRun:11,50MHz:5287034696899,Prompt Run:304929,Prompt SubRun:12,Delta T(s):256.903
+Run:304929,SubRun:12,50MHz:5299879828719,Prompt Run:304929,Prompt SubRun:12,Delta T(s):5.02e-06
+找到对应的Muon。Run:304929,SubRun:12,Prompt Run:304929,Prompt SubRun:12,Delta T(s):5.02e-06
+
+前一个Muon检测信息。Run:304929,SubRun:10,50MHz:5267913410678,Prompt Run:304929,Prompt SubRun:12,Delta T(s):639.328
+Run:304929,SubRun:11,50MHz:5287034696899,Prompt Run:304929,Prompt SubRun:12,Delta T(s):256.903
+Run:304929,SubRun:12,50MHz:5299879828719,Prompt Run:304929,Prompt SubRun:12,Delta T(s):5.48e-06
+找到对应的Muon。Run:304929,SubRun:12,Prompt Run:304929,Prompt SubRun:12,Delta T(s):5.48e-06
+
+更新Muon:305150,SubRun:11,Prompt Run:305197, Prompt SubRun:0
+前一个Muon检测信息。Run:305150,SubRun:9,50MHz:3705944901662,Prompt Run:305197,Prompt SubRun:0,Delta T(s):-50976.4
+Run:305150,SubRun:11,50MHz:3726419469096,Prompt Run:305197,Prompt SubRun:0,Delta T(s):-51385.9
+Run:305197,SubRun:0,50MHz:1157123722079,Prompt Run:305197,Prompt SubRun:0,Delta T(s):1.38e-06
+找到对应的Muon。Run:305197,SubRun:0,Prompt Run:305197,Prompt SubRun:0,Delta T(s):1.38e-06
+
+更新Muon:305150,SubRun:11,Prompt Run:305197, Prompt SubRun:0
+前一个Muon检测信息。Run:305150,SubRun:9,50MHz:3705944901662,Prompt Run:305197,Prompt SubRun:0,Delta T(s):-50976.4
+Run:305150,SubRun:11,50MHz:3726419469096,Prompt Run:305197,Prompt SubRun:0,Delta T(s):-51385.9
+Run:305197,SubRun:0,50MHz:1157123722079,Prompt Run:305197,Prompt SubRun:0,Delta T(s):4.6e-06
+找到对应的Muon。Run:305197,SubRun:0,Prompt Run:305197,Prompt SubRun:0,Delta T(s):4.6e-06
+
+更新Muon:305216,SubRun:8,Prompt Run:305216, Prompt SubRun:10
+前一个Muon检测信息。Run:305216,SubRun:6,50MHz:3693225562393,Prompt Run:305216,Prompt SubRun:10,Delta T(s):1103.15
+Run:305216,SubRun:8,50MHz:3724771844249,Prompt Run:305216,Prompt SubRun:10,Delta T(s):472.222
+Run:305216,SubRun:10,50MHz:3744834744614,Prompt Run:305216,Prompt SubRun:10,Delta T(s):70.9642
+Run:305216,SubRun:10,50MHz:3746712615351,Prompt Run:305216,Prompt SubRun:10,Delta T(s):33.4068
+Run:305216,SubRun:10,50MHz:3748382956582,Prompt Run:305216,Prompt SubRun:10,Delta T(s):9.2e-07
+找到对应的Muon。Run:305216,SubRun:10,Prompt Run:305216,Prompt SubRun:10,Delta T(s):9.2e-07
+
+前一个Muon检测信息。Run:305216,SubRun:6,50MHz:3693225562393,Prompt Run:305216,Prompt SubRun:10,Delta T(s):1103.15
+Run:305216,SubRun:8,50MHz:3724771844249,Prompt Run:305216,Prompt SubRun:10,Delta T(s):472.222
+Run:305216,SubRun:10,50MHz:3744834744614,Prompt Run:305216,Prompt SubRun:10,Delta T(s):70.9642
+Run:305216,SubRun:10,50MHz:3746712615351,Prompt Run:305216,Prompt SubRun:10,Delta T(s):33.4068
+Run:305216,SubRun:10,50MHz:3748382956582,Prompt Run:305216,Prompt SubRun:10,Delta T(s):5.04e-06
+找到对应的Muon。Run:305216,SubRun:10,Prompt Run:305216,Prompt SubRun:10,Delta T(s):5.04e-06
+
+更新Muon:305236,SubRun:1,Prompt Run:305236, Prompt SubRun:12
+前一个Muon检测信息。Run:305235,SubRun:12,50MHz:1850606158179,Prompt Run:305236,Prompt SubRun:12,Delta T(s):3790.36
+Run:305236,SubRun:1,50MHz:1893899130316,Prompt Run:305236,Prompt SubRun:12,Delta T(s):2924.5
+Run:305236,SubRun:3,50MHz:1915335340986,Prompt Run:305236,Prompt SubRun:12,Delta T(s):2495.78
+Run:305236,SubRun:3,50MHz:1920578991588,Prompt Run:305236,Prompt SubRun:12,Delta T(s):2390.91
+Run:305236,SubRun:4,50MHz:1928510031453,Prompt Run:305236,Prompt SubRun:12,Delta T(s):2232.29
+Run:305236,SubRun:6,50MHz:1951242679153,Prompt Run:305236,Prompt SubRun:12,Delta T(s):1777.63
+Run:305236,SubRun:9,50MHz:1991208232133,Prompt Run:305236,Prompt SubRun:12,Delta T(s):978.323
+Run:305236,SubRun:9,50MHz:2001244577030,Prompt Run:305236,Prompt SubRun:12,Delta T(s):777.596
+Run:305236,SubRun:10,50MHz:2010812913091,Prompt Run:305236,Prompt SubRun:12,Delta T(s):586.229
+Run:305236,SubRun:10,50MHz:2015426106102,Prompt Run:305236,Prompt SubRun:12,Delta T(s):493.965
+Run:305236,SubRun:11,50MHz:2018900756892,Prompt Run:305236,Prompt SubRun:12,Delta T(s):424.472
+Run:305236,SubRun:11,50MHz:2020232534416,Prompt Run:305236,Prompt SubRun:12,Delta T(s):397.836
+Run:305236,SubRun:11,50MHz:2025236792198,Prompt Run:305236,Prompt SubRun:12,Delta T(s):297.751
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:305236,SubRun:12,GTID:10232334,Entry:437020,EV:0,Energy:1.4655,Original Energ:1.4486, Tony Energy:1.45239,NHits:401,OWL:1,50MHz:2040124357170,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+Delayed Info:
+Run:305236,SubRun:12,GTID:10232336,Entry:437022,EV:0,Energy:2.09051,Original Energy:2.06419, Tony Energy:2.07046,NHits:548,OWL:0,50MHz:2040124367803,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+
+更新Muon:305527,SubRun:12,Prompt Run:305528, Prompt SubRun:1
+前一个Muon检测信息。Run:305527,SubRun:12,50MHz:1433254930694,Prompt Run:305528,Prompt SubRun:1,Delta T(s):613.538
+Run:305527,SubRun:12,50MHz:1435904796431,Prompt Run:305528,Prompt SubRun:1,Delta T(s):560.541
+Run:305528,SubRun:1,50MHz:1463931836695,Prompt Run:305528,Prompt SubRun:1,Delta T(s):3.66e-06
+找到对应的Muon。Run:305528,SubRun:1,Prompt Run:305528,Prompt SubRun:1,Delta T(s):3.66e-06
+
+更新Muon:305536,SubRun:9,Prompt Run:305536, Prompt SubRun:10
+前一个Muon检测信息。Run:305536,SubRun:8,50MHz:2671028582685,Prompt Run:305536,Prompt SubRun:10,Delta T(s):565.012
+Run:305536,SubRun:9,50MHz:2683361038257,Prompt Run:305536,Prompt SubRun:10,Delta T(s):318.363
+Run:305536,SubRun:11,50MHz:2710612177530,Prompt Run:305536,Prompt SubRun:10,Delta T(s):-226.66
+Run:305536,SubRun:11,50MHz:2714901844796,Prompt Run:305536,Prompt SubRun:10,Delta T(s):-312.453
+Run:305536,SubRun:12,50MHz:2726613490306,Prompt Run:305536,Prompt SubRun:10,Delta T(s):-546.686
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:305536,SubRun:10,GTID:6599503,Entry:191180,EV:0,Energy:1.18635,Original Energ:1.25599, Tony Energy:1.19672,NHits:341,OWL:0,50MHz:2699279202437,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+Delayed Info:
+Run:305536,SubRun:10,GTID:6599505,Entry:191182,EV:0,Energy:2.19081,Original Energy:2.24388, Tony Energy:2.20252,NHits:627,OWL:0,50MHz:2699279225654,Applied:951627314364415,Flags:951627314294774, Flags&Mask:1
+
+更新Muon:305555,SubRun:8,Prompt Run:305555, Prompt SubRun:11
+前一个Muon检测信息。Run:305555,SubRun:7,50MHz:6088162272102,Prompt Run:305555,Prompt SubRun:11,Delta T(s):920.471
+Run:305555,SubRun:8,50MHz:6099327546016,Prompt Run:305555,Prompt SubRun:11,Delta T(s):697.166
+Run:305555,SubRun:11,50MHz:6134185831119,Prompt Run:305555,Prompt SubRun:11,Delta T(s):9.2e-07
+找到对应的Muon。Run:305555,SubRun:11,Prompt Run:305555,Prompt SubRun:11,Delta T(s):9.2e-07
+
+前一个Muon检测信息。Run:305555,SubRun:7,50MHz:6088162272102,Prompt Run:305555,Prompt SubRun:11,Delta T(s):920.471
+Run:305555,SubRun:8,50MHz:6099327546016,Prompt Run:305555,Prompt SubRun:11,Delta T(s):697.166
+Run:305555,SubRun:11,50MHz:6134185831119,Prompt Run:305555,Prompt SubRun:11,Delta T(s):4.14e-06
+找到对应的Muon。Run:305555,SubRun:11,Prompt Run:305555,Prompt SubRun:11,Delta T(s):4.14e-06
+
+前一个Muon检测信息。Run:305555,SubRun:7,50MHz:6088162272102,Prompt Run:305555,Prompt SubRun:11,Delta T(s):920.471
+Run:305555,SubRun:8,50MHz:6099327546016,Prompt Run:305555,Prompt SubRun:11,Delta T(s):697.166
+Run:305555,SubRun:11,50MHz:6134185831119,Prompt Run:305555,Prompt SubRun:11,Delta T(s):4.6e-06
+找到对应的Muon。Run:305555,SubRun:11,Prompt Run:305555,Prompt SubRun:11,Delta T(s):4.6e-06
+
+更新Muon:305564,SubRun:7,Prompt Run:305564, Prompt SubRun:8
+前一个Muon检测信息。Run:305564,SubRun:7,50MHz:7420584525764,Prompt Run:305564,Prompt SubRun:8,Delta T(s):245.006
+Run:305564,SubRun:7,50MHz:7426958160708,Prompt Run:305564,Prompt SubRun:8,Delta T(s):117.533
+Run:305564,SubRun:8,50MHz:7441384363267,Prompt Run:305564,Prompt SubRun:8,Delta T(s):-170.991
+Run:305564,SubRun:9,50MHz:7446727280962,Prompt Run:305564,Prompt SubRun:8,Delta T(s):-277.85
+Run:305564,SubRun:10,50MHz:7459261960621,Prompt Run:305564,Prompt SubRun:8,Delta T(s):-528.543
+Run:305564,SubRun:10,50MHz:7465718762730,Prompt Run:305564,Prompt SubRun:8,Delta T(s):-657.679
+Run:305564,SubRun:12,50MHz:7493104791553,Prompt Run:305564,Prompt SubRun:8,Delta T(s):-1205.4
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:305564,SubRun:8,GTID:5834383,Entry:109574,EV:0,Energy:2.9373,Original Energ:2.9413, Tony Energy:2.9064,NHits:748,OWL:0,50MHz:7432834804553,Applied:951627314364415,Flags:951627314298854, Flags&Mask:1
+Delayed Info:
+Run:305564,SubRun:8,GTID:5834385,Entry:109576,EV:0,Energy:2.09075,Original Energy:2.09855, Tony Energy:2.07295,NHits:542,OWL:0,50MHz:7432834813669,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+
+更新Muon:305601,SubRun:9,Prompt Run:305601, Prompt SubRun:10
+前一个Muon检测信息。Run:305601,SubRun:8,50MHz:5056702397851,Prompt Run:305601,Prompt SubRun:10,Delta T(s):801.972
+Run:305601,SubRun:9,50MHz:5075403270599,Prompt Run:305601,Prompt SubRun:10,Delta T(s):427.955
+Run:305601,SubRun:12,50MHz:5111804843962,Prompt Run:305601,Prompt SubRun:10,Delta T(s):-300.077
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:305601,SubRun:10,GTID:16160926,Entry:614226,EV:0,Energy:1.12368,Original Energ:1.11245, Tony Energy:1.1103,NHits:294,OWL:0,50MHz:5096801015930,Applied:951627314364415,Flags:951627314298871, Flags&Mask:1
+Delayed Info:
+Run:305601,SubRun:10,GTID:16160929,Entry:614229,EV:0,Energy:2.27281,Original Energy:2.25043, Tony Energy:2.24358,NHits:559,OWL:0,50MHz:5096801036503,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+
+更新Muon:305603,SubRun:6,Prompt Run:305603, Prompt SubRun:8
+前一个Muon检测信息。Run:305603,SubRun:6,50MHz:5391676072213,Prompt Run:305603,Prompt SubRun:8,Delta T(s):504.004
+Run:305603,SubRun:6,50MHz:5397461420592,Prompt Run:305603,Prompt SubRun:8,Delta T(s):388.297
+Run:305603,SubRun:8,50MHz:5416876293112,Prompt Run:305603,Prompt SubRun:8,Delta T(s):1.84e-06
+找到对应的Muon。Run:305603,SubRun:8,Prompt Run:305603,Prompt SubRun:8,Delta T(s):1.84e-06
+
+更新Muon:305665,SubRun:8,Prompt Run:305665, Prompt SubRun:10
+前一个Muon检测信息。Run:305665,SubRun:7,50MHz:6692063346379,Prompt Run:305665,Prompt SubRun:10,Delta T(s):702.452
+Run:305665,SubRun:8,50MHz:6703817245099,Prompt Run:305665,Prompt SubRun:10,Delta T(s):467.374
+Run:305665,SubRun:10,50MHz:6726838639598,Prompt Run:305665,Prompt SubRun:10,Delta T(s):6.94578
+找到对应的Muon。Run:305665,SubRun:10,Prompt Run:305665,Prompt SubRun:10,Delta T(s):6.94578
+
+更新Muon:305688,SubRun:4,Prompt Run:305688, Prompt SubRun:6
+前一个Muon检测信息。Run:305688,SubRun:4,50MHz:1992145086218,Prompt Run:305688,Prompt SubRun:6,Delta T(s):618.598
+Run:305688,SubRun:4,50MHz:1999872832853,Prompt Run:305688,Prompt SubRun:6,Delta T(s):464.043
+Run:305688,SubRun:6,50MHz:2018158147545,Prompt Run:305688,Prompt SubRun:6,Delta T(s):98.3367
+Run:305688,SubRun:7,50MHz:2041631254851,Prompt Run:305688,Prompt SubRun:6,Delta T(s):-371.125
+Run:305688,SubRun:8,50MHz:2044863787250,Prompt Run:305688,Prompt SubRun:6,Delta T(s):-435.776
+Run:305688,SubRun:9,50MHz:2060823704370,Prompt Run:305688,Prompt SubRun:6,Delta T(s):-754.974
+Run:305688,SubRun:10,50MHz:2078265483150,Prompt Run:305688,Prompt SubRun:6,Delta T(s):-1103.81
+Run:305688,SubRun:11,50MHz:2089707817504,Prompt Run:305688,Prompt SubRun:6,Delta T(s):-1332.66
+Run:305688,SubRun:13,50MHz:2112222083183,Prompt Run:305688,Prompt SubRun:6,Delta T(s):-1782.94
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:305688,SubRun:6,GTID:8780761,Entry:395204,EV:0,Energy:1.30396,Original Energ:1.26527, Tony Energy:1.26739,NHits:359,OWL:0,50MHz:2023074984864,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+Delayed Info:
+Run:305688,SubRun:6,GTID:8780764,Entry:395207,EV:0,Energy:2.048,Original Energy:1.98978, Tony Energy:1.98093,NHits:543,OWL:0,50MHz:2023074986024,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+
+更新Muon:305960,SubRun:0,Prompt Run:305960, Prompt SubRun:2
+前一个Muon检测信息。Run:305959,SubRun:12,50MHz:3535199015945,Prompt Run:305960,Prompt SubRun:2,Delta T(s):1042.03
+Run:305960,SubRun:0,50MHz:3549792119010,Prompt Run:305960,Prompt SubRun:2,Delta T(s):750.165
+Run:305960,SubRun:3,50MHz:3597031697144,Prompt Run:305960,Prompt SubRun:2,Delta T(s):-194.627
+Run:305960,SubRun:4,50MHz:3610636986661,Prompt Run:305960,Prompt SubRun:2,Delta T(s):-466.733
+Run:305960,SubRun:5,50MHz:3623610145723,Prompt Run:305960,Prompt SubRun:2,Delta T(s):-726.196
+Run:305960,SubRun:6,50MHz:3634149382352,Prompt Run:305960,Prompt SubRun:2,Delta T(s):-936.981
+Run:305960,SubRun:7,50MHz:3645359117901,Prompt Run:305960,Prompt SubRun:2,Delta T(s):-1161.18
+Run:305960,SubRun:8,50MHz:3656553781210,Prompt Run:305960,Prompt SubRun:2,Delta T(s):-1385.07
+Run:305960,SubRun:9,50MHz:3669439337419,Prompt Run:305960,Prompt SubRun:2,Delta T(s):-1642.78
+Run:305960,SubRun:9,50MHz:3672152361678,Prompt Run:305960,Prompt SubRun:2,Delta T(s):-1697.04
+Run:305960,SubRun:10,50MHz:3683770916967,Prompt Run:305960,Prompt SubRun:2,Delta T(s):-1929.41
+Run:305960,SubRun:12,50MHz:3718064153967,Prompt Run:305960,Prompt SubRun:2,Delta T(s):-2615.28
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:305960,SubRun:2,GTID:8656140,Entry:611588,EV:0,Energy:1.55741,Original Energ:1.59961, Tony Energy:1.56037,NHits:402,OWL:0,50MHz:3587300350880,Applied:951627314364415,Flags:951627314298878, Flags&Mask:1
+Delayed Info:
+Run:305960,SubRun:2,GTID:8656142,Entry:611590,EV:0,Energy:2.04625,Original Energy:2.11548, Tony Energy:2.06071,NHits:516,OWL:0,50MHz:3587300365910,Applied:951627314364415,Flags:951627314298862, Flags&Mask:1
+
+更新Muon:305961,SubRun:7,Prompt Run:305961, Prompt SubRun:11
+前一个Muon检测信息。Run:305961,SubRun:6,50MHz:3817815418066,Prompt Run:305961,Prompt SubRun:11,Delta T(s):1236.95
+Run:305961,SubRun:7,50MHz:3828599324230,Prompt Run:305961,Prompt SubRun:11,Delta T(s):1021.27
+Run:305961,SubRun:11,50MHz:3879663064032,Prompt Run:305961,Prompt SubRun:11,Delta T(s):1.38e-06
+找到对应的Muon。Run:305961,SubRun:11,Prompt Run:305961,Prompt SubRun:11,Delta T(s):1.38e-06
+
+前一个Muon检测信息。Run:305961,SubRun:6,50MHz:3817815418066,Prompt Run:305961,Prompt SubRun:11,Delta T(s):1236.95
+Run:305961,SubRun:7,50MHz:3828599324230,Prompt Run:305961,Prompt SubRun:11,Delta T(s):1021.27
+Run:305961,SubRun:11,50MHz:3879663064032,Prompt Run:305961,Prompt SubRun:11,Delta T(s):4.14e-06
+找到对应的Muon。Run:305961,SubRun:11,Prompt Run:305961,Prompt SubRun:11,Delta T(s):4.14e-06
+
+更新Muon:305987,SubRun:1,Prompt Run:305987, Prompt SubRun:2
+前一个Muon检测信息。Run:305987,SubRun:1,50MHz:7917498450161,Prompt Run:305987,Prompt SubRun:2,Delta T(s):438.225
+Run:305987,SubRun:1,50MHz:7921677250660,Prompt Run:305987,Prompt SubRun:2,Delta T(s):354.649
+Run:305987,SubRun:2,50MHz:7936779349941,Prompt Run:305987,Prompt SubRun:2,Delta T(s):52.607
+Run:305987,SubRun:2,50MHz:7939409700877,Prompt Run:305987,Prompt SubRun:2,Delta T(s):1.38e-06
+找到对应的Muon。Run:305987,SubRun:2,Prompt Run:305987,Prompt SubRun:2,Delta T(s):1.38e-06
+
+更新Muon:306357,SubRun:4,Prompt Run:306357, Prompt SubRun:5
+前一个Muon检测信息。Run:306357,SubRun:4,50MHz:5353498388075,Prompt Run:306357,Prompt SubRun:5,Delta T(s):322.279
+Run:306357,SubRun:4,50MHz:5363159972577,Prompt Run:306357,Prompt SubRun:5,Delta T(s):129.047
+Run:306357,SubRun:5,50MHz:5370814086721,Prompt Run:306357,Prompt SubRun:5,Delta T(s):-24.0348
+Run:306357,SubRun:8,50MHz:5412704464632,Prompt Run:306357,Prompt SubRun:5,Delta T(s):-861.842
+Run:306357,SubRun:8,50MHz:5418448928665,Prompt Run:306357,Prompt SubRun:5,Delta T(s):-976.732
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:306357,SubRun:5,GTID:8397987,Entry:134148,EV:0,Energy:1.38449,Original Energ:1.38935, Tony Energy:1.38445,NHits:359,OWL:0,50MHz:5369612346086,Applied:951627314364415,Flags:951627314298878, Flags&Mask:1
+Delayed Info:
+Run:306357,SubRun:5,GTID:8397989,Entry:134150,EV:0,Energy:2.18891,Original Energy:2.19332, Tony Energy:2.19101,NHits:548,OWL:0,50MHz:5369612347681,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+
+更新Muon:306376,SubRun:1,Prompt Run:306376, Prompt SubRun:5
+注意Clock反转！！！！！！！, Max Clock:8796093022207,Last Clock:8743698766343, Present Clock:4359839775, Delta T(s):1135.08
+前一个Muon检测信息。Run:306376,SubRun:1,50MHz:8743698766343,Prompt Run:306376,Prompt SubRun:5,Delta T(s):1135.08
+注意Clock反转！！！！！！！, Max Clock:8796093022207,Last Clock:8745474229644, Present Clock:4359839775, Delta T(s):1099.57
+Run:306376,SubRun:1,50MHz:8745474229644,Prompt Run:306376,Prompt SubRun:5,Delta T(s):1099.57
+Run:306376,SubRun:6,50MHz:10778828708,Prompt Run:306376,Prompt SubRun:5,Delta T(s):-128.38
+Run:306376,SubRun:8,50MHz:37311833433,Prompt Run:306376,Prompt SubRun:5,Delta T(s):-659.04
+Run:306376,SubRun:8,50MHz:39204018805,Prompt Run:306376,Prompt SubRun:5,Delta T(s):-696.884
+Run:306376,SubRun:8,50MHz:41604068654,Prompt Run:306376,Prompt SubRun:5,Delta T(s):-744.885
+Run:306376,SubRun:9,50MHz:49201150416,Prompt Run:306376,Prompt SubRun:5,Delta T(s):-896.826
+Run:306376,SubRun:9,50MHz:58965320926,Prompt Run:306376,Prompt SubRun:5,Delta T(s):-1092.11
+Run:306376,SubRun:10,50MHz:62249163100,Prompt Run:306376,Prompt SubRun:5,Delta T(s):-1157.79
+Run:306376,SubRun:10,50MHz:63300217575,Prompt Run:306376,Prompt SubRun:5,Delta T(s):-1178.81
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:306376,SubRun:5,GTID:2229033,Entry:574382,EV:0,Energy:3.00869,Original Energ:2.90616, Tony Energy:2.90203,NHits:790,OWL:0,50MHz:4359839775,Applied:951627314364415,Flags:951627314297846, Flags&Mask:1
+Delayed Info:
+Run:306376,SubRun:5,GTID:2229035,Entry:574384,EV:0,Energy:2.22567,Original Energy:2.14599, Tony Energy:2.14444,NHits:592,OWL:0,50MHz:4359840462,Applied:951627314364415,Flags:951627314298878, Flags&Mask:1
+
+更新Muon:306398,SubRun:7,Prompt Run:306398, Prompt SubRun:8
+前一个Muon检测信息。Run:306398,SubRun:6,50MHz:3967805443289,Prompt Run:306398,Prompt SubRun:8,Delta T(s):662.052
+Run:306398,SubRun:7,50MHz:3983880189519,Prompt Run:306398,Prompt SubRun:8,Delta T(s):340.557
+Run:306398,SubRun:8,50MHz:4000908052853,Prompt Run:306398,Prompt SubRun:8,Delta T(s):1.84e-06
+找到对应的Muon。Run:306398,SubRun:8,Prompt Run:306398,Prompt SubRun:8,Delta T(s):1.84e-06
+
+更新Muon:306458,SubRun:7,Prompt Run:306458, Prompt SubRun:11
+前一个Muon检测信息。Run:306458,SubRun:7,50MHz:5814245671625,Prompt Run:306458,Prompt SubRun:11,Delta T(s):1268.05
+Run:306458,SubRun:7,50MHz:5824779727572,Prompt Run:306458,Prompt SubRun:11,Delta T(s):1057.37
+Run:306458,SubRun:11,50MHz:5877648015540,Prompt Run:306458,Prompt SubRun:11,Delta T(s):5.5e-06
+找到对应的Muon。Run:306458,SubRun:11,Prompt Run:306458,Prompt SubRun:11,Delta T(s):5.5e-06
+
+更新Muon:306756,SubRun:5,Prompt Run:306756, Prompt SubRun:6
+前一个Muon检测信息。Run:306756,SubRun:2,50MHz:1435142873375,Prompt Run:306756,Prompt SubRun:6,Delta T(s):1260.76
+Run:306756,SubRun:5,50MHz:1481069020325,Prompt Run:306756,Prompt SubRun:6,Delta T(s):342.241
+Run:306756,SubRun:6,50MHz:1496071633142,Prompt Run:306756,Prompt SubRun:6,Delta T(s):42.1888
+Run:306756,SubRun:7,50MHz:1509700305962,Prompt Run:306756,Prompt SubRun:6,Delta T(s):-230.385
+Run:306756,SubRun:7,50MHz:1510959431441,Prompt Run:306756,Prompt SubRun:6,Delta T(s):-255.567
+Run:306756,SubRun:8,50MHz:1515610940220,Prompt Run:306756,Prompt SubRun:6,Delta T(s):-348.597
+Run:306756,SubRun:11,50MHz:1556381520335,Prompt Run:306756,Prompt SubRun:6,Delta T(s):-1164.01
+Run:306756,SubRun:12,50MHz:1574266010438,Prompt Run:306756,Prompt SubRun:6,Delta T(s):-1521.7
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:306756,SubRun:6,GTID:5389833,Entry:531826,EV:0,Energy:2.16934,Original Energ:2.04956, Tony Energy:2.0469,NHits:546,OWL:0,50MHz:1498181071456,Applied:951627314364415,Flags:951627314297854, Flags&Mask:1
+Delayed Info:
+Run:306756,SubRun:6,GTID:5389835,Entry:531828,EV:0,Energy:2.08975,Original Energy:1.97022, Tony Energy:1.96845,NHits:551,OWL:0,50MHz:1498181081975,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+
+更新Muon:306806,SubRun:5,Prompt Run:306806, Prompt SubRun:7
+前一个Muon检测信息。Run:306806,SubRun:5,50MHz:1509375062082,Prompt Run:306806,Prompt SubRun:7,Delta T(s):602.988
+Run:306806,SubRun:5,50MHz:1510756459033,Prompt Run:306806,Prompt SubRun:7,Delta T(s):575.36
+Run:306806,SubRun:7,50MHz:1538475352064,Prompt Run:306806,Prompt SubRun:7,Delta T(s):20.9822
+Run:306806,SubRun:8,50MHz:1542484726837,Prompt Run:306806,Prompt SubRun:7,Delta T(s):-59.2053
+Run:306806,SubRun:8,50MHz:1551305802871,Prompt Run:306806,Prompt SubRun:7,Delta T(s):-235.627
+Run:306806,SubRun:10,50MHz:1571667083667,Prompt Run:306806,Prompt SubRun:7,Delta T(s):-642.852
+Run:306806,SubRun:10,50MHz:1575000499220,Prompt Run:306806,Prompt SubRun:7,Delta T(s):-709.521
+Run:306806,SubRun:10,50MHz:1579818411076,Prompt Run:306806,Prompt SubRun:7,Delta T(s):-805.879
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:306806,SubRun:7,GTID:4749727,Entry:612591,EV:0,Energy:2.40447,Original Energ:2.39228, Tony Energy:2.42284,NHits:663,OWL:0,50MHz:1539524461267,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+Delayed Info:
+Run:306806,SubRun:7,GTID:4749730,Entry:612594,EV:0,Energy:2.27012,Original Energy:2.26596, Tony Energy:2.28946,NHits:593,OWL:0,50MHz:1539524469111,Applied:951627314364415,Flags:951627314298878, Flags&Mask:1
+
+更新Muon:306809,SubRun:6,Prompt Run:306809, Prompt SubRun:11
+前一个Muon检测信息。Run:306809,SubRun:5,50MHz:2043932276188,Prompt Run:306809,Prompt SubRun:11,Delta T(s):1545.62
+Run:306809,SubRun:6,50MHz:2063615691127,Prompt Run:306809,Prompt SubRun:11,Delta T(s):1151.95
+Run:306809,SubRun:11,50MHz:2121213285534,Prompt Run:306809,Prompt SubRun:11,Delta T(s):5.4e-07
+找到对应的Muon。Run:306809,SubRun:11,Prompt Run:306809,Prompt SubRun:11,Delta T(s):5.4e-07
+
+更新Muon:306866,SubRun:6,Prompt Run:306866, Prompt SubRun:8
+前一个Muon检测信息。Run:306866,SubRun:5,50MHz:2975609400240,Prompt Run:306866,Prompt SubRun:8,Delta T(s):997.936
+Run:306866,SubRun:6,50MHz:2996905635220,Prompt Run:306866,Prompt SubRun:8,Delta T(s):572.012
+Run:306866,SubRun:8,50MHz:3025506218858,Prompt Run:306866,Prompt SubRun:8,Delta T(s):6.282e-05
+找到对应的Muon。Run:306866,SubRun:8,Prompt Run:306866,Prompt SubRun:8,Delta T(s):6.282e-05
+
+前一个Muon检测信息。Run:306866,SubRun:5,50MHz:2975609400240,Prompt Run:306866,Prompt SubRun:8,Delta T(s):997.937
+Run:306866,SubRun:6,50MHz:2996905635220,Prompt Run:306866,Prompt SubRun:8,Delta T(s):572.012
+Run:306866,SubRun:8,50MHz:3025506218858,Prompt Run:306866,Prompt SubRun:8,Delta T(s):0.00014038
+找到对应的Muon。Run:306866,SubRun:8,Prompt Run:306866,Prompt SubRun:8,Delta T(s):0.00014038
+
+前一个Muon检测信息。Run:306866,SubRun:5,50MHz:2975609400240,Prompt Run:306866,Prompt SubRun:8,Delta T(s):997.937
+Run:306866,SubRun:6,50MHz:2996905635220,Prompt Run:306866,Prompt SubRun:8,Delta T(s):572.012
+Run:306866,SubRun:8,50MHz:3025506218858,Prompt Run:306866,Prompt SubRun:8,Delta T(s):0.00014678
+找到对应的Muon。Run:306866,SubRun:8,Prompt Run:306866,Prompt SubRun:8,Delta T(s):0.00014678
+
+前一个Muon检测信息。Run:306866,SubRun:5,50MHz:2975609400240,Prompt Run:306866,Prompt SubRun:8,Delta T(s):997.937
+Run:306866,SubRun:6,50MHz:2996905635220,Prompt Run:306866,Prompt SubRun:8,Delta T(s):572.012
+Run:306866,SubRun:8,50MHz:3025506218858,Prompt Run:306866,Prompt SubRun:8,Delta T(s):0.0003318
+找到对应的Muon。Run:306866,SubRun:8,Prompt Run:306866,Prompt SubRun:8,Delta T(s):0.0003318
+
+前一个Muon检测信息。Run:306866,SubRun:5,50MHz:2975609400240,Prompt Run:306866,Prompt SubRun:8,Delta T(s):997.937
+Run:306866,SubRun:6,50MHz:2996905635220,Prompt Run:306866,Prompt SubRun:8,Delta T(s):572.012
+Run:306866,SubRun:8,50MHz:3025506218858,Prompt Run:306866,Prompt SubRun:8,Delta T(s):0.0006258
+找到对应的Muon。Run:306866,SubRun:8,Prompt Run:306866,Prompt SubRun:8,Delta T(s):0.0006258
+
+更新Muon:307191,SubRun:9,Prompt Run:307191, Prompt SubRun:10
+前一个Muon检测信息。Run:307191,SubRun:6,50MHz:452993708589,Prompt Run:307191,Prompt SubRun:10,Delta T(s):1051.2
+Run:307191,SubRun:9,50MHz:491462717368,Prompt Run:307191,Prompt SubRun:10,Delta T(s):281.819
+Run:307191,SubRun:10,50MHz:497654253991,Prompt Run:307191,Prompt SubRun:10,Delta T(s):157.988
+Run:307191,SubRun:13,50MHz:542389158057,Prompt Run:307191,Prompt SubRun:10,Delta T(s):-736.71
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:307191,SubRun:10,GTID:15357177,Entry:520745,EV:0,Energy:1.24214,Original Energ:1.26376, Tony Energy:1.24914,NHits:335,OWL:0,50MHz:505553648734,Applied:951627314364415,Flags:951627314298878, Flags&Mask:1
+Delayed Info:
+Run:307191,SubRun:10,GTID:15357179,Entry:520747,EV:0,Energy:2.11088,Original Energy:2.1477, Tony Energy:2.12451,NHits:528,OWL:0,50MHz:505553652875,Applied:951627314364415,Flags:951627314298854, Flags&Mask:1
+
+更新Muon:307210,SubRun:4,Prompt Run:307210, Prompt SubRun:6
+前一个Muon检测信息。Run:307210,SubRun:1,50MHz:3636888679436,Prompt Run:307210,Prompt SubRun:6,Delta T(s):1152.26
+Run:307210,SubRun:4,50MHz:3667638467647,Prompt Run:307210,Prompt SubRun:6,Delta T(s):537.266
+Run:307210,SubRun:6,50MHz:3692947295696,Prompt Run:307210,Prompt SubRun:6,Delta T(s):31.0892
+Run:307210,SubRun:7,50MHz:3701911510271,Prompt Run:307210,Prompt SubRun:6,Delta T(s):-148.195
+Run:307210,SubRun:10,50MHz:3736518623329,Prompt Run:307210,Prompt SubRun:6,Delta T(s):-840.337
+Run:307210,SubRun:11,50MHz:3757214159012,Prompt Run:307210,Prompt SubRun:6,Delta T(s):-1254.25
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:307210,SubRun:6,GTID:13146082,Entry:317926,EV:0,Energy:2.13768,Original Energ:2.14675, Tony Energy:2.14427,NHits:573,OWL:0,50MHz:3694501754782,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+Delayed Info:
+Run:307210,SubRun:6,GTID:13146087,Entry:317931,EV:0,Energy:2.02189,Original Energy:2.01605, Tony Energy:2.02131,NHits:538,OWL:1,50MHz:3694501769010,Applied:951627314364415,Flags:951627314294774, Flags&Mask:1
+
+更新Muon:307222,SubRun:9,Prompt Run:307222, Prompt SubRun:13
+前一个Muon检测信息。Run:307222,SubRun:7,50MHz:5861655469088,Prompt Run:307222,Prompt SubRun:13,Delta T(s):1445.9
+Run:307222,SubRun:9,50MHz:5880614434032,Prompt Run:307222,Prompt SubRun:13,Delta T(s):1066.72
+Run:307222,SubRun:13,50MHz:5933950425238,Prompt Run:307222,Prompt SubRun:13,Delta T(s):0.00035966
+找到对应的Muon。Run:307222,SubRun:13,Prompt Run:307222,Prompt SubRun:13,Delta T(s):0.00035966
+
+更新Muon:307315,SubRun:3,Prompt Run:307315, Prompt SubRun:4
+前一个Muon检测信息。Run:307315,SubRun:3,50MHz:3905292269294,Prompt Run:307315,Prompt SubRun:4,Delta T(s):214.645
+Run:307315,SubRun:3,50MHz:3907236239712,Prompt Run:307315,Prompt SubRun:4,Delta T(s):175.765
+Run:307315,SubRun:4,50MHz:3926760584941,Prompt Run:307315,Prompt SubRun:4,Delta T(s):-214.722
+Run:307315,SubRun:5,50MHz:3931536197019,Prompt Run:307315,Prompt SubRun:4,Delta T(s):-310.234
+Run:307315,SubRun:8,50MHz:3970739853681,Prompt Run:307315,Prompt SubRun:4,Delta T(s):-1094.31
+Run:307315,SubRun:9,50MHz:3979110136269,Prompt Run:307315,Prompt SubRun:4,Delta T(s):-1261.71
+Run:307315,SubRun:9,50MHz:3981741471739,Prompt Run:307315,Prompt SubRun:4,Delta T(s):-1314.34
+Run:307315,SubRun:11,50MHz:4012163266468,Prompt Run:307315,Prompt SubRun:4,Delta T(s):-1922.78
+Run:307315,SubRun:14,50MHz:4038589077274,Prompt Run:307315,Prompt SubRun:4,Delta T(s):-2451.29
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:307315,SubRun:4,GTID:10764972,Entry:9791,EV:0,Energy:2.80306,Original Energ:2.87903, Tony Energy:2.84287,NHits:761,OWL:0,50MHz:3916024496976,Applied:951627314364415,Flags:951627314297830, Flags&Mask:1
+Delayed Info:
+Run:307315,SubRun:4,GTID:10764974,Entry:9793,EV:0,Energy:2.30413,Original Energy:2.37757, Tony Energy:2.33908,NHits:628,OWL:0,50MHz:3916024522553,Applied:951627314364415,Flags:951627314297854, Flags&Mask:1
+
+更新Muon:307455,SubRun:9,Prompt Run:307455, Prompt SubRun:11
+前一个Muon检测信息。Run:307455,SubRun:8,50MHz:1110883143018,Prompt Run:307455,Prompt SubRun:11,Delta T(s):682.316
+Run:307455,SubRun:9,50MHz:1123095310055,Prompt Run:307455,Prompt SubRun:11,Delta T(s):438.073
+Run:307455,SubRun:11,50MHz:1143781047519,Prompt Run:307455,Prompt SubRun:11,Delta T(s):24.3578
+Run:307455,SubRun:13,50MHz:1169579281878,Prompt Run:307455,Prompt SubRun:11,Delta T(s):-491.607
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:307455,SubRun:11,GTID:14047256,Entry:330551,EV:0,Energy:2.90104,Original Energ:2.86347, Tony Energy:2.87932,NHits:754,OWL:0,50MHz:1144998935884,Applied:951627314364415,Flags:951627314265078, Flags&Mask:1
+Delayed Info:
+Run:307455,SubRun:11,GTID:14047258,Entry:330553,EV:0,Energy:2.22941,Original Energy:2.19162, Tony Energy:2.20986,NHits:590,OWL:0,50MHz:1144998940122,Applied:951627314364415,Flags:951627314266110, Flags&Mask:1
+
+更新Muon:307468,SubRun:8,Prompt Run:307468, Prompt SubRun:9
+前一个Muon检测信息。Run:307468,SubRun:6,50MHz:3426886166049,Prompt Run:307468,Prompt SubRun:9,Delta T(s):573.885
+Run:307468,SubRun:8,50MHz:3443054526203,Prompt Run:307468,Prompt SubRun:9,Delta T(s):250.518
+Run:307468,SubRun:9,50MHz:3462951539310,Prompt Run:307468,Prompt SubRun:9,Delta T(s):-147.423
+Run:307468,SubRun:9,50MHz:3466555434926,Prompt Run:307468,Prompt SubRun:9,Delta T(s):-219.501
+Run:307468,SubRun:10,50MHz:3471051999164,Prompt Run:307468,Prompt SubRun:9,Delta T(s):-309.432
+Run:307468,SubRun:11,50MHz:3485442538396,Prompt Run:307468,Prompt SubRun:9,Delta T(s):-597.243
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:307468,SubRun:9,GTID:3953659,Entry:58874,EV:0,Energy:3.48391,Original Energ:3.46108, Tony Energy:3.45943,NHits:954,OWL:0,50MHz:3455580409367,Applied:951627314364415,Flags:951627314297838, Flags&Mask:1
+Delayed Info:
+Run:307468,SubRun:9,GTID:3953661,Entry:58876,EV:0,Energy:2.15972,Original Energy:2.13406, Tony Energy:2.15053,NHits:607,OWL:0,50MHz:3455580409717,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+
+更新Muon:307579,SubRun:14,Prompt Run:307580, Prompt SubRun:0
+前一个Muon检测信息。Run:307579,SubRun:14,50MHz:3516659676750,Prompt Run:307580,Prompt SubRun:0,Delta T(s):362.215
+Run:307579,SubRun:14,50MHz:3521804546893,Prompt Run:307580,Prompt SubRun:0,Delta T(s):259.317
+Run:307580,SubRun:4,50MHz:3574174167125,Prompt Run:307580,Prompt SubRun:0,Delta T(s):-788.075
+Run:307580,SubRun:5,50MHz:3586429982963,Prompt Run:307580,Prompt SubRun:0,Delta T(s):-1033.19
+Run:307580,SubRun:8,50MHz:3625158603081,Prompt Run:307580,Prompt SubRun:0,Delta T(s):-1807.76
+Run:307580,SubRun:12,50MHz:3683494419428,Prompt Run:307580,Prompt SubRun:0,Delta T(s):-2974.48
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:307580,SubRun:0,GTID:6423278,Entry:528305,EV:0,Energy:3.91271,Original Energ:4.14932, Tony Energy:3.9961,NHits:778,OWL:0,50MHz:3534770418830,Applied:951627314364415,Flags:951627314297838, Flags&Mask:1
+Delayed Info:
+Run:307580,SubRun:0,GTID:6423281,Entry:528308,EV:0,Energy:2.21641,Original Energy:2.35995, Tony Energy:2.27334,NHits:469,OWL:0,50MHz:3534770419328,Applied:951627314364415,Flags:951627314297854, Flags&Mask:1
+
+更新Muon:307604,SubRun:7,Prompt Run:307604, Prompt SubRun:8
+前一个Muon检测信息。Run:307604,SubRun:5,50MHz:6978287019498,Prompt Run:307604,Prompt SubRun:8,Delta T(s):726.133
+Run:307604,SubRun:7,50MHz:7008078587967,Prompt Run:307604,Prompt SubRun:8,Delta T(s):130.302
+Run:307604,SubRun:8,50MHz:7015248489726,Prompt Run:307604,Prompt SubRun:8,Delta T(s):-13.096
+Run:307604,SubRun:13,50MHz:7077340653410,Prompt Run:307604,Prompt SubRun:8,Delta T(s):-1254.94
+Run:307604,SubRun:14,50MHz:7090696649807,Prompt Run:307604,Prompt SubRun:8,Delta T(s):-1522.06
+并没有找到对应的Muon，通过Muon Cut
+通过Muon Cut，输出Coincidence Pair的信息：
+Prompt Info:
+Run:307604,SubRun:8,GTID:4791488,Entry:265979,EV:0,Energy:2.10029,Original Energ:2.12701, Tony Energy:2.10067,NHits:555,OWL:0,50MHz:7014593688609,Applied:951627314364415,Flags:951627314298854, Flags&Mask:1
+Delayed Info:
+Run:307604,SubRun:8,GTID:4791490,Entry:265981,EV:0,Energy:2.07887,Original Energy:2.11615, Tony Energy:2.08754,NHits:560,OWL:0,50MHz:7014593688881,Applied:951627314364415,Flags:951627314298870, Flags&Mask:1
+
+Coincidence Pair Number:1751, After Data Flags Number:147, After Muon Cut Number:56
+(int)0
