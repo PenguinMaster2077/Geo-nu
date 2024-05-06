@@ -172,12 +172,12 @@ const UInt_t NHitsCorrected[], const ULong64_t Count50MHz[], const ULong64_t Dat
 const ULong64_t DataFlags[], const TVector3 PromptPos, const TVector3 DelayedPos);
 
 // int Zombie_CoincidencePair()
-int main(int argc, char** argv)
+int Boost_TaggingCoincidencePair_ByHand()
 {
-    std::string RATDSFile = argv[1];
-    std::string NTUPLEFile = argv[2];
-    std::string OutFile = argv[3];
-    TString sub_run = argv[4];
+    std::string RATDSFile = "/home/shuaioy/scratch/Geo/Gold/300000-306498/ratds/302000/Data/Analysis20R_r0000301910_s000_p000.root";
+    std::string NTUPLEFile = "/home/shuaioy/scratch/Geo/Gold/MC/Th/302000/Data/ScintFit_2p2Geoibd_ThRun_r301910_s0_p0.ntuple.root";
+    std::string OutFile = "/project/6001358/shuaioy/work/Geo/Ingrida/Code/MCData/Th/300000-307612/302000/OUTPUT/MC_Th_301910.root";
+    TString sub_run = "0";
 //Create New Root File
     TFile *outfile = new TFile(OutFile.c_str(), "recreate");
     TTree *outtree = new TTree("output", "output");

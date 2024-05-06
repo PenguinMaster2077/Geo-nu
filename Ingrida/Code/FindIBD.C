@@ -38,6 +38,7 @@ int FindIBD()
 {
     std::string InFile = "/rat/MyCode/Work/Geo-nu-Data/CoincidencePair/Data/Gold_20R_CoincidencePair_0000300000-0000307612.root";
     std::string InMuonFile = "/rat/MyCode/Work/Geo-nu-Data/Muon/Gold_20R_Muon_Abstract_0000300000-0000307612.root";
+    std::string OutRootFile = "/rat/MyCode/Work/Geo-nu-Data/IBDCandidate/Gold_20R_IBD_Candidate_0000300000-0000307612.root";
     std::string OutFile = "./CoincidencePair.txt";
     std::string OutFile2 = "./CoincidencePair_DataFlags.txt";
     std::string OutFile3 = "./CoincidencePair_DataFlags_Muon.txt";
@@ -139,6 +140,51 @@ int FindIBD()
         Muon_GTID_Array[ii1] = Muon_GTID;
         Muon_50MHz_Array[ii1] = Muon_Clock50MHz;
     };
+//Create Out Root File
+    TFile *outfile = new TFile(OutRootFile.c_str(), "recreate");
+    TTree *outtree = new TTree("output", "output");
+    //Create Branch
+    myresult res;
+    outtree->Branch("RunID", &res.C_RunID);
+    outtree->Branch("SubRunID", &res.C_SubRunID);
+    outtree->Branch("Date", &res.C_Date);
+    outtree->Branch("Time", &res.C_Time);
+    outtree->Branch("RunType", &res.C_RunType);
+    outtree->Branch("ZOffSet", &res.C_ZOffSet);
+    //Prompt
+    outtree->Branch("PromptEntry", &res.C_Prompt.C_Entry);
+    outtree->Branch("PromptEv", &res.C_Prompt.C_EV);
+    outtree->Branch("PromptGTID", &res.C_Prompt.C_GTID);
+    outtree->Branch("PromptOWLHits", &res.C_Prompt.C_OWLHits);
+    outtree->Branch("PromptNHits", &res.C_Prompt.C_Nhits);
+    outtree->Branch("PromptNHitsCleaned", &res.C_Prompt.C_Nhits_Cleaned);
+    outtree->Branch("PromptNHitsCorrected", &res.C_Prompt.C_Nhits_Corrected);
+    outtree->Branch("Prompt50MHz", &res.C_Prompt.C_50MHZ);
+    outtree->Branch("PromptDataApplied", &res.C_Prompt.C_Data_Applied);
+    outtree->Branch("PromptDataFlags", &res.C_Prompt.C_Data_Flags);
+    outtree->Branch("PromptPosX", &res.C_Prompt.C_Pos_X);
+    outtree->Branch("PromptPosY", &res.C_Prompt.C_Pos_Y);
+    outtree->Branch("PromptPosZ", &res.C_Prompt.C_Pos_Z);
+    outtree->Branch("PromptEnergy", &res.C_Prompt.C_Energy);
+    outtree->Branch("PromptOriginalEnergy", &res.C_Prompt.C_Original_Energy);
+    outtree->Branch("PromptTonyEnergy", res.C_Prompt.C_Tony_Energy);
+    //Delayed
+    outtree->Branch("DelayedEntry", &res.C_Delayed.C_Entry);
+    outtree->Branch("DelayedEv", &res.C_Delayed.C_EV);
+    outtree->Branch("DelayedGTID", &res.C_Delayed.C_GTID);
+    outtree->Branch("DelayedOWLHits", &res.C_Delayed.C_OWLHits);
+    outtree->Branch("DelayedNHits", &res.C_Delayed.C_Nhits);
+    outtree->Branch("DelayedNHitsCleaned", &res.C_Delayed.C_Nhits_Cleaned);
+    outtree->Branch("DelayedNHitsCorrected", &res.C_Delayed.C_Nhits_Corrected);
+    outtree->Branch("Delayed50MHz", &res.C_Delayed.C_50MHZ);
+    outtree->Branch("DelayedDataApplied", &res.C_Delayed.C_Data_Applied);
+    outtree->Branch("DelayedDataFlags", &res.C_Delayed.C_Data_Flags);
+    outtree->Branch("DelayedPosX", &res.C_Delayed.C_Pos_X);
+    outtree->Branch("DelayedPosY", &res.C_Delayed.C_Pos_Y);
+    outtree->Branch("DelayedPosZ", &res.C_Delayed.C_Pos_Z);
+    outtree->Branch("DelayedEnergy", &res.C_Delayed.C_Energy);
+    outtree->Branch("DelayedOriginalEnergy", &res.C_Delayed.C_Original_Energy);
+    outtree->Branch("DelayedTonyEnergy", res.C_Delayed.C_Tony_Energy);
 //Begin to Find Coincidence Pair
     std::ofstream coincidence_pair(OutFile.c_str());
     std::ofstream coincidence_pair_dataflags(OutFile2.c_str());
@@ -211,11 +257,57 @@ int FindIBD()
         std::cout << "Run:" << RunID << ",SubRun:" << SubRunID << ",GTID:" << PromptGTID  << ",Entry:" << PromptEntry << ",EV:" << PromptEv  << ",Energy:" << PromptEnergy << ",Original Energ:" << Prompt_Original_Energy << ", Tony Energy:" << Prompt_Tony_Energy << ",NHits:" << PromptNHits <<  ",OWL:" << PromptOWLHits << ",50MHz:" << Prompt50MHz << ",Applied:" << PromptDataApplied << ",Flags:" << PromptFlags << ", Flags&Mask:" << ( (PromptFlags & 0x2100000042C2) == 0x2100000042C2) << std::endl;
         std::cout << "Delayed Info:" << std::endl;
         std::cout << "Run:" << RunID << ",SubRun:" << SubRunID << ",GTID:" << DelayedGTID << ",Entry:" << DelayedEntry << ",EV:" << DelayedEv << ",Energy:" << DelayedEnergy << ",Original Energy:" << Delayed_Original_Energy << ", Tony Energy:" << Delayed_Tony_Energy << ",NHits:" << DelayedNHits << ",OWL:" << DelayedOWLHits << ",50MHz:" << Delayed50MHz << ",Applied:" << DelayedDataApplied << ",Flags:" << DelayedFlags << ", Flags&Mask:" << ((DelayedFlags & 0x2100000042C2) == 0x2100000042C2)  <<  std::endl << std::endl;
-
+        //Recording Info
+            //Run Info
+            res.C_RunID = RunID;
+            res.C_SubRunID = SubRunID;
+            res.C_Date = Date;
+            res.C_Time = Time;
+            res.C_RunType = RunType;
+            res.C_ZOffSet = ZOffSet;
+            //Prompt
+            res.C_Prompt.C_Entry = PromptEntry;
+            res.C_Prompt.C_EV = PromptEv;
+            res.C_Prompt.C_GTID = PromptGTID;
+            res.C_Prompt.C_OWLHits = PromptOWLHits;
+            res.C_Prompt.C_Nhits = PromptNHits;
+            res.C_Prompt.C_Nhits_Cleaned = PromptNHitsCleaned;
+            res.C_Prompt.C_Nhits_Corrected = PromptNHitsCorrected;
+            res.C_Prompt.C_50MHZ = Prompt50MHz;
+            res.C_Prompt.C_Data_Applied = PromptDataApplied;
+            res.C_Prompt.C_Data_Flags = PromptDataFlags;
+            res.C_Prompt.C_Pos_X = PromptPosX;
+            res.C_Prompt.C_Pos_Y = PromptPosY;
+            res.C_Prompt.C_Pos_Z = PromptPosZ;
+            res.C_Prompt.C_Energy = PromptEnergy;
+            res.C_Prompt.C_Original_Energy = Prompt_Original_Energy;
+            res.C_Prompt.C_Tony_Energy = Prompt_Tony_Energy;
+            //Delayed
+            res.C_Delayed.C_Entry = DelayedEntry;
+            res.C_Delayed.C_EV = DelayedEv;
+            res.C_Delayed.C_GTID = DelayedGTID;
+            res.C_Delayed.C_OWLHits = DelayedOWLHits;
+            res.C_Delayed.C_Nhits = DelayedNHits;
+            res.C_Delayed.C_Nhits_Cleaned = DelayedNHitsCleaned;
+            res.C_Delayed.C_Nhits_Corrected = DelayedNHitsCorrected;
+            res.C_Delayed.C_50MHZ = Delayed50MHz;
+            res.C_Delayed.C_Data_Applied = DelayedDataApplied;
+            res.C_Delayed.C_Data_Flags = DelayedDataFlags;
+            res.C_Delayed.C_Pos_X = DelayedPosX;
+            res.C_Delayed.C_Pos_Y = DelayedPosY;
+            res.C_Delayed.C_Pos_Z = DelayedPosZ;
+            res.C_Delayed.C_Energy = DelayedEnergy;
+            res.C_Delayed.C_Original_Energy = Delayed_Original_Energy;
+            res.C_Delayed.C_Tony_Energy = Delayed_Tony_Energy;
+        outtree->Fill();
     };
     coincidence_pair.close();
     coincidence_pair_dataflags.close();
+    coincidence_pair_dataflags_muon.close();
+    coincidence_pair_multi.close();
 
+    outfile->Write();
+    outfile->Close();
     std::cout << "Coincidence Pair Number:" << Coin_Pair_Numer << ", After Data Flags Number:" << After_Flags_Numer << ", After Muon Cut Number:" << After_Flags_Muon_Numer << std::endl;
 
     return 0;
@@ -235,10 +327,13 @@ public:
         C_Entry = 0;
         C_EV = 0;
         C_GTID = 0;
+        C_OWLHits = 0;
         C_Nhits = 0;
         C_Nhits_Cleaned = 0;
         C_Nhits_Corrected = 0;
         C_50MHZ = 0;
+        C_Data_Applied = 0;
+        C_Data_Flags = 0;
     };
     void ClearPosEnergy()
     {
@@ -246,6 +341,8 @@ public:
         C_Pos_X = 0;
         C_Pos_Y = 0;
         C_Pos_Z = 0;
+        C_Original_Energy = 0;
+        C_Tony_Energy = 0;
     };
     void ShowDetals()
     {
@@ -257,22 +354,27 @@ public:
         std::cout << "Entry:" << C_Entry << std::endl;
         std::cout << "EV:" << C_EV << std::endl;
         std::cout << "GTID:" << C_GTID << std::endl;
+        std::cout << "OWL:" << C_OWLHits << std::endl;
         std::cout << "Nhits:" << C_Nhits << std::endl;
         std::cout << "NhitsCleaned:" << C_Nhits_Cleaned << std::endl;
         std::cout << "NhitsCorre:" << C_Nhits_Corrected << std::endl;
         std::cout << "50MHz:" << C_50MHZ << std::endl;
+        std::cout << "Applied:" << C_Data_Applied << std::endl;
+        std::cout << "Flags:" << C_Data_Flags << std::endl;
     };
     void ShowPosTime()
     {
         std::cout << "E:" << C_Energy << ",X:" << C_Pos_X << ",Y:" << C_Pos_Y << ",Z:" << C_Pos_Z << std::endl;
+        std::cout << "Original E:" << C_Tony_Energy << ", Tony Energy:" << C_Tony_Energy << std::endl;
     };
 //EV Info
     unsigned int C_Entry, C_EV;
-    Int_t C_GTID;
+    Int_t C_GTID, C_OWLHits;
     UInt_t C_Nhits, C_Nhits_Cleaned, C_Nhits_Corrected;
-    ULong64_t C_50MHZ;
+    ULong64_t C_50MHZ, C_Data_Applied, C_Data_Flags;
 //4D Position and Time
     Double_t C_Energy, C_Pos_X, C_Pos_Y, C_Pos_Z;
+    Double_t C_Original_Energy, C_Tony_Energy;//Tony Energy: Original + Tony Correction
 };
 
 class myresult
@@ -295,6 +397,7 @@ public:
         C_Date = 0;
         C_Time = 0;
         C_RunType = 0;
+        C_ZOffSet = 0;
     };
     void ShowRunInfo()
     {
@@ -303,6 +406,7 @@ public:
         std::cout << "Date:" << C_Date << std::endl;
         std::cout << "Time:" << C_Time << std::endl;
         std::cout << "RunType:" << C_RunType << std::endl;
+        std::cout << "Z OffSet:" << C_ZOffSet << std::endl;
     };
     void ClearPrompt()  {C_Prompt.ClearAll();};
     void ClearDelayed() {C_Delayed.ClearAll();};
@@ -310,6 +414,7 @@ public:
     void ShowDelayed()  {std::cout << "Details of Dealyed" << std::endl; C_Delayed.ShowDetals();};
 //Run Information
     UInt_t C_RunID, C_SubRunID, C_Date, C_Time, C_RunType;
+    Double_t C_ZOffSet;
 //Prompt and Delayed
     Event C_Prompt, C_Delayed;
 };

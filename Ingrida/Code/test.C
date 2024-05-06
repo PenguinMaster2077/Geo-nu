@@ -6,26 +6,31 @@
 //ROOT
 #include <TFile.h>
 #include <TTree.h>
+#include <TH1D.h>
 #include <TString.h>
 //RAT
-#include <RAT/DU/DSReader.hh>
-// #include <RAT/DS/Run.hh>
-// #include <RAT/DS/Entry.hh>
-// #include <RAT/DS/EV.hh>
-// #include <RAT/DS/DataQCFlags.hh>
-// #include <RAT/DS/BitMask.hh>
-// #include <RAT/DS/FitResult.hh>
-// #include <RAT/DS/FitVertex.hh>
-// #include <RAT/DB.hh>
-// #include <RAT/DU/Utility.hh>
-// #include <RAT/DU/ReconCalibrator.hh>
-// #include <RAT/DU/DetectorStateCorrection.hh>
+//Self-Defined
+// #include "/home/penguin/Rat/rat-7.0.14-ROOT5/MyCode/Work/Geo-nu/Ingrida/Code/PlotCode.hh"
+
+#include "/rat/MyCode/Work/Geo-nu/Ingrida/Code/PlotCode.hh"
 
 int test()
 {
-    TString Ta = a;
-    Int_t res = Ta.Atoi();
-    std::cout << res << std::endl;
+    std::string InFile = "/rat/MyCode/Work/Geo-nu-Data/CoincidencePair/MC/AN/MC_AN_300000-307612.root";
+
+    TFile infile(InFile.c_str());
+    TTree* intree = (TTree*) infile.Get("output");
+    std::string BranchName = "PromptEnergy";
+
+    TH1D *th1d = new TH1D("test", "test", 1000, 0, 10);//MeV
+    intree->Project("test", BranchName.c_str());
+
+    SavePlot("./test.png", th1d, "AN", "E", "test");
+
+    th1d->Scale(1.0/th1d->Integral());
+    int startIndex = th1d->FindBin(0.9);
+    int endIndex = th1d->FindBin(2.4);
+    std::cout << startIndex << "," << endIndex << "," << th1d->Integral(startIndex, endIndex) << std::endl;
 
     return 0;
 };
