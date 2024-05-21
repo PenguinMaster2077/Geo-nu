@@ -98,6 +98,11 @@ Double_t ComputeDelta_T(ULong64_t Last_50MHz, ULong64_t Present_50MHz)
 };
 
 void Find_Coincidence_Pairs(std::string InFilePWD, std::string OutFile)
+//Select Coincidence Pairs within cuts
+//Cut:
+//Prompt: 0.9 <= energy <= 8.0; R<= 5700;
+//Delayed: 1.85 <= energy <= 2.5; R<= 5700;
+//DeltaT: 400 ns-2 ms; DeltaR <= 2500
 {
 //Log File
     std::ofstream logfile;
@@ -278,6 +283,10 @@ void Find_Coincidence_Pairs(std::string InFilePWD, std::string OutFile)
 };
 
 void Find_Full_Coincidence_Pairs(std::string InFilePWD, std::string OutFile)
+//Select all Coincidence Pairs and give an estimated number of Coincidence Pairs
+//Cut:
+//Prompt: evIndex == 0; R<= 6000; 0.2 <= energy <= 10.0
+//Delayed: evIndex == 2; R<= 6000; 0.2 <= energy <= 10.0
 {
 //Log File
     std::ofstream logfile;
@@ -454,3 +463,46 @@ void Find_Full_Coincidence_Pairs(std::string InFilePWD, std::string OutFile)
     logfile << "Selection Eff II:" << Selection_Eff_II << ", Error:" << Selection_Eff_II_Error << ", Correct Pro:" << Correct_Pro << std::endl;
     logfile << "Selection Eff III:" << 1.0 * Number_Pass_Energy_Radius_DeltaT_DeltaR/Estimated_Total_Pairs_III << std::endl;
 };
+
+void GetPDfs(std::string InFile, std::string Name, TH1D *Example_Hist)
+{
+//Read File
+    TFile *infile = new TFile(InFile.c_str());
+    TTree *tree = (TTree*) infile->Get("output");
+//Set Branch Address
+    //Prompt
+    Double_t Prompt_Energy, Prompt_PosX, Prompt_PosY, Prompt_PosZ;
+    tree->SetBranchAddress("PromptEnergy", &Prompt_Energy);
+    tree->SetBranchAddress("PromptPosX", &Prompt_PosX);
+    tree->SetBranchAddress("PromptPosY", &Prompt_PosY);
+    tree->SetBranchAddress("PromptPosZ", &Prompt_PosZ);
+    ULong64_t Prompt_50MHz;
+    tree->SetBranchAddress("Prompt50MHz", &Prompt_50MHz);
+    //Delayed
+    Double_t Delayed_Energy, Delayed_PosX, Delayed_PosY, Delayed_PosZ;
+    tree->SetBranchAddress("DelayedEnergy", &Delayed_Energy);
+    tree->SetBranchAddress("DelayedPosX", &Delayed_PosX);
+    tree->SetBranchAddress("DelayedPosY", &Delayed_PosY);
+    tree->SetBranchAddress("DelayedPosZ", &Delayed_PosZ);
+    ULong64_t Delayed_50MHz;
+    tree->SetBranchAddress("Delayed50MHz", &Delayed_50MHz);
+//Initialize Histograms
+//Loop the Data
+    Double_t Delta_T;
+    TVector3 Delta_R;
+    for(int ii1 = 0; ii1 < tree->GetEntries(); ii1++)
+    {
+        tree->GetEntry(ii1);
+        Delta_R.SetXYZ(Delayed_PosX - Prompt_PosX, Delayed_PosY - Prompt_PosY, Delayed_PosZ - Prompt_PosZ);
+        Delta_T = ComputeDelta_T(Delayed_50MHz, Prompt_50MHz);
+    }
+};
+
+/*Back Code For Testing
+    std::cout << "Prompt Info" << std::endl;
+    std::cout << "Energy:" << Prompt_Energy << ",X:" << Prompt_PosX << ",Y:" << Prompt_PosY << ",Z:" << Prompt_PosZ << std::endl;
+    std::cout << "50MHz:" << Prompt_50MHz << std::endl;
+    std::cout << "Delayed Info" << std::endl;
+    std::cout << "Energy:" << Delayed_Energy << ",X:" << Delayed_PosX << ",Y:" << Delayed_PosY << ",Z:" << Delayed_PosZ << std::endl;
+    std::cout << "50MHz:" << Delayed_50MHz << std::endl;
+*/
