@@ -27,7 +27,7 @@ Double_t GiveExpection(Double_t Parameter_1, Double_t Parameter_2, Double_t Para
 TMatrixD GiveCorMatrix(Double_t *Parameters, TH1D *data, TH1D *h1, TH1D *h2, TH1D *h3, TH1D *h4);
 
 
-TH1D *h1, *h2, *h3;
+TH1D *h1, *h2, *h3, *h4;
 
 double self_function(double *x, double*par)
 {
@@ -37,7 +37,8 @@ double self_function(double *x, double*par)
     double part1 = par[0] * h1->GetBinContent(bin);
     double part2 = par[1] * h2->GetBinContent(bin);
     double part3 = par[2] * h3->GetBinContent(bin);
-    return part1 + part2 + part3;
+    double part4 = par[2] * par[3] * h4->GetBinContent(bin);
+    return part1 + part2 + part3 + part4;
 };
 
 int Fitting()
@@ -48,6 +49,8 @@ int Fitting()
     std::string InFile3 = InPWD + "U/MC_U_300000-307612.root";
     std::string InFile4 = InPWD + "Th/MC_Th_300000-307612.root";
     std::string DataFile = "/rat/MyCode/Work/Geo-nu-Data/IBDCandidate/Gold_20R_IBD_Candidate_0000300000-0000307612.root";
+    std::string OutPWD = "/rat/MyCode/Work/Geo-nu/Ingrida/Pic/";
+    std::string OutPut_Prompt_Energy = OutPWD + "Prompt_Energy.png";
 
     std::string Name1 = "AN";
     std::string Name2 = "Reactor";
@@ -65,7 +68,141 @@ int Fitting()
     TFile datafile(DataFile.c_str());
     TTree *datatree = (TTree*) datafile.Get("output");
     //Create Histogram
-    int BinNumber = 15;
+    int BinNumber = 10;
+    Double_t down = 0.8, up = 8.0;
+    h1 = new TH1D(Name1.c_str(), "", BinNumber, down, up);
+    h2 = new TH1D(Name2.c_str(), "", BinNumber, down, up);
+    h3 = new TH1D(Name3.c_str(), "", BinNumber, down, up);
+    h4 = new TH1D(Name4.c_str(), "", BinNumber, down, up);
+    TH1D *data_hist = new TH1D("data_hist", "", BinNumber, down, up);
+
+    TH1D *h1_Plot = new TH1D("PDF1_Plot", "", 100, down, up);
+    TH1D *h2_Plot = new TH1D("PDF2_Plot", "", 100, down, up);
+    TH1D *h3_Plot = new TH1D("PDF3_Plot", "", 100, down, up);
+    TH1D *h4_Plot = new TH1D("PDF4_Plot", "", 100, down, up);
+    //Load Data and PDF
+    std::string BranchName = "PromptEnergy";
+    intree1->Project(Name1.c_str(), BranchName.c_str());
+    intree2->Project(Name2.c_str(), BranchName.c_str());
+    intree3->Project(Name3.c_str(), BranchName.c_str());
+    intree4->Project(Name4.c_str(), BranchName.c_str());
+    datatree->Project("data_hist", BranchName.c_str());
+
+    intree1->Project("PDF1_Plot", BranchName.c_str());
+    intree2->Project("PDF2_Plot", BranchName.c_str());
+    intree3->Project("PDF3_Plot", BranchName.c_str());
+    intree4->Project("PDF4_Plot", BranchName.c_str());
+    //Normalized
+    h1->Scale(1.0/h1->Integral());
+    h2->Scale(1.0/h2->Integral());
+    h3->Scale(1.0/h3->Integral());
+    h4->Scale(1.0/h4->Integral());
+
+    h1_Plot->Scale(1.0/h1_Plot->Integral());
+    h2_Plot->Scale(1.0/h2_Plot->Integral());
+    h3_Plot->Scale(1.0/h3_Plot->Integral());
+    h4_Plot->Scale(1.0/h4_Plot->Integral());
+    //Theory Predictions
+    Int_t Total_Number = datatree->GetEntries();
+    Double_t Pre_Number1 = 17.2, Pre_Number1_Min = Pre_Number1 - 5.9, Pre_Number1_Max = Pre_Number1 + 5.9;
+    Double_t Pre_Number2 = 24.88;
+    Double_t Pre_Number3 = 5.22;
+    Double_t Pre_Number4 = 1.39;
+    //Fit Function
+    TF1 *ftotal = new TF1("ftotal", self_function , down, up, 4);
+    //Setting of Parameters
+    // ftotal->SetParameters(Pre_Number1, Pre_Number2, Pre_Number3, 1/3.7);
+    // ftotal->SetParLimits(0, Pre_Number1_Min, Pre_Number1_Max);
+    // ftotal->SetParLimits(1, Pre_Number2*(0.97), Pre_Number2*(1.03))
+    // ftotal->SetParLimits(3, 1/4.0, 1/2.4);
+
+    ftotal->SetParameters(Pre_Number1, Pre_Number2, Pre_Number3, 1/3.7);
+    ftotal->SetParLimits(0, 0, 0);
+    ftotal->SetParLimits(1, 24.0, 25.6);
+    ftotal->SetParLimits(2, 0, 0);
+    ftotal->SetParLimits(3, 1/4, 1/2.7);
+
+    data_hist->Fit("ftotal", "W");
+    //Get Results
+    Double_t Parameter_Best_1 = ftotal->GetParameter(0);
+    Double_t Parameter_Error_1 = ftotal->GetParError(0);
+    Double_t Parameter_Best_2 = ftotal->GetParameter(1);
+    Double_t Parameter_Error_2 = ftotal->GetParError(1);
+    Double_t Parameter_Best_3 = ftotal->GetParameter(2);
+    Double_t Parameter_Error_3 = ftotal->GetParError(2);
+    Double_t Parameter_Best_4 = ftotal->GetParameter(3);
+    Double_t Parameter_Error_4 = ftotal->GetParError(3);
+    //Compute Events
+    Double_t Number_1 = Parameter_Best_1 * h1->Integral();
+    Double_t Error_1 = Parameter_Error_1 * h1->Integral();
+    Double_t Number_2 = Parameter_Best_2 * h2->Integral();
+    Double_t Error_2 = Parameter_Error_2 * h2->Integral();
+    Double_t Number_3 = Parameter_Best_3 * h3->Integral();
+    Double_t Error_3 = Parameter_Error_3 * h3->Integral();
+
+    Double_t Number_4 = Parameter_Best_3 * Parameter_Best_4 * h4->Integral();
+    Double_t Error_4 = sqrt(pow( Parameter_Error_3/Parameter_Best_3, 2) + pow( Parameter_Error_4/ Parameter_Best_4, 2)) * Number_4;
+
+    Double_t Number_Sum = Number_1 + Number_2 + Number_3 + Number_4;
+    Double_t Error_Sum = Error_1 + Error_2 + Error_3 + Error_4;
+
+    Double_t ChiSquare = ftotal->GetChisquare();
+    Double_t NDF = ftotal->GetNDF();
+
+    Double_t Ratio_Best = 1/Parameter_Best_4;
+    Double_t Ration_Error = Parameter_Error_4/pow(Parameter_Best_4, 2);
+
+    std::cout << "AN:" << Number_1 << ", Error:" << Error_1 << ", Relative Error:" << Error_1/Number_1 << std::endl;
+    std::cout << "Reactor:" << Number_2 << ", Error:" << Error_2 << ", Relative Error:" << Error_2/Number_2 << std::endl;
+    std::cout << "U:" << Number_3 << ", Error:" << Error_3 << ", Relative Error:" << Error_3/Number_3 << std::endl;
+    std::cout << "Th:" << Number_4 << ", Error:" << Error_4 << ", Relative Error:" << Error_4/Number_4 << std::endl;
+    std::cout << "Total:" << Number_Sum << ", Error:" << Error_Sum << ", Relative Error:" << Error_Sum/Number_Sum << std::endl;
+    std::cout << "U/Th:" << Ratio_Best << ", Error:" << Ration_Error << ",Relative Error:" << Ration_Error/Ratio_Best << std::endl;
+    std::cout << "chi square:" << ChiSquare << ", NDF:" << NDF << ", Ratio:" << ChiSquare / NDF << std::endl;
+    return 0;
+    //Rescaling TH1D for Plot
+    h1_Plot->Scale(5 * Number_1);
+    h2_Plot->Scale(5 * Number_2);
+    h3_Plot->Scale(5 * Number_3);
+    //ReSet Total Bin
+    delete data_hist;
+    data_hist = new TH1D("data_hist", "", BinNumber, down, up);
+    datatree->Project("data_hist", BranchName.c_str());
+    TH1D *Sum_Hist = (TH1D*)h1_Plot->Clone();
+    Sum_Hist->Add(h2_Plot,1.0);
+    Sum_Hist->Add(h3_Plot,1.0);
+    SaveFivePlots(OutPut_Prompt_Energy.c_str(), data_hist, "Data", h1_Plot, "AN", h2_Plot, "Reactor", h3_Plot, "Geo", Sum_Hist, "Sum" , "E_{Prompt}/MeV", 0, 0, 15, "Prompt Event Fitting", 0.7, 0.6, 0.9, 0.8 );
+    return 0;
+};
+
+int Fitting_ConstantRation()
+{
+    std::string InPWD = "/rat/MyCode/Work/Geo-nu-Data/CoincidencePair/MC/";
+    std::string InFile1 = InPWD + "AN/MC_AN_300000-307612.root";
+    std::string InFile2 = InPWD + "Reactor/MC_Reactor_OffLine_300000-307612.root";
+    std::string InFile3 = InPWD + "U/MC_U_300000-307612.root";
+    std::string InFile4 = InPWD + "Th/MC_Th_300000-307612.root";
+    std::string DataFile = "/rat/MyCode/Work/Geo-nu-Data/IBDCandidate/Gold_20R_IBD_Candidate_0000300000-0000307612.root";
+    std::string OutPWD = "/rat/MyCode/Work/Geo-nu/Ingrida/Pic/";
+    std::string OutPut_Prompt_Energy = OutPWD + "Prompt_Energy.png";
+
+    std::string Name1 = "AN";
+    std::string Name2 = "Reactor";
+    std::string Name3 = "U"; 
+    std::string Name4 = "Th";
+    //Create TFile
+    TFile infile1(InFile1.c_str());
+    TTree *intree1 = (TTree*) infile1.Get("output");
+    TFile infile2(InFile2.c_str());
+    TTree *intree2 = (TTree*) infile2.Get("output");
+    TFile infile3(InFile3.c_str());
+    TTree *intree3 = (TTree*) infile3.Get("output");
+    TFile infile4(InFile4.c_str());
+    TTree *intree4 = (TTree*) infile4.Get("output");
+    TFile datafile(DataFile.c_str());
+    TTree *datatree = (TTree*) datafile.Get("output");
+    //Create Histogram
+    int BinNumber = 10;
     Double_t down = 0.8, up = 8.0;
     h1 = new TH1D(Name1.c_str(), "", BinNumber, down, up);
     h2 = new TH1D(Name2.c_str(), "", BinNumber, down, up);
@@ -103,7 +240,7 @@ int Fitting()
     h3_Plot->Scale(1.0/h3_Plot->Integral());
     //Theory Predictions
     Int_t Total_Number = datatree->GetEntries();
-    Double_t Pre_Number1 = 17.2, Pre_Number1_Min = 17.2 - 5.9, Pre_Number1_Max = 17.2 + 5.9;
+    Double_t Pre_Number1 = 17.2, Pre_Number1_Min = Pre_Number1 - 5.9, Pre_Number1_Max = Pre_Number1 + 5.9;
     Double_t Pre_Number2 = 24.88;
     Double_t Pre_Number3 = 5.22;
     Double_t Pre_Number4 = 1.39;
@@ -135,10 +272,10 @@ int Fitting()
     Double_t ChiSquare = ftotal->GetChisquare();
     Double_t NDF = ftotal->GetNDF();
 
-    std::cout << "AN:" << Number_1 << ", Error:" << Error_1 << std::endl;
-    std::cout << "Reactor:" << Number_2 << ", Error:" << Error_2 << std::endl;
-    std::cout << "Geo:" << Number_3 << ", Error:" << Error_3 << std::endl;
-    std::cout << "Total:" << Number_Sum << ", Error:" << Error_Sum << std::endl;
+    std::cout << "AN:" << Number_1 << ", Error:" << Error_1 << ", Relative Error:" << Error_1/Number_1 << std::endl;
+    std::cout << "Reactor:" << Number_2 << ", Error:" << Error_2 << ", Relative Error:" << Error_2/Number_2 << std::endl;
+    std::cout << "Geo:" << Number_3 << ", Error:" << Error_3 << ", Relative Error:" << Error_3/Number_3 << std::endl;
+    std::cout << "Total:" << Number_Sum << ", Error:" << Error_Sum << ", Relative Error:" << Error_Sum/Number_Sum << std::endl;
     std::cout << "chi square:" << ChiSquare << ", NDF:" << NDF << ", Ratio:" << ChiSquare / NDF << std::endl;
 
     //Rescaling TH1D for Plot
@@ -152,7 +289,7 @@ int Fitting()
     TH1D *Sum_Hist = (TH1D*)h1_Plot->Clone();
     Sum_Hist->Add(h2_Plot,1.0);
     Sum_Hist->Add(h3_Plot,1.0);
-    SaveFivePlots("./test.png", data_hist, "Data", h1_Plot, "AN", h2_Plot, "Reactor", h3_Plot, "Geo", Sum_Hist, "Sum" , "E_{Prompt}/MeV", 0, 0, 15, "Prompt Event Fitting", 0.7, 0.6, 0.9, 0.8 );
+    SaveFivePlots(OutPut_Prompt_Energy.c_str(), data_hist, "Data", h1_Plot, "AN", h2_Plot, "Reactor", h3_Plot, "Geo", Sum_Hist, "Sum" , "E_{Prompt}/MeV", 0, 0, 15, "Prompt Event Fitting", 0.7, 0.6, 0.9, 0.8 );
     return 0;
 };
 

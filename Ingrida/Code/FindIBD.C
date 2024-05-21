@@ -198,7 +198,7 @@ int FindIBD()
     {
         intree->GetEntry(ii1);
         if(PromptGTID == 0) {continue;};
-        if(PromptNHits >= 2500){continue;};
+        if(PromptNHits >= 3000){continue;};
         TVector3 PromptPos = TVector3(PromptPosX, PromptPosY, PromptPosZ);
         TVector3 DelayedPos = TVector3(DelayedPosX, DelayedPosY, DelayedPosZ);
         TVector3 Delta_R = DelayedPos - PromptPos;

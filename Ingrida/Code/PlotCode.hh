@@ -60,9 +60,15 @@ std::string XTitle, std::string CanTitle, double x1 = 0.1, double y1 = 0.72, dou
     TH1D *f1 = th1d;
     TCanvas *canvas = new TCanvas("canvas", CanTitle.c_str(), 800, 600);
     TLegend *leg = new TLegend(x1, y1, x2, y2);
-    leg->AddEntry(f1, LegTitle.c_str(), "l");
-    f1->Draw("P E");
+    leg->SetBorderSize(0); // 去掉图例的边框
+    leg->SetFillStyle(0); // 将图例置于最底层
+    //leg->SetEntrySeparation(1); // 设置条目之间的间隔，单位为图例的高度
+    leg->SetTextSize(0.03);
+    leg->AddEntry(f1, LegTitle.c_str(), "P");
+    f1->Draw("P E1");
     f1->SetLineColor(kBlack);
+    f1->SetMarkerStyle(8);
+    //f1->SetMarkerSize(2.0);
     f1->SetXTitle(XTitle.c_str());
 
     //Fit
@@ -73,7 +79,15 @@ std::string XTitle, std::string CanTitle, double x1 = 0.1, double y1 = 0.72, dou
     gaussFunc->SetParameter(2, 20);  // 初始高斯宽度
     
     f1->Fit("gaussFunc", "R");
+    gaussFunc->SetLineColor(kBlue);
     gaussFunc->Draw("SAME");
+
+    double gauss_mean = gaussFunc->GetParameter(1);
+    double gauss_sigma = gaussFunc->GetParameter(2);
+    double gauss_mean_error = gaussFunc->GetParError(1);
+    double gauss_sigma_error = gaussFunc->GetParError(2);
+    std::string fit_info = Form("#mu= %.2f #pm %.2f\n #sigma: %.2f #pm %.2f", gauss_mean, gauss_mean_error, gauss_sigma, gauss_sigma_error);
+    leg->AddEntry(gaussFunc, fit_info.c_str(), "l");
 
     leg->Draw();
     canvas->SetTitle(CanTitle.c_str());
@@ -90,9 +104,14 @@ std::string XTitle, std::string CanTitle, double x1 = 0.1, double y1 = 0.72, dou
     TH1D *f1 = th1d;
     TCanvas *canvas = new TCanvas("canvas", CanTitle.c_str(), 800, 600);
     TLegend *leg = new TLegend(x1, y1, x2, y2);
-    leg->AddEntry(f1, LegTitle.c_str(), "l");
-    f1->Draw("P E");
+    leg->SetBorderSize(0); // 去掉图例的边框
+    leg->SetFillStyle(0); // 将图例置于最底层
+    leg->SetTextSize(0.03);
+    leg->AddEntry(f1, LegTitle.c_str(), "P");
+    f1->Draw("P E1");
     f1->SetLineColor(kBlack);
+    f1->SetMarkerStyle(8);
+    //f1->SetMarkerSize(2.0);
     f1->SetXTitle(XTitle.c_str());
 
     //Fit
@@ -103,6 +122,12 @@ std::string XTitle, std::string CanTitle, double x1 = 0.1, double y1 = 0.72, dou
     
     f1->Fit("expFunc", "R");
     expFunc->Draw("SAME");
+    expFunc->SetLineColor(kBlue);
+
+    double mean = expFunc->GetParameter(1);
+    double mean_error = expFunc->GetParError(1);
+    std::string fit_info = Form("Mean= %.2f #pm %.2f\n#mu s", mean, mean_error);
+    leg->AddEntry(expFunc, fit_info.c_str(), "l");
 
     leg->Draw();
     canvas->SetTitle(CanTitle.c_str());
@@ -376,23 +401,24 @@ std::string CanTitle, double x1 = 0.1, double y1 = 0.72, double x2 = 0.3, double
     TH1D *f5 = th5d;
     TCanvas *canvas = new TCanvas("canvas", CanTitle.c_str(), 800, 600);
     TLegend *leg = new TLegend(x1, y1, x2, y2);
-    leg->AddEntry(f1, LegTitle1.c_str(), "l");
+    leg->AddEntry(f1, LegTitle1.c_str(), "p");
     leg->AddEntry(f2, LegTitle2.c_str(), "l");
     leg->AddEntry(f3, LegTitle3.c_str(), "l");
     leg->AddEntry(f4, LegTitle4.c_str(), "l");
     leg->AddEntry(f5, LegTitle5.c_str(), "l");
 
     f1->Draw("E1");
-    f2->Draw("L SAME");
-    f3->Draw("L SAME");
-    f4->Draw("L SAME");
-    f5->Draw("L SAME");
+    f1->SetMarkerStyle(8);
+    f2->Draw("HIST SAME");
+    f3->Draw("HIST SAME");
+    f4->Draw("HIST SAME");
+    f5->Draw("HIST SAME");
 
     
-    f2->SetLineStyle(9);
-    f3->SetLineStyle(9);
-    f4->SetLineStyle(9);
-    f5->SetLineStyle(9);
+    // f2->SetLineStyle(9);
+    // f3->SetLineStyle(9);
+    // f4->SetLineStyle(9);
+    // f5->SetLineStyle(9);
 
     f1->SetLineColor(kBlack);
     f2->SetLineColor(kGreen);

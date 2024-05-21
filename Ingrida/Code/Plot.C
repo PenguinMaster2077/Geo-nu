@@ -79,7 +79,7 @@ int Plot()
 
     TH1D *prompt_energy = new TH1D("prompt energy", "", 30, 0.8, 8.0);
     TH1D *delayed_energy = new TH1D("delayed energy", "", 10, 1.8, 2.4);
-    TH1D *delta_T = new TH1D("h2", "", 20, 0, 800);//\mu s
+    TH1D *delta_T = new TH1D("Delta T", "", 20, 0, 800);//\mu s
     TGraph *prompt_pos = new TGraph;
     TGraph *delayed_pos = new TGraph;
     TVector3 Prompt_Pos, Delayed_Pos;
@@ -100,13 +100,11 @@ int Plot()
         delayed_pos->SetPoint(ii1, Delayed_Pos.Perp2(), Delayed_Pos.Z());
     };
 
-    
-    
     //Save Plots
-    SavePlot(OutPut_Prompt_Energy, prompt_energy, "Prompt", "E_{prompt}/MeV", "Prompt Energy", 0.8, 0.7, 0.9, 0.8);
-    FitSavePlot_G(OutPut_Delayed_Energy, delayed_energy, "Delayed", "E_{delayed}/MeV", "Delayed Energy", 0.8, 0.7, 0.9, 0.8);
-    FitSavePlot_E(OutPut_Delta_T, delta_T, "#Delta T", "#Delta T/#mu s", "#Delta T", 0.8, 0.7, 0.9, 0.8);
+    //SavePlot(OutPut_Prompt_Energy, prompt_energy, "Prompt", "E_{prompt}/MeV", "Prompt Energy", 0.8, 0.7, 0.9, 0.8);
+    FitSavePlot_G(OutPut_Delayed_Energy, delayed_energy, "Data", "E_{delayed}/MeV", "Delayed Energy", 0.13, 0.7, 0.3, 0.85);
+    FitSavePlot_E(OutPut_Delta_T, delta_T, "Data", "#Delta T/#mu s", "#Delta T", 0.5, 0.7, 0.8, 0.8);
     // SavePlot(OutPut_Position, delayed_pos, "Prompt", "z/mm", "#rho^2/mm^2");
-    SaveTwoPlots(OutPut_Position, prompt_pos, "Prompt", delayed_pos, "Delayed", "Position of Coincidence Pair", "#rho^{2}/mm^{2}", "z/mm", 0.8, 0.8, 0.9, 0.9);
+    //SaveTwoPlots(OutPut_Position, prompt_pos, "Prompt", delayed_pos, "Delayed", "Position of Coincidence Pair", "#rho^{2}/mm^{2}", "z/mm", 0.8, 0.8, 0.9, 0.9);
     return 0;
 }
