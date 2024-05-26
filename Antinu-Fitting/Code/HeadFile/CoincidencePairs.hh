@@ -1,3 +1,5 @@
+#ifndef COINCIDENCEPAIRS_HH
+#define COINCIDENCEPAIRS_HH
 //CPP
 #include <iostream>
 //ROOT
@@ -118,3 +120,5 @@ void Find_Coincidence_Pairs()
     std::cout << "X:" << delayed_posx << ", Y:" << delayed_posy << ", Z:" << delayed_posz << std::endl << std::endl;
 
 */
+
+#endif

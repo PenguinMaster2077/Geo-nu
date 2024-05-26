@@ -1,3 +1,5 @@
+#ifndef CONSTANT_SETTING_HH
+#define CONSTANT_SETTING_HH
 //CPP
 #include <iostream>
 //ROOT
@@ -6,23 +8,23 @@
 //Self-Defined
 
 //Reactor
-const Double_t REACTOR_EVENTS;//Detected rector events
-const Double_t REACTOR_EVENTS_RELATIVE_ERROR; //Unit: 1
+const Double_t REACTOR_EVENTS = 0;//Detected rector events
+const Double_t REACTOR_EVENTS_RELATIVE_ERROR = 0; //Unit: 1
 const Double_t REACTOR_ERROR = REACTOR_EVENTS * REACTOR_EVENTS_RELATIVE_ERROR;
-const Double_t REACTOR_SELECTION_EFFIENCY; //Unit: 1
+const Double_t REACTOR_SELECTION_EFFIENCY = 0; //Unit: 1
 //Geonu
-const Double_t U_EVENTS;
-const Double_t U_EVENTS_RELATIVE_ERROR; //Unit: 1
+const Double_t U_EVENTS = 0;
+const Double_t U_EVENTS_RELATIVE_ERROR = 0; //Unit: 1
 const Double_t U_EVENTS_ERROR = U_EVENTS * U_EVENTS_RELATIVE_ERROR;
-const Double_t U_SELECTION_EFFICIENCY;  //Unit: 1
+const Double_t U_SELECTION_EFFICIENCY = 0;  //Unit: 1
 
-const Double_t TH_EVENTS;
-const Double_t TH_EVENTS_RELATIVE_ERROR; //Unit: 1
+const Double_t TH_EVENTS = 0;
+const Double_t TH_EVENTS_RELATIVE_ERROR = 0; //Unit: 1
 const Double_t TH_EVENTS_ERROR = TH_EVENTS * TH_EVENTS_RELATIVE_ERROR;
-const Double_t TH_SELECTION_EFFICIENCY; //Unit: 1
+const Double_t TH_SELECTION_EFFICIENCY = 0; //Unit: 1
 //AlphaN
-const Double_t AN_EVENTS;
-const Double_t AN_EVENTS_RELATIVE_ERROR; //Unit: 1
+const Double_t AN_EVENTS = 0;
+const Double_t AN_EVENTS_RELATIVE_ERROR = 0; //Unit: 1
 const Double_t AN_EVENTS_ERROR = AN_EVENTS * AN_EVENTS_RELATIVE_ERROR;
 //Accidental
 //Energy
@@ -40,3 +42,5 @@ const Long64_t MAX_NUMBER = 8796093022207;//2^43 - 1; DocDB-481
 const Long64_t MIN_CARE_NUMBER = 8596093022207;//Use it in GeneratingPDFs.hh
 //Large NHits Cut
 const Int_t MIN_NHITS = 3000;
+
+#endif

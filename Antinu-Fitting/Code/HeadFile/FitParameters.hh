@@ -1,3 +1,5 @@
+#ifndef FITPARAMETERS_HH
+#define FITPARAMETERS_HH
 //Great thanks for James Page's code
 //CPP
 #include <iostream>
@@ -260,3 +262,5 @@ void FitParameters::ShowAllParameters()
         std::cout << "Name:" << Name << ",Value:" << Value << ",Error:" << Error << ",Error Factor:" << Error_Factor << ",Min Value:" << Value_Min << ",Max Value:" << Value_Max << std::endl;
     };
 };
+
+#endif

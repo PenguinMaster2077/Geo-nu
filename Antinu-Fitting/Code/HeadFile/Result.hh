@@ -1,3 +1,5 @@
+#ifndef RESULT_HH
+#define RESULT_HH
 //CPP
 #include <iostream>
 //ROOT
@@ -145,3 +147,5 @@ public:
 //Event
     Event C_Muon;
 };
+
+#endif

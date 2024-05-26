@@ -201,12 +201,16 @@ int main(int argc, char** argv)
     // std::string NTUPLEFile = "/home/shuaioy/scratch/Geo/Gold/MC/U/300050/Data/ScintFit_2p2Geoibd_URun_r300001_s0_p0.ntuple.root";
     // std::string OutFile = "./test.root";
     // TString sub_run = "4";
-    // TString Data_MC = "1"; //0->Data; 1->MC
+    // TString Data_MC = "1"; //1->Data; 0->MC
     std::string RATDSFile = argv[1];
     std::string NTUPLEFile = argv[2];
     std::string OutFile = argv[3];
     TString sub_run = argv[4];
-    TString Data_MC = argv[5]; //0->Data; 1->MC
+    TString Data_MC = argv[5]; //1->Data; 0->MC
+    std::cout << "RAT Files:" << RATDSFile << std::endl;
+    std::cout << "NTUPLE File:" << NTUPLEFile << std::endl;
+    std::cout << "SubRun:" << sub_run <<std::endl;
+    std::cout << "Data_MC:" << Data_MC << "," << Data_MC.Atoi() << std::endl;
 //Create New Root File
     TFile *outfile = new TFile(OutFile.c_str(), "recreate");
     TTree *outtree = new TTree("output", "output");
@@ -255,8 +259,8 @@ int main(int argc, char** argv)
     outtree->Branch("DelayedPosZ", &res.C_Delayed.C_Pos_Z);
 //Read File
     data_mc = Data_MC.Atoi();
-    if(data_mc == 0){std::cout << "Processing Data" << std::endl;}
-    else if(data_mc == 1){std::cout << "Processing MC" << std::endl;};
+    if(data_mc == 1){std::cout << "Processing Data" << std::endl;}
+    else if(data_mc == 0){std::cout << "Processing MC" << std::endl;};
     //Read RATDS File
     RAT::DU::DSReader dsreader(RATDSFile);
     recon_cali = RAT::DU::Utility::Get()->GetReconCalibrator();

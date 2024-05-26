@@ -1,3 +1,5 @@
+#ifndef GEONU_HH
+#define GEONU_HH
 //CPP
 #include <iostream>
 #include <vector>
@@ -54,3 +56,4 @@ void Geonu::Initialize(Double_t Sin_Square_Theta_12, Double_t Sin_Square_Theta_1
     Compute_Survival_Probability();
 }
 
+#endif

@@ -1,3 +1,5 @@
+#ifndef GENERATINGPDFS_HH
+#define GENERATINGPDFS_HH
 //CPP
 #include <iostream>
 #include <vector>
@@ -12,6 +14,8 @@
 //RAT
 //Self-Defined
 #include "./Constant_Setting.hh"
+#include "./Result.hh"
+#include "./PlotCodes/SinglePlot.hh"
 
 bool Prompt_Energy_Cut(Double_t energy)
 {
@@ -63,7 +67,7 @@ void ReInitialize(std::vector<ULong64_t> &vector)
     };
 };
 
-Double_t ComputeDelta_T(ULong64_t Last_50MHz, ULong64_t Present_50MHz, std::ofstream &logfile)
+Double_t ComputeDelta_T(ULong64_t &Last_50MHz, ULong64_t &Present_50MHz, std::ofstream &logfile)
 {
     
     if(Last_50MHz > Present_50MHz && Last_50MHz > MIN_CARE_NUMBER && Present_50MHz < MIN_CARE_NUMBER)
@@ -80,7 +84,7 @@ Double_t ComputeDelta_T(ULong64_t Last_50MHz, ULong64_t Present_50MHz, std::ofst
     };
 };
 
-Double_t ComputeDelta_T(ULong64_t Last_50MHz, ULong64_t Present_50MHz)
+Double_t ComputeDelta_T(ULong64_t &Last_50MHz, ULong64_t &Present_50MHz)
 {
     
     if(Last_50MHz > Present_50MHz && Last_50MHz > MIN_CARE_NUMBER && Present_50MHz < MIN_CARE_NUMBER)
@@ -464,7 +468,7 @@ void Find_Full_Coincidence_Pairs(std::string InFilePWD, std::string OutFile)
     logfile << "Selection Eff III:" << 1.0 * Number_Pass_Energy_Radius_DeltaT_DeltaR/Estimated_Total_Pairs_III << std::endl;
 };
 
-void GetPDfs(std::string InFile, std::string Name, TH1D *Example_Hist)
+void Create_PDFs(std::string InFile, std::string Name, std::string OutFile, std::vector<TH1D*> Example_Hists, bool Full_PDF)
 {
 //Read File
     TFile *infile = new TFile(InFile.c_str());
@@ -486,16 +490,63 @@ void GetPDfs(std::string InFile, std::string Name, TH1D *Example_Hist)
     tree->SetBranchAddress("DelayedPosZ", &Delayed_PosZ);
     ULong64_t Delayed_50MHz;
     tree->SetBranchAddress("Delayed50MHz", &Delayed_50MHz);
+//Create File
+    TFile *outfile = new TFile(OutFile.c_str(),"recreate");
 //Initialize Histograms
+    std::vector<TH1D*> Out_Hists;
+    Out_Hists.push_back((TH1D*)Example_Hists.at(0)->Clone((Name + "_Delta_T").c_str()));
+    Out_Hists.push_back((TH1D*)Example_Hists.at(1)->Clone((Name + "_Delta_R").c_str()));
+    Out_Hists.push_back((TH1D*)Example_Hists.at(2)->Clone((Name + "_Prompt_Energy").c_str()));
+    Out_Hists.push_back((TH1D*)Example_Hists.at(3)->Clone((Name + "_Delayed_Energy").c_str()));
+
+    TH1D* temp_th1d = (TH1D*)Example_Hists.at(0)->Clone("test");
+    for(int ii1 = 0; ii1 < Out_Hists.size(); ii1++)
+    {
+        Out_Hists.at(ii1)->Reset("ICES");
+    };
 //Loop the Data
     Double_t Delta_T;
-    TVector3 Delta_R;
+    TVector3 Pos[2], Delta_R;
     for(int ii1 = 0; ii1 < tree->GetEntries(); ii1++)
     {
         tree->GetEntry(ii1);
-        Delta_R.SetXYZ(Delayed_PosX - Prompt_PosX, Delayed_PosY - Prompt_PosY, Delayed_PosZ - Prompt_PosZ);
-        Delta_T = ComputeDelta_T(Delayed_50MHz, Prompt_50MHz);
+        Pos[0].SetXYZ(Prompt_PosX, Prompt_PosY, Prompt_PosZ);
+        Pos[1].SetXYZ(Delayed_PosX, Delayed_PosY, Delayed_PosZ);
+        Delta_R = Pos[0] - Pos[1];
+        Delta_T = ComputeDelta_T(Prompt_50MHz, Delayed_50MHz);
+        Out_Hists.at(0)->Fill(Delta_T/1e3);
+        Out_Hists.at(1)->Fill(Delta_R.Mag());
+        Out_Hists.at(2)->Fill(Prompt_Energy);
+        Out_Hists.at(3)->Fill(Delayed_Energy);
+    };
+//Save into Pictures
+    std::vector<std::string> Pic_Name;
+    if(Full_PDF == true)
+    {
+        Pic_Name.push_back("./Pic/" + Name + "_Delta_T_Full.jpg");
+        Pic_Name.push_back("./Pic/" + Name + "_Delta_R_Full.jpg");
+        Pic_Name.push_back("./Pic/" + Name + "_Prompt_Energy_Full.jpg");
+        Pic_Name.push_back("./Pic/" + Name + "_Delayed_Energy_Full.jpg");
     }
+    else
+    {
+        Pic_Name.push_back("./Pic/" + Name + "_Delta_T.jpg");
+        Pic_Name.push_back("./Pic/" + Name + "_Delta_R.jpg");
+        Pic_Name.push_back("./Pic/" + Name + "_Prompt_Energy.jpg");
+        Pic_Name.push_back("./Pic/" + Name + "_Delayed_Energy.jpg");
+    }
+
+    FitSavePlot_E(Pic_Name.at(0), Out_Hists.at(0), "#Delta T", "#Delta T/#mu s", "p.d.f.", true, 0, 0);
+    SavePlot(Pic_Name.at(1), Out_Hists.at(1), "#Delta R", "#Delta R/mm","p.d.f.", true, 0, 0);
+    SavePlot(Pic_Name.at(2), Out_Hists.at(2), "Prompt Energy", "E_{Prompt}/MeV","p.d.f.", true, 0, 0);
+    FitSavePlot_G(Pic_Name.at(3), Out_Hists.at(3), "Delayed Energy", "E_{Delayed}/MeV", "p.d.f.", true, 0, 0);
+//Write in Files
+    for(int ii1 = 0; ii1 < Out_Hists.size(); ii1++)
+    {
+        Out_Hists.at(ii1)->Write();
+    };
+    outfile->Close();
+
 };
 
 /*Back Code For Testing
@@ -506,3 +557,5 @@ void GetPDfs(std::string InFile, std::string Name, TH1D *Example_Hist)
     std::cout << "Energy:" << Delayed_Energy << ",X:" << Delayed_PosX << ",Y:" << Delayed_PosY << ",Z:" << Delayed_PosZ << std::endl;
     std::cout << "50MHz:" << Delayed_50MHz << std::endl;
 */
+
+#endif

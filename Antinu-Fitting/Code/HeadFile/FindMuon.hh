@@ -1,3 +1,5 @@
+#ifndef FINDMUON_HH
+#define FINDMUON_HH
 //CPP
 #include <iostream>
 #include <fstream>
@@ -116,4 +118,6 @@ void Find_Muon(std::string InPWD, std::string OutFile)
     outfile->Write();
     outfile->Close();
     std::cout << "Find Muon:" << MuonNumber << std::endl;
-}
+};
+
+#endif
