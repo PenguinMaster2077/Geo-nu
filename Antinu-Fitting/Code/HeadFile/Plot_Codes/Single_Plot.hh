@@ -2,6 +2,8 @@
 #define SINGLE_PLOT_HH
 //CPP
 #include <iostream>
+#include <sstream>
+#include <iomanip>
 #include <vector>
 //ROOT
 #include <TFile.h>
@@ -9,6 +11,7 @@
 #include <TH1D.h>
 #include <TGraph.h>
 #include <TF1.h>
+#include <TLatex.h>
 #include <TLegend.h>
 #include <TCanvas.h>
 //RAT
@@ -33,6 +36,13 @@ void SavePlot(std::string Out,TH1D *th1d, std::string LegTitle, std::string XTit
     f1->Draw("HIST");
     f1->SetLineColor(kBlack);
     f1->SetXTitle(XTitle.c_str());
+//Add Bin Width
+    Double_t Bin_Width = f1->GetBinWidth(1);
+    std::ostringstream ss;
+    ss << std::fixed << std::setprecision(3) << Bin_Width;
+    std::string Bin_Width_Annotation = "X Width:" + ss.str();
+    f1->GetYaxis()->SetTitle(Bin_Width_Annotation.c_str());
+//Legends and Pad
     leg->Draw();
     canvas->SetTitle(CanTitle.c_str());
     canvas->Print(Out.c_str());
@@ -137,9 +147,14 @@ void FitSavePlot_E(std::string Out,TH1D *th1d, std::string LegTitle, std::string
     f1->SetMarkerStyle(8);
     //f1->SetMarkerSize(2.0);
     f1->SetXTitle(XTitle.c_str());
-
-    //Fit
-    TF1 *expFunc = new TF1("expFunc", "[0] * TMath::Exp(- x/[1])", 0, 800);
+//Add Bin Width
+    Double_t Bin_Width = f1->GetBinWidth(1);
+    std::ostringstream ss;
+    ss << std::fixed << std::setprecision(3) << Bin_Width;
+    std::string Bin_Width_Annotation = "X Width:" + ss.str();
+    f1->GetYaxis()->SetTitle(Bin_Width_Annotation.c_str());
+//Fit
+    TF1 *expFunc = new TF1("expFunc", "[0] * TMath::Exp(- x/[1])", 0, 2000);
     // 设置指数分布函数的初始参数
     expFunc->SetParameter(0, 15); // 初始幅度参数
     expFunc->SetParameter(1, 200); // 初始衰减参数

@@ -1,0 +1,20 @@
+//CPP
+#include <iostream>
+//ROOT
+#include <TFile.h>
+#include <TChain.h>
+#include <TTree.h>
+//RAT
+//Self-Defined
+#include "./HeadFile/Constant_Setting.hh"
+#include "./HeadFile/Base_Functions.hh"
+#include "./HeadFile/FindAccidental.hh"
+
+int FindAccidental()
+{
+    std::string Prompt_Files = "/rat/MyCode/Work/Geo-nu-Data/Accidental/Method_I/RawData/20240530/Prompt";
+    std::string Delayed_Files = "/rat/MyCode/Work/Geo-nu-Data/Accidental/Method_I/RawData/20240530/Delayed";
+    std::string Out = "./test.root";
+    Select_AC(Out, Prompt_Files, Delayed_Files);
+    return 0;
+}

@@ -1,3 +1,4 @@
+
 //This code is desinged to tagging prompt and delayed pair
 //CPP
 #include <iostream>
@@ -195,18 +196,20 @@ Double_t ComputeDelta_T(ULong64_t Last_50MHz, ULong64_t Present_50MHz)
 };
 
 // int LooseCut()
+// int main(int argc, char** argv)
+// int test()
 int main(int argc, char** argv)
 {
-    // std::string RATDSFile = "/home/shuaioy/scratch/Geo/Gold/300000-306498/ratds/300050/Data/Analysis20R_r0000300050_s000_p000.root";
-    // std::string NTUPLEFile = "/home/shuaioy/scratch/Geo/Gold/MC/U/300050/Data/ScintFit_2p2Geoibd_URun_r300001_s0_p0.ntuple.root";
-    // std::string OutFile = "./test.root";
-    // TString sub_run = "4";
-    // TString Data_MC = "1"; //1->Data; 0->MC
-    std::string RATDSFile = argv[1];
-    std::string NTUPLEFile = argv[2];
-    std::string OutFile = argv[3];
-    TString sub_run = argv[4];
-    TString Data_MC = argv[5]; //1->Data; 0->MC
+    std::string RATDSFile = "/home/shuaioy/scratch/Geo/Gold/300000-306498/ratds/301300/Data/Analysis20R_r0000301071_s000_p000.root";
+    std::string NTUPLEFile = "/home/shuaioy/scratch/Geo/Gold/300000-306498/ntuple/301300/Data/Analysis20R_r0000301071_s007_p000.ntuple.root";
+    std::string OutFile = "./test.root";
+    TString sub_run = "4";
+    TString Data_MC = "1"; //1->Data; 0->MC
+    // std::string RATDSFile = argv[1];
+    // std::string NTUPLEFile = argv[2];
+    // std::string OutFile = argv[3];
+    // TString sub_run = argv[4];
+    // TString Data_MC = argv[5]; //1->Data; 0->MC
     std::cout << "RAT Files:" << RATDSFile << std::endl;
     std::cout << "NTUPLE File:" << NTUPLEFile << std::endl;
     std::cout << "SubRun:" << sub_run <<std::endl;
@@ -304,10 +307,9 @@ int main(int argc, char** argv)
     Double_t Delta_T = -999.0;
     TVector3 Delta_R(-99.0, -99.0, -99.0);
     std::cout << "Begin to Search Coincidence Pair" << std::endl;
-    int Len = ntupletree->GetEntries();
-    for(int iEntry = 0; iEntry < ntupletree->GetEntries(); iEntry++)
+    for(int iEntry = 496500; iEntry < 496500 + 10000; iEntry++)
     {
-        if(iEntry % 5000 == 0){std::cout << "已处理：" << double(100.0 * iEntry/Len) << "%, 具体：" << iEntry << ", 还剩" << Len - iEntry << std::endl;};
+        if(iEntry % 500 == 0){std::cout << "已处理" << iEntry << ",还剩" << ntupletree->GetEntries() - iEntry << std::endl;};
         ntupletree->GetEntry(iEntry);
         //Initialization
             Energy[0] = Energy[1]= 0;
@@ -377,6 +379,9 @@ int main(int argc, char** argv)
                 Data_Flags[index] = ntuple_Data_Flags;
                 Original_Energy[index] = ntuple_Original_Energy;
                 Tony_Energy[index] = GiveTonyEnergy(ntuple_Original_Energy, Position[index]);
+
+                std::cout << "Ntuple:" << ntuple_Entry << ", X:" << ntuple_PosX << ", Y:" << ntuple_PosY << ", Z:" << ntuple_PosZ << std::endl;
+                std::cout << "Pos:" << ntuple_Entry << ", X:" << Position[index].X() << ", Y:" << Position[index].Y() << ", Z:" << Position[index].Z() << std::endl;
                 break;
             };
         };

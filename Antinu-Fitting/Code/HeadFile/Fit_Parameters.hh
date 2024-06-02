@@ -18,24 +18,24 @@ public:
     //Global Point
     static FitParameters *Point_FitParameters_;
     //Member Functions
-    static FitParameters *GetGlobalPoint();
-    unsigned int GetTotalNumber() {return C_Total_Number;};
-    unsigned int GetIndex(std::string Name);
-    std::string GetName(unsigned int Index);
-    Double_t GetValue(unsigned int Index);
-    Double_t GetValue(std::string Name);
-    Double_t GetError(unsigned int Index);
-    Double_t GetError(std::string Name);
-    void AddParameter(std::string Name, Double_t Value, Double_t Error, Int_t Error_Factor, Double_t Value_Min, Double_t Value_Max);
-    void AddParameter(std::string Name, Double_t Value, Double_t Error, Int_t Error_Factor);
-    void GetParameter(unsigned int InPut_Index, unsigned int &Index, std::string &Name, Double_t &Value, Double_t &Error, Int_t &Error_Factor, Double_t &Value_Min, Double_t &Value_Max);
+    static FitParameters *Get_Global_Point();
+    unsigned int Get_Total_Number() {return C_Total_Number;};
+    unsigned int Get_Index(std::string Name);
+    std::string Get_Name(unsigned int Index);
+    Double_t Get_Value(unsigned int Index);
+    Double_t Get_Value(std::string Name);
+    Double_t Get_Error(unsigned int Index);
+    Double_t Get_Error(std::string Name);
+    void Add_Parameter(std::string Name, Double_t Value, Double_t Error, Int_t Error_Factor, Double_t Value_Min, Double_t Value_Max);
+    void Add_Parameter(std::string Name, Double_t Value, Double_t Error, Int_t Error_Factor);
+    void Get_Parameter(unsigned int InPut_Index, unsigned int &Index, std::string &Name, Double_t &Value, Double_t &Error, Int_t &Error_Factor, Double_t &Value_Min, Double_t &Value_Max);
     //Get the information of parametes by Index
-    void GetParameter(std::string InPut_Name, unsigned int &Index, std::string &Name, Double_t &Value, Double_t &Error, Int_t &Error_Factor, Double_t &Value_Min, Double_t &Value_Max);
+    void Get_Parameter(std::string InPut_Name, unsigned int &Index, std::string &Name, Double_t &Value, Double_t &Error, Int_t &Error_Factor, Double_t &Value_Min, Double_t &Value_Max);
     //Get the information of parametes by Name
-    void GetAllParameters(std::vector<std::string> &Name, std::vector<Double_t> &Value, std::vector<Double_t> &Error, std::vector<Int_t> &Error_Factor, std::vector<Double_t> &Value_Min, std::vector<Double_t> &Value_Max); 
-    void ShowParameter(unsigned int Index);
-    void ShowParameter(std::string Name);
-    void ShowAllParameters();
+    void Get_All_Parameters(std::vector<std::string> &Name, std::vector<Double_t> &Value, std::vector<Double_t> &Error, std::vector<Int_t> &Error_Factor, std::vector<Double_t> &Value_Min, std::vector<Double_t> &Value_Max); 
+    void Show_Parameter(unsigned int Index);
+    void Show_Parameter(std::string Name);
+    void Show_All_Parameters();
 private:
     unsigned int C_Total_Number;// Total Number of Parameters
     std::vector<std::string> C_Name;
@@ -48,12 +48,12 @@ private:
 
 FitParameters *FitParameters::Point_FitParameters_ = new FitParameters();
 
-FitParameters *FitParameters::GetGlobalPoint()
+FitParameters *FitParameters::Get_Global_Point()
 {
     return Point_FitParameters_;
 };
 
-unsigned int FitParameters::GetIndex(std::string Name)
+unsigned int FitParameters::Get_Index(std::string Name)
 {
     unsigned int Index = 999;
     for(int ii1 = 0; ii1 < C_Total_Number; ii1++)
@@ -74,7 +74,7 @@ unsigned int FitParameters::GetIndex(std::string Name)
     };
 };
 
-std::string FitParameters::GetName(unsigned int Index)
+std::string FitParameters::Get_Name(unsigned int Index)
 {   
     std::string Name = "Nothing";
     if(Index >= C_Total_Number)
@@ -89,7 +89,7 @@ std::string FitParameters::GetName(unsigned int Index)
     };
 };
 
-Double_t FitParameters::GetValue(unsigned int Index)
+Double_t FitParameters::Get_Value(unsigned int Index)
 {
     Double_t Value = 999;
     if(Index >= C_Total_Number)
@@ -104,14 +104,14 @@ Double_t FitParameters::GetValue(unsigned int Index)
     }
 };
 
-Double_t FitParameters::GetValue(std::string Name)
+Double_t FitParameters::Get_Value(std::string Name)
 {   
-    unsigned int Index = GetIndex(Name);
-    Double_t Value = GetValue(Index);
+    unsigned int Index = Get_Index(Name);
+    Double_t Value = Get_Value(Index);
     return Value;
 };
 
-Double_t FitParameters::GetError(unsigned int Index)
+Double_t FitParameters::Get_Error(unsigned int Index)
 {
     Double_t Error = 999;
     if(Index >= C_Total_Number)
@@ -126,14 +126,14 @@ Double_t FitParameters::GetError(unsigned int Index)
     };
 };
 
-Double_t FitParameters::GetError(std::string Name)
+Double_t FitParameters::Get_Error(std::string Name)
 {
-    unsigned int Index = GetIndex(Name);
-    Double_t Error = GetError(Index);
+    unsigned int Index = Get_Index(Name);
+    Double_t Error = Get_Error(Index);
     return Error;
 };
 
-void FitParameters::AddParameter(std::string Name, Double_t Value, Double_t Error, Int_t Error_Factor, Double_t Value_Min, Double_t Value_Max)
+void FitParameters::Add_Parameter(std::string Name, Double_t Value, Double_t Error, Int_t Error_Factor, Double_t Value_Min, Double_t Value_Max)
 {
     int Index = C_Total_Number;
     C_Name.push_back(Name);
@@ -157,15 +157,15 @@ void FitParameters::AddParameter(std::string Name, Double_t Value, Double_t Erro
     C_Total_Number = C_Name.size();
 };
 
-void FitParameters::AddParameter(std::string Name, Double_t Value, Double_t Error, Int_t Error_Factor)
+void FitParameters::Add_Parameter(std::string Name, Double_t Value, Double_t Error, Int_t Error_Factor)
 {
     Double_t temp_value_min = Value - Error_Factor * Error;
     Double_t temp_value_max = Value + Error_Factor * Error;
     if(temp_value_min <= 0) {temp_value_min = 0;};
-    AddParameter(Name, Value, Error, Error_Factor, temp_value_min, temp_value_max);
+    Add_Parameter(Name, Value, Error, Error_Factor, temp_value_min, temp_value_max);
 };
 
-void FitParameters::GetParameter(unsigned int InPut_Index, unsigned int &Index, std::string &Name, Double_t &Value, Double_t &Error, Int_t &Error_Factor, Double_t &Value_Min, Double_t &Value_Max)
+void FitParameters::Get_Parameter(unsigned int InPut_Index, unsigned int &Index, std::string &Name, Double_t &Value, Double_t &Error, Int_t &Error_Factor, Double_t &Value_Min, Double_t &Value_Max)
 {
     if(InPut_Index >= C_Total_Number)
     {
@@ -183,9 +183,9 @@ void FitParameters::GetParameter(unsigned int InPut_Index, unsigned int &Index, 
     };
 };
 
-void FitParameters::GetParameter(std::string InPut_Name, unsigned int &Index, std::string &Name, Double_t &Value, Double_t &Error, Int_t &Error_Factor, Double_t &Value_Min, Double_t &Value_Max)
+void FitParameters::Get_Parameter(std::string InPut_Name, unsigned int &Index, std::string &Name, Double_t &Value, Double_t &Error, Int_t &Error_Factor, Double_t &Value_Min, Double_t &Value_Max)
 {
-    Index = GetIndex(InPut_Name);
+    Index = Get_Index(InPut_Name);
     if(Index != 999)
     {
         Name = C_Name.at(Index);
@@ -206,7 +206,7 @@ void FitParameters::GetParameter(std::string InPut_Name, unsigned int &Index, st
     }
 };
 
-void FitParameters::GetAllParameters(std::vector<std::string> &Name, std::vector<Double_t> &Value, std::vector<Double_t> &Error, std::vector<Int_t> &Error_Factor, std::vector<Double_t> &Value_Min, std::vector<Double_t> &Value_Max)
+void FitParameters::Get_All_Parameters(std::vector<std::string> &Name, std::vector<Double_t> &Value, std::vector<Double_t> &Error, std::vector<Int_t> &Error_Factor, std::vector<Double_t> &Value_Min, std::vector<Double_t> &Value_Max)
 {
     for(int Index = 0; Index < C_Total_Number; Index++)
     {
@@ -219,7 +219,7 @@ void FitParameters::GetAllParameters(std::vector<std::string> &Name, std::vector
     };
 };
 
-void FitParameters::ShowParameter(unsigned int Index)
+void FitParameters::Show_Parameter(unsigned int Index)
 {   
     std::string Name;
     Double_t Value, Error, Value_Min, Value_Max;
@@ -240,13 +240,13 @@ void FitParameters::ShowParameter(unsigned int Index)
     };
 };
 
-void FitParameters::ShowParameter(std::string Name)
+void FitParameters::Show_Parameter(std::string Name)
 {
-    unsigned int Index = GetIndex(Name);
-    ShowParameter(Index);
+    unsigned int Index = Get_Index(Name);
+    Show_Parameter(Index);
 };
 
-void FitParameters::ShowAllParameters()
+void FitParameters::Show_All_Parameters()
 {
     std::string Name;
     Double_t Value, Error, Value_Min, Value_Max;

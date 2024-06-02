@@ -11,7 +11,7 @@
 //Self-Defined
 #include "./Result.hh"
 #include "./Constant_Setting.hh"
-#include "./GeneratingPDFs.hh"
+#include "./Base_Functions.hh"
 
 void Find_Muon(std::string InPWD, std::string OutFile)
 {
@@ -69,7 +69,7 @@ void Find_Muon(std::string InPWD, std::string OutFile)
     Muon_NHits_T << "Run" << "\t" << "SubRun" << "\t" << "Entry" << "\t" << "EV" << "\t" << "GTID" << "\t" << "OWLHits" << "\t" << "NHits" << "\t" << "Clock50MHz" << "\t" << "DeltaT(s)" << std::endl;
 
     Int_t Last_GTID = 0, Last_Run = 0, Last_SubRun = 0;
-    Long64_t Last_50MHz = 0, Temp_50MHz = 0;
+    ULong64_t Last_50MHz = 0, Temp_50MHz = 0;
     int MuonNumber = 0;
     for( int ii1 = 0; ii1 < chain->GetEntries(); ii1++)
     {

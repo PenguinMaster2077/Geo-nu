@@ -30,8 +30,8 @@
 const Double_t RADIUS_MAX = 6000.0;//mm
 // const Double_t DELTA_R_MAX = 12000.0;//mm
 // const Double_t DELTA_T_MIN = 400.0, DELTA_T_MAX = 1.0e7;//ns
-const Double_t ENERGY_PROMPT_MIN = 0.3, ENERGY_PROMPT_MAX = 5.0;//MeV
-const Double_t ENERGY_DELAYED_MIN = 0.3, ENERGY_DELAYED_MAX = 2.0; //MeV
+const Double_t ENERGY_PROMPT_MIN = 0.7, ENERGY_PROMPT_MAX = 10.0;//MeV
+const Double_t ENERGY_DELAYED_MIN = 1.5, ENERGY_DELAYED_MAX = 3.5; //MeV
 const int NHITS_MIN = 60;
 const int MUON_NHITS_MIN = 2500;
 //////////////////////////////////////////////////////////////////////////////

@@ -9,9 +9,9 @@
 //Self-Defined
 #include "./HeadFile/Constant_Setting.hh"
 #include "./HeadFile/Result.hh"
-#include "./HeadFile/GeneratingPDFs.hh"
+#include "./HeadFile/Generating_PDFs.hh"
 
-int GeneratingPDFs()
+int Generating_PDFs()
 {
     std::string FilePWD, OutFile_CP, OutFile_Full, OutFile_PDF, OutFile_FullPDF;
 

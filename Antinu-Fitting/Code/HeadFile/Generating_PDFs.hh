@@ -15,25 +15,8 @@
 //Self-Defined
 #include "./Constant_Setting.hh"
 #include "./Result.hh"
-#include "./PlotCodes/SinglePlot.hh"
-
-bool Prompt_Energy_Cut(Double_t energy)
-{
-    if(energy >= PROMPT_ENERGY_MIN && energy <= PROMPT_ENERGY_MAX){return true;}
-    else {return false;}
-};
-
-bool Delayed_Energy_Cut(Double_t energy)
-{
-    if(energy >= DELAYED_ENERGY_MIN && energy <= DELAYED_ENERGY_MAX){return true;}
-    else {return false;}
-};
-
-bool DeltaT_Cut(Double_t DeltaT)
-{
-    if(DeltaT >= DELTA_T_MIN && DeltaT <= DELTA_T_MAX){return true;}
-    else {return false;};
-};
+#include "./Plot_Codes/Single_Plot.hh"
+#include "./Base_Functions.hh"
 
 void Initialize(int Len, std::vector<Double_t> &vector)
 {
@@ -64,40 +47,6 @@ void ReInitialize(std::vector<ULong64_t> &vector)
     for(int ii1 = 0; ii1 < vector.size(); ii1++)
     {
         vector.at(ii1) = 0;
-    };
-};
-
-Double_t ComputeDelta_T(ULong64_t &Last_50MHz, ULong64_t &Present_50MHz, std::ofstream &logfile)
-{
-    
-    if(Last_50MHz > Present_50MHz && Last_50MHz > MIN_CARE_NUMBER && Present_50MHz < MIN_CARE_NUMBER)
-    {
-        ULong64_t Part1 = MAX_NUMBER - Last_50MHz + 1;
-        ULong64_t ClockGap = (Part1 + Present_50MHz);
-        logfile << "[ComputeDelta_T] 注意Clock反转！！！！！！！Max Clock:" << MAX_NUMBER << ",Last Clock:" << Last_50MHz << ", Present Clock:" << Present_50MHz << ", Delta T(s):" << 20.0 * ClockGap / 1e9 << ",返回 false"<< std::endl;
-        return 20.0 * ClockGap;
-    }
-    else
-    {
-        ULong64_t ClockGap = (Present_50MHz - Last_50MHz);
-        return 20.0 *ClockGap;
-    };
-};
-
-Double_t ComputeDelta_T(ULong64_t &Last_50MHz, ULong64_t &Present_50MHz)
-{
-    
-    if(Last_50MHz > Present_50MHz && Last_50MHz > MIN_CARE_NUMBER && Present_50MHz < MIN_CARE_NUMBER)
-    {
-        ULong64_t Part1 = MAX_NUMBER - Last_50MHz + 1;
-        ULong64_t ClockGap = (Part1 + Present_50MHz);
-        std::cout << "[ComputeDelta_T] 注意Clock反转！！！！！！！Max Clock:" << MAX_NUMBER << ",Last Clock:" << Last_50MHz << ", Present Clock:" << Present_50MHz << ", Delta T(s):" << 20.0 * ClockGap / 1e9 << ",返回 false"<< std::endl;
-        return 20.0 * ClockGap;
-    }
-    else
-    {
-        ULong64_t ClockGap = (Present_50MHz - Last_50MHz);
-        return 20.0 *ClockGap;
     };
 };
 
@@ -499,7 +448,13 @@ void Create_PDFs(std::string InFile, std::string Name, std::string OutFile, std:
     Out_Hists.push_back((TH1D*)Example_Hists.at(2)->Clone((Name + "_Prompt_Energy").c_str()));
     Out_Hists.push_back((TH1D*)Example_Hists.at(3)->Clone((Name + "_Delayed_Energy").c_str()));
 
-    TH1D* temp_th1d = (TH1D*)Example_Hists.at(0)->Clone("test");
+    if( Name == "AN" )
+    {
+        Out_Hists.push_back((TH1D*)Example_Hists.at(2)->Clone((Name + "_Proton_Recoil").c_str()));
+        Out_Hists.push_back((TH1D*)Example_Hists.at(2)->Clone((Name + "_C12").c_str()));
+        Out_Hists.push_back((TH1D*)Example_Hists.at(2)->Clone((Name + "_O16").c_str()));
+    };
+
     for(int ii1 = 0; ii1 < Out_Hists.size(); ii1++)
     {
         Out_Hists.at(ii1)->Reset("ICES");
@@ -518,6 +473,30 @@ void Create_PDFs(std::string InFile, std::string Name, std::string OutFile, std:
         Out_Hists.at(1)->Fill(Delta_R.Mag());
         Out_Hists.at(2)->Fill(Prompt_Energy);
         Out_Hists.at(3)->Fill(Delayed_Energy);
+
+        if( Name == "AN")
+        {
+            if(Prompt_Energy >= 0 && Prompt_Energy < AN_ENERGY_PROTON_RECOIL)
+            {
+                Out_Hists.at(4)->Fill(Prompt_Energy);
+            }
+            else if(Prompt_Energy >= AN_ENERGY_PROTON_RECOIL && Prompt_Energy <= AN_ENERGY_C12)
+            {
+                Out_Hists.at(5)->Fill(Prompt_Energy);
+            }
+            else if(Prompt_Energy > AN_ENERGY_C12)
+            {
+                Out_Hists.at(6)->Fill(Prompt_Energy);
+            };
+        }
+    };
+    if( Name == "AN")
+    {
+        std::cout << "Proton Recoil:" << Out_Hists.at(4)->Integral() / Out_Hists.at(2)->Integral() << std::endl;
+        std::cout << "C12:" << Out_Hists.at(5)->Integral() / Out_Hists.at(2)->Integral() << std::endl;
+        std::cout << "O16:" << Out_Hists.at(6)->Integral() / Out_Hists.at(2)->Integral() << std::endl;
+        std::cout << "Ground State:" << ( Out_Hists.at(4)->Integral() + Out_Hists.at(5)->Integral()) / Out_Hists.at(2)->Integral() << std::endl;
+        std::cout << "1st Exicited State:" << Out_Hists.at(6)->Integral() / Out_Hists.at(2)->Integral() << std::endl;
     };
 //Save into Pictures
     std::vector<std::string> Pic_Name;
