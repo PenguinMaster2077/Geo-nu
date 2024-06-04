@@ -77,12 +77,21 @@ const std::string NAME_GEO_TH = "Geo_Th";
 const std::string NAME_AN_GROUND = "AN_Ground";
 const std::string NAME_AN_EXICTED = "AN_Exicted";
 
-const std::string NAME_AN_PROTON_RECOIL = "AN_PROTON_RECOIL";
-const std::string NAME_AN_C12 = "AN_C12";
-const std::string NAME_AN_O16 = "AN_O16";
+//Names in Fitter
+const std::string NAME_FITTER_REACTOR = "Model_Reactor";
+const std::string NAME_FITTER_GEO = "Model_Geo";
+const std::string NAME_FITTER_GEO_U = "Model_Geo_U";
+const std::string NAME_FITTER_GEO_TH = "Model_Geo_Th";
+const std::string NAME_FITTER_AN = "Model_AN";
+const std::string NAME_FITTER_AN_GROUND = "Model_AN_Ground";
+const std::string NAME_FITTER_AN_EXICTED = "Model_AN_Exicted";
 
+const std::string FITTER_MAXIMUM_LIKELIHOOD = "Maxmium_Likelihood";
+const std::string FITTER_CHI_SQUARE = "Chi_Square";
+const std::string FITTER_DATA_HIST = "Data_Hist";
 //AN Setting
 //Energy Region Setting
 const Double_t AN_ENERGY_PROTON_RECOIL = 3.4;//MeV
 const Double_t AN_ENERGY_C12 = 5.1;//MeV
+
 #endif

@@ -16,21 +16,26 @@ class AN
 {
 public:
     //Constructor and Destructor
-    AN(): Is_Initialized(false), Is_Test(false) {};
+    AN(): Is_Initialized(false), Is_Test(false), Is_Load_PDF(false) {};
     //Global Point
     static AN *Point_AN_;
     //Member Functions
     static AN *Get_Global_Point();
-    void Initialize();
     bool Is_Initialize() {return Is_Initialized;};
-    void Get_Default_PDFs();
     void Setup_PDFs(TH1D *Example_Hist);
-    void Compute_Predictions(std::vector<TH1D*> &Hists);
+    void Compute_Predictions();
+    TH1D *Get_Total_Prediction() { return Hist_Prediction; };
+    TH1D *Get_Ground() { return Hist_Ground; };
+    TH1D *Get_Exicted() { return Hist_Exicted; };
+    TH1D *Get_Proton_Recoil() { return Hist_Proton; };
+    TH1D *Get_C12() { return Hist_C12; };
+    TH1D *Get_O16() { return Hist_O16; };
     void Open_Test_Mode() { Is_Test = true; };
     void Close_Test_Mode() { Is_Test = false; };
 private:
-    Bool_t Is_Initialized;
+    Bool_t Is_Initialized, Is_Load_PDF;
     TH1D *Hist_Proton, *Hist_C12, *Hist_O16;
+    TH1D *Hist_Ground, *Hist_Exicted, *Hist_Prediction;
     std::string Name_Proton = "Hist_Proton", Name_C12 = "Hist_C12", Name_O16 = "Hist_O16";
     Bool_t Is_Test;
     Double_t Pro_Proton, Pro_C12, Pro_O16;
@@ -47,107 +52,84 @@ AN *AN::Get_Global_Point()
     return Point_AN_;
 };
 
-void AN::Initialize()
-{
-    Is_Initialized = true;
-//Histogram
-    Get_Default_PDFs();
-};
-
-void AN::Get_Default_PDFs()
-{
-//Setup Histogram
-    TFile pdf_file_an(PDF_AN.c_str());
-    TH1D* Full_PDF = (TH1D*) pdf_file_an.Get("AN_Prompt_Energy");
-    Hist_Proton = (TH1D*) pdf_file_an.Get("AN_Proton_Recoil");
-    Hist_C12 = (TH1D*) pdf_file_an.Get("AN_C12");
-    Hist_O16 = (TH1D*) pdf_file_an.Get("AN_O16");
-
-    Pro_Proton = Hist_Proton->Integral() / Full_PDF->Integral();
-    Pro_C12 = Hist_C12->Integral() / Full_PDF->Integral();
-    Pro_O16 = Hist_O16->Integral() / Full_PDF->Integral();
-
-    Hist_Proton->Scale( 1.0 / Hist_Proton->Integral() );
-    Hist_C12->Scale( 1.0 / Hist_C12->Integral() );
-    Hist_O16->Scale( 1.0 / Hist_O16->Integral() );
-
-    Hist_Proton->SetName(NAME_AN_PROTON_RECOIL.c_str());
-    Hist_C12->SetName(NAME_AN_C12.c_str());
-    Hist_O16->SetName(NAME_AN_O16.c_str());
-//Show Details
-    std::cout << "[Geonu::Get_Default_PDFs] Load Default AN Proton Recoil PDF. Min:" << Hist_Proton->GetXaxis()->GetXmin() << ", Max:" << Hist_Proton->GetXaxis()->GetXmax() << ", Bin Number:" << Hist_Proton->GetXaxis()->GetNbins() << ", Width:" << Hist_Proton->GetXaxis()->GetBinWidth(1) << std::endl;
-    std::cout << "[Geonu::Get_Default_PDFs] Load Default AN C12 PDF. Min:" << Hist_C12->GetXaxis()->GetXmin() << ", Max:" << Hist_C12->GetXaxis()->GetXmax() << ", Bin Number:" << Hist_C12->GetXaxis()->GetNbins() << ", Width:" << Hist_C12->GetXaxis()->GetBinWidth(1) << std::endl;
-    std::cout << "[Geonu::Get_Default_PDFs] Load Default AN O16 PDF. Min:" << Hist_O16->GetXaxis()->GetXmin() << ", Max:" << Hist_O16->GetXaxis()->GetXmax() << ", Bin Number:" << Hist_O16->GetXaxis()->GetNbins() << ", Width:" << Hist_O16->GetXaxis()->GetBinWidth(1) << std::endl;
-//Test Code
-    if( Is_Test == true)
-    {
-        SavePlot("./AN_Proton_Default_PDF.jpg", Hist_Proton, "PR", "E_{Prompt}/MeV", "U", 0, 0, 0); //For Testing
-        SavePlot("./AN_C12_Default_PDF.jpg", Hist_C12, "{}^{12}C", "E_{Prompt}/MeV", "Th", 0, 0, 0); //For Testing
-        SavePlot("./AN_O16_Default_PDF.jpg", Hist_O16, "{}^{16}O", "E_{Prompt}/MeV", "U", 0, 0, 0); //For Testing
-    };
-};
-
 void AN::Setup_PDFs(TH1D *Example_Hist)
 {
-    if( Is_Initialized == true)
-    {
-        std::cout << "[AN] Haven't Load Default PDFs. But Load PDFs according Given Histogram." << std::endl;
-    };
-    TFile pdf_data_file_an(PDF_DATA_AN.c_str());
-    TTree *tree_an = (TTree*) pdf_data_file_an.Get("output");
+    Is_Initialized = true;
+    Is_Load_PDF = true;
 //Setup Histogram
     Double_t x_min = Example_Hist->GetXaxis()->GetXmin();
     Double_t x_max = Example_Hist->GetXaxis()->GetXmax();
+    Int_t NBinx = Example_Hist->GetNbinsX();
     std::string Selection = Form("PromptEnergy >= %f && PromptEnergy <= %f", x_min, x_max);
 //Setup Full PDF
     TH1D* Full_PDF = (TH1D*) Example_Hist->Clone("Full_PDF"); 
     Full_PDF->Reset("ICES");
-    tree_an->Project(Full_PDF->GetName(), "PromptEnergy", Selection.c_str());
-    Double_t ToTal = Full_PDF->Integral();
-//Setup Proton Recoil
+    //Pronton Recoil
     Hist_Proton = (TH1D*) (Example_Hist->Clone(Name_Proton.c_str()));
     Hist_Proton->Reset("ICES");
-    Selection= Form("PromptEnergy >= %f && PromptEnergy < %f", 0.0, AN_ENERGY_PROTON_RECOIL);
-    tree_an->Project(Name_Proton.c_str(), "PromptEnergy", Selection.c_str());
+    //C12
+    Hist_C12 = (TH1D*) (Example_Hist->Clone(Name_C12.c_str()));
+    Hist_C12->Reset("ICES");
+    //O16
+    Hist_O16 = (TH1D*) (Example_Hist->Clone(Name_O16.c_str()));
+    Hist_O16->Reset("ICES");
+    //Fill Data
+    TFile pdf_data_file_an(PDF_DATA_AN.c_str());
+    TTree *tree_an = (TTree*) pdf_data_file_an.Get("output");
+    Double_t PromptEnergy;
+    tree_an->SetBranchAddress("PromptEnergy", &PromptEnergy);
+    for(int ii1 = 0; ii1 < tree_an->GetEntries(); ii1++)
+    {
+        tree_an->GetEntry(ii1);
+        if(PromptEnergy < x_min || PromptEnergy > x_max){continue;};
+        Full_PDF->Fill(PromptEnergy);
+        if(PromptEnergy >= 0 && PromptEnergy < AN_ENERGY_PROTON_RECOIL)
+        {
+            Hist_Proton->Fill(PromptEnergy);
+        };
+        if(PromptEnergy >= AN_ENERGY_PROTON_RECOIL && PromptEnergy <= AN_ENERGY_C12)
+        {
+            Hist_C12->Fill(PromptEnergy);
+        };
+        if(PromptEnergy > AN_ENERGY_C12)
+        {
+            Hist_O16->Fill(PromptEnergy);
+        }
+    };
+    pdf_data_file_an.Close();
+
+    Double_t ToTal = Full_PDF->Integral();
+//Setup Proton Recoil
     if( ToTal >= 0.0)
     {
         Pro_Proton = Hist_Proton->Integral() / Full_PDF->Integral();
     }
     else
     {
-        std::cout << "[AN::Setup_PDFs] Total Area is 0. Probability of Proton Recoil is assigned to 0" << std::endl;
-        Pro_Proton = 0;
+        std::cout << "[AN::Setup_PDFs] Total Area is 0. Quit." << std::endl;
+        exit(1);
     };
-    Hist_Proton->Scale( 1.0 / ToTal);
+    Hist_Proton->Scale( 1.0 / Hist_Proton->Integral());
 //Setup C12
-    Hist_C12 = (TH1D*) (Example_Hist->Clone(Name_C12.c_str()));
-    Hist_C12->Reset("ICES");
-    Selection= Form("PromptEnergy >= %f && PromptEnergy <= %f", AN_ENERGY_PROTON_RECOIL, AN_ENERGY_C12);
-    tree_an->Project(Name_C12.c_str(), "PromptEnergy", Selection.c_str());
-    Pro_C12 = Hist_C12->Integral() / Full_PDF->Integral();
     if( ToTal >= 0.0)
     {
         Pro_C12 = Hist_C12->Integral() / Full_PDF->Integral();
     }
     else
     {
-        std::cout << "[AN::Setup_PDFs] Total Area is 0. Probability of Proton Recoil is assigned to 0" << std::endl;
-        Pro_C12 = 0;
+        std::cout << "[AN::Setup_PDFs] Total Area is 0. Quit." << std::endl;
+        exit(1);
     };
     Hist_C12->Scale( 1.0 / Hist_C12->Integral());
 //Setup O16
-    Hist_O16 = (TH1D*) (Example_Hist->Clone(Name_O16.c_str()));
-    Hist_O16->Reset("ICES");
-    Selection= Form("PromptEnergy > %f", AN_ENERGY_C12);
-    tree_an->Project(Name_O16.c_str(), "PromptEnergy", Selection.c_str());
     if( ToTal >= 0.0)
     {
         Pro_O16 = Hist_O16->Integral() / Full_PDF->Integral();
     }
     else
     {
-        std::cout << "[AN::Setup_PDFs] Total Area is 0. Probability of Proton Recoil is assigned to 0" << std::endl;
-        Pro_O16 = 0;
+        std::cout << "[AN::Setup_PDFs] Total Area is 0. Quit." << std::endl;
+        exit(1);
     };
     Hist_O16->Scale( 1.0 / Hist_O16->Integral());
 //Show Details
@@ -163,7 +145,7 @@ void AN::Setup_PDFs(TH1D *Example_Hist)
     };
 };
 
-void AN::Compute_Predictions(std::vector<TH1D*> &Hists)
+void AN::Compute_Predictions()
 {
     FitParameters *Fit_Par = FitParameters::Get_Global_Point();
     Double_t Number_Ground = Fit_Par->Get_Value(NAME_AN_GROUND);
@@ -173,14 +155,22 @@ void AN::Compute_Predictions(std::vector<TH1D*> &Hists)
     Double_t Number_C12 = Number_Ground * Pro_C12 / (Pro_Proton + Pro_C12);
     Double_t Number_O16 = Number_Exicted;
 //Ground States
-    TH1D *temp_hist = (TH1D*) Hist_Proton->Clone(NAME_AN_GROUND.c_str());
-    temp_hist->Scale(Number_Proton);
-    temp_hist->Add(Hist_C12, Number_C12);
-    Hists.push_back(temp_hist);
+    Hist_Ground = (TH1D*) Hist_Proton->Clone(NAME_FITTER_AN_GROUND.c_str());
+    Hist_Ground->Scale(Number_Proton);
+    Hist_Ground->Add(Hist_C12, Number_C12);
 //1st Exicted States
-    temp_hist = (TH1D*) Hist_O16->Clone(NAME_AN_EXICTED.c_str());
-    temp_hist->Scale(Number_Exicted);
-    Hists.push_back(temp_hist);
+    Hist_Exicted = (TH1D*) Hist_O16->Clone(NAME_FITTER_AN_EXICTED.c_str());
+    Hist_Exicted->Scale(Number_Exicted);
+//Total AN Histogram
+    Hist_Prediction = (TH1D*) Hist_Ground->Clone(NAME_FITTER_AN.c_str());
+    Hist_Prediction->Add(Hist_Exicted);
+//Test Code
+    if( Is_Test == true)
+    {
+        SavePlot("./AN_Prediction_Ground_PDF.jpg", Hist_Ground, "Ground", "E_{Prompt}/MeV", "Reactor", 0, 0, 0);
+        SavePlot("./AN_Prediction_Exicted_PDF.jpg", Hist_Exicted, "Exicted", "E_{Prompt}/MeV", "Reactor", 0, 0, 0);
+        SavePlot("./AN_Prediction_PDF.jpg", Hist_Prediction, "Prediction", "E_{Prompt}/MeV", "Reactor", 0, 0, 0);
+    };
 };
 
 #endif
