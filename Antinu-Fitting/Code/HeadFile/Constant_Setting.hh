@@ -85,10 +85,15 @@ const std::string NAME_FITTER_GEO_TH = "Model_Geo_Th";
 const std::string NAME_FITTER_AN = "Model_AN";
 const std::string NAME_FITTER_AN_GROUND = "Model_AN_Ground";
 const std::string NAME_FITTER_AN_EXICTED = "Model_AN_Exicted";
+const std::string NAME_FITTER_DATA = "Data";
 
 const std::string FITTER_MAXIMUM_LIKELIHOOD = "Maxmium_Likelihood";
 const std::string FITTER_CHI_SQUARE = "Chi_Square";
 const std::string FITTER_DATA_HIST = "Data_Hist";
+
+//Data File
+const std::string DATA_IBD_CANDIDATE = "/rat/MyCode/Work/Geo-nu-Data/CoincidencePair/Data/20240529/Gold_20R_0000300000-0000306498.root";
+
 //AN Setting
 //Energy Region Setting
 const Double_t AN_ENERGY_PROTON_RECOIL = 3.4;//MeV

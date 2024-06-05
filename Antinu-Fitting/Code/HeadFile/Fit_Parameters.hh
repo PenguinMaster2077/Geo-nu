@@ -30,6 +30,14 @@ public:
     Double_t Get_Prior_Value(std::string Name);
     Double_t Get_Error(unsigned int Index);
     Double_t Get_Error(std::string Name);
+    Double_t Get_Prior_Error(unsigned int Index);
+    Double_t Get_Prior_Error(std::string Name);
+    void Set_Error(unsigned int Index, Double_t Value);
+    void Set_Error(std::string Name, Double_t Value);
+    void Set_Value_Min(unsigned int Index, Double_t Value);
+    void Set_Value_Min(std::string Name, Double_t Value);
+    void Set_Value_Max(unsigned int Index, Double_t Value);
+    void Set_Value_Max(std::string Name, Double_t Value);
     void Add_Parameter(std::string Name, Double_t Value, Double_t Error, Int_t Error_Factor, Double_t Value_Min, Double_t Value_Max);
     void Add_Parameter(std::string Name, Double_t Value, Double_t Error, Int_t Error_Factor);
     void Get_Parameter(unsigned int InPut_Index, unsigned int &Index, std::string &Name, Double_t &Value, Double_t &Error, Int_t &Error_Factor, Double_t &Value_Min, Double_t &Value_Max);
@@ -46,6 +54,7 @@ private:
     std::vector<Double_t> C_Value;//Fitted Value
     std::vector<Double_t> C_Prior_Value;
     std::vector<Double_t> C_Error;
+    std::vector<Double_t> C_Prior_Error;
     std::vector<Int_t> C_Error_Factor; //Compute the minimum and maximum of parameter
     std::vector<Double_t> C_Value_Min;
     std::vector<Double_t> C_Value_Max;  
@@ -156,7 +165,6 @@ Double_t FitParameters::Get_Prior_Value(std::string Name)
 
 Double_t FitParameters::Get_Error(unsigned int Index)
 {
-    Double_t Error = 999;
     if(Index >= C_Total_Number)
     {
         std::cout << "[FitParameters::Get_Error] Index " << Index << " is larger than total number of parameters. Quit." << std::endl;
@@ -164,8 +172,7 @@ Double_t FitParameters::Get_Error(unsigned int Index)
     }
     else
     {
-        Error = C_Error.at(Index);
-        return Error;
+        return C_Error.at(Index);
     };
 };
 
@@ -176,6 +183,82 @@ Double_t FitParameters::Get_Error(std::string Name)
     return Error;
 };
 
+Double_t FitParameters::Get_Prior_Error(unsigned int Index)
+{
+    if(Index >= C_Total_Number)
+    {
+        std::cout << "[FitParameters::Get_Prior_Error] Index " << Index << " is larger than total number of parameters. Quit." << std::endl;
+        exit(1);
+    }
+    else
+    {
+        return C_Prior_Error.at(Index);
+    };
+};
+
+Double_t FitParameters::Get_Prior_Error(std::string Name)
+{
+    Int_t Index = Get_Value(Name);
+    return Get_Prior_Error(Index);
+};
+
+void FitParameters::Set_Error(unsigned int Index, Double_t Value)
+{
+    if(Index >= C_Total_Number)
+    {
+        std::cout << "[FitParameters::Set_Error] Index " << Index << " is larger than total number of parameters. Quit." << std::endl;
+        exit(1);
+    }
+    else
+    {
+        C_Error.at(Index) = Value;
+    };
+};
+
+void FitParameters::Set_Error(std::string Name, Double_t Value)
+{
+    Int_t Index = Get_Index(Name);
+    Set_Error(Index, Value);
+};
+
+void FitParameters::Set_Value_Min(unsigned int Index, Double_t Value)
+{
+    if(Index >= C_Total_Number)
+    {
+        std::cout << "[FitParameters::Set_Value_Min] Index " << Index << " is larger than total number of parameters. Quit." << std::endl;
+        exit(1);
+    }
+    else
+    {
+        C_Value_Min.at(Index) = Value;
+    };
+};
+
+void FitParameters::Set_Value_Min(std::string Name, Double_t Value)
+{
+    Int_t Index = Get_Index(Name);
+    Set_Value_Min(Index, Value);
+};
+
+void FitParameters::Set_Value_Max(unsigned int Index, Double_t Value)
+{
+    if(Index >= C_Total_Number)
+    {
+        std::cout << "[FitParameters::Set_Value_Max] Index " << Index << " is larger than total number of parameters. Quit." << std::endl;
+        exit(1);
+    }
+    else
+    {
+        C_Value_Max.at(Index) = Value;
+    };
+};
+
+void FitParameters::Set_Value_Max(std::string Name, Double_t Value)
+{
+    Int_t Index = Get_Index(Name);
+    Set_Value_Max(Index, Value);
+};
+
 void FitParameters::Add_Parameter(std::string Name, Double_t Value, Double_t Error, Int_t Error_Factor, Double_t Value_Min, Double_t Value_Max)
 {
     int Index = C_Total_Number;
@@ -183,6 +266,7 @@ void FitParameters::Add_Parameter(std::string Name, Double_t Value, Double_t Err
     C_Value.push_back(Value);
     C_Prior_Value.push_back(Value);
     C_Error.push_back(Error);
+    C_Prior_Error.push_back(Error);
     C_Error_Factor.push_back(Error_Factor);
     if(Error_Factor == 0.0)
     {
@@ -260,7 +344,7 @@ void FitParameters::Get_All_Parameters(std::vector<std::string> &Name, std::vect
 void FitParameters::Show_Parameter(unsigned int Index)
 {   
     std::string Name;
-    Double_t Value, Error, Prior_Value, Value_Min, Value_Max;
+    Double_t Value, Prior_Value, Error, Prior_Error, Value_Min, Value_Max;
     Int_t Error_Factor;
     if(Index >= C_Total_Number)
     {
@@ -273,10 +357,11 @@ void FitParameters::Show_Parameter(unsigned int Index)
         Value = C_Value.at(Index);
         Prior_Value = C_Prior_Value.at(Index);
         Error = C_Error.at(Index);
+        Prior_Error = C_Prior_Error.at(Index);
         Error_Factor =  C_Error_Factor.at(Index);
         Value_Min = C_Value_Min.at(Index);
         Value_Max = C_Value_Max.at(Index);
-        std::cout << "[FitParameters::Show_Parameter] Name:" << Name << ", Value:" << Value << ", Prior Value:" << Prior_Value << ", Error:" << Error << ", Error Factor:" << Error_Factor << ", Min Value:" << Value_Min << ", Max Value:" << Value_Max << std::endl;
+        std::cout << "[FitParameters::Show_Parameter] Name:" << Name << ", Value:" << Value << ", Prior Value:" << Prior_Value << ", Error:" << Error << ", Prior Error:" << Prior_Error << ", Error Factor:" << Error_Factor << ", Relative Error:" << Error/Value << ", Prior Relative Error:" << Prior_Error/Prior_Value << ", Min Value:" << Value_Min << ", Max Value:" << Value_Max << std::endl;
     };
 };
 
@@ -289,7 +374,7 @@ void FitParameters::Show_Parameter(std::string Name)
 void FitParameters::Show_All_Parameters()
 {
     std::string Name;
-    Double_t Value, Error, Prior_Value, Value_Min, Value_Max;
+    Double_t Value, Prior_Value, Error, Prior_Error, Value_Min, Value_Max;
     Int_t Error_Factor;
     for(int Index = 0; Index < C_Total_Number; Index++)
     {
@@ -297,10 +382,11 @@ void FitParameters::Show_All_Parameters()
         Value = C_Value.at(Index);
         Prior_Value = C_Prior_Value.at(Index);
         Error = C_Error.at(Index);
+        Prior_Error = C_Prior_Error.at(Index);
         Error_Factor =  C_Error_Factor.at(Index);
         Value_Min = C_Value_Min.at(Index);
         Value_Max = C_Value_Max.at(Index);
-        std::cout << "[FitParameters::Show_All_Parameter] Name:" << Name << ", Value:" << Value << ", Prior Value:" << Prior_Value << ", Error:" << Error << ", Error Factor:" << Error_Factor << ", Min Value:" << Value_Min << ", Max Value:" << Value_Max << std::endl;
+        std::cout << "[FitParameters::Show_All_Parameters] Name:" << Name << ", Value:" << Value << ", Prior Value:" << Prior_Value << ", Error:" << Error << ", Prior Error:" << Prior_Error << ", Error Factor:" << Error_Factor << ", Relative Error:" << Error/Value << ", Prior Relative Error:" << Prior_Error/Prior_Value << ", Min Value:" << Value_Min << ", Max Value:" << Value_Max << std::endl;
     };
 };
 

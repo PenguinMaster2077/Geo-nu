@@ -34,7 +34,7 @@ public:
     TH1D *Get_Total_Prediction() { return Hist_Prediction; };
     void Open_Test_Mode() { Is_Test = true;};
     void Close_Test_Mode() { Is_Test = false;};
-
+    TH1D *Get_Predictions();
 private:
     Bool_t Is_Initialized, Is_Oscillated, Is_Load_PDF;
     Double_t C_Sin_Square_Theta_12, C_Cos_Square_Theta_12;
@@ -49,13 +49,9 @@ Geonu *Geonu::Point_Geonu_ = new Geonu();
 
 Geonu *Geonu::Get_Global_Point()
 {
-    if(Point_Geonu_->Is_Oscillated == false)
-    {
-        std::cout << "[Geonu] Don't Apply Oscillation at Geo-nu." << std::endl;
-    };
     if(Point_Geonu_->Is_Load_PDF == false)
     {
-        std::cout << "[Geonu] Haven't Load PDFs." << std::endl;
+        std::cout << "[Geonu] Haven't Loaded PDFs." << std::endl;
     }
     return Point_Geonu_;
 };
@@ -172,6 +168,12 @@ void Geonu::Compute_Predictions()
         SavePlot("./Geo_Prediction.jpg", Hist_Prediction, "Prediction", "E_{Prompt}/MeV", "U", 0, 0, 0); //For Testing
     };
 };
+
+TH1D *Geonu::Get_Predictions()
+{
+    Compute_Predictions();
+    return Hist_Prediction;
+}
 
 
 #endif

@@ -32,6 +32,7 @@ public:
     TH1D *Get_O16() { return Hist_O16; };
     void Open_Test_Mode() { Is_Test = true; };
     void Close_Test_Mode() { Is_Test = false; };
+    TH1D *Get_Predictions();
 private:
     Bool_t Is_Initialized, Is_Load_PDF;
     TH1D *Hist_Proton, *Hist_C12, *Hist_O16;
@@ -47,7 +48,7 @@ AN *AN::Get_Global_Point()
 {
     if(Point_AN_->Is_Initialized == false)
     {
-        std::cout << "[Geonu] Haven't been Initialized. Can not use it." << std::endl;
+        std::cout << "[AN] Haven't Loaded PDFs." << std::endl;
     };
     return Point_AN_;
 };
@@ -171,6 +172,12 @@ void AN::Compute_Predictions()
         SavePlot("./AN_Prediction_Exicted_PDF.jpg", Hist_Exicted, "Exicted", "E_{Prompt}/MeV", "Reactor", 0, 0, 0);
         SavePlot("./AN_Prediction_PDF.jpg", Hist_Prediction, "Prediction", "E_{Prompt}/MeV", "Reactor", 0, 0, 0);
     };
+};
+
+TH1D *AN::Get_Predictions()
+{
+    Compute_Predictions();
+    return Hist_Prediction;
 };
 
 #endif

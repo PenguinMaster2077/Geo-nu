@@ -29,6 +29,7 @@ public:
     TH1D *Get_Total_Prediction() {return Hist_Prediction; };
     void Open_Test_Mode() { Is_Test = true; };
     void Close_Test_Mode() { Is_Test = false; };
+    TH1D *Get_Predictions();
 private:
     Bool_t Is_Initialized, Is_Load_PDF;
     TH1D *Hist_Reactor, *Hist_Prediction;
@@ -42,7 +43,7 @@ Reactor *Reactor::Get_Global_Point()
 {
     if(Point_Reactor_->Is_Initialized == false)
     {
-        std::cout << "[Reactor] Haven't been Initialized. Can not use it." << std::endl;
+        std::cout << "[Reactor] Haven't Loaded PDFs." << std::endl;
     };
     return Point_Reactor_;
 };
@@ -94,5 +95,11 @@ void Reactor::Compute_Predictions()
         SavePlot("./Reactor_Prediction.jpg", Hist_Prediction, "Prediction", "E_{Prompt}/MeV", "U", 0, 0, 0); //For Testing
     };
 };
+
+TH1D *Reactor::Get_Predictions()
+{
+    Compute_Predictions();
+    return Hist_Prediction;
+}
 
 #endif 
