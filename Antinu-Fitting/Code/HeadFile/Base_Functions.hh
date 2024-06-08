@@ -17,7 +17,7 @@ Double_t ComputeDelta_T(ULong64_t &Last_50MHz, ULong64_t &Present_50MHz, std::of
     {
         ULong64_t Part1 = MAX_NUMBER - Last_50MHz + 1;
         ULong64_t ClockGap = (Part1 + Present_50MHz);
-        logfile << "[ComputeDelta_T] 注意Clock反转！！！！！！！Max Clock:" << MAX_NUMBER << ",Last Clock:" << Last_50MHz << ", Present Clock:" << Present_50MHz << ", Delta T(s):" << 20.0 * ClockGap / 1e9 << ",返回 false"<< std::endl;
+        // logfile << "[ComputeDelta_T] 注意Clock反转！！！！！！！Max Clock:" << MAX_NUMBER << ",Last Clock:" << Last_50MHz << ", Present Clock:" << Present_50MHz << ", Delta T(s):" << 20.0 * ClockGap / 1e9 << ",返回 false"<< std::endl;
         return 20.0 * ClockGap;
     }
     else

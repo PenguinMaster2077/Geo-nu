@@ -7,10 +7,15 @@
 //ROOT
 #include <TFile.h>
 #include <TTree.h>
+#include <TChain.h>
 #include <TH1D.h>
+#include <TSystemDirectory.h>
+#include <TSystemFile.h>
 #include <TVector3.h>
 //RAT
 #include <RAT/DU/DSReader.hh>
+#include <RAT/DS/Meta.hh>
+#include <RAT/DS/MetaDB.hh>
 #include <RAT/DS/Run.hh>
 #include <RAT/DS/Entry.hh>
 #include <RAT/DS/EV.hh>
@@ -28,18 +33,11 @@
 #include <RAT/DU/Point3D.hh>
 #include <RAT/DU/DetectorStateCorrection.hh>
 //Self-defined
-#include "../HeadFile/Constant_Setting.hh"
-#include "./test.hh"
+// #include "../HeadFile/Constant_Setting.hh"
+// #include "./test.hh"
 //////////////////////////////////////////////////////////////////////////////
 
 int test()
 {
-    Geonu *geonu = Geonu::Get_Global_Point();
-
-    TH1D *temp = new TH1D("temp", "", 10, 0, 10);
-    geonu->Setup(temp);
-
-    geonu->Show_Integral();
-
     return 0;
 }

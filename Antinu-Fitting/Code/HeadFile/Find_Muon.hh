@@ -13,7 +13,7 @@
 #include "./Constant_Setting.hh"
 #include "./Base_Functions.hh"
 
-void Find_Muon(std::string InPWD, std::string OutFile)
+void Find_Muons(std::string InPWD, std::string OutFile)
 {
     std::string Muon_LargeNHits = "./Log/Muon_LargeNHits.txt";
     std::string Muon_LargeNHits_DeltaT = "./Log/Muon_LargeNHits_DeltaT.txt";

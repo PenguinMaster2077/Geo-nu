@@ -2,16 +2,21 @@
 #define GENERATINGPDFS_HH
 //CPP
 #include <iostream>
-#include <vector>
 #include <fstream>
+#include <vector>
 #include <cmath>
+#include <algorithm>
 //ROOT
 #include <TFile.h>
 #include <TTree.h>
 #include <TChain.h>
 #include <TH1D.h>
 #include <TVector3.h>
+#include <TSystemDirectory.h>
+#include <TSystemFile.h>
 //RAT
+#include <RAT/DS/Meta.hh>
+#include <RAT/DS/MetaDB.hh>
 //Self-Defined
 #include "./Constant_Setting.hh"
 #include "./Result.hh"
@@ -50,6 +55,70 @@ void ReInitialize(std::vector<ULong64_t> &vector)
     };
 };
 
+std::vector<std::string> Get_Root_Files(const std::string& dir) {
+    std::vector<std::pair<std::string, std::string>> files_with_names;
+    TSystemDirectory directory("rootDir", dir.c_str());
+    TList* fileList = directory.GetListOfFiles();
+    if (fileList) {
+        TSystemFile* file;
+        TString fileName;
+        TIter next(fileList);
+        while ((file = (TSystemFile*)next())) {
+            fileName = file->GetName();
+            if (!file->IsDirectory() && fileName.EndsWith(".root")) {
+                files_with_names.emplace_back(fileName.Data(), dir + "/" + fileName.Data());
+            }
+        }
+    }
+
+    // Sort files by their names
+    std::sort(files_with_names.begin(), files_with_names.end());
+
+    // Extract the file paths
+    std::vector<std::string> files;
+    for (const auto& pair : files_with_names) {
+        files.push_back(pair.second);
+    }
+
+    return files;
+}
+
+void Get_Meta_Info(std::vector<std::string> &Files, std::vector<Int_t> &Runs, std::vector<Int_t> &Generated_Events)
+{
+    RAT::DS::Meta *meta;
+    RAT::DS::MetaDB metadb;
+    std::vector<Int_t> temp_run, temp_generated;
+    std::pair<std::string, std::string> override;
+    TString temp_tstring;
+    for(int ii1 = 0; ii1 < Files.size(); ii1++)
+    {
+        TFile file(Files.at(ii1).c_str());
+        meta = (RAT::DS::Meta*) file.Get("meta");
+    //Generated Events
+        temp_generated = meta->GetEventsGeneratedCounts();
+        Generated_Events.push_back(temp_generated.at(0));
+    //Runs
+        metadb = meta->GetMetaDBs().at(0);
+        override = metadb.GetOverrideCommand(6);
+        if(override.first == "MC run")
+        {
+            temp_tstring = override.second;
+            Runs.push_back(temp_tstring.Atoi());
+        };
+        file.Close();
+    };
+};
+
+Double_t Get_All_Events(std::vector<Int_t> &Events)
+{
+    Double_t Sum = 0;
+    for(int ii1 = 0; ii1 < Events.size(); ii1++)
+    {
+        Sum = Sum + Events.at(ii1);
+    };
+    return Sum;
+}
+
 void Find_Coincidence_Pairs(std::string InFilePWD, std::string OutFile)
 //Select Coincidence Pairs within cuts
 //Cut:
@@ -57,6 +126,7 @@ void Find_Coincidence_Pairs(std::string InFilePWD, std::string OutFile)
 //Delayed: 1.85 <= energy <= 2.5; R<= 5700;
 //DeltaT: 400 ns-2 ms; DeltaR <= 2500
 {
+    std::cout << "[Generating_PDFs::Find_Coincidence_Pairs] Start to process " << InFilePWD << std::endl;
 //Log File
     std::ofstream logfile;
     logfile.open((OutFile + ".log.txt").c_str(), std::ios::out);
@@ -130,7 +200,7 @@ void Find_Coincidence_Pairs(std::string InFilePWD, std::string OutFile)
     outtree->Branch("DelayedOriginalEnergy", &res.C_Delayed.C_Original_Energy);
     outtree->Branch("DelayedTonyEnergy", &res.C_Delayed.C_Tony_Energy);
 //Loop the Data
-    Int_t Number_Total_Pass = 0, Number_Pass_Energy[2] = {0, 0}, Number_Pass_Energy_Radius[2] = {0,0};
+    Int_t Number_Pass_Energy[2] = {0, 0}, Number_Pass_Energy_Radius[2] = {0,0};
     Int_t Number_Pass_Energy_Radius_DeltaT = 0, Number_Pass_Energy_Radius_DeltaT_DeltaR = 0;
     Int_t Event_mcIndex[2] = {0, 0};
     std::vector<ULong64_t> Event_ClockCount50;
@@ -144,7 +214,6 @@ void Find_Coincidence_Pairs(std::string InFilePWD, std::string OutFile)
         chain->GetEntry(iPrompt);
         if(energy < 0.2 || energy > 10.0) {continue;};
         if(fitValid == false){continue;};
-        Number_Total_Pass++;
         if(evIndex == 0){Len_Entry = 1;};
     //Find Prompt Event
         if(Prompt_Energy_Cut(energy) == false){continue;};
@@ -221,18 +290,17 @@ void Find_Coincidence_Pairs(std::string InFilePWD, std::string OutFile)
     };
     outfile->Write();
     outfile->Close();
-    Double_t Estimated_Pairs_II = chain->GetEntries("energy >= 0.2 && energy <= 10.0 && evIndex == 0");
-    Double_t Len = chain->GetEntries()/2;
-    Double_t Correct_Pro = Estimated_Pairs_II/Len, Correct_Error = std::sqrt(Len * Correct_Pro * (1 - Correct_Pro));
-    Double_t Selection_Eff_II = Number_Pass_Energy_Radius_DeltaT_DeltaR / Estimated_Pairs_II;
-    Double_t Selection_Eff_II_Error = Number_Pass_Energy_Radius_DeltaT_DeltaR * Correct_Error/pow(Len, 2);
-    logfile << "Estimated Total Pairs I:" << Number_Total_Pass/2 << ", Estimated Total Pairs II:" << Estimated_Pairs_II << ", Error:" << std::sqrt(0.5 * Len * Correct_Pro * (1 - Correct_Pro)) << ", Estimated Total Pairs III:" << Estimated_Total_Pairs_III << std::endl;
+//Get All Genetated Events
+    std::vector<std::string> Files = Get_Root_Files(InFilePWD);
+    std::vector<Int_t> Runs, Generated_Events;
+    Get_Meta_Info(Files, Runs, Generated_Events);
+    Double_t All_Generated_Events = Get_All_Events(Generated_Events);
     logfile << "Prompt After Energy Cut:" << Number_Pass_Energy[0] << ", Prompt After Radius Cut:" << Number_Pass_Energy_Radius[0] << std::endl;
     logfile << "Delayed After Energy Cut:" << Number_Pass_Energy[1] << ", Delayed After Radius Cut:" << Number_Pass_Energy_Radius[1] << std::endl;
     logfile << "After Delta T Cut:" << Number_Pass_Energy_Radius_DeltaT << ", After Delta R Cut:" << Number_Pass_Energy_Radius_DeltaT_DeltaR << std::endl;
-    logfile << "Selection Eff I :" << Number_Pass_Energy_Radius_DeltaT_DeltaR/(0.5 * Number_Total_Pass) << std::endl;
-    logfile << "Selection Eff II:" << Selection_Eff_II << ", Error:" << Selection_Eff_II_Error << ", Correct Pro:" << Correct_Pro << std::endl;
-    logfile << "Selection Eff III (Don't use this result, because Prompt Cuts reduce the total number):" << 1.0 * Number_Pass_Energy_Radius_DeltaT_DeltaR/Estimated_Total_Pairs_III << std::endl;
+    logfile << "Total Generated Events:" << All_Generated_Events << ", Selection Efficiency:" << 100.0 * Number_Pass_Energy_Radius_DeltaT_DeltaR / All_Generated_Events << "%" << std::endl;
+//Show Message
+    std::cout << "[Generating_PDFs::Find_Coincidence_Pairs] Complete processing " << InFilePWD << std::endl;
 };
 
 void Find_Full_Coincidence_Pairs(std::string InFilePWD, std::string OutFile)
@@ -241,6 +309,7 @@ void Find_Full_Coincidence_Pairs(std::string InFilePWD, std::string OutFile)
 //Prompt: evIndex == 0; R<= 6000; 0.2 <= energy <= 10.0
 //Delayed: evIndex == 2; R<= 6000; 0.2 <= energy <= 10.0
 {
+    std::cout << "[Generating_PDFs::Find_Full_Coincidence_Pairs] Start to process " << InFilePWD << std::endl;
 //Log File
     std::ofstream logfile;
     logfile.open((OutFile + ".log.txt").c_str(), std::ios::out);
@@ -314,7 +383,7 @@ void Find_Full_Coincidence_Pairs(std::string InFilePWD, std::string OutFile)
     outtree->Branch("DelayedOriginalEnergy", &res.C_Delayed.C_Original_Energy);
     outtree->Branch("DelayedTonyEnergy", &res.C_Delayed.C_Tony_Energy);
 //Loop the Data
-    Double_t Number_Total_Pass = 0, Number_Pass_Energy[2] = {0, 0}, Number_Pass_Energy_Radius[2] = {0,0};
+    Double_t Number_Pass_Energy[2] = {0, 0}, Number_Pass_Energy_Radius[2] = {0,0};
     Double_t Number_Pass_Energy_Radius_DeltaT = 0, Number_Pass_Energy_Radius_DeltaT_DeltaR = 0;
     Int_t Event_mcIndex[2] = {0, 0}, Event_evIndex[2] = {0, 0};//Prompt, Last Prompt;
     std::vector<ULong64_t> Event_ClockCount50;
@@ -329,7 +398,6 @@ void Find_Full_Coincidence_Pairs(std::string InFilePWD, std::string OutFile)
         chain->GetEntry(iPrompt);
         if(energy < 0.2 || energy > 10.0) {continue;};
         if(fitValid == false){continue;};
-        Number_Total_Pass++;
         if(evIndex != 0){continue;};
         Event_Pos[0].SetXYZ(posx, posy, posz - Z_OFFSET);
         if(Event_Pos[0].Mag()>6000){continue;};
@@ -403,18 +471,17 @@ void Find_Full_Coincidence_Pairs(std::string InFilePWD, std::string OutFile)
     };
     outfile->Write();
     outfile->Close();
-    Double_t Estimated_Pairs_II = chain->GetEntries("energy >= 0.2 && energy <= 10.0 && evIndex == 0");
-    Double_t Len = chain->GetEntries()/2;
-    Double_t Correct_Pro = Estimated_Pairs_II/Len, Correct_Error = std::sqrt(Len * Correct_Pro * (1 - Correct_Pro));
-    Double_t Selection_Eff_II = Number_Pass_Energy_Radius_DeltaT_DeltaR / Estimated_Pairs_II;
-    Double_t Selection_Eff_II_Error = Number_Pass_Energy_Radius_DeltaT_DeltaR * Correct_Error/pow(Len, 2);
-    logfile << "Estimated Total Pairs I:" << Number_Total_Pass/2 << ", Estimated Total Pairs II:" << Estimated_Pairs_II << ", Error:" << std::sqrt(0.5 * Len * Correct_Pro * (1 - Correct_Pro)) << ", Estimated Total Pairs III:" << Estimated_Total_Pairs_III << std::endl;
+//Get All Genetated Events
+    std::vector<std::string> Files = Get_Root_Files(InFilePWD);
+    std::vector<Int_t> Runs, Generated_Events;
+    Get_Meta_Info(Files, Runs, Generated_Events);
+    Double_t All_Generated_Events = Get_All_Events(Generated_Events);
     logfile << "Prompt After Energy Cut:" << Number_Pass_Energy[0] << ", Prompt After Radius Cut:" << Number_Pass_Energy_Radius[0] << std::endl;
     logfile << "Delayed After Energy Cut:" << Number_Pass_Energy[1] << ", Delayed After Radius Cut:" << Number_Pass_Energy_Radius[1] << std::endl;
     logfile << "After Delta T Cut:" << Number_Pass_Energy_Radius_DeltaT << ", After Delta R Cut:" << Number_Pass_Energy_Radius_DeltaT_DeltaR << std::endl;
-    logfile << "Selection Eff I :" << Number_Pass_Energy_Radius_DeltaT_DeltaR/(0.5 * Number_Total_Pass) << std::endl;
-    logfile << "Selection Eff II:" << Selection_Eff_II << ", Error:" << Selection_Eff_II_Error << ", Correct Pro:" << Correct_Pro << std::endl;
-    logfile << "Selection Eff III:" << 1.0 * Number_Pass_Energy_Radius_DeltaT_DeltaR/Estimated_Total_Pairs_III << std::endl;
+    logfile << "Total Generated Events:" << All_Generated_Events << ", Selection Efficiency:" << 100.0 * Number_Pass_Energy_Radius_DeltaT_DeltaR / All_Generated_Events << "%" << std::endl;
+//Show Message
+    std::cout << "[Generating_PDFs::Find_Full_Coincidence_Pairs] Complete processing " << InFilePWD << std::endl;
 };
 
 void Create_PDFs(std::string InFile, std::string Name, std::string OutFile, std::vector<TH1D*> Example_Hists, bool Full_PDF)

@@ -9,9 +9,9 @@
 //Self-Defined
 #include "./HeadFile/Result.hh"
 #include "./HeadFile/Constant_Setting.hh"
-#include "./HeadFile/CoincidencePairs.hh"
+#include "./HeadFile/Coincidence_Pairs.hh"
 
-int CoincidencePairs()
+int Coincidence_Pairs()
 {
     std::string LooseCut_Files = "/rat/MyCode/Work/Geo-nu-Data/LooseCut/300000-307612";
     std::string Muon_File = "/rat/MyCode/Work/Geo-nu-Data/Muon/Gold_20R_Muon_Abstract_0000300000-0000307612.root";

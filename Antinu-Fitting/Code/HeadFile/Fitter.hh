@@ -309,7 +309,6 @@ void Fitter::Get_All_Hists()
         Hists.push_back((TH1D*) temp->Clone(NAME_FITTER_DATA.c_str()));
         Names.push_back(NAME_FITTER_DATA);
     };
-    std::cout << "Data Complete" << std::endl;
 //AN
     if( an->Is_Initialize() == true)
     {
@@ -317,7 +316,6 @@ void Fitter::Get_All_Hists()
         Hists.push_back((TH1D*) temp->Clone(NAME_FITTER_AN.c_str()));
         Names.push_back(NAME_FITTER_AN);
     };
-    std::cout << "AN Complete" << std::endl;
 //Geonu
     if( geonu->Is_Initialize() == true)
     {
@@ -325,15 +323,13 @@ void Fitter::Get_All_Hists()
         Hists.push_back((TH1D*) temp->Clone(NAME_FITTER_GEO.c_str()));
         Names.push_back(NAME_FITTER_GEO);
     };
-    std::cout << "Geonu Complete" << std::endl;
 //Reactor
     if( reactor->Is_Initialize() == true)
     {
         temp = reactor->Get_Predictions();
         Hists.push_back((TH1D*) temp->Clone(NAME_FITTER_REACTOR.c_str()));
-        Names.push_back(NAME_REACTOR);
+        Names.push_back(NAME_FITTER_REACTOR);
     };
-    std::cout << "Reactor Complete" << std::endl;
 //Test Code
     if( Is_Test == true)
     {
@@ -354,7 +350,7 @@ void Fitter::Draw_All()
     Names.push_back("All");
 //Setup about Draw
     TCanvas *c1 = new TCanvas("c1", "All Histograms", 800, 600);
-    TLegend *legend = new TLegend(0.7, 0.7, 0.9, 0.9);
+    TLegend *legend = new TLegend(0.7, 0.6, 0.9, 0.8);
     
     for(int Index = 0; Index < Hists.size(); Index++)
     {
@@ -363,13 +359,20 @@ void Fitter::Draw_All()
             Hists.at(Index)->Draw("E1");
             Hists.at(Index)->SetMarkerStyle(8);
             Hists.at(Index)->SetLineColor(kBlack);
+            legend->AddEntry(Hists.at(Index), Names.at(Index).c_str(), "p");
         }
         else
         {
             Hists.at(Index)->Draw("HIST SAME");
             Hists.at(Index)->SetLineColor(Index);
+            legend->AddEntry(Hists.at(Index), Names.at(Index).c_str(), "l");
         };
-        legend->AddEntry(Hists.at(Index), Names.at(Index).c_str(), "l");
+        Hists.at(Index)->SetXTitle("E_{Prompt}/MeV");
+        Double_t Bin_Width = Hists.at(Index)->GetBinWidth(1);
+        std::ostringstream ss;
+        ss << std::fixed << std::setprecision(3) << Bin_Width;
+        std::string Bin_Width_Annotation = "X Width:" + ss.str();
+        Hists.at(Index)->SetYTitle(Bin_Width_Annotation.c_str());
     };
 
     legend->Draw();

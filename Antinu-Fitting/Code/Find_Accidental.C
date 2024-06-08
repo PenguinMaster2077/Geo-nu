@@ -8,13 +8,14 @@
 //Self-Defined
 #include "./HeadFile/Constant_Setting.hh"
 #include "./HeadFile/Base_Functions.hh"
-#include "./HeadFile/FindAccidental.hh"
+#include "./HeadFile/Find_Accidental.hh"
 
-int FindAccidental()
+int Find_Accidental()
 {
     std::string Prompt_Files = "/rat/MyCode/Work/Geo-nu-Data/Accidental/Method_I/RawData/20240530/Prompt";
     std::string Delayed_Files = "/rat/MyCode/Work/Geo-nu-Data/Accidental/Method_I/RawData/20240530/Delayed";
-    std::string Out = "./test.root";
-    Select_AC(Out, Prompt_Files, Delayed_Files);
+    std::string OutPWD = "/rat/MyCode/Work/Geo-nu-Data/Accidental/Method_I/DataCleaning/20240530";
+    // Data_Cleaning_Cut(OutPWD, Prompt_Files, Delayed_Files);
+    Compute_Rate("", OutPWD);
     return 0;
 }
