@@ -48,11 +48,15 @@ int Test_FitParameters()
     Double_t Value_Min[4] = {0.1, 0.2, 0.3, 0.4};
     Double_t Value_Max[4] = {1111, 2222, 3333, 4444};
 //Test--Add_Parameter()
-    for(int ii1 = 0; ii1 < 4; ii1++)
-    {
-        // FitPar->AddParameter(Name[ii1], Value[ii1], Error[ii1], Error_Factor[ii1]);
-        FitPar->Add_Parameter(Name[ii1], Value[ii1], Error[ii1], 0, Value_Min[ii1], Value_Max[ii1]);
-    };
+    // for(int ii1 = 0; ii1 < 4; ii1++)
+    // {
+    //     // FitPar->AddParameter(Name[ii1], Value[ii1], Error[ii1], Error_Factor[ii1]);
+    //     FitPar->Add_Parameter(Name[ii1], Value[ii1], Error[ii1], 0, Value_Min[ii1], Value_Max[ii1]);
+    // };
+
+//Test--Compute_Events()
+    FitPar->Compute_Events(88.23, 300733, 306498);
+
 //Test--Get_Total_Number()
     // std::cout << FitPar->Get_Total_Number() << std::endl;
 

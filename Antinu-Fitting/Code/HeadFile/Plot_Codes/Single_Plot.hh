@@ -177,4 +177,29 @@ void FitSavePlot_E(std::string Out,TH1D *th1d, std::string LegTitle, std::string
     delete expFunc; expFunc = NULL;
 };
 
+//TH2D 
+void SavePlot(std::string Out,TH2D *th2d, std::string LegTitle, std::string XTitle, std::string YTitle, std::string CanTitle, double x1 = 0.1, double y1 = 0.72, double x2 = 0.3, double y2 = 0.87)
+{
+    TH2D *f1 = (TH2D*)th2d->Clone("Temp_TH2D");
+    TCanvas *canvas = new TCanvas("canvas", CanTitle.c_str(), 800, 600);
+    TLegend *leg = new TLegend(x1, y1, x2, y2);
+    leg->AddEntry(f1, LegTitle.c_str(), "l");
+
+    f1->SetStats(0);//Entries等信息栏不显示；
+    f1->Draw("colz");
+
+    //f1->Scale(1./f1->Integral());
+    
+    gPad->SetRightMargin(0.15);
+
+    f1->GetXaxis()->SetTitle(XTitle.c_str());
+    f1->GetYaxis()->SetTitle(YTitle.c_str());
+
+    leg->Draw();
+    canvas->SetTitle(CanTitle.c_str());
+    canvas->Print(Out.c_str());
+    delete f1; f1 = NULL;
+    delete canvas; canvas = NULL;
+    delete leg; leg = NULL;
+};
 #endif

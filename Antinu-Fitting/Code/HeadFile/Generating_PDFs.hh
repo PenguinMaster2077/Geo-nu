@@ -81,7 +81,7 @@ std::vector<std::string> Get_Root_Files(const std::string& dir) {
     }
 
     return files;
-}
+};
 
 void Get_Meta_Info(std::vector<std::string> &Files, std::vector<Int_t> &Runs, std::vector<Int_t> &Generated_Events)
 {
@@ -119,7 +119,7 @@ Double_t Get_All_Events(std::vector<Int_t> &Events)
     return Sum;
 }
 
-void Find_Coincidence_Pairs(std::string InFilePWD, std::string OutFile)
+void Find_Coincidence_Pairs(std::string InFilePWD, std::string OutFile, std::string Name)
 //Select Coincidence Pairs within cuts
 //Cut:
 //Prompt: 0.9 <= energy <= 8.0; R<= 5700;
@@ -208,9 +208,11 @@ void Find_Coincidence_Pairs(std::string InFilePWD, std::string OutFile)
     TVector3 Event_Pos[2], temp_TVector3;
     Double_t DeltaT, DeltaR;
     Int_t Len_Entry = 0, Estimated_Total_Pairs_III = 0;
+    const int len = chain->GetEntries();
+    logfile << "[Generating_PDFs::Find_Coincidence_Pairs] Begin to Loop for CP" << std::endl;
     for(int iPrompt = 0; iPrompt < chain->GetEntries(); iPrompt ++)
     {
-        if(iPrompt % 10000 == 0){logfile << "已处理" << iPrompt << ",还剩" << chain->GetEntries() - iPrompt << std::endl; };
+        if(iPrompt % 50000 == 0){logfile << "[Generating_PDFs::Find_Coincidence_Pairs::Loop CP] 已处理：" << 100.0 *iPrompt / len << "%，具体：" << iPrompt << "，还剩：" << len - iPrompt << std::endl; };
         chain->GetEntry(iPrompt);
         if(energy < 0.2 || energy > 10.0) {continue;};
         if(fitValid == false){continue;};
@@ -260,7 +262,7 @@ void Find_Coincidence_Pairs(std::string InFilePWD, std::string OutFile)
             Event_Pos[1].SetXYZ(posx, posy, posz - Z_OFFSET);
             if(Event_Pos[1].Mag() > RADIUS_MAX){continue;};
             Number_Pass_Energy_Radius[1]++;
-            DeltaT = ComputeDelta_T(Event_ClockCount50.at(0), clockCount50, logfile);
+            DeltaT = Compute_Delta_T(Event_ClockCount50.at(0), clockCount50, logfile);
             if(DeltaT_Cut(DeltaT) == false && DeltaT > DELTA_T_MAX) {break;};
             Number_Pass_Energy_Radius_DeltaT++;
             temp_TVector3 = Event_Pos[1] - Event_Pos[0];
@@ -288,22 +290,73 @@ void Find_Coincidence_Pairs(std::string InFilePWD, std::string OutFile)
         };
         //if(Len_Entry == 2){Estimated_Total_Pairs_III++;};
     };
-    outfile->Write();
-    outfile->Close();
+    
 //Get All Genetated Events
-    std::vector<std::string> Files = Get_Root_Files(InFilePWD);
+    std::vector<std::string> Files;
     std::vector<Int_t> Runs, Generated_Events;
-    Get_Meta_Info(Files, Runs, Generated_Events);
-    Double_t All_Generated_Events = Get_All_Events(Generated_Events);
+    Double_t All_Generated_Events;
+    logfile << "[Generating_PDFs::Find_Coincidence_Pairs] Begin to Loop for Generated Events" << std::endl;
+    if( Name == "Reactor")
+    {
+        Int_t Number_mcIndex, Last_mcIndex, Number_Positive_Energy;
+        for(int ii1 = 0; ii1 < chain->GetEntries(); ii1++)
+        {
+            if(ii1 % 50000 == 0){logfile << "[Generating_PDFs::Find_Coincidence_Pairs::Sum Generated Events] 已处理：" << 100.0 *ii1 / len << "%，具体：" << ii1 << "，还剩：" << len - ii1 << std::endl;};
+            chain->GetEntry(ii1);
+            //Initialize
+            if(ii1 == 0)
+            {
+                Last_mcIndex = mcIndex;
+                Number_mcIndex = 1;
+                if(energy > 0)
+                {
+                    Number_Positive_Energy++;
+                };
+                continue;
+            };
+            //Same mcIndex
+            if(Last_mcIndex == mcIndex)
+            {
+                Number_mcIndex++;
+                if(energy > 0)
+                {
+                    Number_Positive_Energy++;
+                };
+                continue;
+            }
+            //Different mcIndex
+            else if(Last_mcIndex != mcIndex)
+            {
+                if( Number_mcIndex >=2 && Number_Positive_Energy >= 2){All_Generated_Events++;};
+                Last_mcIndex = mcIndex;
+                Number_mcIndex = 0;
+                Number_Positive_Energy = 0;
+                if(energy > 0)
+                {
+                    Number_Positive_Energy++;
+                };
+                continue;
+            }
+        }
+    }
+    else
+    {
+        Files = Get_Root_Files(InFilePWD);
+        Get_Meta_Info(Files, Runs, Generated_Events);
+        All_Generated_Events = Get_All_Events(Generated_Events);
+    };
     logfile << "Prompt After Energy Cut:" << Number_Pass_Energy[0] << ", Prompt After Radius Cut:" << Number_Pass_Energy_Radius[0] << std::endl;
     logfile << "Delayed After Energy Cut:" << Number_Pass_Energy[1] << ", Delayed After Radius Cut:" << Number_Pass_Energy_Radius[1] << std::endl;
     logfile << "After Delta T Cut:" << Number_Pass_Energy_Radius_DeltaT << ", After Delta R Cut:" << Number_Pass_Energy_Radius_DeltaT_DeltaR << std::endl;
     logfile << "Total Generated Events:" << All_Generated_Events << ", Selection Efficiency:" << 100.0 * Number_Pass_Energy_Radius_DeltaT_DeltaR / All_Generated_Events << "%" << std::endl;
+//Close Files
+    outfile->Write();
+    outfile->Close();
 //Show Message
     std::cout << "[Generating_PDFs::Find_Coincidence_Pairs] Complete processing " << InFilePWD << std::endl;
 };
 
-void Find_Full_Coincidence_Pairs(std::string InFilePWD, std::string OutFile)
+void Find_Full_Coincidence_Pairs(std::string InFilePWD, std::string OutFile, std::string Name)
 //Select all Coincidence Pairs and give an estimated number of Coincidence Pairs
 //Cut:
 //Prompt: evIndex == 0; R<= 6000; 0.2 <= energy <= 10.0
@@ -391,10 +444,11 @@ void Find_Full_Coincidence_Pairs(std::string InFilePWD, std::string OutFile)
     TVector3 Event_Pos[2], temp_TVector3;
     Double_t DeltaT, DeltaR;
     Int_t Len_Entry = 0, Estimated_Total_Pairs_III = 0;
-    logfile << "Begin to Loop" << std::endl;
+    const int len = chain->GetEntries();
+    logfile << "[Generating_PDFs::Find_Full_Coincidence_Pairs] Begin to Loop for CP" << std::endl;
     for(int iPrompt = 0; iPrompt < chain->GetEntries(); iPrompt ++)
     {
-        if(iPrompt % 10000 == 0){logfile << "[Loop] 已处理" << iPrompt << ",还剩" << chain->GetEntries() - iPrompt << std::endl; };
+        if(iPrompt % 50000 == 0){logfile << "[Generating_PDFs::Find_Full_Coincidence_Pairs::Loop CP] 已处理：" << 100.0 *iPrompt / len << "%，具体：" << iPrompt << "，还剩：" << len - iPrompt << std::endl; };
         chain->GetEntry(iPrompt);
         if(energy < 0.2 || energy > 10.0) {continue;};
         if(fitValid == false){continue;};
@@ -469,13 +523,62 @@ void Find_Full_Coincidence_Pairs(std::string InFilePWD, std::string OutFile)
         };
         if(Len_Entry == 2){Estimated_Total_Pairs_III++;};
     };
+//Get All Genetated Events
+    std::vector<std::string> Files;
+    std::vector<Int_t> Runs, Generated_Events;
+    Double_t All_Generated_Events;
+    logfile << "[Generating_PDFs::Find_Full_Coincidence_Pairs] Begin to Loop for Generated Events" << std::endl;
+    if( Name == "Reactor")
+    {
+        Int_t Number_mcIndex, Last_mcIndex, Number_Positive_Energy;
+        for(int ii1 = 0; ii1 < chain->GetEntries(); ii1++)
+        {
+            if(ii1 % 50000 == 0){logfile << "[Generating_PDFs::Find_Full_Coincidence_Pairs::Sum Generated Events] 已处理：" << 100.0 *ii1 / len << "%，具体：" << ii1 << "，还剩：" << len - ii1 << std::endl;};
+            chain->GetEntry(ii1);
+            //Initialize
+            if(ii1 == 0)
+            {
+                Last_mcIndex = mcIndex;
+                Number_mcIndex = 1;
+                if(energy > 0)
+                {
+                    Number_Positive_Energy++;
+                };
+                continue;
+            };
+            //Same mcIndex
+            if(Last_mcIndex == mcIndex)
+            {
+                Number_mcIndex++;
+                if(energy > 0)
+                {
+                    Number_Positive_Energy++;
+                };
+                continue;
+            }
+            //Different mcIndex
+            else if(Last_mcIndex != mcIndex)
+            {
+                if( Number_mcIndex >=2 && Number_Positive_Energy >= 2){All_Generated_Events++;};
+                Last_mcIndex = mcIndex;
+                Number_mcIndex = 0;
+                Number_Positive_Energy = 0;
+                if(energy > 0)
+                {
+                    Number_Positive_Energy++;
+                };
+                continue;
+            }
+        }
+    }
+    else
+    {
+        Files = Get_Root_Files(InFilePWD);
+        Get_Meta_Info(Files, Runs, Generated_Events);
+        All_Generated_Events = Get_All_Events(Generated_Events);
+    };
     outfile->Write();
     outfile->Close();
-//Get All Genetated Events
-    std::vector<std::string> Files = Get_Root_Files(InFilePWD);
-    std::vector<Int_t> Runs, Generated_Events;
-    Get_Meta_Info(Files, Runs, Generated_Events);
-    Double_t All_Generated_Events = Get_All_Events(Generated_Events);
     logfile << "Prompt After Energy Cut:" << Number_Pass_Energy[0] << ", Prompt After Radius Cut:" << Number_Pass_Energy_Radius[0] << std::endl;
     logfile << "Delayed After Energy Cut:" << Number_Pass_Energy[1] << ", Delayed After Radius Cut:" << Number_Pass_Energy_Radius[1] << std::endl;
     logfile << "After Delta T Cut:" << Number_Pass_Energy_Radius_DeltaT << ", After Delta R Cut:" << Number_Pass_Energy_Radius_DeltaT_DeltaR << std::endl;
@@ -535,7 +638,7 @@ void Create_PDFs(std::string InFile, std::string Name, std::string OutFile, std:
         Pos[0].SetXYZ(Prompt_PosX, Prompt_PosY, Prompt_PosZ);
         Pos[1].SetXYZ(Delayed_PosX, Delayed_PosY, Delayed_PosZ);
         Delta_R = Pos[0] - Pos[1];
-        Delta_T = ComputeDelta_T(Prompt_50MHz, Delayed_50MHz);
+        Delta_T = Compute_Delta_T(Prompt_50MHz, Delayed_50MHz);
         Out_Hists.at(0)->Fill(Delta_T/1e3);
         Out_Hists.at(1)->Fill(Delta_R.Mag());
         Out_Hists.at(2)->Fill(Prompt_Energy);

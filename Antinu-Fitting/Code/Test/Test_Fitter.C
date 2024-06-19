@@ -24,11 +24,7 @@ int Test_Fitter()
     an->Setup_PDFs(Example_Hist);
 //Add Fit Parameters
     FitParameters *Fit_Par = FitParameters::Get_Global_Point();
-    Fit_Par->Add_Parameter(NAME_GEO_U, 3.40, 3.40, 1);
-    Fit_Par->Add_Parameter(NAME_GEO_TH, 0.95, 0.95, 1);
-    Fit_Par->Add_Parameter(NAME_REACTOR, 18.32, 0.51, 1);
-    Fit_Par->Add_Parameter(NAME_AN_GROUND, 11.08, 3.32, 1);
-    Fit_Par->Add_Parameter(NAME_AN_EXICTED, 1.23, 1.23, 1);
+    Fit_Par->Compute_Events(114.09, 300733, 307612);
 //Fitter
     Fitter *fitter = Fitter::Get_Global_Point();
     fitter->Initialize();

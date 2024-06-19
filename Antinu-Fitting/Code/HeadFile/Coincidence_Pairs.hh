@@ -15,6 +15,7 @@
 #include "./Base_Functions.hh"
 #include "./Plot_Code.hh"
 
+
 void Find_Coincidence_Pairs(std::string Out_File, std::string LooseCut_Files, std::string Muon_File)
 {
     // std::string InPWD = "/rat/MyCode/Work/Geo-nu-Data/LooseCut/300000-307612";
@@ -28,7 +29,7 @@ void Find_Coincidence_Pairs(std::string Out_File, std::string LooseCut_Files, st
 //Create OutPut File
     TFile *outfile = new TFile(Out_File.c_str(), "recreate");
     TTree *outtree = new TTree("output", "");
-    std::cout << "输出文件创建成功" << std::endl;
+    std::cout << "[Coincidence_Pairs::Find_Coincidence_Pairs] 输出文件创建成功" << std::endl;
     //Set Branch Address
     myresult res;
     outtree->Branch("RunID", &res.C_RunID);
@@ -74,7 +75,7 @@ void Find_Coincidence_Pairs(std::string Out_File, std::string LooseCut_Files, st
 //Read Loose Cut Files
     TChain *chain = new TChain("output");
     chain->Add((LooseCut_Files + "/*").c_str());
-    std::cout << "LooseCut文件加载成功" << std::endl;
+    std::cout << "[Coincidence_Pairs::Find_Coincidence_Pairs] LooseCut文件加载成功" << std::endl;
 //Set Branch Address
     //Run Info
     UInt_t run_id, subrun_id, date, time, run_type;
@@ -132,7 +133,7 @@ void Find_Coincidence_Pairs(std::string Out_File, std::string LooseCut_Files, st
 //Read Muon Files
     TFile muonfile(Muon_File.c_str());
     TTree *muontree = (TTree*) muonfile.Get("output");
-    std::cout << "Muon文件加载成功" << std::endl;
+    std::cout << "[Coincidence_Pairs::Find_Coincidence_Pairs] Muon文件加载成功" << std::endl;
     //Set Branch Addres
     muontree->SetBranchAddress("RunID", &run_id);
     muontree->SetBranchAddress("SubRunID", &subrun_id);
@@ -166,7 +167,7 @@ void Find_Coincidence_Pairs(std::string Out_File, std::string LooseCut_Files, st
         Muon_GTID_Array[ii1] = Muon_GTID;
         Muon_50MHz_Array[ii1] = Muon_Clock50MHz;
     };
-    std::cout << "Muon数据加载成功" << std::endl;
+    std::cout << "[Coincidence_Pairs::Find_Coincidence_Pairs] Muon数据加载成功" << std::endl;
 //Set up Log
     std::ofstream cp_energy(Log_CP_Energy.c_str(), std::ios::out);
     std::ofstream cp_energy_radius(Log_CP_Energy_Radius.c_str(), std::ios::out);
@@ -191,16 +192,16 @@ void Find_Coincidence_Pairs(std::string Out_File, std::string LooseCut_Files, st
     Int_t Number_CoincidencePair_Energy_Radius_DeltaT_DeltaR_Data = 0, Number_CoincidencePair_Energy_Radius_DeltaT_DeltaR_Data_Muon = 0;
     Int_t Number_Muon = 0;
     Int_t Index_Muon_Array = 0, Change_Run_SubRun = 0;
-    std::cout << "开始处理" << std::endl;
+    std::cout << "[Coincidence_Pairs::Find_Coincidence_Pairs] 开始处理" << std::endl;
     int Len = chain->GetEntries();
     for(int ii1 = 0; ii1 < chain->GetEntries(); ii1++)
     {
-        if(ii1 % 5000 == 0){std::cout << "已处理：" << double(100.0 * ii1/Len) << "%，具体：" << ii1 << "，还剩" << Len - ii1 << std::endl;};
+        if(ii1 % 5000 == 0){std::cout << "[Coincidence_Pairs::Find_Coincidence_Pairs] 已处理：" << double(100.0 * ii1/Len) << "%，具体：" << ii1 << "，还剩" << Len - ii1 << std::endl;};
         chain->GetEntry(ii1);
         Pos[0].SetXYZ(prompt_posx, prompt_posy, prompt_posz);
         Pos[1].SetXYZ(delayed_posx, delayed_posy, delayed_posz);
         Delta_R = Pos[1] - Pos[0];
-        Delta_T = ComputeDelta_T(prompt_50mhz, delayed_50mhz);
+        Delta_T = Compute_Delta_T(prompt_50mhz, delayed_50mhz);
     //Energy Cut
         if(Prompt_Energy_Cut(prompt_energy) == false) {continue;};
         if(Delayed_Energy_Cut(delayed_energy) == false) {continue;};
@@ -245,7 +246,7 @@ void Find_Coincidence_Pairs(std::string Out_File, std::string LooseCut_Files, st
                     break;
                 };
             };
-            std::cout << "更新Muon:" << Muon_Run_Array[Index_Muon_Array] << ",SubRun:" << Muon_SubRun_Array[Index_Muon_Array] << ",Prompt Run:" << run_id << ", Prompt SubRun:" << subrun_id << std::endl;
+            std::cout << "[Coincidence_Pairs::Find_Coincidence_Pairs::Muon Cut] 更新Muon：" << Muon_Run_Array[Index_Muon_Array] << ",SubRun:" << Muon_SubRun_Array[Index_Muon_Array] << ",Prompt Run:" << run_id << ", Prompt SubRun:" << subrun_id << std::endl;
         };
         if( PassMuonCut(Index_Muon_Array, Muon_Len, Muon_50MHz_Array, Muon_Run_Array, Muon_SubRun_Array, prompt_50mhz, run_id, subrun_id) == false){continue;};
         Number_CoincidencePair_Energy_Radius_DeltaT_DeltaR_Data_Muon++;
@@ -304,12 +305,12 @@ void Find_Coincidence_Pairs(std::string Out_File, std::string LooseCut_Files, st
     outfile->Write();
     outfile->Close();
 //Show Details
-    std::cout << "After Energy Cut:" << Number_CoincidencePair_Energy << std::endl;
-    std::cout << "After Radius Cut:" << Number_CoincidencePair_Energy_Radius << std::endl;
-    std::cout << "After Delta T Cut:" << Number_CoincidencePair_Energy_Radius_DeltaT << std::endl;
-    std::cout << "After Delta R Cut:" << Number_CoincidencePair_Energy_Radius_DeltaT_DeltaR << std::endl;
-    std::cout << "After Data Clean Mask Cut:" << Number_CoincidencePair_Energy_Radius_DeltaT_DeltaR_Data << std::endl;
-    std::cout << "After Muon Cut:" << Number_CoincidencePair_Energy_Radius_DeltaT_DeltaR_Data_Muon << std::endl;
+    std::cout << "[Coincidence_Pairs::Find_Coincidence_Pairs] After Energy Cut:" << Number_CoincidencePair_Energy << std::endl;
+    std::cout << "[Coincidence_Pairs::Find_Coincidence_Pairs] After Radius Cut:" << Number_CoincidencePair_Energy_Radius << std::endl;
+    std::cout << "[Coincidence_Pairs::Find_Coincidence_Pairs] After Delta T Cut:" << Number_CoincidencePair_Energy_Radius_DeltaT << std::endl;
+    std::cout << "[Coincidence_Pairs::Find_Coincidence_Pairs] After Delta R Cut:" << Number_CoincidencePair_Energy_Radius_DeltaT_DeltaR << std::endl;
+    std::cout << "[Coincidence_Pairs::Find_Coincidence_Pairs] After Data Clean Mask Cut:" << Number_CoincidencePair_Energy_Radius_DeltaT_DeltaR_Data << std::endl;
+    std::cout << "[Coincidence_Pairs::Find_Coincidence_Pairs] After Muon Cut:" << Number_CoincidencePair_Energy_Radius_DeltaT_DeltaR_Data_Muon << std::endl;
 }
 
 void Plot_IBD_Candidate(std::string IBD_Files, std::string OutPWD)
@@ -389,7 +390,7 @@ void Plot_IBD_Candidate(std::string IBD_Files, std::string OutPWD)
         prompt_energy->Fill(PromptEnergy);
         delayed_energy->Fill(DelayedEnergy);
         //Delta T
-        Delta_T = ComputeDelta_T(Prompt50MHz, Delayed50MHz)/1e3;
+        Delta_T = Compute_Delta_T(Prompt50MHz, Delayed50MHz)/1e3;
         delta_T->Fill(Delta_T);
         //Position
         Prompt_Pos.SetXYZ(PromptPosX, PromptPosY, PromptPosZ);
@@ -403,7 +404,7 @@ void Plot_IBD_Candidate(std::string IBD_Files, std::string OutPWD)
     FitSavePlot_G(OutPut_Delayed_Energy, delayed_energy, "Data", "E_{delayed}/MeV", "Delayed Energy", 0, 0, 0, 0.13, 0.7, 0.3, 0.85);
     FitSavePlot_E(OutPut_Delta_T, delta_T, "Data", "#Delta T/#mu s", "#Delta T", 0, 0, 0, 0.5, 0.7, 0.8, 0.8);
     //SavePlot(OutPut_Position, delayed_pos, "Prompt", "z/mm", "#rho^2/mm^2");
-    SaveTwoPlots(OutPut_Position, prompt_pos, "Prompt", delayed_pos, "Delayed", "Position of Coincidence Pair", "#rho^{2}/mm^{2}", "z/mm", 0.8, 0.8, 0.9, 0.9);
+    Save_Two_Plots(OutPut_Position, prompt_pos, "Prompt", delayed_pos, "Delayed", "Position of Coincidence Pair", "#rho^{2}/mm^{2}", "z/mm", 0.8, 0.8, 0.9, 0.9);
 }
 
 /* //Back Code for Testing

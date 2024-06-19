@@ -6,8 +6,10 @@
 #include <vector>
 //ROOT
 #include <TFile.h>
+#include <TTree.h>
 //RAT
 //Self-Defined
+#include "./Constant_Setting.hh"
 
 class FitParameters
 {
@@ -21,6 +23,7 @@ public:
     static FitParameters *Get_Global_Point();
     unsigned int Get_Total_Number() {return C_Total_Number;};
     unsigned int Get_Index(std::string Name);
+    void Compute_Events(Double_t Duration, Int_t Start_Run, Int_t End_Run);
     std::string Get_Name(unsigned int Index);
     Double_t Get_Value(unsigned int Index);
     Double_t Get_Value(std::string Name);
@@ -65,6 +68,67 @@ FitParameters *FitParameters::Point_FitParameters_ = new FitParameters();
 FitParameters *FitParameters::Get_Global_Point()
 {
     return Point_FitParameters_;
+};
+
+void FitParameters::Compute_Events(Double_t Duration, Int_t Start_Run, Int_t End_Run)
+{
+//Read Muon File
+    TFile *infile_muon = new TFile(MUON_FILE.c_str());
+    TTree *intree_muon = (TTree*) infile_muon->Get("output");
+    //Set Branch Address
+    UInt_t Muon_RunID;
+    intree_muon->SetBranchAddress("RunID", &Muon_RunID);
+    Int_t Number_Muon = 0;
+    for(int ii1 = 0; ii1 < intree_muon->GetEntries(); ii1++)
+    {
+        intree_muon->GetEntry(ii1);
+        if(Muon_RunID < Start_Run){continue;};
+        if(Muon_RunID >= Start_Run && Muon_RunID <= End_Run){Number_Muon++;};
+        if(Muon_RunID > End_Run){break;};
+    };
+//Effective Time
+    Duration = Duration - Number_Muon * 20.0/86400;//days
+    std::cout << "Duration(days):" << Duration + Number_Muon * 20.0/86400 << ", Muon:" << Number_Muon << ", Muon Vote(days):" << Number_Muon * 20.0/86400 << ", Effective Duraton(days):" << Duration << std::endl;
+//Compute Events
+    //Reactor
+    Double_t Number_Reactor = Duration * REACTOR_EVENTS_RATE * REACTOR_SELECTION_EFFIENCY/ 365.0;
+    Double_t Error_Reactor = REACTOR_EVENTS_RELATIVE_ERROR * Number_Reactor;
+    //Geo U
+    Double_t Number_U = Duration * U_EVENTS_RATE * U_SELECTION_EFFICIENCY / 365.0;
+    Double_t Error_U = U_EVENTS_RELATIVE_ERROR * Number_U;
+    //Geo Th
+    Double_t Number_Th = Duration * TH_EVENTS_RATE * TH_SELECTION_EFFICIENCY / 365.0;
+    Double_t Error_Th = TH_EVENTS_RELATIVE_ERROR * Number_Th;
+    //AN
+    Double_t Number_AN = Duration * AN_EVENTS_RATE * AN_SELECTION_EFFICIENCY / 365;
+    Double_t Error_AN = AN_EVENTS_RELATIVE_ERROR * Number_AN;
+
+    Double_t Number_AN_PR = Number_AN * PROTON_RECOIL_FRACTION;
+    Double_t Error_AN_PR = Number_AN_PR * PROTON_RECOIL_RELATIVE_ERROR;
+    Double_t Number_AN_C12 = Number_AN * C12_FRACTION;
+    Double_t Error_AN_C12 = Number_AN_C12 * C12_RELATIVE_ERROR;
+    Double_t Number_AN_O16 = Number_AN * O16_FRACTION;
+    Double_t Error_AN_O16 = Number_AN_O16 * O16_RELATIVE_ERROR;
+
+    Double_t Number_AN_Ground = Number_AN_PR + Number_AN_C12;
+    Double_t Error_AN_Ground = sqrt(pow(Error_AN_PR, 2) + pow(Error_AN_C12, 2));
+    Double_t Number_AN_Exicted = Number_AN_O16;
+    Double_t Error_AN_Exicted = Error_AN_O16;
+    //Total
+    Double_t Number_Total = Number_Reactor + Number_U + Number_Th + Number_AN;
+    Double_t Error_Total = sqrt(pow(Error_Reactor, 2) + pow(Error_U, 2) + pow(Error_Th, 2) + pow(Error_AN, 2));
+    std::cout << "[FitParameters::Compute_Events] Reactor:" << Number_Reactor << "+-" << Error_Reactor << std::endl;
+    std::cout << "[FitParameters::Compute_Events] U:" << Number_U << "+-" << Error_U << std::endl;
+    std::cout << "[FitParameters::Compute_Events] Th:" << Number_Th << "+-" << Error_Th << std::endl;
+    std::cout << "[FitParameters::Compute_Events] AN:" << Number_AN << "+-" << Error_AN << std::endl;
+    std::cout << "[FitParameters::Compute_Events] Total:" << Number_Total << "+-" << Error_Total << std::endl;
+//Add in Parameters
+    FitParameters *Fit_Par = FitParameters::Get_Global_Point();
+    Fit_Par->Add_Parameter(NAME_REACTOR, Number_Reactor, Error_Reactor, 1);
+    Fit_Par->Add_Parameter(NAME_GEO_U, Number_U, Error_U, 1);
+    Fit_Par->Add_Parameter(NAME_GEO_TH, Number_Th, Error_Th, 1);
+    Fit_Par->Add_Parameter(NAME_AN_GROUND, Number_AN_Ground, Error_AN_Ground, 1);
+    Fit_Par->Add_Parameter(NAME_AN_EXICTED, Number_AN_Exicted, Error_AN_Exicted, 1);
 };
 
 unsigned int FitParameters::Get_Index(std::string Name)
@@ -361,7 +425,7 @@ void FitParameters::Show_Parameter(unsigned int Index)
         Error_Factor =  C_Error_Factor.at(Index);
         Value_Min = C_Value_Min.at(Index);
         Value_Max = C_Value_Max.at(Index);
-        std::cout << "[FitParameters::Show_Parameter] Name:" << Name << ", Value:" << Value << ", Prior Value:" << Prior_Value << ", Error:" << Error << ", Prior Error:" << Prior_Error << ", Error Factor:" << Error_Factor << ", Relative Error:" << Error/Value << ", Prior Relative Error:" << Prior_Error/Prior_Value << ", Min Value:" << Value_Min << ", Max Value:" << Value_Max << std::endl;
+        std::cout << "[FitParameters::Show_Parameter] Name:" << Name << ", Value:" << Value << ", Error:" << Error << ", Relative Error:" << Error/Value << ", Prior Value:" << Prior_Value << ", Prior Error:" << Prior_Error << ", Prior Relative Error:" << Prior_Error/Prior_Value << ", Error Factor:" << Error_Factor << ", Min Value:" << Value_Min << ", Max Value:" << Value_Max << std::endl;
     };
 };
 
@@ -386,8 +450,47 @@ void FitParameters::Show_All_Parameters()
         Error_Factor =  C_Error_Factor.at(Index);
         Value_Min = C_Value_Min.at(Index);
         Value_Max = C_Value_Max.at(Index);
-        std::cout << "[FitParameters::Show_All_Parameters] Name:" << Name << ", Value:" << Value << ", Prior Value:" << Prior_Value << ", Error:" << Error << ", Prior Error:" << Prior_Error << ", Error Factor:" << Error_Factor << ", Relative Error:" << Error/Value << ", Prior Relative Error:" << Prior_Error/Prior_Value << ", Min Value:" << Value_Min << ", Max Value:" << Value_Max << std::endl;
+        std::cout << "[FitParameters::Show_All_Parameter] Name:" << Name << ", Value:" << Value << ", Error:" << Error << ", Relative Error:" << Error/Value << ", Prior Value:" << Prior_Value << ", Prior Error:" << Prior_Error << ", Prior Relative Error:" << Prior_Error/Prior_Value << ", Error Factor:" << Error_Factor << ", Min Value:" << Value_Min << ", Max Value:" << Value_Max << std::endl;
     };
+//Reactor
+    Double_t Number_Reactor, Error_Reactor;
+    Number_Reactor = FitParameters::Get_Value(NAME_REACTOR);
+    Error_Reactor = FitParameters::Get_Error(NAME_REACTOR);
+    std::cout << "[FitParameters::Show_All_Parameters] Reactor:" << Number_Reactor << ", Error:" << Error_Reactor << std::endl;
+//Geo
+    Double_t Number_U, Number_Th, Number_Geo;
+    Double_t Error_U, Error_Th, Error_Geo;
+    Number_U = FitParameters::Get_Value(NAME_GEO_U);
+    Error_U = FitParameters::Get_Error(NAME_GEO_U);
+    Number_Th = FitParameters::Get_Value(NAME_GEO_TH);
+    Error_Th = FitParameters::Get_Error(NAME_GEO_TH);
+    Number_Geo = Number_U + Number_Th;
+    Error_Geo = sqrt(pow(Error_U, 2) + pow(Error_Th, 2));
+    std::cout << "[FitParameters::Show_All_Parameters] Geo:" << Number_Geo << ", Error:" << Error_Geo << std::endl;
+//Geo Ratio
+    Double_t Ratio, Error_Ratio;
+    Ratio = Number_U/Number_Th;
+    Error_Ratio = Ratio * sqrt( pow(Error_U/Number_U, 2) + pow(Error_Th/Number_Th, 2));
+    std::cout << "[FitParameters::Show_All_Parameters] Geo Ratio:" << Ratio << ", Error:" << Error_Ratio << std::endl;
+//AN
+    Double_t Number_Ground, Number_Exicted, Number_AN;
+    Double_t Error_Ground, Error_Exicted, Error_AN;
+    Number_Ground = FitParameters::Get_Value(NAME_AN_GROUND);
+    Error_Ground = FitParameters::Get_Error(NAME_AN_GROUND);
+    Number_Exicted = FitParameters::Get_Value(NAME_AN_EXICTED);
+    Error_Exicted = FitParameters::Get_Error(NAME_AN_EXICTED);
+    Number_AN = Number_Ground + Number_AN;
+    Error_AN = sqrt( pow(Error_Ground, 2) + pow(Error_Exicted, 2));
+    std::cout << "[FitParameters::Show_All_Parameters] AN:" << Number_AN << ", Error:" << Error_AN << std::endl;
+//Total
+    Double_t Total = 0, Error_Total;
+    for(int Index = 0; Index < C_Total_Number; Index++)
+    {
+        Total = Total + C_Value.at(Index);
+        Error_Total = Error_Total + pow( C_Error.at(Index), 2);
+    };
+    Error_Total = sqrt(Error_Total);
+    std::cout << "[FitParameters::Show_All_Parameters] Total:" << Total << ", Error:" << Error_Total << std::endl;
 };
 
 #endif
