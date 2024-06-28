@@ -1,5 +1,5 @@
-#ifndef STUDY_AN_ERROR_HH
-#define STUDY_AN_ERROR_HH
+#ifndef COMPUTE_SIGMA_HH
+#define COMPUTE_SIGMA_HH
 //CPP
 #include <iostream>
 #include <vector>
@@ -45,7 +45,7 @@ Double_t Compute_Standard_Error(std::vector<Double_t> &vector_x, std::vector<Dou
     return Sum/(Len - 1);
 }
 
-void Compute()
+void Compute_AN()
 {
     std::string InFile = PDF_DATA_AN;
 //Read File
@@ -86,6 +86,44 @@ void Compute()
     std::cout << "Cov(PR, C12):" << Sigma_PR_C12 << ", Cov(PR, O16):" << Sigma_PR_O16 << ", Cov(C12, O16):" << Sigma_C12_O16 << std::endl;
     std::cout << "Cov(C12, PR):" << Compute_Standard_Error(C12, Proton_Recoil) << ", Cov(O16, PR):" << Compute_Standard_Error(O16, Proton_Recoil) << ", Cov(O16, C12):" << Compute_Standard_Error(O16, C12) << std::endl;
     std::cout << "Sctrictly Computation:" << Sigma_PR + Sigma_C12 + Sigma_O16 + 2 * Sigma_PR_C12 + 2 * Sigma_PR_O16 + 2 * Sigma_C12_O16 << ", Roughly Computation:" << Sigma_PR + Sigma_C12 + Sigma_O16 << std::endl;
+};
+
+void Compute_Geo()
+{
+    std::string InFile_U = PDF_DATA_GEO_U;
+    std::string InFile_Th = PDF_DATA_GEO_TH;
+//Read File
+    TFile *infile_u = new TFile(InFile_U.c_str());
+    TTree *intree_u = (TTree*) infile_u->Get("output");
+    TFile *infile_th = new TFile(InFile_Th.c_str());
+    TTree *intree_th = (TTree*) infile_th->Get("output");
+//Setup Branch Address
+    Double_t Prompt_Energy;
+    intree_u->SetBranchAddress("PromptEnergy", &Prompt_Energy);
+    intree_th->SetBranchAddress("PromptEnergy", &Prompt_Energy);
+//Loop Data
+    std::vector<Double_t> Prompt_U, Prompt_Th;
+    for(int ii1 = 0; ii1 < intree_u->GetEntries(); ii1++)
+    {
+        intree_u->GetEntry(ii1);
+        Prompt_U.push_back(Prompt_Energy);
+    };
+    for(int ii1 = 0; ii1 < intree_th->GetEntries(); ii1++)
+    {
+        intree_th->GetEntry(ii1);
+        Prompt_Th.push_back(Prompt_Energy);
+    };
+//Close Files
+    infile_u->Close();
+    infile_th->Close();
+//Compute Cov
+    Double_t Sigma_U = Compute_Standard_Error(Prompt_U, Prompt_U);
+    Double_t Sigma_Th = Compute_Standard_Error(Prompt_Th, Prompt_Th);
+    Double_t Sigma_U_Th = Compute_Standard_Error(Prompt_U, Prompt_Th);
+//Show
+    std::cout << "Sigma U:" << Sigma_U << ", Sigma Th:" << Sigma_Th << std::endl;
+    std::cout << "Sigma U Th:" << Sigma_U_Th << std::endl;
+
 }
 
 #endif

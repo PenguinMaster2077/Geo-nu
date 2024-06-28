@@ -44,6 +44,8 @@ public:
     void Fitting();
     void Get_All_Hists();
     void Draw_All();
+    void Show_Results();
+    Double_t Get_Fit_Covariance_Matrix_Element(unsigned int i, unsigned int j) {return minuit->GetCovarianceMatrixElement(i, j);};
 private:
     //Minuit
     TVirtualFitter *minuit;
@@ -377,6 +379,63 @@ void Fitter::Draw_All()
 
     legend->Draw();
     c1->Print("./Draw_All.jpg");
+};
+
+void Fitter::Show_Results()
+{
+    FitParameters *Fit_Par = FitParameters::Get_Global_Point();
+    //Reactor
+    Double_t Number_Reactor, Error_Reactor;
+    Number_Reactor = Fit_Par->Get_Value(NAME_REACTOR);
+    Error_Reactor = Fit_Par->Get_Error(NAME_REACTOR);
+    std::cout << "[Fitter::Show_Results] Reactor:" << Number_Reactor << ", Error:" << Error_Reactor << std::endl;
+//Geo
+    Int_t Index_U = Fit_Par->Get_Index(NAME_GEO_U);
+    Int_t Index_Th = Fit_Par->Get_Index(NAME_GEO_TH);
+    Double_t Number_U, Number_Th, Number_Geo;
+    Double_t Error_U, Error_Th, Error_Geo;
+    Number_U = Fit_Par->Get_Value(Index_U);
+    Error_U = Fit_Par->Get_Error(Index_U);
+    Number_Th = Fit_Par->Get_Value(Index_Th);
+    Error_Th = Fit_Par->Get_Error(Index_Th);
+    Double_t Sigma_U_Th = Fitter::Get_Fit_Covariance_Matrix_Element(Index_U, Index_Th);
+    Number_Geo = Number_U + Number_Th;
+    Error_Geo = sqrt(pow(Error_U, 2) + pow(Error_Th, 2) + 2 * Sigma_U_Th);
+    std::cout << "[Fitter::Show_Results] Geo:" << Number_Geo << ", Error:" << Error_Geo << std::endl;
+//Geo Ratio
+    Double_t Ratio, Error_Ratio;
+    Ratio = Number_U/Number_Th;
+    Error_Ratio = Ratio * sqrt( pow(Error_U/Number_U, 2) + pow(Error_Th/Number_Th, 2) - 2 * Sigma_U_Th/(Number_U * Number_Th));
+    std::cout << "[Fitter::Show_Results] Geo Ratio:" << Ratio << ", Error:" << Error_Ratio << std::endl;
+//AN
+    Int_t Index_Ground = Fit_Par->Get_Index(NAME_AN_GROUND);
+    Int_t Index_Exicted = Fit_Par->Get_Index(NAME_AN_EXICTED);
+    Double_t Number_Ground, Number_Exicted, Number_AN;
+    Double_t Error_Ground, Error_Exicted, Error_AN;
+    Number_Ground = Fit_Par->Get_Value(Index_Ground);
+    Error_Ground = Fit_Par->Get_Error(Index_Ground);
+    Number_Exicted = Fit_Par->Get_Value(Index_Exicted);
+    Error_Exicted = Fit_Par->Get_Error(Index_Exicted);
+    Double_t Sigma_Ground_Exicted = Fitter::Get_Fit_Covariance_Matrix_Element(Index_Ground, Index_Exicted);
+    Number_AN = Number_Ground + Number_AN;
+    Error_AN = sqrt( pow(Error_Ground, 2) + pow(Error_Exicted, 2) + 2 * Sigma_Ground_Exicted);
+    std::cout << "[Fitter::Show_Results] AN:" << Number_AN << ", Error:" << Error_AN << std::endl;
+//Total
+    Double_t Total = 0, Error_Total;
+    for(int Index = 0; Index < Fit_Par->Get_Total_Number(); Index++)
+    {
+        Total = Total + Fit_Par->Get_Value(Index);
+    };
+    for(int ii1 = 0; ii1 < Fit_Par->Get_Total_Number(); ii1++)
+    {
+        for(int ii2 = 0; ii2 < Fit_Par->Get_Total_Number(); ii2++)
+        {
+            Error_Total = Error_Total + Fitter::Get_Fit_Covariance_Matrix_Element(ii1, ii2);
+        };
+    };
+    Error_Total = sqrt(Error_Total);
+    std::cout << "[Fitter::Show_Results] Total:" << Total << ", Error:" << Error_Total << std::endl;
+    std::cout << "[Fitter::Show_Results] Data Observed:" << Hist_Data->Integral() << std::endl;
 }
 
 #endif

@@ -8,7 +8,9 @@
 //Self-Defined
 #include "../HeadFile/Constant_Setting.hh"
 #include "../HeadFile/Models.hh"
+#include "../HeadFile/Fit_Parameters.hh"
 #include "../HeadFile/Fitter.hh"
+
 
 int Test_Fitter()
 {
@@ -38,10 +40,12 @@ int Test_Fitter()
 
 //Test--Fitting()
     fitter->Fitting();
-    Fit_Par->Show_All_Parameters();
+    //Fit_Par->Show_All_Parameters();
 
 //Test--Get_All_Models()
-    fitter->Draw_All();
+    //fitter->Draw_All();
+//Test--Show_Results()
+    fitter->Show_Results();
 
 
     return 0;
