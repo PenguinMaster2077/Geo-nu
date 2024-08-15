@@ -155,8 +155,10 @@ void Geonu::Setup_PDFs(TH1D *Example_Hist)
 void Geonu::Compute_Predictions()
 {
     FitParameters *Fit_Par = FitParameters::Get_Global_Point();
-    Double_t Number_U = Fit_Par->Get_Value(NAME_GEO_U);
-    Double_t Number_Th = Fit_Par->Get_Value(NAME_GEO_TH);
+    Double_t Number_Geo = Fit_Par->Get_Value(NAME_GEO);
+    Double_t Geo_ratio = Fit_Par->Get_Value(NAME_GEO_RATIO);
+    Double_t Number_U = Number_Geo * Geo_ratio/ (Geo_ratio + 1);
+    Double_t Number_Th = Number_Geo * 1/ (Geo_ratio + 1);
 //U
     Hist_Prediction = (TH1D*) (Hist_U->Clone(NAME_FITTER_GEO.c_str()));
     Hist_Prediction->Scale(Number_U);

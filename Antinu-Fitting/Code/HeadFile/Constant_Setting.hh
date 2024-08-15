@@ -13,6 +13,13 @@ const Double_t REACTOR_EVENTS_RELATIVE_ERROR = 0.03; //Unit: 1
 const Double_t REACTOR_SELECTION_EFFIENCY = 0.78; //Unit: 1
 
 //Geonu
+const Double_t GEO_EVENTS_RATE = 26;
+const Double_t GEO_EVENTS_RELATIVE_ERROR = 1;
+const Double_t GEO_SELECTION_EFFICIENCY = 0.72;
+
+const Double_t GEO_RATIO = 3.7;
+const Double_t GEO_RATIO_RELATIVE_ERROR = 0.35;
+
 const Double_t U_EVENTS_RATE = 19.6897;//Detected rector events in Full AV per year
 const Double_t U_EVENTS_RELATIVE_ERROR = 1; //Unit: 1
 const Double_t U_SELECTION_EFFICIENCY = 0.72;  //Unit: 1
@@ -20,6 +27,8 @@ const Double_t U_SELECTION_EFFICIENCY = 0.72;  //Unit: 1
 const Double_t TH_EVENTS_RATE = 5.49776;//Detected rector events in Full AV per year
 const Double_t TH_EVENTS_RELATIVE_ERROR = 1; //Unit: 1
 const Double_t TH_SELECTION_EFFICIENCY = 0.72; //Unit: 1
+
+const Double_t Rate_TNU = 1/(0.54 * GEO_SELECTION_EFFICIENCY); //Unit: TNU/Rate
 
 //AlphaN
 const Double_t AN_EVENTS_RATE = 76.65;//Detected rector events in Full AV per year
@@ -84,6 +93,8 @@ const std::string PDF_DATA_AN = PDF_DATA_PWD + "AN_RawData_PairCut_Energy_DeltaT
 
 //Name in FitParameters
 const std::string NAME_REACTOR = "Reactor";
+const std::string NAME_GEO = "Geo";
+const std::string NAME_GEO_RATIO = "Geo_Ratio";
 const std::string NAME_GEO_U = "Geo_U";
 const std::string NAME_GEO_TH = "Geo_Th";
 const std::string NAME_AN_GROUND = "AN_Ground";
@@ -104,8 +115,8 @@ const std::string FITTER_CHI_SQUARE = "Chi_Square";
 const std::string FITTER_DATA_HIST = "Data_Hist";
 
 //Data File
-const std::string DATA_IBD_CANDIDATE = "/rat/MyCode/Work/Geo-nu-Data/CoincidencePair/Data/20240529/Gold_20R_0000300000-0000306498.root";
-const std::string MUON_FILE = "/rat/MyCode/Work/Geo-nu-Data/Muon/Gold_20R_Muon_Abstract_0000300000-0000307612.root";
+const std::string DATA_IBD_CANDIDATE = "/rat/MyCode/Work/Geo-nu-Data/CoincidencePair/Data/20240529/Gold_20R_0000300000-0000309277.root";
+const std::string MUON_FILE = "/rat/MyCode/Work/Geo-nu-Data/Muon/Gold_20R_Muon_Abstract_0000300000-0000309277.root";
 //AN Setting
 //Energy Region Setting
 const Double_t AN_ENERGY_PROTON_RECOIL = 3.4;//MeV

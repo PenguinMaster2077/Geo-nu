@@ -37,6 +37,7 @@ public:
     Double_t Get_Error(std::string Name);
     Double_t Get_Prior_Error(unsigned int Index);
     Double_t Get_Prior_Error(std::string Name);
+    Double_t Get_Effective_Duration() {return Effective_Duration;};
     void Set_Error(unsigned int Index, Double_t Value);
     void Set_Error(std::string Name, Double_t Value);
     void Set_Value_Min(unsigned int Index, Double_t Value);
@@ -62,7 +63,8 @@ private:
     std::vector<Double_t> C_Prior_Error;
     std::vector<Int_t> C_Error_Factor; //Compute the minimum and maximum of parameter
     std::vector<Double_t> C_Value_Min;
-    std::vector<Double_t> C_Value_Max;  
+    std::vector<Double_t> C_Value_Max; 
+    Double_t Effective_Duration;// Unit: year
 };
 
 FitParameters *FitParameters::Point_FitParameters_ = new FitParameters();
@@ -90,17 +92,23 @@ void FitParameters::Compute_Events(Double_t Duration, Int_t Start_Run, Int_t End
     };
 //Effective Time
     Duration = Duration - Number_Muon * 20.0/86400;//days
-    std::cout << "[FitParameters::Compute_Events] Duration(days):" << Duration + Number_Muon * 20.0/86400 << ", Muon:" << Number_Muon << ", Muon Vote(days):" << Number_Muon * 20.0/86400 << ", Effective Duraton(days):" << Duration << std::endl;
+    Effective_Duration = Duration / 365;
+    std::cout << "[FitParameters::Compute_Events] Duration(days):" << Duration + Number_Muon * 20.0/86400 << ", Muon:" << Number_Muon << ", Muon Veto(days):" << Number_Muon * 20.0/86400 << ", Effective Duraton(days):" << Duration << std::endl;
 //Compute Events
     //Reactor
     Double_t Number_Reactor = Duration * REACTOR_EVENTS_RATE * REACTOR_SELECTION_EFFIENCY/ 365.0;
     Double_t Error_Reactor = REACTOR_EVENTS_RELATIVE_ERROR * Number_Reactor;
+    //Geo Events;
+    Double_t Number_Geo = Duration * GEO_EVENTS_RATE * GEO_SELECTION_EFFICIENCY / 365.0;
+    Double_t Error_Geo = GEO_EVENTS_RELATIVE_ERROR * Number_Geo;
+    //Geo Ratio
+        //Set up in Constant_Setting.hh
     //Geo U
-    Double_t Number_U = Duration * U_EVENTS_RATE * U_SELECTION_EFFICIENCY / 365.0;
-    Double_t Error_U = U_EVENTS_RELATIVE_ERROR * Number_U;
+    Double_t Number_U = Number_Geo * (GEO_RATIO)/(GEO_RATIO + 1);
+    // Double_t Error_U = U_EVENTS_RELATIVE_ERROR * Number_U;//Can not compute, because we don't know their cov
     //Geo Th
-    Double_t Number_Th = Duration * TH_EVENTS_RATE * TH_SELECTION_EFFICIENCY / 365.0;
-    Double_t Error_Th = TH_EVENTS_RELATIVE_ERROR * Number_Th;
+    Double_t Number_Th = Number_Geo /(GEO_RATIO + 1);
+    // Double_t Error_Th = TH_EVENTS_RELATIVE_ERROR * Number_Th;//Can not compute, because we don't know their cov
     //AN
     Double_t Number_AN = Duration * AN_EVENTS_RATE * AN_SELECTION_EFFICIENCY / 365;
     Double_t Error_AN = AN_EVENTS_RELATIVE_ERROR * Number_AN;
@@ -118,17 +126,23 @@ void FitParameters::Compute_Events(Double_t Duration, Int_t Start_Run, Int_t End
     Double_t Error_AN_Exicted = Error_AN_O16;
     //Total
     Double_t Number_Total = Number_Reactor + Number_U + Number_Th + Number_AN;
-    Double_t Error_Total = sqrt(pow(Error_Reactor, 2) + pow(Error_U, 2) + pow(Error_Th, 2) + pow(Error_AN, 2));
+    Double_t Error_Total = sqrt(pow(Error_Reactor, 2) + pow(Error_Geo, 2) + pow(Error_AN, 2));
     std::cout << "[FitParameters::Compute_Events] Reactor:" << Number_Reactor << "+-" << Error_Reactor << std::endl;
-    std::cout << "[FitParameters::Compute_Events] U:" << Number_U << "+-" << Error_U << std::endl;
-    std::cout << "[FitParameters::Compute_Events] Th:" << Number_Th << "+-" << Error_Th << std::endl;
+    std::cout << "[FitParameters::Compute_Events] Geo:" << Number_Geo << "+-" << Error_Geo << std::endl;
+    std::cout << "[FitParameters::Compute_Events] Geo Ratio:" << GEO_RATIO << "+-" << GEO_RATIO * GEO_RATIO_RELATIVE_ERROR << std::endl;
+    std::cout << "[FitParameters::Compute_Events] U:" << Number_U << std::endl;
+    std::cout << "[FitParameters::Compute_Events] Th:" << Number_Th << std::endl;
     std::cout << "[FitParameters::Compute_Events] AN:" << Number_AN << "+-" << Error_AN << std::endl;
+    std::cout << "[FitParameters::Compute_Events] AN Ground:" << Number_AN_Ground << "+-" << Error_AN << std::endl;
+    std::cout << "[FitParameters::Compute_Events] AN Exicted:" << Number_AN_Exicted << "+-" << Error_AN_Exicted << std::endl;
     std::cout << "[FitParameters::Compute_Events] Total:" << Number_Total << "+-" << Error_Total << std::endl;
 //Add in Parameters
     FitParameters *Fit_Par = FitParameters::Get_Global_Point();
     Fit_Par->Add_Parameter(NAME_REACTOR, Number_Reactor, Error_Reactor, 1);
-    Fit_Par->Add_Parameter(NAME_GEO_U, Number_U, Error_U, 1);
-    Fit_Par->Add_Parameter(NAME_GEO_TH, Number_Th, Error_Th, 1);
+    Fit_Par->Add_Parameter(NAME_GEO, Number_Geo, Error_Geo, 1);
+    Fit_Par->Add_Parameter(NAME_GEO_RATIO, GEO_RATIO, GEO_RATIO * GEO_RATIO_RELATIVE_ERROR, 1);
+    // Fit_Par->Add_Parameter(NAME_GEO_U, Number_U, Error_U, 1);
+    // Fit_Par->Add_Parameter(NAME_GEO_TH, Number_Th, Error_Th, 1);
     Fit_Par->Add_Parameter(NAME_AN_GROUND, Number_AN_Ground, Error_AN_Ground, 1);
     Fit_Par->Add_Parameter(NAME_AN_EXICTED, Number_AN_Exicted, Error_AN_Exicted, 1);
 };

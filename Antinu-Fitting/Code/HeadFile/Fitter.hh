@@ -390,23 +390,36 @@ void Fitter::Show_Results()
     Error_Reactor = Fit_Par->Get_Error(NAME_REACTOR);
     std::cout << "[Fitter::Show_Results] Reactor:" << Number_Reactor << ", Error:" << Error_Reactor << std::endl;
 //Geo
-    Int_t Index_U = Fit_Par->Get_Index(NAME_GEO_U);
-    Int_t Index_Th = Fit_Par->Get_Index(NAME_GEO_TH);
-    Double_t Number_U, Number_Th, Number_Geo;
-    Double_t Error_U, Error_Th, Error_Geo;
-    Number_U = Fit_Par->Get_Value(Index_U);
-    Error_U = Fit_Par->Get_Error(Index_U);
-    Number_Th = Fit_Par->Get_Value(Index_Th);
-    Error_Th = Fit_Par->Get_Error(Index_Th);
-    Double_t Sigma_U_Th = Fitter::Get_Fit_Covariance_Matrix_Element(Index_U, Index_Th);
-    Number_Geo = Number_U + Number_Th;
-    Error_Geo = sqrt(pow(Error_U, 2) + pow(Error_Th, 2) + 2 * Sigma_U_Th);
+    Int_t Index_Geo = Fit_Par->Get_Index(NAME_GEO);
+    Int_t Index_Geo_Ratio = Fit_Par->Get_Index(NAME_GEO_RATIO);
+    Double_t Number_U, Number_Th, Number_Geo, Geo_Ratio;
+    Double_t Error_U, Error_Th, Error_Geo, Error_Geo_Ratio;
+    //Geo
+    Number_Geo = Fit_Par->Get_Value(Index_Geo);
+    Error_Geo = Fit_Par->Get_Error(Index_Geo);
+    //Geo Ratio
+    Geo_Ratio = Fit_Par->Get_Value(Index_Geo_Ratio);
+    Error_Geo_Ratio = Fit_Par->Get_Error(Index_Geo_Ratio);
+    //Covariance
+    Double_t Sigma_Geo_Ratio = Fitter::Get_Fit_Covariance_Matrix_Element(Index_Geo, Index_Geo_Ratio);
+    //U
+    Number_U = Number_Geo * Geo_Ratio/(Geo_Ratio + 1);
+    Double_t Part1 = pow(Number_Geo * Error_Geo_Ratio, 2) /pow((Geo_Ratio + 1), 4);
+    Double_t Part2 = pow(Geo_Ratio * Error_Geo, 2) / pow(Geo_Ratio + 1, 2);
+    Double_t Part3 = 2 * Geo_Ratio * Number_Geo*  Sigma_Geo_Ratio/ pow(Geo_Ratio + 1, 3);
+    Error_U = sqrt(Part1 + Part2 + Part3);
+    //Th
+    Number_Th = Number_Geo * 1/(Geo_Ratio + 1);
+    Part1 = pow(Number_Geo * Error_Geo_Ratio, 2) /pow((Geo_Ratio + 1), 4);
+    Part2 = pow(Error_Geo, 2) / pow(Geo_Ratio + 1, 2);
+    Part3 = -2 * Number_Geo * Sigma_Geo_Ratio/ pow(Geo_Ratio + 1, 3);
+    Error_Th = sqrt(Part1 + Part2 + Part3);
+    
+
     std::cout << "[Fitter::Show_Results] Geo:" << Number_Geo << ", Error:" << Error_Geo << std::endl;
-//Geo Ratio
-    Double_t Ratio, Error_Ratio;
-    Ratio = Number_U/Number_Th;
-    Error_Ratio = Ratio * sqrt( pow(Error_U/Number_U, 2) + pow(Error_Th/Number_Th, 2) - 2 * Sigma_U_Th/(Number_U * Number_Th));
-    std::cout << "[Fitter::Show_Results] Geo Ratio:" << Ratio << ", Error:" << Error_Ratio << std::endl;
+    std::cout << "[Fitter::Show_Results] Geo Ratio:" << Geo_Ratio << ", Error:" << Error_Geo_Ratio << std::endl;
+    std::cout << "[Fitter::Show_Results] Geo U:" << Number_U << ", Error:" << Error_U << std::endl;
+    std::cout << "[Fitter::Show_Results] Geo Th:" << Number_Th << ", Error:" << Error_Th << std::endl;
 //AN
     Int_t Index_Ground = Fit_Par->Get_Index(NAME_AN_GROUND);
     Int_t Index_Exicted = Fit_Par->Get_Index(NAME_AN_EXICTED);
@@ -417,9 +430,11 @@ void Fitter::Show_Results()
     Number_Exicted = Fit_Par->Get_Value(Index_Exicted);
     Error_Exicted = Fit_Par->Get_Error(Index_Exicted);
     Double_t Sigma_Ground_Exicted = Fitter::Get_Fit_Covariance_Matrix_Element(Index_Ground, Index_Exicted);
-    Number_AN = Number_Ground + Number_AN;
+    Number_AN = Number_Ground + Number_Exicted;
     Error_AN = sqrt( pow(Error_Ground, 2) + pow(Error_Exicted, 2) + 2 * Sigma_Ground_Exicted);
     std::cout << "[Fitter::Show_Results] AN:" << Number_AN << ", Error:" << Error_AN << std::endl;
+    std::cout << "[Fitter::Show_Results] AN Ground:" << Number_Ground << ", Error:" << Error_Ground << std::endl;
+    std::cout << "[Fitter::Show_Results] AN Exicted:" << Number_Exicted << ", Error:" << Error_Exicted << std::endl;
 //Total
     Double_t Total = 0, Error_Total;
     for(int Index = 0; Index < Fit_Par->Get_Total_Number(); Index++)
@@ -428,14 +443,23 @@ void Fitter::Show_Results()
     };
     for(int ii1 = 0; ii1 < Fit_Par->Get_Total_Number(); ii1++)
     {
+        if(Fit_Par->Get_Name(ii1) == NAME_GEO_RATIO){continue;};
         for(int ii2 = 0; ii2 < Fit_Par->Get_Total_Number(); ii2++)
         {
+            if(Fit_Par->Get_Name(ii1) == NAME_GEO_RATIO){continue;};
             Error_Total = Error_Total + Fitter::Get_Fit_Covariance_Matrix_Element(ii1, ii2);
         };
     };
     Error_Total = sqrt(Error_Total);
     std::cout << "[Fitter::Show_Results] Total:" << Total << ", Error:" << Error_Total << std::endl;
     std::cout << "[Fitter::Show_Results] Data Observed:" << Hist_Data->Integral() << std::endl;
+//Geo Rate
+    Double_t Fitted_Geo_Rate = Number_Geo/Fit_Par->Get_Effective_Duration();
+    Double_t Error_Fitted_Geo_Rate = Error_Geo/Fit_Par->Get_Effective_Duration();
+    Double_t Fitted_Geo_TNU = Fitted_Geo_Rate * Rate_TNU;
+    Double_t Error_Fitter_Geo_TNU = Error_Fitted_Geo_Rate * Rate_TNU;
+    std::cout << "[Fitter::Show_Results] Effective Duration (year):" << Fit_Par->Get_Effective_Duration() << " or " << Fit_Par->Get_Effective_Duration() * 365 << " days" << std::endl;
+    std::cout << "[Fitter::Show_Results] Fitted Geo Rate (events per year):" << Fitted_Geo_Rate << "+-" << Error_Fitted_Geo_Rate << ", Corresponding to " << Fitted_Geo_TNU << "+-" << Error_Fitter_Geo_TNU << " TNU" << std::endl;
 }
 
 #endif

@@ -26,7 +26,7 @@ int Test_Fitter()
     an->Setup_PDFs(Example_Hist);
 //Add Fit Parameters
     FitParameters *Fit_Par = FitParameters::Get_Global_Point();
-    Fit_Par->Compute_Events(114.09, 300733, 307612);
+    Fit_Par->Compute_Events(145.17, 300733, 309277);
 //Fitter
     Fitter *fitter = Fitter::Get_Global_Point();
     fitter->Initialize();
@@ -43,7 +43,7 @@ int Test_Fitter()
     //Fit_Par->Show_All_Parameters();
 
 //Test--Get_All_Models()
-    //fitter->Draw_All();
+    fitter->Draw_All();
 //Test--Show_Results()
     fitter->Show_Results();
 

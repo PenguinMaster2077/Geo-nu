@@ -311,6 +311,7 @@ void Find_Coincidence_Pairs(std::string Out_File, std::string LooseCut_Files, st
     std::cout << "[Coincidence_Pairs::Find_Coincidence_Pairs] After Delta R Cut:" << Number_CoincidencePair_Energy_Radius_DeltaT_DeltaR << std::endl;
     std::cout << "[Coincidence_Pairs::Find_Coincidence_Pairs] After Data Clean Mask Cut:" << Number_CoincidencePair_Energy_Radius_DeltaT_DeltaR_Data << std::endl;
     std::cout << "[Coincidence_Pairs::Find_Coincidence_Pairs] After Muon Cut:" << Number_CoincidencePair_Energy_Radius_DeltaT_DeltaR_Data_Muon << std::endl;
+    std::cout << "[Coincidence_Pairs::Find_Coincidence_Pairs] Completing Finding Coincidence_Pairs" << std::endl;
 }
 
 void Plot_IBD_Candidate(std::string IBD_Files, std::string OutPWD)

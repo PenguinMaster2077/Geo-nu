@@ -9,6 +9,7 @@
 #include <TFile.h>
 #include <TH1.h>
 #include <TH1D.h>
+#include <TH2D.h>
 #include <TGraph.h>
 #include <TF1.h>
 #include <TLatex.h>
