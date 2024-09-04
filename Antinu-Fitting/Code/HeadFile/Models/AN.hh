@@ -39,7 +39,7 @@ private:
     TH1D *Hist_Ground, *Hist_Exicted, *Hist_Prediction;
     std::string Name_Proton = "Hist_Proton", Name_C12 = "Hist_C12", Name_O16 = "Hist_O16";
     Bool_t Is_Test;
-    Double_t Pro_Proton, Pro_C12, Pro_O16;
+    Double_t Pro_Proton, Pro_C12, Pro_O16; // Probability
 };
 
 AN *AN::Point_AN_ = new AN();

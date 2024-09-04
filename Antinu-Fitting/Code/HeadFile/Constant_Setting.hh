@@ -110,7 +110,7 @@ const std::string NAME_FITTER_AN_GROUND = "Model_AN_Ground";
 const std::string NAME_FITTER_AN_EXICTED = "Model_AN_Exicted";
 const std::string NAME_FITTER_DATA = "Data";
 
-const std::string FITTER_MAXIMUM_LIKELIHOOD = "Maxmium_Likelihood";
+const std::string FITTER_EXTENDED_MAXIMUM_LIKELIHOOD = "Extended_Maxmium_Likelihood";
 const std::string FITTER_CHI_SQUARE = "Chi_Square";
 const std::string FITTER_DATA_HIST = "Data_Hist";
 

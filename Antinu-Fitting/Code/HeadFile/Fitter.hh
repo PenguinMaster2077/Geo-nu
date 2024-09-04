@@ -18,7 +18,7 @@ class Fitter
 {
 public:
     //Constructor and destructor
-    Fitter(): Fit_Method(FITTER_MAXIMUM_LIKELIHOOD), Is_Initialized_Data(false), Is_Binned(false), Is_Initialized_Hist(false), Is_Test(false)
+    Fitter(): Fit_Method(FITTER_EXTENDED_MAXIMUM_LIKELIHOOD), Is_Initialized_Data(false), Is_Binned(false), Is_Initialized_Hist(false), Is_Test(false)
     {
         std::cout << "[Fitter::Fitter] Haven't been Initialized." << std::endl;
     };
@@ -29,7 +29,9 @@ public:
     void Initialize();
     void Initialize_Hist( TH1D* Example_Hist );
     void Initialize_Data( TH1D *Example_Hist );
-    void Load_Data( std::string Data_File );
+    Int_t Get_Data_Size () { return Data_Prompt_Energy.size(); };
+    std::vector<Double_t> Get_Data() { return Data_Prompt_Energy; };
+    void Load_Data( std::string Data_File, Bool_t Binned = true );
     TVirtualFitter *Get_Minuit() { return minuit; };
     TH1D *Get_Hist_Total() { return Hist_Total; };
     TH1D *Get_Hist_Data() { return Hist_Data; };
@@ -37,10 +39,13 @@ public:
     Bool_t &Get_Is_Binned_Data() { return Is_Binned; };
     Bool_t &Get_Is_Initialized_Hist() { return Is_Initialized_Hist; };
     std::string &Get_Fit_Method() { return Fit_Method; };
-    void Use_Maximum_Likelihood() { Fit_Method = FITTER_MAXIMUM_LIKELIHOOD; };
+    void Record_Fitting_Variable( Double_t res ) { Fitting_Variable = res; };
+    Double_t Get_Fitting_Variable() { return Fitting_Variable; };
+    void Use_Extended_Maximum_Likelihood() { Fit_Method = FITTER_EXTENDED_MAXIMUM_LIKELIHOOD; };
     void Use_Chi_Square() { Fit_Method = FITTER_CHI_SQUARE; };
     void Open_Test_Mode() { Is_Test = true; };
     void Close_Test_Mode() { Is_Test = false; };
+    Bool_t Get_Test_Index() { return Is_Test; };
     void Fitting();
     void Get_All_Hists();
     void Draw_All();
@@ -56,12 +61,15 @@ private:
     TH1D *Hist_Data;
     const std::string Name_Hist_Data = "Data", Title_Hist_Data = "Data Histogram";
     Bool_t Is_Initialized_Data, Is_Binned;
+    std::vector<Double_t> Data_Prompt_Energy;
     //Models
     TH1D *Hist_Total;
     const std::string Name_Hist_Total = "Model_Total", Title_Hist_Total = "Total Fit Specturm";
     Bool_t Is_Initialized_Hist;
     std::vector<TH1D*> Hists;
     std::vector<std::string> Names;
+    //Fitting Results
+    Double_t Fitting_Variable; // LogL or chi-square
     //Test 
     Bool_t Is_Test;
 };
@@ -73,20 +81,21 @@ Fitter *Fitter::Get_Global_Point()
     return Point_Fitter_;
 };
 
-Double_t Maximum_Likelihood(Double_t *parameters)
+Double_t Extended_Maximum_Likelihood(Double_t *parameters)
 {
     Fitter *fitter = Fitter::Get_Global_Point();
     Double_t LogL = 0, bin_model, bin_data;
     if(fitter->Get_Is_Initialized_Data() == false)
     {
-        std::cout << "[Fitter] Haven't Load Data. Quit." << std::endl;
+        std::cout << "[Fitter] Haven't Load Data. Quit!" << std::endl;
         exit(1);
     };
 //Binned Data
+    // LogL = -N_{expeaction} + \sum^{Number of Data} Log N_{i, Expection}(E_i)
+    TH1D *temp_total = fitter->Get_Hist_Total();
     if( fitter->Get_Is_Binned_Data() == true)
     {
         TH1D *temp_data = fitter->Get_Hist_Data();
-        TH1D *temp_total = fitter->Get_Hist_Total();
         for(int iBin = 1; iBin < temp_data->GetNbinsX() + 1; iBin++)
         {
             bin_model = temp_total->GetBinContent(iBin);
@@ -94,20 +103,88 @@ Double_t Maximum_Likelihood(Double_t *parameters)
             if(bin_model <= 0){continue;};
             LogL = LogL - bin_model + bin_data * log(bin_model);
         };
+    }
+    else
+//Unbinned Data
+    {
+        LogL = LogL - temp_total->Integral();
+        Int_t temp_index;
+        std::vector<Double_t> data = fitter->Get_Data();
+        for(int index = 0; index < data.size(); index++)
+        {
+            temp_index = temp_total->FindBin(data.at(index));
+            bin_model = temp_total->GetBinContent(temp_index);
+            LogL = LogL + log(bin_model);
+        };
     };
 //Penalty
     FitParameters *Fit_Par = FitParameters::Get_Global_Point();
     for(int iPars = 0; iPars < Fit_Par->Get_Total_Number(); iPars++)
     {
-        LogL = LogL - 0.5 * pow( parameters[iPars] - Fit_Par->Get_Prior_Value(iPars), 2) /pow( Fit_Par->Get_Prior_Error(iPars), 2);
+        if( Fit_Par->Get_Constant(iPars) == false)
+        {
+            LogL = LogL - 0.5 * pow( parameters[iPars] - Fit_Par->Get_Prior_Value(iPars), 2) /pow( Fit_Par->Get_Prior_Error(iPars), 2);
+        };
+        // We want to find the minuim of -LogL, -LogL + Penalty can help minuit to find the best value around the prior values.
+        // In this funciton, LogL should be LogL - Penalty
+    };
+    fitter->Record_Fitting_Variable( LogL );
+//Test Code
+    if(fitter->Get_Test_Index() == true)
+    {
+        std::cout << "[Fitter::Extended_Maximum_Likelihood] LogL:" << fitter->Get_Fitting_Variable() << std::endl;
     };
 //Return
     return LogL;
+
 };
 
 Double_t Chi_Square(Double_t *parameters)
 {
-    return 0;
+    Fitter *fitter = Fitter::Get_Global_Point();
+    Double_t chi2 = 0, bin_model, bin_data, bin_error;
+    if(fitter->Get_Is_Initialized_Data() == false)
+    {
+        std::cout << "[Fitter] Haven't Load Data. Quit!" << std::endl;
+        exit(1);
+    };
+//Binned Data
+    TH1D *temp_total = fitter->Get_Hist_Total();
+    if(fitter->Get_Is_Binned_Data() == true)
+    {
+        TH1D *temp_data = fitter->Get_Hist_Data();
+        for(int iBin = 1; iBin < temp_data->GetNbinsX() + 1; iBin++)
+        {
+            bin_model = temp_total->GetBinContent(iBin);
+            bin_data = temp_data->GetBinContent(iBin);
+            bin_error = temp_data->GetBinError(iBin);
+            if(bin_error <= 0) { continue; };
+
+            chi2 = chi2 + pow( (bin_data - bin_model), 2) / pow(bin_error, 2);
+        }
+    }
+    else
+//Unbinned Data
+    {
+        std::cout << "[Fitter::Chi_Square] There isn't chi-square fit for unbinned data. Quit!" << std::endl;
+        exit(1);
+    };
+//Penalty
+    FitParameters *Fit_Par = FitParameters::Get_Global_Point();
+    for(int iPars = 0; iPars < Fit_Par->Get_Total_Number(); iPars++)
+    {
+        if( Fit_Par->Get_Constant(iPars) == false)
+        {
+            chi2 = chi2 + pow( parameters[iPars] - Fit_Par->Get_Prior_Value(iPars), 2) / pow( Fit_Par->Get_Prior_Error(iPars), 2);
+        };
+    };
+    fitter->Record_Fitting_Variable(chi2);
+//Test Code
+    if(fitter->Get_Test_Index() == true)
+    {
+        std::cout << "[Fitter::Chi_Square] Chi-Square:" << fitter->Get_Fitting_Variable() << std::endl;
+    }
+    return chi2;
 };
 
 void Fit_Function(Int_t &, Double_t *, Double_t &value, Double_t *parameters, Int_t)
@@ -117,7 +194,7 @@ void Fit_Function(Int_t &, Double_t *, Double_t &value, Double_t *parameters, In
     {
         std::cout << "[Fitter] The Total Prediction Histogram isn't initizlied. Initializing it with Models." << std::endl;
     }
-    else { fitter->Get_Hist_Total()->Reset("ICES"); };
+    else { fitter->Get_Hist_Total()->Reset("ICES"); }; // Reset Total Histogram
 //Fit Parameters
     FitParameters *Fit_Par = FitParameters::Get_Global_Point();
     Int_t Total_Number = Fit_Par->Get_Total_Number();
@@ -133,7 +210,7 @@ void Fit_Function(Int_t &, Double_t *, Double_t &value, Double_t *parameters, In
     TH1D *temp = fitter->Get_Hist_Total();
     if( an->Is_Initialize() == false || reactor->Is_Initialize() == false || geonu->Is_Initialize() == false)
     {
-        std::cout << "[Fitter] There is at least one model that hasn't been initialized. Quit" << std::endl;
+        std::cout << "[Fitter::Fit_Function] There is at least one model that hasn't been initialized. Quit" << std::endl;
         exit(1);
     }
     //AN Setting
@@ -171,9 +248,9 @@ void Fit_Function(Int_t &, Double_t *, Double_t &value, Double_t *parameters, In
     };
 
 //Use Fitting Method
-    if( fitter->Get_Fit_Method() == FITTER_MAXIMUM_LIKELIHOOD)
+    if( fitter->Get_Fit_Method() == FITTER_EXTENDED_MAXIMUM_LIKELIHOOD)
     {
-        value = -2 * Maximum_Likelihood( parameters );
+        value = - Extended_Maximum_Likelihood( parameters );
     }
     else if( fitter->Get_Fit_Method() == FITTER_CHI_SQUARE)
     {
@@ -224,7 +301,7 @@ void Fitter::Initialize_Hist( TH1D* Example_Hist )
 //Data Histogram
     Hist_Data = (TH1D*) Example_Hist->Clone(Name_Hist_Data.c_str());
     Hist_Data->Reset("ICES");
-    Hist_Total->SetTitle(Title_Hist_Data.c_str());
+    Hist_Data->SetTitle(Title_Hist_Data.c_str());
     Is_Initialized_Data = true;
 //Test Code
     if( Is_Test == true)
@@ -234,11 +311,11 @@ void Fitter::Initialize_Hist( TH1D* Example_Hist )
     };
 };
 
-void Fitter::Load_Data( std::string Data_File )
+void Fitter::Load_Data( std::string Data_File, Bool_t Binned = true)
 {
     if(Is_Initialized_Data == false)
     {
-        std::cout << "[Fitter::Load_Data] Haven't Initialized Data Histogram. Quit." << std::endl;
+        std::cout << "[Fitter::Load_Data] Haven't Initialized Data Histogram. Quit!" << std::endl;
         exit(1);
     };
     Is_Binned = true;
@@ -256,9 +333,18 @@ void Fitter::Load_Data( std::string Data_File )
         if(PromptEnergy >= x_min && PromptEnergy <= x_max)
         {
             Hist_Data->Fill(PromptEnergy);
+            Data_Prompt_Energy.push_back(PromptEnergy);
         };
     };
-    Is_Binned = true;
+    Is_Binned = Binned;
+    if(Is_Binned == true)
+    {
+        std::cout << "[Fitter::Load_Data] Binned Data" << std::endl;
+    }
+    else
+    {
+        std::cout << "[Fitter::Load_Data] Unbinned Data" << std::endl;
+    }
 //Test Code
     if( Is_Test == true)
     {
@@ -349,7 +435,7 @@ void Fitter::Draw_All()
 //Get Models and Data;
     if(Hists.size() == 0){ Get_All_Hists();};
     Hists.push_back(Hist_Total);
-    Names.push_back("All");
+    Names.push_back("Total");
 //Setup about Draw
     TCanvas *c1 = new TCanvas("c1", "All Histograms", 800, 600);
     TLegend *legend = new TLegend(0.7, 0.6, 0.9, 0.8);
@@ -458,8 +544,8 @@ void Fitter::Show_Results()
     Double_t Error_Fitted_Geo_Rate = Error_Geo/Fit_Par->Get_Effective_Duration();
     Double_t Fitted_Geo_TNU = Fitted_Geo_Rate * Rate_TNU;
     Double_t Error_Fitter_Geo_TNU = Error_Fitted_Geo_Rate * Rate_TNU;
-    std::cout << "[Fitter::Show_Results] Effective Duration (year):" << Fit_Par->Get_Effective_Duration() << " or " << Fit_Par->Get_Effective_Duration() * 365 << " days" << std::endl;
-    std::cout << "[Fitter::Show_Results] Fitted Geo Rate (events per year):" << Fitted_Geo_Rate << "+-" << Error_Fitted_Geo_Rate << ", Corresponding to " << Fitted_Geo_TNU << "+-" << Error_Fitter_Geo_TNU << " TNU" << std::endl;
+    std::cout << "[Fitter::Show_Results] Effective Duration:" << Fit_Par->Get_Effective_Duration() << " year or " << Fit_Par->Get_Effective_Duration() * 365 << " days" << std::endl;
+    std::cout << "[Fitter::Show_Results] Fitted Geo Rate:" << Fitted_Geo_Rate << "+-" << Error_Fitted_Geo_Rate << " events per year, Corresponding to " << Fitted_Geo_TNU << "+-" << Error_Fitter_Geo_TNU << " TNU" << std::endl;
 }
 
 #endif

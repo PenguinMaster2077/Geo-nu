@@ -26,26 +26,35 @@ public:
     unsigned int Get_Total_Number() {return C_Total_Number;};
     unsigned int Get_Index(std::string Name);
     void Compute_Events(Double_t Duration, Int_t Start_Run, Int_t End_Run);
+    void Compute_Events(Double_t Duration, Int_t Start_Run, Int_t End_Run, std::vector<std::string> Names, std::vector<Double_t> Values); // Only Use it in Grid Scan
     std::string Get_Name(unsigned int Index);
     Double_t Get_Value(unsigned int Index);
     Double_t Get_Value(std::string Name);
     void Set_Value(unsigned int Index, Double_t Value);
     void Set_Value(std::string Name, Double_t Value);
+    void Set_Prior_Value(unsigned int Index, Double_t Value);
+    void Set_Prior_Value(std::string Name, Double_t Value);
     Double_t Get_Prior_Value(unsigned int Index);
     Double_t Get_Prior_Value(std::string Name);
+    void Set_Error(unsigned int Index, Double_t Value);
+    void Set_Error(std::string Name, Double_t Value);
     Double_t Get_Error(unsigned int Index);
     Double_t Get_Error(std::string Name);
+    void Set_Prior_Error(unsigned int Index, Double_t Value);
+    void Set_Prior_Error(std::string Name, Double_t Value);
     Double_t Get_Prior_Error(unsigned int Index);
     Double_t Get_Prior_Error(std::string Name);
     Double_t Get_Effective_Duration() {return Effective_Duration;};
-    void Set_Error(unsigned int Index, Double_t Value);
-    void Set_Error(std::string Name, Double_t Value);
     void Set_Value_Min(unsigned int Index, Double_t Value);
     void Set_Value_Min(std::string Name, Double_t Value);
     void Set_Value_Max(unsigned int Index, Double_t Value);
     void Set_Value_Max(std::string Name, Double_t Value);
-    void Add_Parameter(std::string Name, Double_t Value, Double_t Error, Int_t Error_Factor, Double_t Value_Min, Double_t Value_Max);
-    void Add_Parameter(std::string Name, Double_t Value, Double_t Error, Int_t Error_Factor);
+    void Add_Parameter(std::string Name, Double_t Value, Double_t Error, Int_t Error_Factor, Double_t Value_Min, Double_t Value_Max, Bool_t Constant = false);
+    void Add_Parameter(std::string Name, Double_t Value, Double_t Error, Int_t Error_Factor, Bool_t Constant);
+    void Set_Constant(unsigned int Index);
+    void Set_Constant(std::string Name);
+    Bool_t Get_Constant(unsigned int Index);
+    Bool_t Get_Constant(std::string Name);
     void Get_Parameter(unsigned int InPut_Index, unsigned int &Index, std::string &Name, Double_t &Value, Double_t &Error, Int_t &Error_Factor, Double_t &Value_Min, Double_t &Value_Max);
     //Get the information of parametes by Index
     void Get_Parameter(std::string InPut_Name, unsigned int &Index, std::string &Name, Double_t &Value, Double_t &Error, Int_t &Error_Factor, Double_t &Value_Min, Double_t &Value_Max);
@@ -57,14 +66,16 @@ public:
 private:
     unsigned int C_Total_Number;// Total Number of Parameters
     std::vector<std::string> C_Name;
-    std::vector<Double_t> C_Value;//Fitted Value
+    std::vector<Double_t> C_Value; // Fitted Value
     std::vector<Double_t> C_Prior_Value;
     std::vector<Double_t> C_Error;
     std::vector<Double_t> C_Prior_Error;
-    std::vector<Int_t> C_Error_Factor; //Compute the minimum and maximum of parameter
+    std::vector<Int_t> C_Error_Factor; // Compute the minimum and maximum of parameter
     std::vector<Double_t> C_Value_Min;
     std::vector<Double_t> C_Value_Max; 
+    std::vector<Bool_t> C_Constant; // Only use it in Grid Scan; Default: false
     Double_t Effective_Duration;// Unit: year
+    Bool_t Is_Grid_Scan_1D, Is_Grid_Scan_2D;
 };
 
 FitParameters *FitParameters::Point_FitParameters_ = new FitParameters();
@@ -138,13 +149,78 @@ void FitParameters::Compute_Events(Double_t Duration, Int_t Start_Run, Int_t End
     std::cout << "[FitParameters::Compute_Events] Total:" << Number_Total << "+-" << Error_Total << std::endl;
 //Add in Parameters
     FitParameters *Fit_Par = FitParameters::Get_Global_Point();
-    Fit_Par->Add_Parameter(NAME_REACTOR, Number_Reactor, Error_Reactor, 1);
-    Fit_Par->Add_Parameter(NAME_GEO, Number_Geo, Error_Geo, 1);
-    Fit_Par->Add_Parameter(NAME_GEO_RATIO, GEO_RATIO, GEO_RATIO * GEO_RATIO_RELATIVE_ERROR, 1);
+    Fit_Par->Add_Parameter(NAME_REACTOR, Number_Reactor, Error_Reactor, 1, false);
+    Fit_Par->Add_Parameter(NAME_GEO, Number_Geo, Error_Geo, 1, false);
+    Fit_Par->Add_Parameter(NAME_GEO_RATIO, GEO_RATIO, GEO_RATIO * GEO_RATIO_RELATIVE_ERROR, 1, false);
     // Fit_Par->Add_Parameter(NAME_GEO_U, Number_U, Error_U, 1);
     // Fit_Par->Add_Parameter(NAME_GEO_TH, Number_Th, Error_Th, 1);
-    Fit_Par->Add_Parameter(NAME_AN_GROUND, Number_AN_Ground, Error_AN_Ground, 1);
-    Fit_Par->Add_Parameter(NAME_AN_EXICTED, Number_AN_Exicted, Error_AN_Exicted, 1);
+    Fit_Par->Add_Parameter(NAME_AN_GROUND, Number_AN_Ground, Error_AN_Ground, 1, false);
+    Fit_Par->Add_Parameter(NAME_AN_EXICTED, Number_AN_Exicted, Error_AN_Exicted, 1, false);
+};
+
+void FitParameters::Compute_Events(Double_t Duration, Int_t Start_Run, Int_t End_Run, std::vector<std::string> Names, std::vector<Double_t> Values)
+{
+//Read Muon File
+    TFile *infile_muon = new TFile(MUON_FILE.c_str());
+    TTree *intree_muon = (TTree*) infile_muon->Get("output");
+    //Set Branch Address
+    UInt_t Muon_RunID;
+    intree_muon->SetBranchAddress("RunID", &Muon_RunID);
+    Int_t Number_Muon = 0;
+    for(int ii1 = 0; ii1 < intree_muon->GetEntries(); ii1++)
+    {
+        intree_muon->GetEntry(ii1);
+        if(Muon_RunID < Start_Run){continue;};
+        if(Muon_RunID >= Start_Run && Muon_RunID <= End_Run){Number_Muon++;};
+        if(Muon_RunID > End_Run){break;};
+    };
+//Effective Time
+    Duration = Duration - Number_Muon * 20.0/86400;//days
+    Effective_Duration = Duration / 365;
+    std::cout << "[FitParameters::Compute_Events] Duration(days):" << Duration + Number_Muon * 20.0/86400 << ", Muon:" << Number_Muon << ", Muon Veto(days):" << Number_Muon * 20.0/86400 << ", Effective Duraton(days):" << Duration << std::endl;
+//Compute Events
+    //Reactor
+    Double_t Number_Reactor = Duration * REACTOR_EVENTS_RATE * REACTOR_SELECTION_EFFIENCY/ 365.0;
+    Double_t Error_Reactor = REACTOR_EVENTS_RELATIVE_ERROR * Number_Reactor;
+    //Geo Events;
+    Double_t Number_Geo = Duration * GEO_EVENTS_RATE * GEO_SELECTION_EFFICIENCY / 365.0;
+    Double_t Error_Geo = GEO_EVENTS_RELATIVE_ERROR * Number_Geo;
+    //Geo Ratio
+        //Set up in Constant_Setting.hh
+    //Geo U
+    Double_t Number_U = Number_Geo * (GEO_RATIO)/(GEO_RATIO + 1);
+    // Double_t Error_U = U_EVENTS_RELATIVE_ERROR * Number_U;//Can not compute, because we don't know their cov
+    //Geo Th
+    Double_t Number_Th = Number_Geo /(GEO_RATIO + 1);
+    // Double_t Error_Th = TH_EVENTS_RELATIVE_ERROR * Number_Th;//Can not compute, because we don't know their cov
+    //AN
+    Double_t Number_AN = Duration * AN_EVENTS_RATE * AN_SELECTION_EFFICIENCY / 365;
+    Double_t Error_AN = AN_EVENTS_RELATIVE_ERROR * Number_AN;
+
+    Double_t Number_AN_PR = Number_AN * PROTON_RECOIL_FRACTION;
+    Double_t Error_AN_PR = Number_AN_PR * PROTON_RECOIL_RELATIVE_ERROR;
+    Double_t Number_AN_C12 = Number_AN * C12_FRACTION;
+    Double_t Error_AN_C12 = Number_AN_C12 * C12_RELATIVE_ERROR;
+    Double_t Number_AN_O16 = Number_AN * O16_FRACTION;
+    Double_t Error_AN_O16 = Number_AN_O16 * O16_RELATIVE_ERROR;
+
+    Double_t Number_AN_Ground = Number_AN_PR + Number_AN_C12;
+    Double_t Error_AN_Ground = sqrt(pow(Error_AN_PR, 2) + pow(Error_AN_C12, 2));
+    Double_t Number_AN_Exicted = Number_AN_O16;
+    Double_t Error_AN_Exicted = Error_AN_O16;
+    //Total
+    Double_t Number_Total = Number_Reactor + Number_U + Number_Th + Number_AN;
+    Double_t Error_Total = sqrt(pow(Error_Reactor, 2) + pow(Error_Geo, 2) + pow(Error_AN, 2));
+//Set Parameters for Grid Scan
+    FitParameters *Fit_Par = FitParameters::Get_Global_Point();
+    for(int ii1 = 0; ii1 < Names.size(); ii1++)
+    {
+        Fit_Par->Set_Value(Names.at(ii1), Values.at(ii1));
+        Fit_Par->Set_Error(Names.at(ii1), 0.0);
+        Fit_Par->Set_Prior_Value(Names.at(ii1), Values.at(ii1));
+        Fit_Par->Set_Prior_Error(Names.at(ii1), 0.0);
+        Fit_Par->Set_Constant(Names.at(ii1));
+    };
 };
 
 unsigned int FitParameters::Get_Index(std::string Name)
@@ -224,6 +300,25 @@ void FitParameters::Set_Value(std::string Name, Double_t Value)
     Set_Value(Index, Value);
 };
 
+void FitParameters::Set_Prior_Value(unsigned int Index, Double_t Value)
+{
+    if(Index >= C_Total_Number)
+    {
+        std::cout << "[FitParameters::Set_Prior_Value] Index " << Index << " is larger than total number of parameters. Quit." << std::endl;
+        exit(1);
+    }
+    else
+    {
+        C_Prior_Value.at(Index) = Value;
+    };
+};
+
+void FitParameters::Set_Prior_Value(std::string Name, Double_t Value)
+{
+    Int_t Index = Get_Index(Name);
+    Set_Prior_Value(Index, Value);
+}
+
 Double_t FitParameters::Get_Prior_Value(unsigned int Index)
 {
     if(Index >= C_Total_Number)
@@ -241,6 +336,25 @@ Double_t FitParameters::Get_Prior_Value(std::string Name)
 {
     Int_t Index = Get_Index(Name);
     return C_Prior_Value.at(Index);
+};
+
+void FitParameters::Set_Error(unsigned int Index, Double_t Value)
+{
+    if(Index >= C_Total_Number)
+    {
+        std::cout << "[FitParameters::Set_Error] Index " << Index << " is larger than total number of parameters. Quit." << std::endl;
+        exit(1);
+    }
+    else
+    {
+        C_Error.at(Index) = Value;
+    };
+};
+
+void FitParameters::Set_Error(std::string Name, Double_t Value)
+{
+    Int_t Index = Get_Index(Name);
+    Set_Error(Index, Value);
 };
 
 Double_t FitParameters::Get_Error(unsigned int Index)
@@ -263,6 +377,25 @@ Double_t FitParameters::Get_Error(std::string Name)
     return Error;
 };
 
+void FitParameters::Set_Prior_Error(unsigned int Index, Double_t Value)
+{
+    if(Index >= C_Total_Number)
+    {
+        std::cout << "[FitParameters::Set_Prior_Error] Index " << Index << " is larger than total number of parameters. Quit." << std::endl;
+        exit(1);
+    }
+    else
+    {
+        C_Prior_Error.at(Index) = Value;
+    };
+};
+
+void FitParameters::Set_Prior_Error(std::string Name, Double_t Value)
+{
+    Int_t Index = Get_Index(Name);
+    Set_Prior_Error(Index, Value);
+}
+
 Double_t FitParameters::Get_Prior_Error(unsigned int Index)
 {
     if(Index >= C_Total_Number)
@@ -280,25 +413,6 @@ Double_t FitParameters::Get_Prior_Error(std::string Name)
 {
     Int_t Index = Get_Value(Name);
     return Get_Prior_Error(Index);
-};
-
-void FitParameters::Set_Error(unsigned int Index, Double_t Value)
-{
-    if(Index >= C_Total_Number)
-    {
-        std::cout << "[FitParameters::Set_Error] Index " << Index << " is larger than total number of parameters. Quit." << std::endl;
-        exit(1);
-    }
-    else
-    {
-        C_Error.at(Index) = Value;
-    };
-};
-
-void FitParameters::Set_Error(std::string Name, Double_t Value)
-{
-    Int_t Index = Get_Index(Name);
-    Set_Error(Index, Value);
 };
 
 void FitParameters::Set_Value_Min(unsigned int Index, Double_t Value)
@@ -339,15 +453,16 @@ void FitParameters::Set_Value_Max(std::string Name, Double_t Value)
     Set_Value_Max(Index, Value);
 };
 
-void FitParameters::Add_Parameter(std::string Name, Double_t Value, Double_t Error, Int_t Error_Factor, Double_t Value_Min, Double_t Value_Max)
+void FitParameters::Add_Parameter(std::string Name, Double_t Value, Double_t Error, Int_t Error_Factor, Double_t Value_Min, Double_t Value_Max, Bool_t Constant)
 {
     int Index = C_Total_Number;
     C_Name.push_back(Name);
     C_Value.push_back(Value);
-    C_Prior_Value.push_back(Value);
     C_Error.push_back(Error);
+    C_Prior_Value.push_back(Value);
     C_Prior_Error.push_back(Error);
     C_Error_Factor.push_back(Error_Factor);
+    C_Constant.push_back(Constant);
     if(Error_Factor == 0.0)
     {
         C_Value_Min.push_back(Value_Min);
@@ -366,15 +481,60 @@ void FitParameters::Add_Parameter(std::string Name, Double_t Value, Double_t Err
         C_Value_Max.push_back(Value_Max);
     };
 
+    if(Constant == true)
+    {
+        Index = C_Name.size() - 1;
+        C_Error.at(Index) = 0.0; // Tell Minuit that this parameter is constant in fitting
+        C_Prior_Error.at(Index) = 0.0;
+    };
+
     C_Total_Number = C_Name.size();
 };
 
-void FitParameters::Add_Parameter(std::string Name, Double_t Value, Double_t Error, Int_t Error_Factor)
+void FitParameters::Add_Parameter(std::string Name, Double_t Value, Double_t Error, Int_t Error_Factor, Bool_t Constant)
 {
     Double_t temp_value_min = Value - Error_Factor * Error;
     Double_t temp_value_max = Value + Error_Factor * Error;
     if(temp_value_min <= 0) {temp_value_min = 0;};
-    Add_Parameter(Name, Value, Error, Error_Factor, temp_value_min, temp_value_max);
+    Add_Parameter(Name, Value, Error, Error_Factor, temp_value_min, temp_value_max, Constant);
+};
+
+void FitParameters::Set_Constant(unsigned int Index)
+{
+    if(Index >= C_Total_Number)
+    {
+        std::cout << "[FitParameters::Set_Constant] Index " << Index << " is larger than total number of parameters. Quit." << std::endl;
+        exit(1);
+    }
+    else
+    {   
+        C_Constant.at(Index) = true;
+    };
+};
+
+void FitParameters::Set_Constant(std::string Name)
+{
+    Int_t Index = Get_Index(Name);
+    Set_Constant(Index);
+};
+
+Bool_t FitParameters::Get_Constant(unsigned int Index)
+{
+    if(Index >= C_Total_Number)
+    {
+        std::cout << "[FitParameters::Get_Constant] Index " << Index << " is larger than total number of parameters. Quit." << std::endl;
+        exit(1);
+    }
+    else
+    {   
+        return C_Constant.at(Index);
+    };
+};
+
+Bool_t FitParameters::Get_Constant(std::string Name)
+{
+    Int_t Index = Get_Index(Name);
+    return C_Constant.at(Index);
 };
 
 void FitParameters::Get_Parameter(unsigned int InPut_Index, unsigned int &Index, std::string &Name, Double_t &Value, Double_t &Error, Int_t &Error_Factor, Double_t &Value_Min, Double_t &Value_Max)
