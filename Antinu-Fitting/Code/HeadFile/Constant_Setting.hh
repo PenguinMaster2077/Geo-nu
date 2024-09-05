@@ -86,6 +86,7 @@ const std::string PDF_AN = PDF_PWD + "AN_RawData_CP_PDF_300000-307612.root";
 
 //Data for PDFs
 const std::string PDF_DATA_PWD = "/rat/MyCode/Work/Geo-nu-Data/PDFs/Method_RawData/Data/";
+const std::string PDF_DATA_PWD = "/home/penguin/Rat/rat-7.0.15-ROOT6/rat/MyCode/Work/Geo-nu-Data/PDFs/Method_RawData/Data/";
 const std::string PDF_DATA_REACTOR = PDF_DATA_PWD + "Reactor_RawData_PairCut_Energy_DeltaT_DeltaR_300000-307612.root";
 const std::string PDF_DATA_GEO_U = PDF_DATA_PWD + "U_RawData_PairCut_Energy_DeltaT_DeltaR_300000-307612.root";
 const std::string PDF_DATA_GEO_TH = PDF_DATA_PWD + "Th_RawData_PairCut_Energy_DeltaT_DeltaR_300000-307612.root";
@@ -114,9 +115,18 @@ const std::string FITTER_EXTENDED_MAXIMUM_LIKELIHOOD = "Extended_Maxmium_Likelih
 const std::string FITTER_CHI_SQUARE = "Chi_Square";
 const std::string FITTER_DATA_HIST = "Data_Hist";
 
+const Double_t GRID_SCAN_1D_1SIGMA = 1.0;
+const Double_t GRID_SCAN_1D_2SIGMA = 4.0;
+const Double_t GRID_SCAN_1D_3SIGMA = 9.0;
+
+const Double_t GRID_SCAN_2D_1SIGMA = 2.3;
+const Double_t GRID_SCAN_2D_2SIGMA = 6.18;
+const Double_t GRID_SCAN_2D_3SIGMA = 11.83;
+
 //Data File
 const std::string DATA_IBD_CANDIDATE = "/rat/MyCode/Work/Geo-nu-Data/CoincidencePair/Data/20240529/Gold_20R_0000300000-0000309277.root";
 const std::string MUON_FILE = "/rat/MyCode/Work/Geo-nu-Data/Muon/Gold_20R_Muon_Abstract_0000300000-0000309277.root";
+const std::string MUON_FILE = "/home/penguin/Rat/rat-7.0.15-ROOT6/rat/MyCode/Work/Geo-nu-Data/Muon/Gold_20R_Muon_Abstract_0000300000-0000309277.root";
 //AN Setting
 //Energy Region Setting
 const Double_t AN_ENERGY_PROTON_RECOIL = 3.4;//MeV

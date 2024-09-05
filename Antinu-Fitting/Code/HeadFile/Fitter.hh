@@ -38,9 +38,10 @@ public:
     Bool_t &Get_Is_Initialized_Data() { return Is_Initialized_Data; };
     Bool_t &Get_Is_Binned_Data() { return Is_Binned; };
     Bool_t &Get_Is_Initialized_Hist() { return Is_Initialized_Hist; };
-    std::string &Get_Fit_Method() { return Fit_Method; };
     void Record_Fitting_Variable( Double_t res ) { Fitting_Variable = res; };
     Double_t Get_Fitting_Variable() { return Fitting_Variable; };
+    void Set_Fitting_Method( std::string Method );
+    std::string &Get_Fit_Method() { return Fit_Method; };
     void Use_Extended_Maximum_Likelihood() { Fit_Method = FITTER_EXTENDED_MAXIMUM_LIKELIHOOD; };
     void Use_Chi_Square() { Fit_Method = FITTER_CHI_SQUARE; };
     void Open_Test_Mode() { Is_Test = true; };
@@ -52,25 +53,25 @@ public:
     void Show_Results();
     Double_t Get_Fit_Covariance_Matrix_Element(unsigned int i, unsigned int j) {return minuit->GetCovarianceMatrixElement(i, j);};
 private:
-    //Minuit
+//Minuit
     TVirtualFitter *minuit;
     double arg_list[2];
     Int_t Number_Fit_Parameters;//Total Number of Fitted Parameters
     std::string Fit_Method;
-    //Data
+//Data
     TH1D *Hist_Data;
     const std::string Name_Hist_Data = "Data", Title_Hist_Data = "Data Histogram";
     Bool_t Is_Initialized_Data, Is_Binned;
     std::vector<Double_t> Data_Prompt_Energy;
-    //Models
+//Models
     TH1D *Hist_Total;
     const std::string Name_Hist_Total = "Model_Total", Title_Hist_Total = "Total Fit Specturm";
     Bool_t Is_Initialized_Hist;
     std::vector<TH1D*> Hists;
     std::vector<std::string> Names;
-    //Fitting Results
-    Double_t Fitting_Variable; // LogL or chi-square
-    //Test 
+//Fitting Results
+    Double_t Fitting_Variable; // LogL or chi-square; After completing fitting, it will record the last value ( i.e. the minuim value );
+//Test 
     Bool_t Is_Test;
 };
 
@@ -352,6 +353,23 @@ void Fitter::Load_Data( std::string Data_File, Bool_t Binned = true)
     };
 
 };
+
+void Fitter::Set_Fitting_Method( std::string Method)
+{
+    if( Method == FITTER_EXTENDED_MAXIMUM_LIKELIHOOD)
+    {
+        Fitter::Use_Extended_Maximum_Likelihood();
+    }
+    else if( Method == FITTER_CHI_SQUARE)
+    {
+        Fitter::Use_Chi_Square();
+    }
+    else
+    {
+        std::cout << "[Fitter::Set_Fitting_Method] Wrong Method. Quit!" << std::endl;
+        exit(1);
+    };
+}
 
 void Fitter::Fitting()
 {

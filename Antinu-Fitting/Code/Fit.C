@@ -38,7 +38,7 @@ int Fit()
     fitter->Initialize_Hist(Example_Hist);
 
 //Test--Load_Data()
-    fitter->Load_Data(DATA_IBD_CANDIDATE, false);
+    fitter->Load_Data(DATA_IBD_CANDIDATE, true);
 
 //Test--Fitting()
     fitter->Fitting();
