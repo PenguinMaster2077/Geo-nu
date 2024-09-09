@@ -116,6 +116,8 @@ const std::string FITTER_DATA_HIST = "Data_Hist";
 
 const std::string GRID_SCAN_GEONU_REACTOR_EXTENDED_MAXIMUM_LIKELIHOOD = "/rat/MyCode/Work/Geo-nu-Data/Grid_Scan/Geonu_Reactor/Geonu_Reactor_Extended_Maximum_Likelihood.root";
 const std::string GRID_SCAN_GEONU_REACTOR_CHI_SQUARE = "/rat/MyCode/Work/Geo-nu-Data/Grid_Scan/Geonu_Reactor/Geonu_Reactor_Chi_Square.root";
+const std::string GRID_SCAN_GEO_RATIO_EXTENDED_MAXIMUM_LIKELIHOOD = "/rat/MyCode/Work/Geo-nu-Data/Grid_Scan/Geo_Ratio/Geo_Ratio_Extended_Maximum_Likelihood.root";
+const std::string GRID_SCAN_GEO_RATIO_CHI_SQUARE = "/rat/MyCode/Work/Geo-nu-Data/Grid_Scan/Geo_Ratio/Geo_Ratio_Chi_Square.root";
 const Double_t GRID_SCAN_1D_1SIGMA = 1.0;
 const Double_t GRID_SCAN_1D_2SIGMA = 4.0;
 const Double_t GRID_SCAN_1D_3SIGMA = 9.0;

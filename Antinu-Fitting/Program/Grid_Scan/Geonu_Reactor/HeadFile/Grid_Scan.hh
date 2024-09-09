@@ -118,7 +118,6 @@ void Scan_U_Th_Ratio(Double_t Input_Min, Double_t Input_Max, Int_t Steps)
     Initialize();
 //Fit Parameters
     FitParameters *fit_par = FitParameters::Get_Global_Point();
-    fit_par->Compute_Events(145.17, 300733, 309277);
 //Fitter
     Fitter *fitter = Fitter::Get_Global_Point();
 //Scan Setting
@@ -168,6 +167,124 @@ void Scan_U_Th_Ratio(Double_t Input_Min, Double_t Input_Max, Int_t Steps)
     };
     Hist->Draw();
     std::cout << "Complete! Best:" << Best_ratio << std::endl;
+};
+
+void Scan_U_Th_Ratio_Detail(Double_t Input_Min, Double_t Input_Max, Int_t Steps, std::string Method, Bool_t Create_New_File)
+{
+//Open or Create File
+    TFile *file;
+    TTree *tree;
+    Double_t number_reactor, number_geonu, number_alphan_ground, number_alphan_exicted;
+    Double_t ratio_u_th;    
+    Double_t error_reactor, error_geonu, error_alphan_ground, error_alphan_exicted, error_u_th;    
+    Double_t fitting_value;
+    Int_t method; //1->ELL; 2->Chi-square
+    if(Method == FITTER_EXTENDED_MAXIMUM_LIKELIHOOD)
+    {
+        method = 1;
+    }
+    else
+    {
+        method = 2;
+    }
+    if(Create_New_File == false)
+    {
+        if( Method == FITTER_EXTENDED_MAXIMUM_LIKELIHOOD)
+        {
+            file = new TFile(GRID_SCAN_GEO_RATIO_EXTENDED_MAXIMUM_LIKELIHOOD.c_str(), "update");
+        }
+        else
+        {
+            file = new TFile(GRID_SCAN_GEO_RATIO_CHI_SQUARE.c_str(), "update");
+        };
+        tree = (TTree*) file->Get("output");
+        tree->SetBranchAddress("NumberReactor", &number_reactor);
+        tree->SetBranchAddress("NumberGeonu", &number_geonu);
+        tree->SetBranchAddress("NumberAlphaNGround", &number_alphan_ground);
+        tree->SetBranchAddress("NumberAlphaNExicted", &number_alphan_exicted);
+        tree->SetBranchAddress("RatioUTh", &ratio_u_th);
+        tree->SetBranchAddress("ErrorReactor", &error_reactor);
+        tree->SetBranchAddress("ErrorGeonu", &error_geonu);
+        tree->SetBranchAddress("ErrorAlphaNGround", &error_alphan_ground);
+        tree->SetBranchAddress("ErrorAlphaNExicted", &error_alphan_exicted);
+        tree->SetBranchAddress("ErrorRatioUTh", &error_u_th);
+        tree->SetBranchAddress("FittingValue", &fitting_value);
+        tree->SetBranchAddress("Method", &method);
+    }
+    else
+    {
+        if( Method == FITTER_EXTENDED_MAXIMUM_LIKELIHOOD)
+        {
+            file = new TFile(GRID_SCAN_GEO_RATIO_EXTENDED_MAXIMUM_LIKELIHOOD.c_str(), "recreate");
+        }
+        else
+        {
+            file = new TFile(GRID_SCAN_GEO_RATIO_CHI_SQUARE.c_str(), "recreate");
+        };
+        tree = new TTree("output", "");
+        tree->Branch("NumberReactor", &number_reactor);
+        tree->Branch("NumberGeonu", &number_geonu);
+        tree->Branch("NumberAlphaNGround", &number_alphan_ground);
+        tree->Branch("NumberAlphaNExicted", &number_alphan_exicted);
+        tree->Branch("RatioUTh", &ratio_u_th);
+        tree->Branch("ErrorReactor", &error_reactor);
+        tree->Branch("ErrorGeonu", &error_geonu);
+        tree->Branch("ErrorAlphaNGround", &error_alphan_ground);
+        tree->Branch("ErrorAlphaNExicted", &error_alphan_exicted);
+        tree->Branch("ErrorRatioUTh", &error_u_th);
+        tree->Branch("FittingValue", &fitting_value);
+        tree->Branch("Method", &method);
+    };
+//Initialization
+    Initialize();
+//Fit Parameters
+    FitParameters *fit_par = FitParameters::Get_Global_Point();
+//Fitter
+    Fitter *fitter = Fitter::Get_Global_Point();
+//Scan Setting
+    Double_t interval = (Input_Max - Input_Min) / Steps;
+    Double_t ratio;
+    Double_t res;
+    std::vector<Double_t> fitting_values;
+    std::vector<std::string> Names;
+    std::vector<Double_t> Values, Errors;
+    Names.push_back(NAME_GEO_RATIO);
+    Values.push_back(0);
+    for(int ii1 = 0; ii1 < Steps; ii1++)
+    {
+        ratio = Input_Min + interval * ii1;
+        Values.at(0) = ratio;
+        fit_par->Compute_Events(145.17, 300733, 309277, Names, Values);
+        fitter->Initialize();
+        fitter->Initialize_Hist(Example_Hist);
+        fitter->Load_Data(DATA_IBD_CANDIDATE, true);
+        fitter->Fitting();
+        fitting_values.push_back(- fitter->Get_Fitting_Variable());
+        if( Method == FITTER_EXTENDED_MAXIMUM_LIKELIHOOD)
+            {
+                fitting_values.at(ii1) = - fitter->Get_Fitting_Variable();
+                fitting_value = - fitter->Get_Fitting_Variable();
+            }
+            else if( Method == FITTER_CHI_SQUARE)
+            {
+                fitting_values.at(ii1) = fitter->Get_Fitting_Variable();
+                fitting_value = fitter->Get_Fitting_Variable();
+            };
+            //Record
+            number_reactor = fit_par->Get_Value(NAME_REACTOR);
+            number_geonu = fit_par->Get_Value(NAME_GEO);
+            number_alphan_ground = fit_par->Get_Value(NAME_AN_GROUND);
+            number_alphan_exicted = fit_par->Get_Value(NAME_AN_EXICTED);
+            ratio_u_th = fit_par->Get_Value(NAME_GEO_RATIO);
+            error_reactor = fit_par->Get_Error(NAME_REACTOR);
+            error_geonu = fit_par->Get_Error(NAME_GEO);
+            error_alphan_ground = fit_par->Get_Error(NAME_AN_GROUND);
+            error_alphan_exicted = fit_par->Get_Error(NAME_AN_EXICTED);
+            error_u_th = fit_par->Get_Error(NAME_GEO_RATIO);
+            tree->Fill();
+    };
+    file->Write();
+    file->Close();
 };
 
 void Scan_Geonu_Number(Double_t Input_Min, Double_t Input_Max, Int_t Steps, std::string Method = FITTER_EXTENDED_MAXIMUM_LIKELIHOOD)
@@ -231,7 +348,6 @@ void Scan_Geonu_Reactor(std::vector<Double_t> X_Values, std::vector<Double_t> Y_
     }
     if(Create_New_File == false)
     {
-        std::cout << "False!!!!!!!!!!!!!!!" << std::endl;
         if( Method == FITTER_EXTENDED_MAXIMUM_LIKELIHOOD)
         {
             file = new TFile(GRID_SCAN_GEONU_REACTOR_EXTENDED_MAXIMUM_LIKELIHOOD.c_str(), "update");
@@ -256,7 +372,6 @@ void Scan_Geonu_Reactor(std::vector<Double_t> X_Values, std::vector<Double_t> Y_
     }
     else
     {
-        std::cout << "True!!!!!!!!!!!!!!!!!" << std::endl;
         if( Method == FITTER_EXTENDED_MAXIMUM_LIKELIHOOD)
         {
             file = new TFile(GRID_SCAN_GEONU_REACTOR_EXTENDED_MAXIMUM_LIKELIHOOD.c_str(), "recreate");
