@@ -6,10 +6,10 @@
 #include <TH1D.h>
 //RAT
 //Self-Defined
-#include "../HeadFile/Constant_Setting.hh"
-#include "../HeadFile/Models.hh"
-#include "../HeadFile/Fit_Parameters.hh"
-#include "../HeadFile/Fitter.hh"
+#include "../HeadFiles/Constants_Setting.hh"
+#include "../HeadFiles/Models.hh"
+#include "../HeadFiles/Fit_Parameters.hh"
+#include "../HeadFiles/Fitter.hh"
 
 
 int Test_Fitter()

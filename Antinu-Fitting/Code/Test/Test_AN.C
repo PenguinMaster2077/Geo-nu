@@ -4,8 +4,8 @@
 #include <TH1D.h>
 //RAT
 //Self-Defined
-#include "../HeadFile/Models/AN.hh"
-#include "../HeadFile/Constant_Setting.hh"
+#include "../HeadFiles/Models/AN.hh"
+#include "../HeadFiles/Constants_Setting.hh"
 
 int Test_AN()
 {

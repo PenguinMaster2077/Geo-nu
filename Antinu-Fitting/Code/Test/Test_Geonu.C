@@ -4,9 +4,9 @@
 #include <TFile.h>
 //RAT
 //Self-Defined
-#include "../HeadFile/Models/Geonu.hh"
-#include "../HeadFile/Fit_Parameters.hh"
-#include "../HeadFile/Constant_Setting.hh"
+#include "../HeadFiles/Models/Geonu.hh"
+#include "../HeadFiles/Fit_Parameters.hh"
+#include "../HeadFiles/Constants_Setting.hh"
 
 int Test_Geonu()
 {

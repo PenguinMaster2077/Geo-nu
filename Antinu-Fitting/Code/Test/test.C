@@ -33,7 +33,7 @@
 #include <RAT/DU/Point3D.hh>
 #include <RAT/DU/DetectorStateCorrection.hh>
 //Self-defined
-// #include "../HeadFile/Constant_Setting.hh"
+// #include "../HeadFiles/Constants_Setting.hh"
 // #include "./test.hh"
 //////////////////////////////////////////////////////////////////////////////
 

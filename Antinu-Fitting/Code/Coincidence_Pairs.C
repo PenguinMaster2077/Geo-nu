@@ -7,9 +7,9 @@
 #include <TChain.h>
 //RAT
 //Self-Defined
-#include "./HeadFile/Result.hh"
-#include "./HeadFile/Constant_Setting.hh"
-#include "./HeadFile/Coincidence_Pairs.hh"
+#include "./HeadFiles/Result.hh"
+#include "./HeadFiles/Constants_Setting.hh"
+#include "./HeadFiles/Coincidence_Pairs.hh"
 
 int Coincidence_Pairs()
 {
