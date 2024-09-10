@@ -1,3 +1,0 @@
-	Scan_Geonu_Reactor(Geo_Range, Reactor_Range, Steps, FITTER_EXTENDED_MAXIMUM_LIKELIHOOD, false);
-    	return 0;
-}
